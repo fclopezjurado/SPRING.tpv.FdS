@@ -55,5 +55,5 @@ public class Article extends Product {
         return "Article [" + super.toString() + "stock=" + stock + ", wholesalePrice=" + wholesalePrice + ", providerId=" + provider.getId()
                 + "]";
     }
-
+ 
 }
