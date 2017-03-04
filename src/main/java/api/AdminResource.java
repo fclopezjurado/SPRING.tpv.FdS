@@ -12,6 +12,7 @@ import controllers.AdminController;
 public class AdminResource {
 
     private AdminController adminController;
+    
 
     @Autowired
     public void setAdminController(AdminController adminController) {
