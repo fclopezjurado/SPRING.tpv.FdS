@@ -11,6 +11,8 @@ import controllers.AdminController;
 @RequestMapping(Uris.VERSION + Uris.ADMINS)
 public class AdminResource {
 
+	
+	
     private AdminController adminController;
 
     @Autowired
