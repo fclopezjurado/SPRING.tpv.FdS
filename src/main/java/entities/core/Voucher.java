@@ -66,6 +66,14 @@ public class Voucher {
         return dateOfUse != null;
     }
 
+    public Calendar getDateOfExpiration() {
+        return expiration;
+    }
+
+    public void setDateOfExpiration(Calendar expiration) {
+        this.expiration = expiration;
+    }
+
     public boolean expired() {
 
         if (expiration == null) {
