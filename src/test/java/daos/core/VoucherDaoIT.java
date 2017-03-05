@@ -20,7 +20,7 @@ public class VoucherDaoIT {
 
     @Test
     public void testCreate() {
-        assertEquals(4, voucherDao.count());
+        assertEquals(5, voucherDao.count());
     }
 
 }

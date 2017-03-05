@@ -103,6 +103,10 @@ public class DaosServiceIntegrationTests {
             voucher = new Voucher(new BigDecimal(i));
             voucherDao.save(voucher);
         }
+
+        voucher = new Voucher(new BigDecimal(100));
+        voucher.consume();
+        voucherDao.save(voucher);
     }
 
     public void createProviders() {
