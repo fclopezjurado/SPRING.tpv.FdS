@@ -23,6 +23,9 @@ public class Token {
     @JoinColumn
     private User user;
 
+    @Column(nullable = false)
+    private Date expirationDate;
+    
     public Token() {
     }
 
@@ -30,6 +33,7 @@ public class Token {
         assert user != null;
         this.user = user;
         this.value = new Encrypting().encryptInBase64UrlSafe("" + user.getId() + Long.toString(new Date().getTime()));
+        this.expirationDate = new Date(new Date().getTime() + 3600*1000);
     }
 
     public int getId() {
@@ -44,6 +48,10 @@ public class Token {
         return user;
     }
 
+    public Date getExpirationDate() {
+        return expirationDate;
+    }
+    
     @Override
     public int hashCode() {
         return id;
@@ -65,6 +73,6 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token [id=" + id + ", value=" + value + ", user=" + user + "]";
+        return "Token [id=" + id + ", value=" + value + ", user=" + user + ", expirationDate=" + expirationDate.toString() + "]";
     }
 }
