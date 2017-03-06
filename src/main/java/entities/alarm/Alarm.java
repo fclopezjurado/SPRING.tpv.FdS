@@ -13,83 +13,84 @@ import entities.core.Article;
 @Entity
 public class Alarm {
 
-	@Id
-	@GeneratedValue
-	private int id;
-	
-	@Column(nullable = false, length = 100)
-	private String name;
-	
-	@OneToMany
-	private List<Article> articleList;
-	
-	@Column(nullable = false)
-	private AlarmType type;
-	
-	public Alarm() { }
+    @Id
+    @GeneratedValue
+    private int id;
 
-	public Alarm(int id, String name, List<Article> articleList, AlarmType type) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.articleList = articleList;
-		this.type = type;
-	}
+    @Column(nullable = false, length = 100)
+    private String name;
 
-	public int getId() {
-		return id;
-	}
+    @OneToMany
+    private List<Article> articleList;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    @Column(nullable = false)
+    private AlarmType type;
 
-	public String getName() {
-		return name;
-	}
+    public Alarm() {
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Alarm(int id, String name, List<Article> articleList, AlarmType type) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.articleList = articleList;
+        this.type = type;
+    }
 
-	public List<Article> getArticleList() {
-		return articleList;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setArticleList(List<Article> articleList) {
-		this.articleList = articleList;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public AlarmType getType() {
-		return type;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setType(AlarmType type) {
-		this.type = type;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Override
-	public int hashCode() {
-		return id;
-	}
+    public List<Article> getArticleList() {
+        return articleList;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Alarm other = (Alarm) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
+    public void setArticleList(List<Article> articleList) {
+        this.articleList = articleList;
+    }
 
-	@Override
-	public String toString() {
-		return "Alarm [id=" + id + ", name=" + name + ", articleList=" + articleList + ", type=" + type + "]";
-	}
-	
+    public AlarmType getType() {
+        return type;
+    }
+
+    public void setType(AlarmType type) {
+        this.type = type;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Alarm other = (Alarm) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Alarm [id=" + id + ", name=" + name + ", articleList=" + articleList + ", type=" + type + "]";
+    }
+
 }
