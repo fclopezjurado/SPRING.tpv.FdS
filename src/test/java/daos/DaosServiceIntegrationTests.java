@@ -1,6 +1,7 @@
 package daos;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 import javax.annotation.PostConstruct;
 
@@ -103,6 +104,39 @@ public class DaosServiceIntegrationTests {
             voucher = new Voucher(new BigDecimal(i));
             voucherDao.save(voucher);
         }
+
+        voucher = new Voucher(new BigDecimal(100));
+        voucher.consume();
+        voucherDao.save(voucher);
+
+        voucher = new Voucher(new BigDecimal(50));
+
+        Calendar calen = Calendar.getInstance();
+
+        calen.set(Calendar.YEAR, 2016);
+        calen.set(Calendar.MONTH, 5);
+        calen.set(Calendar.DAY_OF_MONTH, 0);
+        calen.set(Calendar.HOUR, 0);
+        calen.set(Calendar.MINUTE, 0);
+        calen.set(Calendar.SECOND, 0);
+
+        voucher.setDateOfExpiration(calen);
+        voucherDao.save(voucher);
+
+        voucher = new Voucher(new BigDecimal(15.30));
+
+        calen = Calendar.getInstance();
+
+        calen.set(Calendar.YEAR, 2018);
+        calen.set(Calendar.MONTH, 5);
+        calen.set(Calendar.DAY_OF_MONTH, 2);
+        calen.set(Calendar.HOUR, 0);
+        calen.set(Calendar.MINUTE, 0);
+        calen.set(Calendar.SECOND, 0);
+
+        voucher.setDateOfExpiration(calen);
+        voucherDao.save(voucher);
+
     }
 
     public void createProviders() {

@@ -26,6 +26,8 @@ public class Voucher {
 
     private Calendar dateOfUse;
 
+    private Calendar expiration;
+
     public Voucher() {
     }
 
@@ -64,6 +66,23 @@ public class Voucher {
         return dateOfUse != null;
     }
 
+    public Calendar getDateOfExpiration() {
+        return expiration;
+    }
+
+    public void setDateOfExpiration(Calendar expiration) {
+        this.expiration = expiration;
+    }
+
+    public boolean expired() {
+
+        if (expiration == null) {
+            return false;
+        } else {
+            return expiration.compareTo(Calendar.getInstance()) > 0;
+        }
+    }
+
     public void consume() {
         assert dateOfUse == null;
         dateOfUse = Calendar.getInstance();
@@ -97,8 +116,15 @@ public class Voucher {
         } else {
             useTime = "---";
         }
+        String expiredTime;
+        if (expiration != null) {
+            expiredTime = new SimpleDateFormat("HH:00 dd-MMM-yyyy ").format(expiration.getTime());
+        } else {
+            expiredTime = "---";
+        }
+
         return "Voucher[" + id + ": reference=" + reference + ", value=" + value + ", created=" + createTime + ", dateOfUse=" + useTime
-                + "]";
+                + ", expiredDate=" + expiredTime + "]";
     }
 
 }
