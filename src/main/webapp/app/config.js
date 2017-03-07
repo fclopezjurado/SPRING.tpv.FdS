@@ -26,6 +26,11 @@ tpv.config(function ($routeProvider) {
             controller: "DeleteAllController",
             controllerAs: "vm"
         })
+        .when("/feature10/crear", {
+            templateUrl: "app/components/feature10/createAlarm.html",
+            controller: "createAlarmController.js",
+            controllerAs: "vm"
+        })
         .otherwise({
             redirectTo: '/'
         });
