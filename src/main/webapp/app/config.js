@@ -31,9 +31,9 @@ tpv.config(function ($routeProvider) {
             controller: "createAlarmController.js",
             controllerAs: "vm"
         })
-        .when("/feature10/list", {
-            templateUrl: "app/components/feature10/listAlarm.html",
-            controller: "listAlarmController.js",
+        .when("/feature10/edit", {
+            templateUrl: "app/components/feature10/editAlarm.html",
+            controller: "editAlarmController.js",
             controllerAs: "vm"
         })
         .otherwise({
