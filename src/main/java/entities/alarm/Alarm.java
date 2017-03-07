@@ -26,6 +26,9 @@ public class Alarm {
     @Column(nullable = false)
     private AlarmType type;
 
+    @Column(nullable = false)
+    private int value;
+    
     public Alarm() {
     }
 
@@ -47,6 +50,14 @@ public class Alarm {
 
     public String getName() {
         return name;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public void setName(String name) {
