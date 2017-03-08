@@ -1,5 +1,7 @@
 package daos.users;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,5 +13,7 @@ public interface UserDao extends JpaRepository<User, Integer> {
     public User findByTokenValue(String tokenValue);
 
     public User findByMobile(long mobile);
+    
+    public List<User> findAll();
 
 }
