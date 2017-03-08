@@ -7,23 +7,32 @@
 					<tr>
 						<th>Nombre</th>
 						<th>Artículos</th>
+						<th>Tipo</th>
 						<th width="10%">Valor</th>
 						<th>&nbsp;</th>
 					</tr>
 				</thead>
 				<tbody>
-					<!-- <tr>
-						<td colspan="3">No hay alarmas</td>
-					</tr> -->
 					<tr>
-						<td style="vertical-align: middle;">Alarma test</td>
+						<td colspan="5" ng-hide="vm.completed">Cargando...</td>
+					</tr>
+					<tr>
+						<td colspan="5" ng-show="vm.completed && vm.alarms == null">No
+							hay alarmas</td>
+					</tr>
+					<tr ng-show="vm.completed && vm.alarms != null"
+						ng-repeat="alarm in vm.alarms">
+						<td style="vertical-align: middle;">{{ alarm.name }}</td>
 						<td>
 							<ul>
-								<li>Artículo de prueba 1</li>
-								<li>Artículo de prueba 2</li>
-								<li>Artículo de prueba 3</li>
+								<li ng-repeat="article in alarm.articles">{{ article.name }}</li>
 							</ul>
 						</td>
+						<td style="vertical-align: middle;"><select name="type">
+								<option value=''></option>
+								<option value='warning' selected>Warning</option>
+								<option value='critical'>Critical</option>
+						</select></td>
 						<td style="vertical-align: middle;"><input type="text"
 							class="form-control" name="value" value="3"></td>
 						<td style="vertical-align: middle;"><button type="button"
