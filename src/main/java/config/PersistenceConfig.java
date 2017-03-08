@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource(ResourceNames.PROPERTIES)
-@EnableJpaRepositories(basePackages = {ResourceNames.DAOS_USERS, ResourceNames.DAOS_CORE}, repositoryImplementationPostfix = "Impl")
+@EnableJpaRepositories(basePackages = {ResourceNames.DAOS_USERS, ResourceNames.DAOS_CORE, ResourceNames.DAOS_ALARM}, repositoryImplementationPostfix = "Impl")
 @EnableTransactionManagement
 public class PersistenceConfig {
 
@@ -51,7 +51,7 @@ public class PersistenceConfig {
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5InnoDBDialect");
         entityManagerFactoryBean.setJpaProperties(properties);
-        entityManagerFactoryBean.setPackagesToScan(ResourceNames.ENTITIES_USERS, ResourceNames.ENTITIES_CORE);
+        entityManagerFactoryBean.setPackagesToScan(ResourceNames.ENTITIES_USERS, ResourceNames.ENTITIES_CORE, ResourceNames.ENTITIES_ALARM);
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.afterPropertiesSet();
         return entityManagerFactoryBean.getObject();
