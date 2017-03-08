@@ -8,6 +8,7 @@ import daos.alarm.AlarmDao;
 @Controller
 public class AlarmController {
 
+    @Autowired
     private AlarmDao alarmDao;
     
     @Autowired
