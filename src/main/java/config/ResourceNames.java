@@ -13,12 +13,16 @@ public class ResourceNames {
     public static final String ENTITIES_USERS = "entities.users";
 
     public static final String ENTITIES_CORE = "entities.core";
+    
+    public static final String ENTITIES_ALARM = "entities.alarm";
 
     public static final String DAOS = "daos";
 
     public static final String DAOS_USERS = "daos.users";
 
     public static final String DAOS_CORE = "daos.core";
+    
+    public static final String DAOS_ALARM = "daos.alarm";
 
     public static final String SERVICES = "services";
 
