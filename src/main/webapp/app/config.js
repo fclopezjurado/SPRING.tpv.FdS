@@ -33,7 +33,7 @@ tpv.config(function ($routeProvider) {
         })
         .when("/feature10/edit", {
             templateUrl: "app/components/feature10/editAlarm.html",
-            controller: "editAlarmController.js",
+            controller: "EditAlarmController",
             controllerAs: "vm"
         })
         .otherwise({

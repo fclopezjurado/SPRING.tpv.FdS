@@ -13,16 +13,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<!-- <tr>
-						<td colspan="3">No hay alarmas</td>
-					</tr> -->
 					<tr>
-						<td style="vertical-align: middle;">Alarma test</td>
+						<td colspan="5" ng-hide="vm.completed">Cargando...</td>
+					</tr>
+					<tr>
+						<td colspan="5" ng-show="vm.completed && vm.alarms == null">No
+							hay alarmas</td>
+					</tr>
+					<tr ng-show="vm.completed && vm.alarms != null"
+						ng-repeat="alarm in vm.alarms">
+						<td style="vertical-align: middle;">{{ alarm.name }}</td>
 						<td>
 							<ul>
-								<li>Artículo de prueba 1</li>
-								<li>Artículo de prueba 2</li>
-								<li>Artículo de prueba 3</li>
+								<li ng-repeat="article in alarm.articles">{{ article.name }}</li>
 							</ul>
 						</td>
 						<td style="vertical-align: middle;"><select name="type">
