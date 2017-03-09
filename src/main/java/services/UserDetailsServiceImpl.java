@@ -1,8 +1,9 @@
 package services;
-
+import org.springframework.core.env.Environment;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Date;
 
 import javax.transaction.Transactional;
 
@@ -29,10 +30,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private AuthorizationDao authorizationDao;
+    
+    @Autowired
+    private Environment environment;
 
     @Override
     public UserDetails loadUserByUsername(final String mobileOrTokenValue) throws UsernameNotFoundException {
-        User user = userDao.findByTokenValue(mobileOrTokenValue);
+        User user = userDao.findByTokenValue(mobileOrTokenValue, new Date(new Date().getTime() - Integer.parseInt(environment.getProperty("tokenTime.user"))));
         if (user != null) {
             List<Role> roleList = authorizationDao.findRoleByUser(user);
             return this.userBuilder(Long.toString(user.getMobile()), new BCryptPasswordEncoder().encode(""), roleList);
