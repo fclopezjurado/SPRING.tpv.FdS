@@ -1,4 +1,4 @@
-var tpv = angular.module("tpv", ["ngRoute"]);
+var tpv = angular.module("tpv", ["ngRoute", "angularCSS"]);
 
 tpv.config(function ($routeProvider) {
     "use strict";
@@ -34,6 +34,12 @@ tpv.config(function ($routeProvider) {
         .when("/feature10/edit", {
             templateUrl: "app/components/feature10/editAlarm.html",
             controller: "EditAlarmController",
+            controllerAs: "vm"
+        })
+        .when("/feature8.9/invoices/create", {
+            templateUrl: "app/components/feature8.9/views/create_invoice.html",
+            css: "app/components/feature8.9/css/style.css",
+            controller: "CreateInvoiceController",
             controllerAs: "vm"
         })
         .otherwise({
