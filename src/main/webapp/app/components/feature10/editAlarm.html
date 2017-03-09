@@ -28,10 +28,10 @@
 								<li ng-repeat="article in alarm.articles">{{ article.name }}</li>
 							</ul>
 						</td>
-						<td style="vertical-align: middle;"><select name="type">
+						<td style="vertical-align: middle;"><select name="type" ng-model="alarm.type">
 								<option value=''></option>
-								<option value='warning' selected>Warning</option>
-								<option value='critical'>Critical</option>
+								<option value='WARNING'>Warning</option>
+								<option value='CRITICAL'>Critical</option>
 						</select></td>
 						<td style="vertical-align: middle;"><input type="text"
 							class="form-control" name="value" value="3"></td>

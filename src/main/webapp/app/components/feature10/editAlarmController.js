@@ -5,9 +5,7 @@ tpv.controller('EditAlarmController', [ '$timeout', 'f10Service',
 
 			vm.completed = false;
 			vm.alarms = null;
-			// vm.deleteAll = deleteAll;
 			vm.error = false;
-			vm.response = "";
 
 			function getAlarms() {
 				const
@@ -15,6 +13,10 @@ tpv.controller('EditAlarmController', [ '$timeout', 'f10Service',
 
 				f10Service.getAll().then(function(result) {
 					vm.completed = true;
+					vm.alarms = result.alarms;
+					/*$timeout(function() {
+						vm.completed = false;
+					}, delay)*/
 				}, function(errors) {
 					// handle errors
 					vm.error = true;
