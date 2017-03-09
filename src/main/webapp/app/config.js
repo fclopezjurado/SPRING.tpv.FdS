@@ -28,7 +28,7 @@ tpv.config(function ($routeProvider) {
         })
         .when("/feature10/crear", {
             templateUrl: "app/components/feature10/createAlarm.html",
-            controller: "CreateAlarmController.js",
+            controller: "CreateAlarmController",
             controllerAs: "vm"
         })
         .when("/feature10/edit", {

@@ -1,34 +1,53 @@
 tpv.controller('CreateAlarmController', [ '$timeout', 'f10Service',
-		function($timeout, f00Service) {
+		function($timeout, f10Service) {
 			"use strict";
 			var vm = this;
 
-			vm.completed = false;
-			vm.error = false;
-			vm.login = login;
-			vm.mobile;
-			vm.password;
-			vm.respuesta = "";
+			vm.products = ['apple', 'orange', 'pear', 'naartjie'];
 
-			function createAlarms() {
-				const
-				delay = 2000;
-				f00Service.login(vm.mobile, vm.password).then(function(result) {
+			vm.selection = ['apple', 'pear'];
+			
+			vm.type;
+			
+			vm.number;
+
+			vm.completed;
+			
+			vm.send = false;
+			
+			vm.createAlarm = function() {
+				const delay = 2000;
+				f10Service.createAlarm(vm.selection, vm.type, vm.number).then(function(result) {
 					// promise was fullfilled
 					vm.completed = true;
+					vm.send = true;
 					vm.response = result.token + ":" + result.rol;
 					sessionStorage.token = result.token;
 					sessionStorage.rol = result.rol;
 					$timeout(function() {
-						vm.completed = false;
-					}, delay)
+						vm.send = false;
+					}, delay);
 				}, function(errors) {
 					// handle errors
-					vm.error = true;
-					vm.response = errors;
+					vm.completed = false;
+					vm.send = true;
 					$timeout(function() {
-						vm.error = false;
-					}, delay)
+						vm.send = false;
+					}, delay);
 				});
-			}
+			};
+			
+			vm.toggleSelection = function(productName) {
+			    var idx = vm.selection.indexOf(productName);
+
+			    // Is currently selected
+			    if (idx > -1) {
+			      vm.selection.splice(idx, 1);
+			    }
+
+			    // Is newly selected
+			    else {
+			      vm.selection.push(productName);
+			    }
+			  };
 		} ]);
