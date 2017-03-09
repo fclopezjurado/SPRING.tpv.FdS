@@ -44,6 +44,16 @@ tpv.config(function ($routeProvider) {
             controller: "",
             controllerAs: "vm"
         })
+        .when("/feature10/crear", {
+            templateUrl: "app/components/feature10/createAlarm.html",
+            controller: "createAlarmController.js",
+            controllerAs: "vm"
+        })
+        .when("/feature10/edit", {
+            templateUrl: "app/components/feature10/editAlarm.html",
+            controller: "EditAlarmController",
+            controllerAs: "vm"
+        })
         .otherwise({
             redirectTo: '/'
         });
