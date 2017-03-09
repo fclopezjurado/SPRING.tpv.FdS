@@ -1,12 +1,9 @@
 package controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import daos.alarm.AlarmDao;
-import entities.alarm.Alarm;
 import wrappers.AlarmWrapper;
 
 @Controller

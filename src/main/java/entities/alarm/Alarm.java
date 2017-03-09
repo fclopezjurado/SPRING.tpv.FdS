@@ -33,12 +33,13 @@ public class Alarm {
     public Alarm() {
     }
 
-    public Alarm(int id, String name, List<Article> articleList, AlarmType type) {
+    public Alarm(int id, String name, List<Article> articleList, AlarmType type, int value) {
         super();
         this.id = id;
         this.name = name;
         this.articleList = articleList;
         this.type = type;
+        this.value = value;
     }
 
     public int getId() {
