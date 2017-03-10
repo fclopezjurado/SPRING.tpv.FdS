@@ -1,10 +1,15 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import daos.alarm.AlarmDao;
+import daos.core.ArticleDao;
 import entities.alarm.Alarm;
+import entities.core.Article;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
 
@@ -15,7 +20,7 @@ public class AlarmController {
     private AlarmDao alarmDao;
     
     @Autowired
-    private MockArticlesDao articlesDao;
+    private ArticleDao articlesDao;
     
     @Autowired
     public void setAlarmDao(AlarmDao alarmDao) {
@@ -23,7 +28,7 @@ public class AlarmController {
     }
     
     @Autowired
-    public void setArticlesDao(MockArticlesDao articlesDao){
+    public void setArticlesDao(ArticleDao articlesDao){
         this.articlesDao = articlesDao;
     }
 
@@ -32,7 +37,11 @@ public class AlarmController {
     }
 
     public void addNewAlarm(AlarmWrapper alarm) {
-        Alarm alarmEntity = new Alarm(alarm.getName(), alarm.getProducts());
+        List<Article> articles = new ArrayList<Article>();
+        for(String nameProduct : alarm.getProducts()){
+            articles.add(articlesDao.findByDescription(nameProduct));
+        }
+        Alarm alarmEntity = new Alarm(alarm.getName(), articles, alarm.getType(), alarm.getNumProducts());
         alarmDao.save(alarmEntity);
     }
     

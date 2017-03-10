@@ -11,14 +11,17 @@ public class AlarmWrapper {
     private AlarmType type;
 
     private List<String> products;
+    
+    private int numProducts;
 
     public AlarmWrapper() {}
 
-    public AlarmWrapper(String name, AlarmType type, List<String> products) {
+    public AlarmWrapper(String name, AlarmType type, List<String> products, int numProducts) {
         super();
         this.name = name;
         this.type = type;
         this.products = products;
+        this.numProducts = numProducts;
     }
 
     public String getName() {
@@ -45,10 +48,17 @@ public class AlarmWrapper {
         this.products = products;
     }
 
-    @Override
-    public String toString() {
-        return "AlarmWrapper [name=" + name + ", type=" + type + ", products=" + products + "]";
+    public int getNumProducts() {
+        return numProducts;
     }
 
+    public void setNumProducts(int numProducts) {
+        this.numProducts = numProducts;
+    }
+
+    @Override
+    public String toString() {
+        return "AlarmWrapper [name=" + name + ", type=" + type + ", products=" + products + ", numProducts=" + numProducts + "]";
+    }
     
 }
