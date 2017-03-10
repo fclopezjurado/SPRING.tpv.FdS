@@ -3,9 +3,13 @@ tpv.controller('CreateAlarmController', [ '$timeout', 'f10Service',
 			"use strict";
 			var vm = this;
 
-			vm.products = ['apple', 'orange', 'pear', 'naartjie'];
+			vm.products;
 
-			vm.selection = ['apple', 'pear'];
+			vm.selection = [];
+			
+			vm.loading = true;
+			
+			vm.errorLoading = false;
 			
 			vm.type;
 			
@@ -21,9 +25,6 @@ tpv.controller('CreateAlarmController', [ '$timeout', 'f10Service',
 					// promise was fullfilled
 					vm.completed = true;
 					vm.send = true;
-					vm.response = result.token + ":" + result.rol;
-					sessionStorage.token = result.token;
-					sessionStorage.rol = result.rol;
 					$timeout(function() {
 						vm.send = false;
 					}, delay);
@@ -50,4 +51,17 @@ tpv.controller('CreateAlarmController', [ '$timeout', 'f10Service',
 			      vm.selection.push(productName);
 			    }
 			  };
+			  
+			vm.getProducts = function() {
+				vm.loading = true;
+				f10Service.getAllProducts().then(function(result){
+					vm.products = result.products;
+					vm.loading = false;
+					vm.errorLoading = false;
+				}, function(errors){
+					vm.loading = false;
+					vm.errorLoading = true;
+				});
+			};
+			vm.getProducts();
 		} ]);

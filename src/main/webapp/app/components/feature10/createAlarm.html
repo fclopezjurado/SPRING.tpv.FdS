@@ -2,6 +2,12 @@
 	<div class="jumbotron text-center">
 		<fieldset>
 			<legend>Feature10. Crear alarma</legend>
+			<div ng-show="vm.loading" class="alert alert-warning">
+                    <strong>LOADING!</strong> Cargando datos
+                </div>
+            <div ng-show="!vm.loading && vm.errorLoading" class="alert alert-danger">
+                    <strong>ERROR!</strong> Error al cargar los datos!!
+                </div>
 			<form class="form-horizontal">
 				<div class="form-group">
 					<label class="control-label col-sm-2 " for="name">Name:</label>
