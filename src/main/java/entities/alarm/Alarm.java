@@ -1,5 +1,6 @@
 package entities.alarm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,6 +32,7 @@ public class Alarm {
     private int value;
     
     public Alarm() {
+        this.articleList = new ArrayList<>();
     }
 
     public Alarm(int id, String name, List<Article> articleList, AlarmType type, int value) {

@@ -26,11 +26,5 @@ public class RestService {
                 .basicAuth(Long.toString(manager.getMobile()), manager.getPassword()).clazz(TokenWrapper.class).post().build();
         return token.getToken();
     }
-    
-    public AlarmsWrapper getAllAlarms() {
-        RestBuilder<AlarmsWrapper> restbuilder = new RestBuilder<AlarmsWrapper>(URL).path(Uris.ALARMS).get();
-        AlarmsWrapper alarmsWrapper = restbuilder.build();
-        return alarmsWrapper;
-    }
 
 }
