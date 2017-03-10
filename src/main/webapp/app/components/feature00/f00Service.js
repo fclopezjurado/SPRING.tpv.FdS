@@ -49,7 +49,7 @@ tpv.service('f00Service', ['$http', '$q', function ($http, $q) {
 	    	  resource="customers";
 		  let config = {
 	 	      method: 'POST',
-	 	      url: urlBase + resource,
+	 	      url: urlBase + "/"+ resource,
 	 	      data: {'mobile': mobile, 'username': username, 'password': password}
 		  };
 	      return this.request(config);

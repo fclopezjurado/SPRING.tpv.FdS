@@ -18,7 +18,7 @@ import daos.users.UserDao;
 public class DataService {
 
     @Autowired
-    private Populate populate;
+    private DatabaseSeeder populate;
 
     @Autowired
     private AuthorizationDao authorizationDao;
