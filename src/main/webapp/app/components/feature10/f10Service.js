@@ -29,4 +29,21 @@ tpv.service('f10Service', ['$http', '$q', function ($http, $q) {
 	  return this.request(config); 
    }
    
+   this.getAllProducts = function() {
+	   let config = {
+		method: 'GET',
+		url: urlBase + "/mock_products"
+	   }
+	   
+	   return this.request(config);
+   };
+
+   this.createAlarm = function(products, type, number) {
+	   let config = {
+		method: 'POST',
+		url: urlBase + "/alarms",
+		data:{'products': products, 'type': type, 'number': number}
+	   };
+	   return this.request(config);
+   };
 }]);

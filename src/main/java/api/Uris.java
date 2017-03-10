@@ -19,5 +19,7 @@ public class Uris {
     public static final String ACTIVE = "/active";
     
     public static final String ALARMS = "/alarms";
+    
+    public static final String MOCK_PRODUCT = "/mock_products";
 
 }
