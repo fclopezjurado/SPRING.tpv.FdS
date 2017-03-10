@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import daos.alarm.AlarmDao;
-import wrappers.AlarmWrapper;
+import wrappers.AlarmsWrapper;
 
 @Controller
 public class AlarmController {
@@ -17,8 +17,8 @@ public class AlarmController {
         this.alarmDao = alarmDao;
     }
 
-    public AlarmWrapper getAll() {
-        return new AlarmWrapper(this.alarmDao.findAll());
+    public AlarmsWrapper getAll() {
+        return new AlarmsWrapper(this.alarmDao.findAll());
     }
     
 }

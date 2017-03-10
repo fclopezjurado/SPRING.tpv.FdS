@@ -4,14 +4,14 @@ import java.util.List;
 
 import entities.alarm.Alarm;
 
-public class AlarmWrapper {
+public class AlarmsWrapper {
 
     private List<Alarm> alarms;
 
-    public AlarmWrapper() {
+    public AlarmsWrapper() {
     }
 
-    public AlarmWrapper(List<Alarm> alarms) {
+    public AlarmsWrapper(List<Alarm> alarms) {
         this.alarms = alarms;
     }
 

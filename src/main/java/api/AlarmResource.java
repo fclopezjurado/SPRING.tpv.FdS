@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import controllers.AlarmController;
-import wrappers.AlarmWrapper;
+import wrappers.AlarmsWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION + Uris.ALARMS)
@@ -20,7 +20,7 @@ public class AlarmResource {
     }
     
     @RequestMapping(method = RequestMethod.GET)
-    public AlarmWrapper getAll() {
+    public AlarmsWrapper getAll() {
         return alarmController.getAll();
     }
     
