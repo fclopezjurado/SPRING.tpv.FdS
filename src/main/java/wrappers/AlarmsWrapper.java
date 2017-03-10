@@ -1,5 +1,6 @@
 package wrappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import entities.alarm.Alarm;
@@ -9,6 +10,7 @@ public class AlarmsWrapper {
     private List<Alarm> alarms;
 
     public AlarmsWrapper() {
+        this.alarms = new ArrayList<>();
     }
 
     public AlarmsWrapper(List<Alarm> alarms) {

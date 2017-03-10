@@ -1,6 +1,7 @@
 package api;
 
 import api.Uris;
+import wrappers.AlarmsWrapper;
 import wrappers.TokenWrapper;
 import wrappers.UserWrapper;
 
@@ -24,6 +25,12 @@ public class RestService {
         TokenWrapper token = new RestBuilder<TokenWrapper>(URL).path(Uris.TOKENS)
                 .basicAuth(Long.toString(manager.getMobile()), manager.getPassword()).clazz(TokenWrapper.class).post().build();
         return token.getToken();
+    }
+    
+    public AlarmsWrapper getAllAlarms() {
+        RestBuilder<AlarmsWrapper> restbuilder = new RestBuilder<AlarmsWrapper>(URL).path(Uris.ALARMS).get();
+        AlarmsWrapper alarmsWrapper = restbuilder.build();
+        return alarmsWrapper;
     }
 
 }
