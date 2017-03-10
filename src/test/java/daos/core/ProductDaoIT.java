@@ -1,6 +1,7 @@
 package daos.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +38,11 @@ public class ProductDaoIT {
     @Test
     public void testCreateTextilePrinting() {
         assertEquals(4, textilePrintingDao.count());
+    }
+    
+    @Test
+    public void testFindById() {
+        assertNotNull(embroideryDao.findById(84000002222L + 0));
     }
 
 }
