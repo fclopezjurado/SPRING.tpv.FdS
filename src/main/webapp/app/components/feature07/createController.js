@@ -19,7 +19,7 @@ tpv.controller('createController', [
 						function(result) {
 							// promise was fullfilled
 							vm.completed = true;
-							vm.response = result.total;
+							vm.response = "Referencia vale creado: "+result.reference;
 							$timeout(function() {
 								vm.completed = false;
 							}, delay)

@@ -1,6 +1,6 @@
 package api;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 
@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import wrappers.TotalVouchersWrapper;
+import wrappers.VoucherWrapper;
 
 public class VoucherResourceFunctionalTesting {
 
@@ -23,6 +24,16 @@ public class VoucherResourceFunctionalTesting {
         TotalVouchersWrapper totalVouchersWrapper = new RestBuilder<TotalVouchersWrapper>(RestService.URL).path(Uris.VOUCHERS)
                 .clazz(TotalVouchersWrapper.class).get().build();
         assertEquals(new BigDecimal("21.30"), totalVouchersWrapper.getTotal());
+    }
+
+    @Test
+    public void createVoucher() {
+        VoucherWrapper newVoucherWrapper = new VoucherWrapper();
+        newVoucherWrapper.setValue(new BigDecimal("100"));
+        VoucherWrapper voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class)
+                .body(newVoucherWrapper).post().build();
+
+        assertNotNull(voucherWrapper.getReference());
     }
 
     @After
