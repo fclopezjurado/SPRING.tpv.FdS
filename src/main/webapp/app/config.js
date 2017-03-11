@@ -30,19 +30,30 @@ tpv.config(function ($routeProvider) {
 
        .when("/feature03/feature03-1/listadoArticulos", {
 	        templateUrl: "app/components/feature03/feature03-1/listadoArticulos.html",
-	        controller: "",
+	        controller: "listadoArticulosController",
 	        controllerAs: "vm"
         })
         .when("/feature03/feature03-1/listadoBordados", {
-	        templateUrl: "app/components/feature03/feature03-1/listadoBordados.html",
-	        controller: "",
-	        controllerAs: "vm"
+            templateUrl: "app/components/feature03/feature03-1/listadoBordados.html",
+            controller: "listadoBordadosControler",
+            controllerAs: "vm"
         })
         .when("/feature03/feature03-1/listadoPrendaImpresa", {
-	        templateUrl: "app/components/feature03/feature03-1/listadoPrendaImpresa.html",
-	        controller: "",
-	        controllerAs: "vm"
+            templateUrl: "app/components/feature03/feature03-1/listadoPrendaImpresa.html",
+            controller: "listadoPrendaImpresaController",
+            controllerAs: "vm"
         })
+        .when("/feature10/crear", {
+            templateUrl: "app/components/feature10/createAlarm.html",
+            controller: "createAlarmController.js",
+            controllerAs: "vm"
+        })
+        .when("/feature10/edit", {
+            templateUrl: "app/components/feature10/editAlarm.html",
+            controller: "EditAlarmController",
+            controllerAs: "vm"
+        })
+
     	.when("/feature10/crear", {
     		templateUrl: "app/components/feature10/createAlarm.html",
         	controller: "CreateAlarmController",
