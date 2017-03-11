@@ -1,4 +1,4 @@
-package entities.alarm;
+package entities.core;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.core.Alarm;
+import entities.core.AlarmType;
 import entities.core.Article;
 
 public class AlarmTest {
@@ -47,7 +49,7 @@ public class AlarmTest {
         assertNotNull(alarm.getArticleList());
         assertEquals(4, alarm.getArticleList().size());
     }
-    
+
     @Test
     public void testSetValue() {
         alarm.setValue(2);

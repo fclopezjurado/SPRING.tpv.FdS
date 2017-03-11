@@ -1,4 +1,5 @@
 package daos.users;
+
 import org.springframework.core.env.Environment;
 
 import static org.junit.Assert.assertEquals;
@@ -28,7 +29,7 @@ public class UserDaoIT {
 
     @Autowired
     private TokenDao tokenDao;
-    
+
     @Autowired
     private Environment environment;
 
@@ -41,8 +42,12 @@ public class UserDaoIT {
     public void testFindByTokenValue() {
         User user = userDao.findByMobile(666000000);
         Token token = tokenDao.findByUser(user);
-        assertEquals(user, userDao.findByTokenValue(token.getValue(), new Date(new Date().getTime() - Integer.parseInt(environment.getProperty("tokenTime.user")) + 1000)));
-        assertEquals(null, userDao.findByTokenValue(token.getValue(), new Date(new Date().getTime() - Integer.parseInt(environment.getProperty("tokenTime.user")) + Integer.parseInt(environment.getProperty("tokenTime.user")) + 1000)));
+        assertEquals(user, userDao.findByTokenValue(token.getValue(),
+                new Date(new Date().getTime() - Integer.parseInt(environment.getProperty("tokenTime.user")) + 1000)));
+        assertEquals(null,
+                userDao.findByTokenValue(token.getValue(),
+                        new Date(new Date().getTime() - Integer.parseInt(environment.getProperty("tokenTime.user"))
+                                + Integer.parseInt(environment.getProperty("tokenTime.user")) + 1000)));
         assertNull(userDao.findByTokenValue("kk", new Date()));
     }
 }
