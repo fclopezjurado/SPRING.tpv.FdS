@@ -1,0 +1,36 @@
+/*
+
+CSS style sheet for feature 8.9
+
+*/
+
+body {
+	background: url("../img/invoice.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.form-container {
+    background-color: white;
+    border-radius: 10px;
+}
+
+h3, h2 {
+	padding-top: 20px;
+}
+
+h3, h2, .form-group {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#button-container {
+	padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.error {
+    font-style: italic;
+}
