@@ -31,17 +31,7 @@ public class Alarm {
     
     public Alarm() {
         this.articleList = new ArrayList<>();
-    }
-
-    public Alarm(int id, String name, List<Article> articleList, AlarmType type, int value) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.articleList = articleList;
-        this.type = type;
-        this.value = value;
-    }
-    
+    }    
 
     public Alarm(String name, List<Article> articleList, AlarmType type, int value) {
         super();
