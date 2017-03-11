@@ -2,10 +2,12 @@ package controllers;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import daos.core.AlarmDao;
 import daos.core.ArticleDao;
 import daos.core.EmbroideryDao;
 import daos.core.InvoiceDao;
@@ -16,6 +18,8 @@ import daos.core.VoucherDao;
 import daos.users.AuthorizationDao;
 import daos.users.TokenDao;
 import daos.users.UserDao;
+import entities.core.Alarm;
+import entities.core.AlarmType;
 import entities.core.Article;
 import entities.core.Embroidery;
 import entities.core.Invoice;
@@ -66,6 +70,9 @@ public class AdminController {
 
     @Autowired
     private InvoiceDao invoiceDao;
+    
+    @Autowired
+    private AlarmDao alarmDao;
 
     @Autowired
     public void setDataService(DataService dataService) {
@@ -76,7 +83,7 @@ public class AdminController {
         dataService.deleteAllExceptAdmin();
     }
     
-    public void populate() {
+    public void seedDatabase() {
         this.createUsers(0, 4, Role.CUSTOMER);
         this.createToken(666000000);
         this.createVouchers();
@@ -84,6 +91,7 @@ public class AdminController {
         this.createProducts();
         this.createTickets();
         this.createInvoices();
+        this.createAlarms();
     }
     
     public void createUsers(int initial, int size, Role role) {
@@ -208,5 +216,9 @@ public class AdminController {
         invoiceDao.save(new Invoice(3, ticketDao.findOne(3L)));
     }
 
-
+    public void createAlarms() {
+        List<Article> articles = articleDao.findAll();
+        alarmDao.save(new Alarm(1, "Alarma Warning", articles, AlarmType.WARNING, 5));
+        alarmDao.save(new Alarm(2, "Alarma Critical", null, AlarmType.CRITICAL, 2));
+    }
 }
