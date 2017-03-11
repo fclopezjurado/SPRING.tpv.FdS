@@ -45,7 +45,7 @@ tpv.config(function ($routeProvider) {
         })
     	.when("/feature10/crear", {
     		templateUrl: "app/components/feature10/createAlarm.html",
-        	controller: "createAlarmController.js",
+        	controller: "CreateAlarmController",
         	controllerAs: "vm"
     	})
     	.when("/feature10/edit", {
@@ -53,18 +53,18 @@ tpv.config(function ($routeProvider) {
         	controller: "EditAlarmController",
         	controllerAs: "vm"
     	})
-    	.when("/feature04/search-articles", {
-    		templateUrl: "app/components/feature04/searchArticles.html",
+    	.when("/feature13/search-articles", {
+    		templateUrl: "app/components/feature13/searchArticles.html",
     		controller: "SearchArticlesController",
     		controllerAs: "vm"
     	})
-    	.when("/feature04/search-embroideries", {
-    		templateUrl: "app/components/feature04/searchEmbroideries.html",
+    	.when("/feature13/search-embroideries", {
+    		templateUrl: "app/components/feature13/searchEmbroideries.html",
     		controller: "SearchEmbroideriesController",
     		controllerAs: "vm"
     	})
-    	.when("/feature04/search-textile-printings", {
-    		templateUrl: "app/components/feature04/searchTextilePrintings.html",
+    	.when("/feature13/search-textile-printings", {
+    		templateUrl: "app/components/feature13/searchTextilePrintings.html",
     		controller: "SearchTextilePrintingsController",
     		controllerAs: "vm"
     	})
