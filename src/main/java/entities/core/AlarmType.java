@@ -1,4 +1,4 @@
-package entities.alarm;
+package entities.core;
 
 public enum AlarmType {
     WARNING, CRITICAL;

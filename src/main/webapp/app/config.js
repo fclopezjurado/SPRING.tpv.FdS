@@ -53,6 +53,17 @@ tpv.config(function ($routeProvider) {
             controller: "EditAlarmController",
             controllerAs: "vm"
         })
+
+    	.when("/feature10/crear", {
+    		templateUrl: "app/components/feature10/createAlarm.html",
+        	controller: "CreateAlarmController",
+        	controllerAs: "vm"
+    	})
+    	.when("/feature10/edit", {
+    		templateUrl: "app/components/feature10/editAlarm.html",
+        	controller: "EditAlarmController",
+        	controllerAs: "vm"
+    	})
     	.when("/feature13/search-articles", {
     		templateUrl: "app/components/feature13/searchArticles.html",
     		controller: "SearchArticlesController",
