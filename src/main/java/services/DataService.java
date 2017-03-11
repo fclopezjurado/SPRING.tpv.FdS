@@ -64,11 +64,11 @@ public class DataService {
 
         voucherDao.deleteAll();
 
+        alarmDao.deleteAll();
         articleDao.deleteAll();
         embroideryDao.deleteAll();
         textilePrintingDao.deleteAll();
         providerDao.deleteAll();
-        alarmDao.deleteAll();
 
         populate.createDefaultAdmin();
     }
