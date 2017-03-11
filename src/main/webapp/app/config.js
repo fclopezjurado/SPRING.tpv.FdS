@@ -64,21 +64,6 @@ tpv.config(function ($routeProvider) {
         	controller: "EditAlarmController",
         	controllerAs: "vm"
     	})
-    	.when("/feature13/search-articles", {
-    		templateUrl: "app/components/feature13/searchArticles.html",
-    		controller: "SearchArticlesController",
-    		controllerAs: "vm"
-    	})
-    	.when("/feature13/search-embroideries", {
-    		templateUrl: "app/components/feature13/searchEmbroideries.html",
-    		controller: "SearchEmbroideriesController",
-    		controllerAs: "vm"
-    	})
-    	.when("/feature13/search-textile-printings", {
-    		templateUrl: "app/components/feature13/searchTextilePrintings.html",
-    		controller: "SearchTextilePrintingsController",
-    		controllerAs: "vm"
-    	})
         .when("/feature8.9/invoices/create", {
             templateUrl: "app/components/feature8.9/views/create_invoice.html",
             css: "app/components/feature8.9/css/style.css",
