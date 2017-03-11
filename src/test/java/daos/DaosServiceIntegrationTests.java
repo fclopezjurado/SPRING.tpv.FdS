@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import daos.alarm.AlarmDao;
+import daos.core.AlarmDao;
 import daos.core.ArticleDao;
 import daos.core.EmbroideryDao;
 import daos.core.InvoiceDao;
@@ -20,8 +20,8 @@ import daos.core.VoucherDao;
 import daos.users.AuthorizationDao;
 import daos.users.TokenDao;
 import daos.users.UserDao;
-import entities.alarm.Alarm;
-import entities.alarm.AlarmType;
+import entities.core.Alarm;
+import entities.core.AlarmType;
 import entities.core.Article;
 import entities.core.Embroidery;
 import entities.core.Invoice;
@@ -73,7 +73,7 @@ public class DaosServiceIntegrationTests {
 
     @Autowired
     private InvoiceDao invoiceDao;
-    
+
     @Autowired
     private AlarmDao alarmDao;
 
@@ -214,7 +214,7 @@ public class DaosServiceIntegrationTests {
     public void deleteAll() {
         dataService.deleteAllExceptAdmin();
     }
-    
+
     public void createAlarms() {
         List<Article> articles = articleDao.findAll();
         alarmDao.save(new Alarm(1, "Alarma Warning", articles, AlarmType.WARNING, 5));

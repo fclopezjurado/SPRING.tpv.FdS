@@ -1,4 +1,4 @@
-package entities.alarm;
+package entities.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import entities.core.Article;
 
 @Entity
 public class Alarm {
@@ -44,12 +42,15 @@ public class Alarm {
         this.value = value;
     }
     
+
     public Alarm(String name, List<Article> articleList, AlarmType type, int value) {
+        super();
         this.name = name;
         this.articleList = articleList;
         this.type = type;
         this.value = value;
     }
+
 
     public int getId() {
         return id;

@@ -2,7 +2,7 @@ package wrappers;
 
 import java.util.List;
 
-import entities.alarm.AlarmType;
+import entities.core.AlarmType;
 
 public class AlarmWrapper {
 

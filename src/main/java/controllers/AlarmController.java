@@ -6,12 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import daos.alarm.AlarmDao;
+import daos.core.AlarmDao;
 import daos.core.ArticleDao;
-import entities.alarm.Alarm;
+import entities.core.Alarm;
 import entities.core.Article;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
+
+
 
 @Controller
 public class AlarmController {

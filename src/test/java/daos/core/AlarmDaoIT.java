@@ -1,4 +1,4 @@
-package daos.alarm;
+package daos.core;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,10 +17,10 @@ public class AlarmDaoIT {
 
     @Autowired
     private AlarmDao alarmDao;
- 
+
     @Test
     public void testCreateAlarm() {
         assertEquals(2, alarmDao.count());
     }
-    
+
 }
