@@ -26,10 +26,12 @@ tpv.config(function ($routeProvider) {
 	        controller: "DeleteAllController",
 	        controllerAs: "vm"
         })
-        .when("/feature03/feature03-1/listadoArticulos", {
-            templateUrl: "app/components/feature03/feature03-1/listadoArticulos.html",
-            controller: "",
-            controllerAs: "vm"
+        //Feature 03 -01 
+
+       .when("/feature03/feature03-1/listadoArticulos", {
+	        templateUrl: "app/components/feature03/feature03-1/listadoArticulos.html",
+	        controller: "",
+	        controllerAs: "vm"
         })
         .when("/feature03/feature03-1/listadoBordados", {
             templateUrl: "app/components/feature03/feature03-1/listadoBordados.html",
@@ -51,18 +53,18 @@ tpv.config(function ($routeProvider) {
             controller: "EditAlarmController",
             controllerAs: "vm"
         })
-    	.when("/feature04/search-articles", {
-    		templateUrl: "app/components/feature04/searchArticles.html",
+    	.when("/feature13/search-articles", {
+    		templateUrl: "app/components/feature13/searchArticles.html",
     		controller: "SearchArticlesController",
     		controllerAs: "vm"
     	})
-    	.when("/feature04/search-embroideries", {
-    		templateUrl: "app/components/feature04/searchEmbroideries.html",
+    	.when("/feature13/search-embroideries", {
+    		templateUrl: "app/components/feature13/searchEmbroideries.html",
     		controller: "SearchEmbroideriesController",
     		controllerAs: "vm"
     	})
-    	.when("/feature04/search-textile-printings", {
-    		templateUrl: "app/components/feature04/searchTextilePrintings.html",
+    	.when("/feature13/search-textile-printings", {
+    		templateUrl: "app/components/feature13/searchTextilePrintings.html",
     		controller: "SearchTextilePrintingsController",
     		controllerAs: "vm"
     	})
