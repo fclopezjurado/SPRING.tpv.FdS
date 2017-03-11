@@ -6,6 +6,7 @@ tpv.controller('validController', [ '$timeout', 'f07Service',
             vm.completed = false;
             vm.error = false;
             vm.response = "";
+            vm.total = total;
 
             function total() {
                 const
