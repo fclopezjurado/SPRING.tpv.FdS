@@ -74,6 +74,27 @@ tpv.config(function ($routeProvider) {
             controller: "CreateInvoiceController",
             controllerAs: "vm"
         })
+        //Feature 07        
+       .when("/feature07/create", {
+	        templateUrl: "app/components/feature07/create.html",
+	        controller: "createController",
+	        controllerAs: "vm"
+        })
+       .when("/feature07/search", {
+	        templateUrl: "app/components/feature07/search.html",
+	        controller: "searchController",
+	        controllerAs: "vm"
+        })
+       .when("/feature07/consume", {
+	        templateUrl: "app/components/feature07/consume.html",
+	        controller: "consumeController",
+	        controllerAs: "vm"
+        })  
+       .when("/feature07/validTotal", {
+	        templateUrl: "app/components/feature07/validTotal.html",
+	        controller: "validController",
+	        controllerAs: "vm"
+        })                 
         .otherwise({
             redirectTo: '/'
         });
