@@ -218,7 +218,7 @@ public class AdminController {
 
     public void createAlarms() {
         List<Article> articles = articleDao.findAll();
-        alarmDao.save(new Alarm(1, "Alarma Warning", articles, AlarmType.WARNING, 5));
-        alarmDao.save(new Alarm(2, "Alarma Critical", null, AlarmType.CRITICAL, 2));
+        alarmDao.save(new Alarm("Alarma Warning", articles, AlarmType.WARNING, 5));
+        alarmDao.save(new Alarm("Alarma Critical", null, AlarmType.CRITICAL, 2));
     }
 }
