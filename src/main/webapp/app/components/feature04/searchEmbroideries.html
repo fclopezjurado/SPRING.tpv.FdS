@@ -1,0 +1,154 @@
+<section>
+     <div class="page-header">
+     <h1>Embroidery search</h1>
+   </div>
+   <div class="panel panel-primary">
+       <div class="panel-heading clickable" ng-click="vm.onClickAdvancedSearch()">
+          Advanced search
+          <div class="pull-right">
+              <div ng-show="vm.searchVisibility">
+                  Hide filters
+                  <span class="glyphicon glyphicon-chevron-up"></span>
+              </div>
+              <div ng-hide="vm.searchVisibility">
+                  Show filters
+                  <span class="glyphicon glyphicon-chevron-down"></span>
+              </div>
+          </div>
+       </div>
+       <div class="panel-body" ng-show="vm.searchVisibility">
+             <div class="row">
+               <div class="col-lg-4">
+                   <div class="form-group">
+                       <label for="referenceInput">Search by reference</label>
+                       <input ng-model="search.reference" id="referenceInput" placeholder="627-23-12_TPV" class="form-control">
+                   </div>
+               </div>
+               <div class="col-lg-8">
+                   <div class="row">
+                       <div class="form-group col-lg-4">
+                           <label for="exactRetailPriceInput">Exact retail price</label>
+                           <input ng-model="vm.exactRetailPrice" type="number" min="0" step="0.01" id="exactRetailPriceInput" class="form-control">
+                       </div>
+                       <div class="form-group col-lg-4">
+                           <label for="minRetailPriceInput">Min retail price</label>
+                           <input ng-model="vm.minRetailPrice" type="number" min="0" step="0.01" id="minRetailPriceInput" class="form-control">
+                       </div>
+                       <div class="form-group col-lg-4">
+                           <label for="maxRetailPriceInput">Max retail price</label>
+                           <input ng-model="vm.maxRetailPrice" type="number" min="0" step="0.01" id="maxRetailPriceInput" class="form-control">
+                       </div>
+                   </div>  
+               </div>
+           </div> 
+           <div class="row">
+               <div class="col-lg-4">              
+                   <div class="row">
+                      <div class="form-group col-lg-4">
+                             <label for="exactStitchesInput">Exact number of stitches</label>
+                             <input ng-model="vm.exactStitches" type="number" min="0" id="exactStitchesInput" class="form-control">
+                         </div>
+                         <div class="form-group col-lg-4">
+                             <label for="minStitchesInput">Min number of stitches</label>
+                             <input ng-model="vm.minStitches" type="number" min="0" id="minStitchesInput" class="form-control">
+                         </div>
+                         <div class="form-group col-lg-4">
+                             <label for="maxStitchesInput">Max number of stitches</label>
+                             <input ng-model="vm.maxStitches" type="number" min="0"  id="maxStitchesInput" class="form-control">
+                         </div>
+                    </div>
+                   <button class="btn btn-primary" ng-click="vm.clearFilters()">
+                      <span class="glyphicon glyphicon-refresh"></span>
+                      Clear filters
+                   </button>
+               </div>
+               <div class="col-lg-8">
+                   <div class="row">
+                       <div class="form-group col-lg-4">
+                           <label for="exactColorsInput">Exact number of colors</label>
+                           <input ng-model="vm.exactColors" type="number" min="0" id="exactColorsInput" class="form-control">
+                       </div>
+                       <div class="form-group col-lg-4">
+                           <label for="minColorsInput">Min number of colors</label>
+                           <input ng-model="vm.minColors" type="number" min="0" id="minColorsInput" class="form-control">
+                       </div>
+                       <div class="form-group col-lg-4">
+                           <label for="maxColorsInput">Max number of colors</label>
+                           <input ng-model="vm.maxColors" type="number" min="0" id="maxColorsInput" class="form-control">
+                       </div>
+                   </div>
+                   <div class="row">
+                         <div class="form-group col-lg-4">
+                             <label for="exactSquareMillimetersInput">Exact square millimeters</label>
+                             <input ng-model="vm.exactSquareMillimeters" type="number" min="0" step="0.01" id="exactSquareMillimetersInput" class="form-control">
+                         </div>
+                         <div class="form-group col-lg-4">
+                             <label for="minSquareMillimetersInput">Min square millimeters</label>
+                             <input ng-model="vm.minSquareMillimeters" type="number" min="0" step="0.01" id="minSquareMillimetersInput" class="form-control">
+                         </div>
+                         <div class="form-group col-lg-4">
+                             <label for="maxSquareMillimetersInput">Max square millimeters</label>
+                             <input ng-model="vm.maxSquareMillimeters" type="number" min="0" step="0.01" id="maxSquareMillimetersInput" class="form-control">
+                         </div>
+                     </div>
+               </div> 
+           </div>
+       </div>
+     </div>
+     <br/>
+     <div class="panel panel-primary">
+         <div class="table-responsive">
+             <table class="table table-striped">
+                 <thead>
+                     <tr>
+                         <th class="clickable" ng-click="vm.sortType='reference'; vm.sortReverse = !vm.sortReverse">
+                             Reference
+                             <span ng-show="vm.sortType=='reference' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom text-primary"></span>
+                             <span ng-show="vm.sortType=='reference' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top text-primary"></span>
+                         </th>
+                         <th class="clickable" ng-click="vm.sortType='description'; vm.sortReverse = !vm.sortReverse">
+                             Description
+                             <span ng-show="vm.sortType=='description' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom text-primary"></span>
+                             <span ng-show="vm.sortType=='description' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top text-primary"></span>
+                         </th>
+                         <th class="clickable" ng-click="vm.sortType='retailPrice'; vm.sortReverse = !vm.sortReverse">
+                             Retail price
+                             <span ng-show="vm.sortType=='retailPrice' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom text-primary"></span>
+                             <span ng-show="vm.sortType=='retailPrice' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top text-primary"></span>
+                         </th>
+                         <th class="clickable" ng-click="vm.sortType='stitches'; vm.sortReverse = !vm.sortReverse">
+                             Stitches
+                             <span ng-show="vm.sortType=='stitches' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom text-primary"></span>
+                             <span ng-show="vm.sortType=='stitches' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top text-primary"></span>
+                         </th>
+                         <th class="clickable" ng-click="vm.sortType='colors'; vm.sortReverse = !vm.sortReverse">
+                             Colors
+                             <span ng-show="vm.sortType=='colors' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom text-primary"></span>
+                             <span ng-show="vm.sortType=='colors' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top text-primary"></span>
+                         </th>
+                         <th class="clickable" ng-click="vm.sortType='squareMillimeters'; vm.sortReverse = !vm.sortReverse">
+                             Square millimeters
+                             <span ng-show="vm.sortType=='squareMillimeters' && vm.sortReverse" class="glyphicon glyphicon-triangle-bottom text-primary"></span>
+                             <span ng-show="vm.sortType=='squareMillimeters' && !vm.sortReverse" class="glyphicon glyphicon-triangle-top text-primary"></span>
+                         </th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                     <tr ng-repeat="embroidery in embroideriesFiltered = (vm.embroideries | orderBy:vm.sortType:vm.sortReverse | filter:search | filter:vm.filterExactRetailPrice | filter:vm.filterRetailPrice | filter:vm.filterExactStitches | filter:vm.filterStitches | filter:vm.filterExactColors |filter:vm.filterColors | filter:vm.filterExactSquareMillimeters | filter:vm.filterSquareMillimeters)">
+                         <td>{{embroidery.reference}}</td>
+                         <td>{{embroidery.description}}</td>
+                         <td>{{embroidery.retailPrice}}</td>
+                         <td>{{embroidery.stitches}}</td>
+                         <td>{{embroidery.colors}}</td>
+                         <td>{{embroidery.squareMillimeters}}</td>
+                     </tr>
+                 </tbody>
+             </table>
+             <div class="panel" ng-hide="embroideriesFiltered.length">
+                 <div class="panel-body">
+                     No embroideries found with this data
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section> 
