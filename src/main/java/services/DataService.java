@@ -3,6 +3,7 @@ package services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import daos.core.AlarmDao;
 import daos.core.ArticleDao;
 import daos.core.EmbroideryDao;
 import daos.core.InvoiceDao;
@@ -49,6 +50,9 @@ public class DataService {
 
     @Autowired
     private InvoiceDao invoiceDao;
+    
+    @Autowired
+    private AlarmDao alarmDao;
 
     public void deleteAllExceptAdmin() {
         invoiceDao.deleteAll();
@@ -60,6 +64,7 @@ public class DataService {
 
         voucherDao.deleteAll();
 
+        alarmDao.deleteAll();
         articleDao.deleteAll();
         embroideryDao.deleteAll();
         textilePrintingDao.deleteAll();

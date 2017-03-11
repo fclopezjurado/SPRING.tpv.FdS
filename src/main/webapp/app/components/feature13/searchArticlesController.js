@@ -1,9 +1,9 @@
-tpv.controller('SearchArticlesController', function($route, f04Service) {
+tpv.controller('SearchArticlesController', function($route, f13Service) {
  	"use strict";
  	
  	var vm = this;
  	
- 	vm.articles = f04Service.getArticles();
+ 	vm.articles = f13Service.getArticles();
  	vm.exactRetailPrice = 0;
  	vm.minRetailPrice = 0;
  	vm.maxRetailPrice = 0;

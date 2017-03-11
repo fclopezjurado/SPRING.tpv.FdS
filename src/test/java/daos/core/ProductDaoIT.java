@@ -39,7 +39,7 @@ public class ProductDaoIT {
     public void testCreateTextilePrinting() {
         assertEquals(4, textilePrintingDao.count());
     }
-    
+
     @Test
     public void testFindById() {
         assertNotNull(embroideryDao.findById(84000002222L + 0));

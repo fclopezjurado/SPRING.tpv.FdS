@@ -21,5 +21,8 @@ public class Uris {
     public static final String ALARMS = "/alarms";
     
     public static final String SEEDER = "/seeder";
+    
+    public static final String MOCK_PRODUCT = "/mock_products";
 
+    public static final String TICKETS = "/tickets";
 }
