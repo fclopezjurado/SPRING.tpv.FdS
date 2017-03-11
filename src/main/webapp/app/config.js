@@ -74,6 +74,13 @@ tpv.config(function ($routeProvider) {
             controller: "CreateInvoiceController",
             controllerAs: "vm"
         })
+        
+        .when("/feature4/searchProducts", {
+            templateUrl: "app/components/feature04/views/searchProducts.html",
+            css: "app/components/feature04/css/style.css",
+            controller: "SearchProducts",
+            controllerAs: "vm"
+        })
         //Feature 07        
        .when("/feature07/create", {
 	        templateUrl: "app/components/feature07/create.html",
