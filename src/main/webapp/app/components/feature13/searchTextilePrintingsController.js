@@ -1,9 +1,9 @@
-tpv.controller('SearchTextilePrintingsController', function($route, f04Service) {
+tpv.controller('SearchTextilePrintingsController', function($route, f13Service) {
  	"use strict";
  	
  	var vm = this;
  	
- 	vm.textilePrintings = f04Service.getTextilePrintings();
+ 	vm.textilePrintings = f13Service.getTextilePrintings();
  	vm.exactRetailPrice = 0;
  	vm.minRetailPrice = 0;
  	vm.maxRetailPrice = 0;
