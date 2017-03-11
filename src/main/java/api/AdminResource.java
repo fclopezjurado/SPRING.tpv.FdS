@@ -27,5 +27,10 @@ public class AdminResource {
     public void deleteAllExceptAdmin() {
         adminController.deleteAllExceptAdmin();
     }
+    
+    @RequestMapping(value = Uris.SEEDER, method = RequestMethod.POST)
+    public void seedDatabase() {
+        adminController.populate();
+    }
 
 }
