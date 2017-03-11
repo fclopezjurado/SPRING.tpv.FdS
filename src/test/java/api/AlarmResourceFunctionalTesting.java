@@ -6,6 +6,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Test;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
@@ -60,6 +61,11 @@ public class AlarmResourceFunctionalTesting {
         if(!found){
             fail();
         }
+    }
+    
+    @After
+    public void after(){
+        new RestService().deleteAll();
     }
     
 }
