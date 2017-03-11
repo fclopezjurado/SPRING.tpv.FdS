@@ -27,5 +27,14 @@ tpv.service('f07Service', ['$http', '$q', function ($http, $q) {
 	  };
       return this.request(config);
    }
+
+   this.crear = function (value, expiration) {
+	      let config = {
+	 	     method: 'POST',
+	 	     url: urlBase + "/vouchers",
+	 	     data:{'value': value, 'expiration': expiration}
+		  };
+	      return this.request(config);
+	   }   
    
 }]);
