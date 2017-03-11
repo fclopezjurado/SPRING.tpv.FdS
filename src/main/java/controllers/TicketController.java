@@ -18,7 +18,7 @@ public class TicketController {
         return null;
     }
 
-    public TicketWrapper updateTicket() {
+    public TicketWrapper updateTicket(TicketWrapper ticketWrapper) {
         // TODO Implement this method
         // TODO Feature 11: Check status after each update 
         return null;
