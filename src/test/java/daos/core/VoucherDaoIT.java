@@ -27,7 +27,7 @@ public class VoucherDaoIT {
 
     @Test
     public void testTotalActive() {
-        assertEquals(new BigDecimal("21.30"),voucherDao.findTotalActiveVouchers());
+        assertEquals(new BigDecimal("21.30"), voucherDao.findTotalActiveVouchers());
     }
 
 }
