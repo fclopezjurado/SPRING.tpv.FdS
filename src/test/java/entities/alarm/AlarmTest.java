@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import entities.core.Alarm;
+import entities.core.AlarmType;
 import entities.core.Article;
 
 public class AlarmTest {

@@ -1,4 +1,4 @@
-package entities.alarm;
+package entities.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
-import entities.core.Article;
 
 @Entity
 public class Alarm {

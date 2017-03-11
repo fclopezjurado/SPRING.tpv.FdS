@@ -1,7 +1,6 @@
 package api;
 
 import api.Uris;
-import wrappers.AlarmsWrapper;
 import wrappers.TokenWrapper;
 import wrappers.UserWrapper;
 
