@@ -41,6 +41,16 @@ public class Alarm {
         this.type = type;
         this.value = value;
     }
+    
+
+    public Alarm(String name, List<Article> articleList, AlarmType type, int value) {
+        super();
+        this.name = name;
+        this.articleList = articleList;
+        this.type = type;
+        this.value = value;
+    }
+
 
     public int getId() {
         return id;
