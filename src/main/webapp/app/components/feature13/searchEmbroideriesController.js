@@ -1,9 +1,9 @@
-tpv.controller('SearchEmbroideriesController', function($route, f04Service) {
+tpv.controller('SearchEmbroideriesController', function($route, f13Service) {
 	"use strict";
 	
 	var vm = this;
 	
-	vm.embroideries = f04Service.getEmbroideries();
+	vm.embroideries = f13Service.getEmbroideries();
 	vm.exactRetailPrice = 0;
 	vm.minRetailPrice = 0;
 	vm.maxRetailPrice = 0;	
