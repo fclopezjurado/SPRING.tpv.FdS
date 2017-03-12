@@ -37,4 +37,12 @@ tpv.service('f07Service', ['$http', '$q', function ($http, $q) {
 	      return this.request(config);
 	   }   
    
+   this.consumir = function (reference) {
+	      let config = {
+	 	     method: 'POST',
+	 	     url: urlBase + "/vouchers/"+reference,
+		  };
+	      return this.request(config);
+	   }
+   
 }]);

@@ -31,4 +31,21 @@ public class VoucherController {
         return voucherCrerado;
     }
 
+    public VoucherWrapper consumeVoucher(VoucherWrapper consumeVoucherWrapper) {
+
+        Voucher voucherEntity = voucherDao.findFirstByReference(consumeVoucherWrapper.getReference());
+        VoucherWrapper voucherConsumido = new VoucherWrapper();
+
+        if (voucherEntity != null) {
+
+            if (!voucherEntity.used() && !voucherEntity.expired()) {
+                voucherEntity.consume();
+                voucherDao.save(voucherEntity);
+                voucherConsumido.setReference(voucherEntity.getReference());
+                voucherConsumido.setValue(voucherEntity.getValue());
+            }
+        }
+        return voucherConsumido;
+    }
+
 }

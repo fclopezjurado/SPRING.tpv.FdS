@@ -36,6 +36,19 @@ public class VoucherResourceFunctionalTesting {
         assertNotNull(voucherWrapper.getReference());
     }
 
+    @Test
+    public void consumeVoucher() {
+        VoucherWrapper newVoucherWrapper = new VoucherWrapper();
+        newVoucherWrapper.setValue(new BigDecimal("101.00"));
+        VoucherWrapper voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class)
+                .body(newVoucherWrapper).post().build();
+
+        VoucherWrapper consumedvoucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).path("/"+voucherWrapper.getReference()).clazz(VoucherWrapper.class)
+                .post().build();        
+                
+        assertEquals(new BigDecimal("101.00"), consumedvoucherWrapper.getValue());
+    }    
+    
     @After
     public void after() {
         new RestService().deleteAll();
