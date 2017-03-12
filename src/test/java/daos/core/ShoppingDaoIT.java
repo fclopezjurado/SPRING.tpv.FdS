@@ -3,6 +3,7 @@ package daos.core;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,28 +13,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
-import entities.core.Ticket;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
-public class TicketDaoIT {
-
+public class ShoppingDaoIT {
     @Autowired
-    private TicketDao ticketDao;
+    private ShoppingDao shoppingDao;
 
     @Test
-    public void testCreate() {
-        assertEquals(3, ticketDao.count());
-    }
-
-    @Test
-    public void testFindByReference() {
-        Ticket ticketRetrieved = ticketDao.findByReference(ticketDao.findOne(1L).getReference());
-        assertEquals(ticketRetrieved.getId(), ticketDao.findOne(1L).getId());
-    }
-
-    @Test
-    public void testCountTicketsBetweenDates() {
+    public void findBestSellersBetweenDates() {
 
         Calendar dateInicio = Calendar.getInstance();
         int diaBase = dateInicio.get(Calendar.DAY_OF_MONTH);
@@ -41,9 +29,23 @@ public class TicketDaoIT {
         Calendar dateFin = Calendar.getInstance();
         dateFin.set(Calendar.DAY_OF_MONTH, diaBase + 5);
 
-        int counter = ticketDao.countTicketsBetweenDates(dateInicio, dateFin);
+        List<Object[]> bestSellers = shoppingDao.findBestSellersBetweenDates(dateInicio, dateFin);
 
-        assertEquals(3, counter);
+        assertEquals(12, bestSellers.size());
+    }
+
+    @Test
+    public void findBestSellersBetweenFutureDates() {
+
+        Calendar dateInicio = Calendar.getInstance();
+        int diaBase = dateInicio.get(Calendar.DAY_OF_MONTH);
+        dateInicio.set(Calendar.DAY_OF_MONTH, diaBase + 1);
+        Calendar dateFin = Calendar.getInstance();
+        dateFin.set(Calendar.DAY_OF_MONTH, diaBase + 5);
+
+        List<Object[]> bestSellers = shoppingDao.findBestSellersBetweenDates(dateInicio, dateFin);
+
+        assertEquals(0, bestSellers.size());
     }
 
 }
