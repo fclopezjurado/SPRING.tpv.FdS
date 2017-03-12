@@ -9,17 +9,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
-import daos.core.AlarmDao;
-import daos.core.ArticleDao;
-import entities.core.Alarm;
 import entities.core.AlarmType;
-import entities.core.Article;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
 
@@ -29,6 +24,12 @@ public class AlarmResourceFunctionalTesting {
 
     public static final String URL = "http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api" + Uris.VERSION;
 
+    @Before
+    public void seedDataBase(){
+        new RestService().deleteAll();
+        new RestService().seedDatabase();
+    }
+    
     @Test
     public void testPostAlarm() {
         String nameAlarm = "alarma2";
@@ -54,7 +55,7 @@ public class AlarmResourceFunctionalTesting {
     @Test
     public void testGetAlarms() {
         AlarmsWrapper alarmsWrapper = new RestBuilder<AlarmsWrapper>(URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
-        assertEquals(0, alarmsWrapper.getAlarms().size());
+        assertEquals(2, alarmsWrapper.getAlarms().size());
     }
 
     @After
