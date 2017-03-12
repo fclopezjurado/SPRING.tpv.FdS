@@ -88,7 +88,7 @@ public class Voucher {
         if (expiration == null) {
             return false;
         } else {
-            return expiration.compareTo(Calendar.getInstance()) > 0;
+            return expiration.compareTo(Calendar.getInstance()) < 0;
         }
     }
 
