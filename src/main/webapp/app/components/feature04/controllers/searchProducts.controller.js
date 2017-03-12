@@ -1,5 +1,5 @@
 angular.module("tpv").controller("SearchProducts",
-    function ($scope) {
+    function ($scope, busquedaDeProductos) {
 		"use strict";
 		const SEARCH_BY_PRODUCT				= 0;
 		const SEARCH_BY_ARTICLE 			= 1;
@@ -17,6 +17,7 @@ angular.module("tpv").controller("SearchProducts",
 	 	vm.searchVisibility = false;
 	 	vm.sortType = "reference";
 	 	vm.sortReverse = false;
+	 	vm.articles	= "";
 		
 		
 		vm.onClickAdvancedSearch = () => {
@@ -51,7 +52,7 @@ angular.module("tpv").controller("SearchProducts",
         vm.getProductos = function () {
         	vm.mobile= "prueba" ;
             if (vm.showInputForArticle ==true){
-            	 //vm.requestToGetTickets(searchProductsMock, vm.mobile);
+            	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
             }
         };
         
@@ -59,17 +60,9 @@ angular.module("tpv").controller("SearchProducts",
             var serverResponseBody;
 
             serverResponseBody 			= angular.fromJson(getUserService.getProducts(queryParameter));
-            vm.products 				= serverResponseBody.data;
+            vm.articles			= serverResponseBody.data;
             vm.showTableProducts		= true;
             
-            if (vm.tickets.length === 0) {
-            	vm.ticketsFormError 	= THERE_ARE_NOT_TICKETS_MESSAGE;
-            	vm.disableCreateInvoice = true;
-            }
-            else {
-            	vm.showTicketsTable 	= true;
-            	vm.disableCreateInvoice = false;
-            }
         }
 		
     });
