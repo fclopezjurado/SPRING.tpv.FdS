@@ -52,24 +52,24 @@ angular.module("tpv").controller("SearchProducts",
         vm.getProductos = function () {
         	vm.mobile= "prueba" ;
         	if (vm.showInputForArticle ==true){
-           	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
+           	 vm.requestToGetProducts(busquedaDeArticulos, vm.mobile);
            }
         	else if (vm.showInputForEmbroidery  ==true){
-            	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
+            	 vm.requestToGetProducts(busquedaDeEmbroidery, vm.mobile);
             }
         	else if (vm.showInputForTextilePrinting ==true){
-           	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
+           	 vm.requestToGetProducts(busquedaDeTextilePrinting, vm.mobile);
            }
         	else {
               	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
               }
         };
         
-        vm.requestToGetProducts = function (getUserService, queryParameter) {
+        vm.requestToGetProducts = function (getProductService, queryParameter) {
             var serverResponseBody;
 
-            serverResponseBody 			= angular.fromJson(getUserService.getProducts(queryParameter));
-            vm.articles			= serverResponseBody.data;
+            serverResponseBody 			= angular.fromJson(getProductService.getProducts(queryParameter));
+            vm.articles					= serverResponseBody.data;
             vm.showTableProducts		= true;
             
         }
