@@ -97,7 +97,13 @@ tpv.config(function ($routeProvider) {
 	        templateUrl: "app/components/feature07/validTotal.html",
 	        controller: "validController",
 	        controllerAs: "vm"
-        })                 
+        })
+        .when("/feature8.10/invoices/details", {
+            templateUrl: "app/components/feature8.10/views/get_invoice.html",
+            css: "app/components/feature8.10/css/style.css",
+            controller: "GetInvoiceController",
+            controllerAs: "vm"
+        })
         .otherwise({
             redirectTo: '/'
         });
