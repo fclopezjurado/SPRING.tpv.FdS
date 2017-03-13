@@ -1,7 +1,8 @@
 angular.module("tpv").factory("getUsersService", function ($http) {
     const baseURL 			= "http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api/v0/users";
     const responseMockWrong = "{\"error\": \"Not found\", \"code\": 404, \"data\": []}";
-    const responseMockOK 	= "{\"error\": \"\", \"code\": 200, \"data\": [{\"active\": 1, \"address\": \"Uclés St. 1\", " +
+    const responseMockOK1 	= "{\"error\": \"\", \"code\": 200, \"data\": []}";
+    const responseMockOK2 	= "{\"error\": \"\", \"code\": 200, \"data\": [{\"active\": 1, \"address\": \"Uclés St. 1\", " +
     		"\"dni\": \"78458964D\", \"email\": \"user1@user1.com\", \"mobile\": 624587489, " +
     		"\"registrationDate\": 1504389500000, \"username\": \"user1\"}, {\"active\": 1, \"address\": " +
     		"\"Noblejas St. 2\", \"dni\": \"78958964D\", \"email\": \"user2@user2.com\", \"mobile\": 694587489, " +
@@ -17,7 +18,7 @@ angular.module("tpv").factory("getUsersService", function ($http) {
 
             $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(sessionStorage.token + ':');
             
-            return responseMockOK;
+            return responseMockOK2;
         }
     }
 });
