@@ -42,7 +42,7 @@ public class AlarmResource {
     }
 
     private void validNewAlarm(AlarmWrapper alarm) throws InvalidNewAlarmException {
-        if (alarm.getName().isEmpty() || alarm.getProducts().isEmpty() || alarm.getType() == null) {
+        if (alarm.getName().isEmpty() || alarm.getProducts().isEmpty() || alarm.getType() == null || alarm.getNumProducts() == 0) {
             throw new InvalidNewAlarmException();
         }
     }
