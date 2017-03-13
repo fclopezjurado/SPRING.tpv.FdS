@@ -1,5 +1,5 @@
 angular.module("tpv").controller("SearchProducts",
-    function ($scope, busquedaDeProductos) {
+    function ($scope, busquedaDeProductos,busquedaDeArticulos,busquedaDeEmbroidery,busquedaDeTextilePrinting) {
 		"use strict";
 		const SEARCH_BY_PRODUCT				= 0;
 		const SEARCH_BY_ARTICLE 			= 1;
@@ -51,9 +51,18 @@ angular.module("tpv").controller("SearchProducts",
         
         vm.getProductos = function () {
         	vm.mobile= "prueba" ;
-            if (vm.showInputForArticle ==true){
+        	if (vm.showInputForArticle ==true){
+           	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
+           }
+        	else if (vm.showInputForEmbroidery  ==true){
             	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
             }
+        	else if (vm.showInputForTextilePrinting ==true){
+           	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
+           }
+        	else {
+              	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
+              }
         };
         
         vm.requestToGetProducts = function (getUserService, queryParameter) {
