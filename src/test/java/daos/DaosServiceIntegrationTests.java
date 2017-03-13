@@ -2,12 +2,14 @@ package daos;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import daos.core.AlarmDao;
 import daos.core.ArticleDao;
 import daos.core.EmbroideryDao;
 import daos.core.InvoiceDao;
@@ -18,6 +20,8 @@ import daos.core.VoucherDao;
 import daos.users.AuthorizationDao;
 import daos.users.TokenDao;
 import daos.users.UserDao;
+import entities.core.Alarm;
+import entities.core.AlarmType;
 import entities.core.Article;
 import entities.core.Embroidery;
 import entities.core.Invoice;
@@ -70,6 +74,9 @@ public class DaosServiceIntegrationTests {
     @Autowired
     private InvoiceDao invoiceDao;
 
+    @Autowired
+    private AlarmDao alarmDao;
+
     @PostConstruct
     public void populate() {
         this.createUsers(0, 4, Role.CUSTOMER);
@@ -79,6 +86,7 @@ public class DaosServiceIntegrationTests {
         this.createProducts();
         this.createTickets();
         this.createInvoices();
+        this.createAlarms();
     }
 
     public void createUsers(int initial, int size, Role role) {
@@ -203,7 +211,9 @@ public class DaosServiceIntegrationTests {
         invoiceDao.save(new Invoice(3, ticketDao.findOne(3L)));
     }
 
-    public void deleteAll() {
-        dataService.deleteAllExceptAdmin();
+    public void createAlarms() {
+        List<Article> articles = articleDao.findAll();
+        alarmDao.save(new Alarm("Alarma Warning", articles, AlarmType.WARNING, 5));
+        alarmDao.save(new Alarm("Alarma Critical", null, AlarmType.CRITICAL, 2));
     }
 }

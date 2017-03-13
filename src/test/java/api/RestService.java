@@ -11,6 +11,10 @@ public class RestService {
     public void deleteAll() {
         new RestBuilder<TokenWrapper>(RestService.URL).path(Uris.ADMINS).basicAuth(this.loginAdmin(), "").delete().build();
     }
+    
+    public void seedDatabase() {
+        new RestBuilder<TokenWrapper>(RestService.URL).path(Uris.ADMINS + Uris.SEEDS).basicAuth(this.loginAdmin(), "").post().build();
+    }
 
     public String loginAdmin() {
         TokenWrapper token = new RestBuilder<TokenWrapper>(URL).path(Uris.TOKENS).basicAuth("123456789", "admin").clazz(TokenWrapper.class)
