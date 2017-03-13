@@ -6,6 +6,8 @@ import entities.core.AlarmType;
 
 public class AlarmWrapper {
 
+    private int id;
+    
     private String name;
 
     private AlarmType type;
@@ -24,6 +26,23 @@ public class AlarmWrapper {
         this.numProducts = numProducts;
     }
 
+    public AlarmWrapper(int id, String name, AlarmType type, List<String> products, int numProducts) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.products = products;
+        this.numProducts = numProducts;
+    }
+
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public String getName() {
         return name;
     }

@@ -46,4 +46,14 @@ tpv.service('f10Service', ['$http', '$q', function ($http, $q) {
 	   };
 	   return this.request(config);
    };
+   
+   this.editAlarm = function(id, name, type, number) {
+	   let config = {
+		method: 'PUT',
+		url: urlBase + "/alarms",
+		data:{'id': id, 'name': name, 'type': type, 'numProducts': number}
+	   };
+	   return this.request(config);
+   };
+   
 }]);
