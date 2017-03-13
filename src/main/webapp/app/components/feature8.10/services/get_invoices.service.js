@@ -6,8 +6,8 @@ angular.module("tpv").factory("getInvoicesService", function ($http) {
 	"{\"id\": 25698, \"ticket_id\": 45897}]}";
     
     /**
-     * TODO: This end-point will return an invoice wrapper when an invoice has been created. The user who uses this end 
-     * point must be logged in.
+     * TODO: This end-point will return a list of invoices wrappers by a user mobile. The user who uses this end 
+     * point must be logged in and must be authorized.
      */
     return {
         getInvoices: function (userMobile) {
