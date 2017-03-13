@@ -14,19 +14,19 @@ import wrappers.AlarmsWrapper;
 @RestController
 @RequestMapping(Uris.VERSION + Uris.ALARMS)
 public class AlarmResource {
-    
+
     private AlarmController alarmController;
-    
+
     @Autowired
     public void setAdminController(AlarmController alarmController) {
         this.alarmController = alarmController;
     }
-    
+
     @RequestMapping(method = RequestMethod.GET)
     public AlarmsWrapper getAll() {
         return alarmController.getAll();
     }
-    
+
     @RequestMapping(method = RequestMethod.POST)
     public void createAlarm(@RequestBody AlarmWrapper alarm) throws InvalidNewAlarmException{
         validNewAlarm(alarm);
@@ -34,7 +34,7 @@ public class AlarmResource {
     }
 
     private void validNewAlarm(AlarmWrapper alarm) throws InvalidNewAlarmException {
-        if(alarm.getName().isEmpty() || alarm.getProducts().isEmpty() || alarm.getType() == null){
+        if(alarm.getName().isEmpty() || alarm.getProducts().isEmpty() || alarm.getType() == null || alarm.getNumProducts() == 0){
             throw new InvalidNewAlarmException();
         }
     }

@@ -3,7 +3,9 @@ tpv.controller('CreateAlarmController', [ '$timeout', 'f10Service',
 			"use strict";
 			var vm = this;
 
-			vm.products;
+			vm.name;
+
+			vm.products = [];
 
 			vm.selection = [];
 			
@@ -21,7 +23,7 @@ tpv.controller('CreateAlarmController', [ '$timeout', 'f10Service',
 			
 			vm.createAlarm = function() {
 				const delay = 2000;
-				f10Service.createAlarm(vm.selection, vm.type, vm.number).then(function(result) {
+				f10Service.createAlarm(vm.name, vm.selection, vm.type, vm.number).then(function(result) {
 					// promise was fullfilled
 					vm.completed = true;
 					vm.send = true;
@@ -55,7 +57,9 @@ tpv.controller('CreateAlarmController', [ '$timeout', 'f10Service',
 			vm.getProducts = function() {
 				vm.loading = true;
 				f10Service.getAllProducts().then(function(result){
-					vm.products = result.products;
+					$.each(result.products, function( index, value ) {
+						  vm.products.push(value.description);
+						});
 					vm.loading = false;
 					vm.errorLoading = false;
 				}, function(errors){
