@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
+import entities.core.Alarm;
 import entities.core.AlarmType;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
@@ -29,7 +30,7 @@ public class AlarmResourceFunctionalTesting {
         new RestService().deleteAll();
         new RestService().seedDatabase();
     }
-    
+
     @Test
     public void testPostAlarm() {
         String nameAlarm = "alarma2";
@@ -56,6 +57,28 @@ public class AlarmResourceFunctionalTesting {
     public void testGetAlarms() {
         AlarmsWrapper alarmsWrapper = new RestBuilder<AlarmsWrapper>(URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
         assertEquals(2, alarmsWrapper.getAlarms().size());
+    }
+
+    @Test
+    public void testEditAlarm() {
+        AlarmsWrapper alarmsWrapper = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get()
+                .build();
+        AlarmWrapper alarmWrapper = new AlarmWrapper(alarmsWrapper.getAlarms().get(0).getId(), "Alarma modificada", AlarmType.CRITICAL,
+                new ArrayList<String>(), 4);
+        new RestBuilder<AlarmWrapper>(RestService.URL).path(Uris.ALARMS).body(alarmWrapper).put().build();
+        alarmsWrapper = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
+
+        boolean found = false;
+        for (Alarm alarm : alarmsWrapper.getAlarms()) {
+            if (alarm.getId() == alarmWrapper.getId()) {
+                found = true;
+                assertEquals("Alarma modificada", alarm.getName());
+                assertEquals(AlarmType.CRITICAL, alarm.getType());
+                assertEquals(4, alarm.getValue());
+            }
+        }
+        if (!found)
+            fail();
     }
 
     @After

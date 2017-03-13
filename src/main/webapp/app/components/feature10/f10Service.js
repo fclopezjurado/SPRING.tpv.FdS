@@ -38,12 +38,22 @@ tpv.service('f10Service', ['$http', '$q', function ($http, $q) {
 	   return this.request(config);
    };
 
-   this.createAlarm = function(products, type, number) {
+   this.createAlarm = function(name, products, type, number) {
 	   let config = {
 		method: 'POST',
 		url: urlBase + "/alarms",
-		data:{'products': products, 'type': type, 'number': number}
+		data:{'name': name, 'products': products, 'type': type, 'numProducts': number}
 	   };
 	   return this.request(config);
    };
+   
+   this.editAlarm = function(id, name, type, number) {
+	   let config = {
+		method: 'PUT',
+		url: urlBase + "/alarms",
+		data:{'id': id, 'name': name, 'type': type, 'numProducts': number}
+	   };
+	   return this.request(config);
+   };
+   
 }]);
