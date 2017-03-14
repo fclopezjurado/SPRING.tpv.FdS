@@ -56,6 +56,7 @@ public class AlarmController {
        Alarm alarm = alarmDao.findById(alarmWrapper.getId());
        alarm.setName(alarmWrapper.getName());
        alarm.setType(alarmWrapper.getType());
+       alarm.setArticleList(alarmWrapper.getProductsList());
        alarm.setValue(alarmWrapper.getNumProducts());
        alarmDao.save(alarm);
     }

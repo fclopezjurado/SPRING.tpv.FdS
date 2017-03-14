@@ -47,11 +47,11 @@ tpv.service('f10Service', ['$http', '$q', function ($http, $q) {
 	   return this.request(config);
    };
    
-   this.editAlarm = function(id, name, type, number) {
+   this.editAlarm = function(modifData) {
 	   let config = {
 		method: 'PUT',
 		url: urlBase + "/alarms",
-		data:{'id': id, 'name': name, 'type': type, 'numProducts': number}
+		data:{'id': modifData.newId, 'name': modifData.newName, 'productsList': modifData.newProducts, 'type': modifData.newType, 'numProducts': modifData.newValue}
 	   };
 	   return this.request(config);
    };
