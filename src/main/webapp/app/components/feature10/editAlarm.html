@@ -20,31 +20,74 @@
 						<td colspan="5" ng-hide="vm.successList">Cargando...</td>
 					</tr>
 					<tr>
-						<td colspan="5" ng-show="vm.successList && !vm.alarms.length">No hay alarmas</td>
+						<td colspan="5" ng-show="vm.successList && !vm.alarms.length">No
+							hay alarmas</td>
 					</tr>
-					<tr ng-show="vm.successList && vm.alarms.length" ng-repeat="alarm in vm.alarms">
-						<td style="vertical-align: middle;"><input type="text"
-							class="form-control" name="value" ng-model="alarm.name" /></td>
+					<tr ng-show="vm.successList && vm.alarms.length"
+						ng-repeat="alarm in vm.alarms track by $index">
+						<td style="vertical-align: middle;">{{ alarm.name }}</td>
 						<td>
 							<ul>
 								<li ng-repeat="article in alarm.articleList">{{
 									article.description }}</li>
 							</ul>
 						</td>
-						<td style="vertical-align: middle;"><select name="type"
-							ng-model="alarm.type">
-								<option value=''></option>
-								<option value='WARNING'>Warning</option>
-								<option value='CRITICAL'>Critical</option>
-						</select></td>
-						<td style="vertical-align: middle;"><input type="text"
-							class="form-control" name="value" ng-model="alarm.value"></td>
-						<td style="vertical-align: middle;"><button type="button"
-								class="btn btn-info btn-sm"
-								ng-click="vm.editAlarm(alarm.id, alarm.name, alarm.type, alarm.value)">Guardar</button></td>
+						<td style="vertical-align: middle;">{{ alarm.type }}</td>
+						<td style="vertical-align: middle;">{{ alarm.value }}</td>
+						<td style="vertical-align: middle;">
+							<button type="button" class="btn btn-info btn-sm"
+								data-toggle="modal" data-target="#modalEdicion"
+								ng-click="vm.loadData($index)">Editar</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
 		</fieldset>
 	</div>
 </section>
+
+<div id="modalEdicion" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Editar alarma</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label for="email">Nombre:</label> <input type="text"
+						class="form-control" name="value" ng-model="vm.modifData.newName" />
+				</div>
+				<div class="form-group">
+					<label for="email">Productos:</label>
+					<div class="row" style="max-height: 150px; overflow: auto;">
+						<div class="col-md-2" ng-repeat="newProduct in vm.modifData.newProducts track by $index">
+							<input type="checkbox" name="newProducts"
+								ng-click="vm.selectProduct($index)" ng-checked="newProduct.selected" /> {{ newProduct.reference }}
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email">Tipo:</label> <select name="type"
+						ng-model="vm.modifData.newType">
+						<option value=''></option>
+						<option value='WARNING'>Warning</option>
+						<option value='CRITICAL'>Critical</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="email">Valor:</label> <input type="text"
+						class="form-control" name="value" ng-model="vm.modifData.newValue" />
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info btn-sm"
+					ng-click="vm.editAlarm()">Guardar</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+
+	</div>
+</div>

@@ -16,6 +16,7 @@ import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
 import entities.core.Alarm;
 import entities.core.AlarmType;
+import entities.core.Article;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
 
@@ -63,8 +64,8 @@ public class AlarmResourceFunctionalTesting {
     public void testEditAlarm() {
         AlarmsWrapper alarmsWrapper = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get()
                 .build();
-        AlarmWrapper alarmWrapper = new AlarmWrapper(alarmsWrapper.getAlarms().get(0).getId(), "Alarma modificada", AlarmType.CRITICAL,
-                new ArrayList<String>(), 4);
+        AlarmWrapper alarmWrapper = new AlarmWrapper(alarmsWrapper.getAlarms().get(0).getId(), "Alarma modificada",
+                new ArrayList<Article>(), AlarmType.CRITICAL, 4);
         new RestBuilder<AlarmWrapper>(RestService.URL).path(Uris.ALARMS).body(alarmWrapper).put().build();
         alarmsWrapper = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
 
@@ -73,6 +74,7 @@ public class AlarmResourceFunctionalTesting {
             if (alarm.getId() == alarmWrapper.getId()) {
                 found = true;
                 assertEquals("Alarma modificada", alarm.getName());
+                assertEquals(0, alarm.getArticleList().size());
                 assertEquals(AlarmType.CRITICAL, alarm.getType());
                 assertEquals(4, alarm.getValue());
             }
