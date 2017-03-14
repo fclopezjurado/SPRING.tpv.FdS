@@ -4,7 +4,6 @@
 			<table class="table table-hover">
 				<tbody>
 					<tr>
-						<th>ID</th>
 						<th>Mobile</th>
 						<th>Username</th>
 						<th>DNI</th>
@@ -19,7 +18,6 @@
 				</tbody>
 			</table>
 		    <script type="text/ng-template" id="display">
-                <td>{{user.id}}</td>
                 <td>{{user.mobile}}</td>
                 <td>{{user.username}}</td>
                 <td>{{user.dni}}</td>
@@ -33,8 +31,7 @@
                 </td>
             </script>
             <script type="text/ng-template" id="edit">
-                <td>{{user.id}}</td>
-                <td><input type="text" ng-model="vm.selected.mobile" class="form-control" /></td>
+                <td>{{user.mobile}}</td>
                 <td><input type="text" ng-model="vm.selected.username" class="form-control" /></td>
                 <td><input type="text" ng-model="vm.selected.dni" class="form-control" /></td>
                 <td><input type="text" ng-model="vm.selected.address" class="form-control" /></td>

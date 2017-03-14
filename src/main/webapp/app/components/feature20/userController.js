@@ -4,18 +4,7 @@ tpv.controller('UserController', [
 		function($timeout, f20Service) {
 			"use strict";
 			var vm = this;
-			vm.users = [
-				{
-					id: 1,
-					mobile: '666 666 666',
-					username: 'Jorge',
-					dni: '12345678Z',
-					address: 'Calle Génova 23',
-					email: 'mimail@alumnos.urjc.es',
-					registrationDate: '01/12/2004',
-					active: true
-				}
-			];
+			vm.users = [];
 			
 			vm.edit = edit;
 			vm.getTemplate = getTemplate;
@@ -24,18 +13,12 @@ tpv.controller('UserController', [
 			vm.selected = {};
 			
 			function getUsers(){
-				const delay = 2000;
-
 				f20Service.getUsers().then(function(result) {
-					$timeout(function() {
-						vm.users = result;
-					}, delay)
+					vm.users = result.userList;
 				}, function(errors) {
 					vm.error = true;
 					vm.response = errors;
-					$timeout(function() {
-						vm.error = false;
-					}, delay)
+					vm.error = false;
 				});
 			}
 			
@@ -44,7 +27,7 @@ tpv.controller('UserController', [
 			}
 			
 			function getTemplate(user) {
-		        if (user.id === vm.selected.id) return 'edit';
+		        if (user.mobile === vm.selected.mobile) return 'edit';
 		        else return 'display';
 		    }
 			
