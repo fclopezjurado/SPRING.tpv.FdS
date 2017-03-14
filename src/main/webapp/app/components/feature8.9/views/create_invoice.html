@@ -1,0 +1,79 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+	        <div class="form-container">
+	            <h3>Creación de Facturas</h3><br/>
+	            <form role="form" ng-submit="vm.getTickets()">
+	                <div class="form-group">
+	                    <label for="searchMode">B&uacute;squeda del usuario</label>
+	                    <select class="form-control" id="searchMode" ng-model="vm.searchMode" ng-change="vm.changeSearchMode()">
+	                        <option value="1">correo electr&oacute;nico</option>
+	                        <option value="2">m&oacute;vil</option>
+	                    </select>
+	                </div>
+	                <div class="form-group" ng-show="vm.showInputForMails">
+	                    <label for="email">Correo electr&oacute;nico</label>
+	                    <input type="email" class="form-control" id="email" ng-required="vm.showInputForMails" 
+	                    placeholder="correo electr&oacute;nico" 
+	                    title="Direcci&oacute;n de correo electr&oacute;nico v&aacute;lida" ng-model="vm.email"/>
+	                </div>
+	                <div class="form-group" ng-show="vm.showInputForMobilePhoneNumbers">
+	                    <label for="mobile">M&oacute;vil</label>
+	                    <input type="text" class="form-control" id="mobile" ng-required="vm.showInputForMobilePhoneNumbers" 
+	                    pattern="6{1}[0-9]{8}" placeholder="m&oacute;vil" title="N&uacute;mero de m&oacute;vil v&aacute;lido" 
+	                    ng-model="vm.mobile"/>
+	                </div>
+	                <div class="form-group">
+                        <span class="error">{{vm.userFormError}}</span>
+                    </div>
+	                <div class="form-group" id="button-container">
+		                <button type="submit" class="btn btn-default">Buscar usuario</button>
+	                </div>
+	            </form>
+	        </div><br/>
+	        <div class="form-container" ng-show="vm.showTickets">
+                <h2>Tickets Asociados</h2><br/>
+                <form role="form" ng-submit="vm.createInvoice()">
+                    <div class="form-group" ng-show="vm.showTicketsTable">
+                        <table class="table">
+			                <thead>
+			                    <tr>
+			                        <th>ID</th>
+			                        <th>Creaci&oacute;n</th>
+			                        <th>Referencia</th>
+			                        <th>Estado</th>
+			                        <th>Usuario ID</th>
+			                    </tr>
+			                </thead>
+			                <tbody ng-repeat="ticket in vm.tickets">
+			                    <tr class="active">
+			                        <td>{{ticket.id}}</td>
+			                        <td>{{ticket.created | date: 'dd/MM/yyyy HH:mm:ss a'}}</td>
+			                        <td>{{ticket.reference}}</td>
+			                        <td>{{ticket.ticketState}}</td>
+			                        <td>{{ticket.user_id}}</td>
+			                    </tr>
+			                </tbody>
+			            </table>
+                    </div>
+                    <div class="form-group">
+                        <label for="searchMode">Generar factura de</label>
+                        <select class="form-control" id="ticketID" ng-model="vm.ticketID" ng-hide="vm.disableCreateInvoice">
+                            <option ng-repeat="ticket in vm.tickets" value="{{ticket.id}}">ticket {{ticket.id}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <span class="error">{{vm.ticketsFormError}}</span>
+                    </div>
+                    <div class="form-group" id="button-container">
+                        <button type="submit" class="btn btn-default" 
+                        ng-disabled="vm.disableCreateInvoice">Crear factura</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+</div>

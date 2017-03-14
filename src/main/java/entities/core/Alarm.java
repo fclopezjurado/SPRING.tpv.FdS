@@ -1,14 +1,14 @@
-package entities.alarm;
+package entities.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import entities.core.Article;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Alarm {
@@ -20,21 +20,25 @@ public class Alarm {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Article> articleList;
 
     @Column(nullable = false)
     private AlarmType type;
 
+    @Column(nullable = false)
+    private int value;
+
     public Alarm() {
+        this.articleList = new ArrayList<>();
     }
 
-    public Alarm(int id, String name, List<Article> articleList, AlarmType type) {
+    public Alarm(String name, List<Article> articleList, AlarmType type, int value) {
         super();
-        this.id = id;
         this.name = name;
         this.articleList = articleList;
         this.type = type;
+        this.value = value;
     }
 
     public int getId() {
@@ -47,6 +51,14 @@ public class Alarm {
 
     public String getName() {
         return name;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
     }
 
     public void setName(String name) {
