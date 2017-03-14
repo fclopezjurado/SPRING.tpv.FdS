@@ -28,10 +28,10 @@ public class Alarm {
 
     @Column(nullable = false)
     private int value;
-    
+
     public Alarm() {
         this.articleList = new ArrayList<>();
-    }    
+    }
 
     public Alarm(String name, List<Article> articleList, AlarmType type, int value) {
         super();
@@ -40,7 +40,6 @@ public class Alarm {
         this.type = type;
         this.value = value;
     }
-
 
     public int getId() {
         return id;

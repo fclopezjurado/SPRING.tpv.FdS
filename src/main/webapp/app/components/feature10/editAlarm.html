@@ -2,6 +2,9 @@
 	<div class="jumbotron text-center">
 		<fieldset>
 			<legend>Feature10. Editar alarmas</legend>
+			<div ng-show="vm.successEdit" class="alert alert-success">
+				<strong>CORRECTO!</strong> La alerta se modificó correctamente
+			</div>
 			<table class="table table-condensed table-hover">
 				<thead>
 					<tr>
@@ -14,21 +17,22 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td colspan="5" ng-hide="vm.completed">Cargando...</td>
+						<td colspan="5" ng-hide="vm.successList">Cargando...</td>
 					</tr>
 					<tr>
-						<td colspan="5" ng-show="vm.completed && vm.alarms == null">No
-							hay alarmas</td>
+						<td colspan="5" ng-show="vm.successList && !vm.alarms.length">No hay alarmas</td>
 					</tr>
-					<tr ng-show="vm.completed && vm.alarms != null"
-						ng-repeat="alarm in vm.alarms">
-						<td style="vertical-align: middle;">{{ alarm.name }}</td>
+					<tr ng-show="vm.successList && vm.alarms.length" ng-repeat="alarm in vm.alarms">
+						<td style="vertical-align: middle;"><input type="text"
+							class="form-control" name="value" ng-model="alarm.name" /></td>
 						<td>
 							<ul>
-								<li ng-repeat="article in alarm.articleList">{{ article.description }}</li>
+								<li ng-repeat="article in alarm.articleList">{{
+									article.description }}</li>
 							</ul>
 						</td>
-						<td style="vertical-align: middle;"><select name="type" ng-model="alarm.type">
+						<td style="vertical-align: middle;"><select name="type"
+							ng-model="alarm.type">
 								<option value=''></option>
 								<option value='WARNING'>Warning</option>
 								<option value='CRITICAL'>Critical</option>
@@ -36,8 +40,8 @@
 						<td style="vertical-align: middle;"><input type="text"
 							class="form-control" name="value" ng-model="alarm.value"></td>
 						<td style="vertical-align: middle;"><button type="button"
-								class="btn btn-info btn-sm" data-toggle="modal"
-								data-target="#myModal">Guardar</button></td>
+								class="btn btn-info btn-sm"
+								ng-click="vm.editAlarm(alarm.id, alarm.name, alarm.type, alarm.value)">Guardar</button></td>
 					</tr>
 				</tbody>
 			</table>
