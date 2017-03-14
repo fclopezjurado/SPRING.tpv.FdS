@@ -15,9 +15,9 @@ public class TokenTest {
     public void testTokenUser() {
         User user = new User(123456789, "u", "p");
         Token token = new Token(user);
-        Date now = new Date();
+        Date now = new Date(new Date().getTime() - 3600 * 1000);
         assertTrue(token.getValue().length() > 20);
-        assertTrue(now.before(token.getExpirationDate()));
+        assertTrue(now.before(token.getCreationDate()));
     }
 
 }

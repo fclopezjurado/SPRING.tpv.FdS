@@ -36,6 +36,15 @@ public class Voucher {
         this.value = value;
         created = Calendar.getInstance();
         dateOfUse = null;
+        expiration = null;
+    }
+
+    public Voucher(BigDecimal value, Calendar expiration) {
+        reference = new Encrypting().encryptInBase64UrlSafe("" + value + Long.toString(new Date().getTime()));
+        this.value = value;
+        created = Calendar.getInstance();
+        dateOfUse = null;
+        this.expiration = expiration;
     }
 
     public int getId() {
@@ -79,7 +88,7 @@ public class Voucher {
         if (expiration == null) {
             return false;
         } else {
-            return expiration.compareTo(Calendar.getInstance()) > 0;
+            return expiration.compareTo(Calendar.getInstance()) < 0;
         }
     }
 
