@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({AdminControllerTest.class})
+@SuiteClasses({AdminControllerTest.class, AlarmControllerTest.class})
 public class AllControllersTests {
 
 }
