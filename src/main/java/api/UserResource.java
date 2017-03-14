@@ -14,6 +14,7 @@ import api.exceptions.InvalidUserFieldException;
 import api.exceptions.NotFoundUserIdException;
 import controllers.UserController;
 import entities.users.Role;
+import wrappers.UserForEditListWrapper;
 import wrappers.UserForEditWrapper;
 import wrappers.UserWrapper;
 
@@ -46,11 +47,11 @@ public class UserResource {
     }
     
     @RequestMapping(value = Uris.USERS, method = RequestMethod.GET)
-    public List<UserForEditWrapper> getAllUsers() {
+    public UserForEditListWrapper getAllUsers() {
         //TODO use instead of mock: this.userController.findAll();
         List<UserForEditWrapper> list = new ArrayList<UserForEditWrapper>();
         list.add(new UserForEditWrapper(66000000, "Prueba", true, "Calle prueba", "12345678Z", "prueba@mail.com", "25/10/2008"));
-        return list;
+        return new UserForEditListWrapper(list);
     }
     
     @RequestMapping(value = Uris.USERS, method = RequestMethod.PUT)
