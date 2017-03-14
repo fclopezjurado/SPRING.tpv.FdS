@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 
 import api.Uris;
+import wrappers.UserForEditListWrapper;
 import wrappers.UserWrapper;
 
 public class UserResourceFunctionalTesting {
@@ -82,6 +83,19 @@ public class UserResourceFunctionalTesting {
             assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
             LogManager.getLogger(this.getClass())
                     .info("testCreateCustomerForbidden (" + httpError.getMessage() + "):\n " + httpError.getResponseBodyAsString());
+        }
+    }
+    
+    @Test
+    public void testGetAllUsers() {
+        try {
+            UserForEditListWrapper users = new RestBuilder<UserForEditListWrapper>(RestService.URL).path(Uris.USERS).clazz(UserForEditListWrapper.class)
+                    .get().build();
+            assertEquals(1, users.getUserList().size());
+        } catch (HttpClientErrorException httpError) {
+            assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
+            LogManager.getLogger(this.getClass())
+                    .info("testGetAllUsersForbidden (" + httpError.getMessage() + "):\n " + httpError.getResponseBodyAsString());
         }
     }
 
