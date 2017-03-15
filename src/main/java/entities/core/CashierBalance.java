@@ -10,23 +10,22 @@ public class CashierBalance {
 
     @Id
     private int id;
-    
+
     private Calendar day;
-    
+
     private double balance = 0;
-    
+
     private double change;
-    
+
     private double cash;
-    
+
     private double checks;
-    
+
     private double dataphone;
-    
-    private double totalTiketsMoney;       
-    
-    public CashierBalance()
-    {
+
+    private double totalTiketsMoney;
+
+    public CashierBalance() {
         day = Calendar.getInstance();
     }
 
@@ -93,7 +92,7 @@ public class CashierBalance {
     public void setDataphone(double dataphone) {
         this.dataphone = dataphone;
     }
-    
+
     public double getTotalTiketsMoney() {
         return totalTiketsMoney;
     }
@@ -101,7 +100,6 @@ public class CashierBalance {
     public void setTotalTiketsMoney(double totalTiketsMoney) {
         this.totalTiketsMoney = totalTiketsMoney;
     }
-    
 
     @Override
     public int hashCode() {
@@ -130,7 +128,5 @@ public class CashierBalance {
             return false;
         return true;
     }
-    
-    
-    
+
 }
