@@ -1,0 +1,32 @@
+/*
+
+CSS style sheet for feature 4
+
+*/
+
+body {
+    
+}
+
+.form-container {
+    background-color: white;
+    border-radius: 10px;
+}
+
+h3, h2 {
+    padding-top: 20px;
+}
+
+h3, h2, .form-group {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#button-container {
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.error {
+    font-style: italic;
+}

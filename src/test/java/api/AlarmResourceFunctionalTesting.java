@@ -8,18 +8,28 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import config.PersistenceConfig;
+import config.TestsPersistenceConfig;
+import entities.core.Alarm;
 import entities.core.AlarmType;
+import entities.core.Article;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
 public class AlarmResourceFunctionalTesting {
 
     public static final String URL = "http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api" + Uris.VERSION;
 
     @Before
-    public void init() {
-
+    public void seedDataBase(){
+        new RestService().deleteAll();
+        new RestService().seedDatabase();
     }
 
     @Test
@@ -47,7 +57,30 @@ public class AlarmResourceFunctionalTesting {
     @Test
     public void testGetAlarms() {
         AlarmsWrapper alarmsWrapper = new RestBuilder<AlarmsWrapper>(URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
-        assertEquals(0, alarmsWrapper.getAlarms().size());
+        assertEquals(2, alarmsWrapper.getAlarms().size());
+    }
+
+    @Test
+    public void testEditAlarm() {
+        AlarmsWrapper alarmsWrapper = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get()
+                .build();
+        AlarmWrapper alarmWrapper = new AlarmWrapper(alarmsWrapper.getAlarms().get(0).getId(), "Alarma modificada",
+                new ArrayList<Article>(), AlarmType.CRITICAL, 4);
+        new RestBuilder<AlarmWrapper>(RestService.URL).path(Uris.ALARMS).body(alarmWrapper).put().build();
+        alarmsWrapper = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
+
+        boolean found = false;
+        for (Alarm alarm : alarmsWrapper.getAlarms()) {
+            if (alarm.getId() == alarmWrapper.getId()) {
+                found = true;
+                assertEquals("Alarma modificada", alarm.getName());
+                assertEquals(0, alarm.getArticleList().size());
+                assertEquals(AlarmType.CRITICAL, alarm.getType());
+                assertEquals(4, alarm.getValue());
+            }
+        }
+        if (!found)
+            fail();
     }
 
     @After

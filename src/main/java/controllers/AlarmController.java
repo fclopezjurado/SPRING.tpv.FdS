@@ -35,6 +35,11 @@ public class AlarmController {
     }
 
     public AlarmsWrapper getAll() {
+        /*List<Alarm> alarms = this.alarmDao.findAll();
+        List<AlarmsWrapper> alarmsWrapper = new ArrayList<>();
+        for(Alarm alarm : alarms) {
+            alarmsWrapper.add(new AlarmWrapper(alarm.getId(), alarm.getName(), alarm.getType(), alarm.getArticleList(), alarm.getValue()));
+        }*/
         return new AlarmsWrapper(this.alarmDao.findAll());
     }
 
@@ -45,6 +50,15 @@ public class AlarmController {
         }
         Alarm alarmEntity = new Alarm(alarm.getName(), articles, alarm.getType(), alarm.getNumProducts());
         alarmDao.save(alarmEntity);
+    }
+    
+    public void editAlarm(AlarmWrapper alarmWrapper) {
+       Alarm alarm = alarmDao.findById(alarmWrapper.getId());
+       alarm.setName(alarmWrapper.getName());
+       alarm.setType(alarmWrapper.getType());
+       alarm.setArticleList(alarmWrapper.getProductsList());
+       alarm.setValue(alarmWrapper.getNumProducts());
+       alarmDao.save(alarm);
     }
     
 }

@@ -6,4 +6,6 @@ import entities.core.Alarm;
 
 public interface AlarmDao extends JpaRepository<Alarm, Integer> {
 
+    Alarm findById(int id);
+
 }
