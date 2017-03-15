@@ -109,6 +109,12 @@ tpv.config(function ($routeProvider) {
             controller: "UserController",
             controllerAs: "vm"
         })
+        //Feature 09
+        .when("/feature09/cierrecaja/nuevo", {
+            templateUrl: "app/components/feature09/new_cashier_balancing.html",
+            controller: "CashierBalancingController",
+            controllerAs: "vm"
+        })
         .otherwise({
             redirectTo: '/'
         });
