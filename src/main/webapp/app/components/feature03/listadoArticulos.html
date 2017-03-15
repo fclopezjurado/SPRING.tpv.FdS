@@ -1,13 +1,32 @@
-<section class="container">
-	<div class="jumbotron text-center">
-		<fieldset>
-			<legend>Listado de Articulos</legend>
-			<form class="form-horizontal">
-				<div class="form-group">
-
-				</div>
-
-			</form>
-		</fieldset>
-	</div>
+<section>
+    <div class="page-header">
+      <h1>Article List</h1>
+    </div>
+    <br/>
+    <div class="table-responsive">
+       <table class="table table-striped">
+         <thead>
+            <tr>
+              <th>Reference</th>
+              <th>Description</th>
+              <th>Retail price</th>
+              <th>Wholesale Price</th>
+              <th>Provider</th>
+            </tr>
+          </thead>
+          <tbody ng-init="vm.initList()">
+            <tr ng-repeat="article in vm.data">
+              <td>{{article.reference}}</td>
+              <td>{{article.description}}</td>
+              <td>{{article.retailPrice}}</td>
+              <td>{{article.wholesalePrice}}</td>
+              <td>{{article.provider.company}}</td>
+            </tr>
+          </tbody>
+        </table>
+            
+        <div class="no-data" ng-if="vm.data.length === 0">
+           <div class="panel-body"> No Articles found </div>
+        </div>
+    </div>
 </section>
