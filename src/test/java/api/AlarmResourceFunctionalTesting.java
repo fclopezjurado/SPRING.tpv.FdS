@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
@@ -40,7 +41,7 @@ public class AlarmResourceFunctionalTesting {
         Provider provider = new Provider("company0", "address0", 666100000L, 916661000L, "No", "No");
         Article article = new Article(84000001111L, "article0", new BigDecimal(20), "article0", new BigDecimal(10), provider);
         articles.add(article);
-        
+
         AlarmWrapper newAlarm = new AlarmWrapper("alarma2", AlarmType.WARNING, articles, 5);
         new RestBuilder<Object>(RestService.URL).path(Uris.ALARMS).body(newAlarm).post().build();
         AlarmsWrapper wrapp = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
@@ -85,6 +86,47 @@ public class AlarmResourceFunctionalTesting {
         }
         if (!found)
             fail();
+    }
+
+    @Test
+    public void testDelete(){
+        List<Article> articles = new ArrayList<>();      
+        Provider provider = new Provider("company0", "address0", 666100000L, 916661000L, "No", "No");
+        Article article = new Article(84000001111L, "article0", new BigDecimal(20), "article0", new BigDecimal(10), provider);
+        articles.add(article);
+
+        AlarmWrapper newAlarm = new AlarmWrapper(String.valueOf((new Date()).getTime()), AlarmType.WARNING, articles, 5);
+        new RestBuilder<Object>(RestService.URL).path(Uris.ALARMS).body(newAlarm).post().build();
+
+        AlarmsWrapper wrapp = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
+        boolean found = false;
+        int i = 0;
+        while (!found && i < wrapp.getAlarms().size()) {
+            if (wrapp.getAlarms().get(i).getName().equals(newAlarm.getName())) {
+                found = true;
+            }
+            else {
+                i++;
+            }
+        }
+
+        new RestBuilder<Object>(RestService.URL).path(Uris.ALARMS).path("/" + String.valueOf(wrapp.getAlarms().get(i).getId())).delete().build();
+
+        wrapp = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
+        found = false;
+        i = 0;
+        while (!found && i < wrapp.getAlarms().size()) {
+            if (wrapp.getAlarms().get(i).getName().equals(newAlarm.getName())) {
+                found = true;
+            }
+            else {
+                i++;
+            }
+        }
+
+        if (found) {
+            fail();
+        }
     }
 
     @After

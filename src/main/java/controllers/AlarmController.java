@@ -37,4 +37,8 @@ public class AlarmController {
         alarmDao.save(alarm);
     }
 
+    public void removeAlarm(int id) {
+        alarmDao.deleteById(id);
+    }
+
 }

@@ -14,6 +14,7 @@ tpv.controller('ListAlarmsController', [
 
 			vm.successCreate = false;
 			vm.successEdit = false;
+			vm.successRemove = false;
 			vm.modifData = {};
 			vm.modifData.newProducts = [];
 
@@ -73,7 +74,7 @@ tpv.controller('ListAlarmsController', [
 			
 			vm.createAlarm = function() {
 				const delay = 2000;
-				var copy = $.extend(true, {}, vm.modifData);;
+				var copy = $.extend(true, {}, vm.modifData);
 				copy.newProducts = [];
 				$.each(vm.modifData.newProducts, function (index, value){
 					if(value.selected){
@@ -118,7 +119,6 @@ tpv.controller('ListAlarmsController', [
 					vm.completed = true;
 					vm.successEdit = true;
 					$("#modalEdicion").modal("hide");
-
 					$timeout(function() {
 						vm.send = false;
 						vm.completed = false;
@@ -150,6 +150,29 @@ tpv.controller('ListAlarmsController', [
 					bool = false;
 
 				vm.modifData.newProducts[index].selected = bool;
+			};
+			
+			vm.removeAlarm = function(index) {
+				const delay = 2000;
+				f10Service.removeAlarm(vm.alarms[index].id).then(function(result) {
+					vm.send = true;
+					vm.completed = true;
+					vm.successRemove = true;
+					vm.alarms.splice(index, 1);
+					$timeout(function() {
+						vm.send = false;
+						vm.completed = false;
+						vm.successRemove = false;
+						//$window.location.reload();
+					}, delay);
+				}, function(errors) {
+					// handle errors
+					vm.errorRemove = true;
+					vm.response = errors;
+					$timeout(function() {
+						vm.errorRemove = false;
+					}, delay)
+				});
 			};
 
 			getAlarms();
