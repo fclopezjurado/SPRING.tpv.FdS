@@ -48,4 +48,12 @@ tpv.service('f10Service', ['$http', '$q', function ($http, $q) {
 	   return this.request(config);
    };
    
+   this.getAllProducts = function() {
+	   let config = {
+		method: 'GET',
+		url: urlBase + "/mock_products"
+	   }
+	   
+	   return this.request(config);
+   };
 }]);

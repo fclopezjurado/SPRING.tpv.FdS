@@ -73,7 +73,14 @@ tpv.controller('ListAlarmsController', [
 			
 			vm.createAlarm = function() {
 				const delay = 2000;
-				f10Service.createAlarm(vm.modifData).then(function(result) {
+				var copy = $.extend(true, {}, vm.modifData);;
+				copy.newProducts = [];
+				$.each(vm.modifData.newProducts, function (index, value){
+					if(value.selected){
+						copy.newProducts.push(value);
+					}
+				});
+				f10Service.createAlarm(copy).then(function(result) {
 					vm.send = true;
 					vm.completed = true;
 					vm.successCreate = true;

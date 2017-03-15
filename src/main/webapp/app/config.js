@@ -43,11 +43,6 @@ tpv.config(function ($routeProvider) {
             controller: "listadoPrendaImpresaController",
             controllerAs: "vm"
         })
-        .when("/feature10/crear", {
-            templateUrl: "app/components/feature10/createAlarm.html",
-            controller: "createAlarmController.js",
-            controllerAs: "vm"
-        })
         .when("/feature10/list", {
             templateUrl: "app/components/feature10/listAlarms.html",
             controller: "ListAlarmsController",
