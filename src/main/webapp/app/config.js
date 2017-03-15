@@ -28,18 +28,18 @@ tpv.config(function ($routeProvider) {
         })
         //Feature 03 -01 
 
-       .when("/feature03/feature03-1/listadoArticulos", {
-	        templateUrl: "app/components/feature03/feature03-1/listadoArticulos.html",
+       .when("/feature03/listadoArticulos", {
+	        templateUrl: "app/components/feature03/listadoArticulos.html",
 	        controller: "listadoArticulosController",
 	        controllerAs: "vm"
         })
-        .when("/feature03/feature03-1/listadoBordados", {
-            templateUrl: "app/components/feature03/feature03-1/listadoBordados.html",
+        .when("/feature03/listadoBordados", {
+            templateUrl: "app/components/feature03/listadoBordados.html",
             controller: "listadoBordadosControler",
             controllerAs: "vm"
         })
-        .when("/feature03/feature03-1/listadoPrendaImpresa", {
-            templateUrl: "app/components/feature03/feature03-1/listadoPrendaImpresa.html",
+        .when("/feature03/listadoPrendaImpresa", {
+            templateUrl: "app/components/feature03/listadoPrendaImpresa.html",
             controller: "listadoPrendaImpresaController",
             controllerAs: "vm"
         })
