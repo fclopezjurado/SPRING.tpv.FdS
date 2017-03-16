@@ -131,6 +131,6 @@ public class AlarmResourceFunctionalTesting {
 
     @After
     public void after() {
-        //new RestService().deleteAll();
+        new RestService().deleteAll();
     }
 }
