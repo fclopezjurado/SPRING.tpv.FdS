@@ -28,29 +28,24 @@ tpv.config(function ($routeProvider) {
         })
         //Feature 03 -01 
 
-       .when("/feature03/feature03-1/listadoArticulos", {
-	        templateUrl: "app/components/feature03/feature03-1/listadoArticulos.html",
+       .when("/feature03/listadoArticulos", {
+	        templateUrl: "app/components/feature03/listadoArticulos.html",
 	        controller: "listadoArticulosController",
 	        controllerAs: "vm"
         })
-        .when("/feature03/feature03-1/listadoBordados", {
-            templateUrl: "app/components/feature03/feature03-1/listadoBordados.html",
+        .when("/feature03/listadoBordados", {
+            templateUrl: "app/components/feature03/listadoBordados.html",
             controller: "listadoBordadosControler",
             controllerAs: "vm"
         })
-        .when("/feature03/feature03-1/listadoPrendaImpresa", {
-            templateUrl: "app/components/feature03/feature03-1/listadoPrendaImpresa.html",
+        .when("/feature03/listadoPrendaImpresa", {
+            templateUrl: "app/components/feature03/listadoPrendaImpresa.html",
             controller: "listadoPrendaImpresaController",
             controllerAs: "vm"
         })
-        .when("/feature10/crear", {
-            templateUrl: "app/components/feature10/createAlarm.html",
-            controller: "createAlarmController.js",
-            controllerAs: "vm"
-        })
-        .when("/feature10/edit", {
-            templateUrl: "app/components/feature10/editAlarm.html",
-            controller: "EditAlarmController",
+        .when("/feature10/list", {
+            templateUrl: "app/components/feature10/listAlarms.html",
+            controller: "ListAlarmsController",
             controllerAs: "vm"
         })
 
@@ -97,7 +92,24 @@ tpv.config(function ($routeProvider) {
 	        templateUrl: "app/components/feature07/validTotal.html",
 	        controller: "validController",
 	        controllerAs: "vm"
-        })                 
+        })
+        .when("/feature8.10/invoices/details", {
+            templateUrl: "app/components/feature8.10/views/get_invoice.html",
+            css: "app/components/feature8.10/css/style.css",
+            controller: "GetInvoiceController",
+            controllerAs: "vm"
+        })
+        .when("/feature20/users", {
+            templateUrl: "app/components/feature20/users.html",
+            controller: "UserController",
+            controllerAs: "vm"
+        })
+        //Feature 09
+        .when("/feature09/cierrecaja/nuevo", {
+            templateUrl: "app/components/feature09/new_cashier_balancing.html",
+            controller: "CashierBalancingController",
+            controllerAs: "vm"
+        })
         .otherwise({
             redirectTo: '/'
         });
