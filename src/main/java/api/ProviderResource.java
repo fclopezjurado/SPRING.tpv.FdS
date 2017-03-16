@@ -3,21 +3,41 @@ package api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.exceptions.AlreadyExistProviderFieldException;
+import api.exceptions.AlreadyExistUserFieldException;
+import controllers.ProviderController;
 import wrappers.ProviderWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION)
 public class ProviderResource {
 
-    // TODO: Definir excepciones
+    private ProviderController providerController;
+
+    @Autowired
+    public void setProviderController(ProviderController providerController) {
+        this.providerController = providerController;
+    }
+
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.POST)
-    public String providerRegistration(@RequestBody ProviderWrapper providerWrapper) throws Exception {
-        return "El método para la creación de proveedores está en construcción";
+    public void providerRegistration(@RequestBody ProviderWrapper providerWrapper) throws Exception {
+        validateFields(providerWrapper);
+        if (!this.providerController.registration(providerWrapper)) {
+            throw new AlreadyExistProviderFieldException();
+        }
+    }
+
+    private void validateFields(ProviderWrapper providerWrapper) {
+        if (providerWrapper.getCompany() == null || providerWrapper.getMobile() == 0L) {
+            throw new IllegalArgumentException();
+        }
+
     }
 
     // TODO: Definir excepciones
