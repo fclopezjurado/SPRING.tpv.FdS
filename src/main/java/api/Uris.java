@@ -29,4 +29,6 @@ public class Uris {
     public static final String TICKETS = "/tickets";
     
     public static final String VOUCHERS = "/vouchers";
+    
+    public static final String ARTICLES = "/articles";
 }

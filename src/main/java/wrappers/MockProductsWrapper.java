@@ -2,11 +2,13 @@ package wrappers;
 
 import java.util.List;
 
+import entities.core.Article;
+
 public class MockProductsWrapper {
 
-    private List<String> products;
+    private List<Article> products;
 
-    public MockProductsWrapper(List<String> products) {
+    public MockProductsWrapper(List<Article> products) {
         super();
         this.products = products;
     }
@@ -15,11 +17,11 @@ public class MockProductsWrapper {
         // TODO Auto-generated constructor stub
     }
 
-    public List<String> getProducts() {
+    public List<Article> getProducts() {
         return products;
     }
 
-    public void setProducts(List<String> products) {
+    public void setProducts(List<Article> products) {
         this.products = products;
     }
     
