@@ -93,6 +93,7 @@ public class DaosServiceIntegrationTests {
         User user;
         for (int i = 0; i < size; i++) {
             user = new User(666000000 + initial + i, role.toString().toLowerCase() + (i + initial), "pass");
+            user.setEmail("user" + i + "@gmail.com");
             userDao.save(user);
             authorizationDao.save(new Authorization(user, role));
         }
@@ -189,6 +190,7 @@ public class DaosServiceIntegrationTests {
             Product product = articleDao.findOne(84000001111L + i);
             ticket.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
         }
+        ticket.setUser(userDao.findByMobile(666000000));
         ticketDao.save(ticket);
 
         ticket = new Ticket(2L, TicketState.OPENED);
