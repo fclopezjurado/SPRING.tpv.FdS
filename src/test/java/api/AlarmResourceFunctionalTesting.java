@@ -2,6 +2,7 @@ package api;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import config.TestsPersistenceConfig;
 import entities.core.Alarm;
 import entities.core.AlarmType;
 import entities.core.Article;
+import entities.core.Provider;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
 
@@ -34,16 +36,18 @@ public class AlarmResourceFunctionalTesting {
 
     @Test
     public void testPostAlarm() {
-        String nameAlarm = "alarma2";
-        List<String> listProducts = new ArrayList<String>();
-        listProducts.add("articulo1");
-        AlarmWrapper newAlarm = new AlarmWrapper(nameAlarm, AlarmType.WARNING, listProducts, 5);
+        List<Article> articles = new ArrayList<>();      
+        Provider provider = new Provider("company0", "address0", 666100000L, 916661000L, "No", "No");
+        Article article = new Article(84000001111L, "article0", new BigDecimal(20), "article0", new BigDecimal(10), provider);
+        articles.add(article);
+        
+        AlarmWrapper newAlarm = new AlarmWrapper("alarma2", AlarmType.WARNING, articles, 5);
         new RestBuilder<Object>(RestService.URL).path(Uris.ALARMS).body(newAlarm).post().build();
         AlarmsWrapper wrapp = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
         boolean found = false;
         int i = 0;
         while (!found && i < wrapp.getAlarms().size()) {
-            if (wrapp.getAlarms().get(i).getName().equals(nameAlarm)) {
+            if (wrapp.getAlarms().get(i).getName().equals(newAlarm.getName())) {
                 found = true;
             }
             i++;

@@ -15,6 +15,7 @@ import config.TestsControllerConfig;
 import config.TestsPersistenceConfig;
 import entities.core.Alarm;
 import entities.core.AlarmType;
+import entities.core.Article;
 import wrappers.AlarmWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,7 +32,7 @@ public class AlarmControllerTest {
 
     @Test
     public void testEditAlarm() {
-        AlarmWrapper alarmWrapper = new AlarmWrapper(1, "Alarma modificada", AlarmType.CRITICAL, new ArrayList<String>(), 1);
+        AlarmWrapper alarmWrapper = new AlarmWrapper(1, "Alarma modificada", new ArrayList<Article>(), AlarmType.CRITICAL, 1);
         alarmController.editAlarm(alarmWrapper);
         Alarm alarm = alarmController.getAll().getAlarms().get(0);
         assertEquals("Alarma modificada", alarm.getName());
