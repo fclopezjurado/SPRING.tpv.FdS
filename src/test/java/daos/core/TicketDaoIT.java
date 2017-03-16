@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
 import daos.users.UserDao;
+import entities.core.Invoice;
 import entities.core.Ticket;
 import entities.users.User;
 
@@ -25,6 +26,9 @@ public class TicketDaoIT {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private InvoiceDao invoiceDao;
 
     @Test
     public void testCreate() {
@@ -53,13 +57,20 @@ public class TicketDaoIT {
 
     @Test
     public void testFindByUserEmail() {
-        User admin = userDao.findByMobile(666000000);
-        assertEquals(admin.getEmail(), ticketDao.findByUserEmail(admin.getEmail()).get(0).getUser().getEmail());
+        User user = userDao.findByMobile(666000000);
+        assertEquals(user.getEmail(), ticketDao.findByUserEmail(user.getEmail()).get(0).getUser().getEmail());
     }
-    
+
     @Test
     public void testFindByUserMobile() {
-        assertEquals(666000000, ticketDao.findByUserMobile(666000000).get(0).getUser().getMobile());
+        User user = userDao.findByMobile(666000000);
+        assertEquals(user.getMobile(), ticketDao.findByUserMobile(user.getMobile()).get(0).getUser().getMobile());
+    }
+
+    @Test
+    public void testFindByInvoiceID() {
+        Invoice invoice = invoiceDao.findOne(1);
+        assertEquals(invoice.getTicket().getReference(), ticketDao.findByInvoiceID(invoice.getId()).get(0).getReference());
     }
 
 }
