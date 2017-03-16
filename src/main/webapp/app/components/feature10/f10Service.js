@@ -27,23 +27,25 @@ tpv.service('f10Service', ['$http', '$q', function ($http, $q) {
 	  };
 	   
 	  return this.request(config); 
-   }
-   
-   this.getAllProducts = function() {
-	   let config = {
-		method: 'GET',
-		url: urlBase + "/mock_products"
-	   }
-	   
-	   return this.request(config);
    };
 
-   this.createAlarm = function(products, type, number) {
+   this.createAlarm = function(modifData) {
+	   console.log(modifData);
 	   let config = {
 		method: 'POST',
 		url: urlBase + "/alarms",
-		data:{'products': products, 'type': type, 'number': number}
+		data:{'name': modifData.newName, 'productsList': modifData.newProducts, 'type': modifData.newType, 'numProducts': modifData.newValue}
 	   };
 	   return this.request(config);
    };
+   
+   this.editAlarm = function(modifData) {
+	   let config = {
+		method: 'PUT',
+		url: urlBase + "/alarms",
+		data:{'id': modifData.newId, 'name': modifData.newName, 'productsList': modifData.newProducts, 'type': modifData.newType, 'numProducts': modifData.newValue}
+	   };
+	   return this.request(config);
+   };
+   
 }]);

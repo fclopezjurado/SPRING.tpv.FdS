@@ -22,22 +22,41 @@
     <script src="app/components/feature00/loginController.js"></script>  
     <script src="app/components/feature00/registrationController.js"></script>  
     <script src="app/components/feature00/deleteAllController.js"></script>
-    <script src="app/components/feature13/f13Service.js"></script>  
-    <script src="app/components/feature13/searchArticlesController.js"></script>
-    <script src="app/components/feature13/searchEmbroideriesController.js"></script>
-    <script src="app/components/feature13/searchTextilePrintingsController.js"></script>
+    <!-- Autor: Jorge Cárdenas -->
+    <script src="app/components/feature20/f20Service.js"></script>  
+    <script src="app/components/feature20/userController.js"></script>  
     <!-- Autor: Jorge Higuera y Daniel González -->
     <script src="app/components/feature10/f10Service.js"></script>  
     <script src="app/components/feature10/createAlarmController.js"></script>
-    <script src="app/components/feature10/editAlarmController.js"></script>
+    <script src="app/components/feature10/listAlarmsController.js"></script>
+    <!-- Author: Francisco López -->
     <script src="app/components/feature8.9/services/get_tickets_by_user_email.service.js"></script>
     <script src="app/components/feature8.9/services/get_tickets_by_user_mobile.service.js"></script>
     <script src="app/components/feature8.9/services/create_invoice.service.js"></script>
+    <script src="app/components/feature8.9/controllers/create_invoice.controller.js"></script>
     <!-- Autor: Alfonso Ayuso -->    
     <script src="app/components/feature07/f07Service.js"></script>    
-    <script src="app/components/feature07/validController.js"></script>       
+    <script src="app/components/feature07/validController.js"></script>
+    <script src="app/components/feature07/createController.js"></script>
+    <script src="app/components/feature07/searchController.js"></script>
+    <script src="app/components/feature07/consumeController.js"></script>
     <!-- Autor: Eduardo Franco Gutierrez-->  
     <script src="app/components/feature04/controllers/searchProducts.controller.js"></script>
+    <script src="app/components/feature04/services/search_Products.js"></script>
+    <script src="app/components/feature04/services/search_Articles.js"></script>
+    <script src="app/components/feature04/services/search_Embroidery.js"></script>
+    <script src="app/components/feature04/services/search_TextilePrinting.js"></script>
+    <!-- Author: Francisco López -->
+    <script src="app/components/feature8.10/services/get_invoices.service.js"></script>
+    <script src="app/components/feature8.10/services/get_ticket_by_invoice_id.service.js"></script>
+    <script src="app/components/feature8.10/services/get_users.service.js"></script>
+    <script src="app/components/feature8.10/controllers/get_invoice.controller.js"></script>
+    <!-- Author: Enrique Arranz -->
+    <script src="app/components/feature09/new_cashier_balancing.service.js"></script>
+    <script src="app/components/feature09/cashier_balancing.controller.js"></script>
+        <!-- Autor: Cecilia Aguilar DAvid Blasco-->  
+    <script src="app/components/feature03/f03Service.js"></script>  
+    <script src="app/components/feature03/listadoArticulosController.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -67,6 +86,7 @@
                <li><a href="#/feature00/delete-all">Delete All</a></li>
              </ul>
            </li>
+           <li><a href="#/feature20/users">F20</a></li>
            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F07<b class="caret"></b></a>
              <ul class="dropdown-menu">
                <li><a href="#/feature07/create">Crear</a></li>
@@ -79,17 +99,9 @@
            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F10<b class="caret"></b></a>
              <ul class="dropdown-menu">
                <li><a href="#/feature10/crear">Crear alarma</a></li>
-               <li><a href="#/feature10/edit">Editar alarmas</a></li>
+               <li><a href="#/feature10/list">Alarmas</a></li>
                 </ul>
                </li>
-               <!-- Feature 13  --> 
-           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F13<b class="caret"></b></a>
-             <ul class="dropdown-menu">
-               <li><a href="#/feature13/search-articles">Buscar Artìculos</a></li>
-               <li><a href="#/feature13/search-embroideries">Buscar Embroideries</a></li>
-               <li><a href="#/feature13/search-textile-printings">Buscar Textile Printings</a></li>
-                </ul>
-                </li>
                 
            <!-- Feature 04  --> 
            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F04<b class="caret"></b></a>
@@ -99,16 +111,18 @@
            </li>
                 
                 <!-- Feature 03-01  -->     
-         <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F03<b class="caret"></b></a>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F03<b class="caret"></b></a>
              <ul class="dropdown-menu">
-               <li><a href="#/feature03/feature03-1/listadoArticulos">Listado de Articulos</a>
-               <li><a href="#/feature03/feature03-1/listadoBordados">Listado Bordado</a></li>
-               <li><a href="#/feature03/feature03-1/listadoPrendaImpresa">Listado Impresa</a></li>
+               <li><a href="#/feature03/listadoArticulos">Listado de Articulos</a></li>
+               <li><a href="#/feature03/listadoBordados">Listado Bordado</a></li>
+               <li><a href="#/feature03/listadoPrendaImpresa">Listado Impresa</a></li>
              </ul>
            </li>
+           
            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F8<b class="caret"></b></a>
              <ul class="dropdown-menu">
                <li><a href="#/feature8.9/invoices/create">Crear factura</a></li>
+               <li><a href="#/feature8.10/invoices/details">Detalles de factura</a></li>
              </ul>
            </li>
          </ul>

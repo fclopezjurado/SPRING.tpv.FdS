@@ -21,8 +21,8 @@ package wrappers;
          this.wholesalePrice = wholesalePrice;
          this.provider = provider;
      }
- 
-     public int getStock() {
+
+	public int getStock() {
          return stock;
      }
  

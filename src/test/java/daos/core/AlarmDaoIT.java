@@ -1,6 +1,6 @@
 package daos.core;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +21,12 @@ public class AlarmDaoIT {
     @Test
     public void testCreateAlarm() {
         assertEquals(2, alarmDao.count());
+    }
+    
+    @Test 
+    public void testFindById() {
+        assertEquals(1, alarmDao.findById(1).getId());
+        assertNull(alarmDao.findById(2423));
     }
 
 }
