@@ -1,10 +1,13 @@
 package controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import daos.core.AlarmDao;
 import entities.core.Alarm;
+import entities.core.Article;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
 
@@ -39,6 +42,17 @@ public class AlarmController {
 
     public void removeAlarm(int id) {
         alarmDao.deleteById(id);
+    }
+    
+    protected boolean checkAlarmArticle(Article article) {
+        boolean result = false;
+        List<Alarm> listAlarm = alarmDao.findByArticleListContaining(article.getId());
+        int i = 0;
+        while(!result && i < listAlarm.size()){
+            result = article.getStock() <= listAlarm.get(i).getValue();
+            i++;
+        }
+        return result;
     }
 
 }
