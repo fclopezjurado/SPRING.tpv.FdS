@@ -5,24 +5,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import controllers.MockProductsController;
+import controllers.ArticleController;
 import wrappers.MockProductsWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION + Uris.MOCK_PRODUCT)
 public class MockProductsResource {
 
-    private MockProductsController productsController;
+    private ArticleController articleController;
     
     @Autowired
-    public void setProductsController(MockProductsController productsController){
-        this.productsController = productsController;
+    public void setProductsController(ArticleController articleController){
+        this.articleController = articleController;
     }
     
     @RequestMapping(method = RequestMethod.GET)
     public MockProductsWrapper getAll(){
         MockProductsWrapper result = new MockProductsWrapper();
-        result.setProducts(productsController.getAll());
+        result.setProducts(articleController.getAll());
         return result;
     }
     

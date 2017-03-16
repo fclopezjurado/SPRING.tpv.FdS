@@ -217,5 +217,6 @@ public class DaosServiceIntegrationTests {
         List<Article> articles = articleDao.findAll();
         alarmDao.save(new Alarm("Alarma Warning", articles, AlarmType.WARNING, 5));
         alarmDao.save(new Alarm("Alarma Critical", null, AlarmType.CRITICAL, 2));
+        alarmDao.save(new Alarm("Alarma extra", articles, AlarmType.WARNING, 5));
     }
 }
