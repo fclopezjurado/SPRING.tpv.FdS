@@ -1,18 +1,31 @@
 package api;
 
-import org.springframework.web.bind.annotation.*;
-import wrappers.TicketWrapper;
-
 import java.util.List;
+
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import controllers.TicketController;
+import wrappers.TicketWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION)
 public class TicketResource {
 
+    private TicketController ticketController;
+
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET)
     public List<TicketWrapper> listTickets(@RequestParam String reference) {
         // TODO Implement ticket list
         return null;
+    }
+
+    @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET)
+    public TicketWrapper getTicket(@RequestParam String reference) {
+        return (ticketController.getTicketByReference(reference));
     }
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.POST)
