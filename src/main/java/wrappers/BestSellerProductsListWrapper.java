@@ -9,6 +9,9 @@ public class BestSellerProductsListWrapper {
     public BestSellerProductsListWrapper() {
         this.bestSellersList = new ArrayList<BestSellerProductWrapper>();
     }
+    public BestSellerProductsListWrapper(List<BestSellerProductWrapper> bestSellersList) {
+        this.bestSellersList = bestSellersList;
+    }
 
     public List<BestSellerProductWrapper> getBestSellersList() {
         return bestSellersList;
@@ -21,6 +24,10 @@ public class BestSellerProductsListWrapper {
     @Override
     public String toString() {
         return "BestSellerProductsListWrapper [bestSellersList=" + bestSellersList + "]";
+    }
+    
+    public void add(BestSellerProductWrapper b) {
+        bestSellersList.add(b);
     }
 
 }
