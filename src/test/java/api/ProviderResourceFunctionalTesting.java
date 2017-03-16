@@ -8,7 +8,12 @@ public class ProviderResourceFunctionalTesting {
 
     @Test
     public void testCreateProvider() {
-        new RestBuilder<Object>(RestService.URL).path(Uris.PROVIDERS).body(new ProviderWrapper()).post().build();
+        ProviderWrapper providerWrapper = new ProviderWrapper();
+        providerWrapper.setCompany("Compañia");
+        providerWrapper.setMobile(666666666L);
+        new RestBuilder<Object>(RestService.URL).path(Uris.PROVIDERS).body(providerWrapper).post().build();
+        
+
     }
 
     @Test
