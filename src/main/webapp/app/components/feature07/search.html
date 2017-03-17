@@ -3,6 +3,7 @@
         <fieldset>
             <legend>Feature07. Consultar Voucher</legend>
             <form class="form-horizontal">
+
                 <div class="form-group">
                     <label class="control-label col-sm-2 " for="reference">Referencia:</label>
                     <div class='col-sm-10'>
@@ -10,54 +11,41 @@
                             ng-model='vm.reference' required />
                     </div>
                 </div>
-                
-                <div class="form-group">
-                    <label class="control-label col-sm-2 " for="reference">Fecha Creacion:</label>
-                    <div class='col-sm-10'>
-                        <input type='date' class="form-control" name='reference'
-                            ng-model='vm.FechaCrea' disabled/>
-                    </div>
-                </div>                
 
-                <div class="form-group">
-                    <label class="control-label col-sm-2 " for="reference">Fecha Uso:</label>
-                    <div class='col-sm-10'>
-                        <input type='date' class="form-control" name='reference'
-                            ng-model='vm.FechaUso' disabled/>
-                    </div>
-                </div>  
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2 " for="reference">Fecha Caducidad:</label>
-                    <div class='col-sm-10'>
-                        <input type='date' class="form-control" name='reference'
-                            ng-model='vm.FechaCadu' disabled/>
-                    </div>
-                </div>  
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2 " for="reference">Valor en €:</label>
-                    <div class='col-sm-10'>
-                        <input type='number' class="form-control" name='reference'
-                            ng-model='vm.Valor' disabled/>
-                    </div>
-                </div> 
-                
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-2">
                         <button class="btn btn-primary btn-sm" ng-click="vm.consultar()">Consultar</button>
                     </div>
                     <label class="bg-success col-sm-6" ng-show="vm.completed">Petición
                         correcta</label> <label class="bg-danger col-sm-6" ng-show="vm.error">Error!!!</label>
-                </div>
-                
-                
-                
+                </div>  
                 <div class="form-group">
                     <label class="control-label col-sm-2">Respuesta:</label> <label
                         class="col-sm-10" ng-bind='vm.response'></label>
-                </div>           
-            </form>
+                </div>			    
+			</form>   			    
+			<div class="table-responsive">
+			    <table  class="table table-striped">
+	               <thead>
+			          <tr>
+			              <th>REFERENCIA</th>
+                          <th>CREADO</th>
+		                  <th>USADO</th>
+			              <th>CADUCIDAD</th>
+			              <th>VALOR</th>
+	                  </tr>
+	              </thead>
+	              <tbody>                
+	                  <tr ng-repeat="vale in vm.vales">
+			              <td>{{ vale.reference }}</td>
+			              <td>{{ vale.created | date:'dd/MM/yyyy' }}</td>
+		                  <td>{{ vale.dateOfUse | date:'dd/MM/yyyy' }}</td>
+                          <td>{{ vale.expiration | date:'dd/MM/yyyy' }}</td>		                      
+			              <td>{{ vale.value }}</td>
+	                  </tr>
+	              </tbody>	
+	           </table>
+			</div>			       		      			 
         </fieldset>
     </div>
 </section>

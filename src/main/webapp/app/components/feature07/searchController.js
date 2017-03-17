@@ -8,13 +8,8 @@ tpv.controller('searchController', [
             vm.completed = false;
             vm.error = false;
             vm.response = "";
-            vm.reference = "";
+            vm.reference = "all";
             vm.consultar = consultar;
-            
-            vm.FechaCrea = "";
-            vm.FechaUso  = "";
-            vm.FechaCadu = "";
-            vm.Valor     = 0;            
             
             function consultar() {
                 const
@@ -23,7 +18,8 @@ tpv.controller('searchController', [
                         function(result) {
                             // promise was fullfilled
                             vm.completed = true;
-                            vm.response = "Importe descontado: "+result.value;
+                            vm.response = "Info recupearada correctamente";
+                            vm.vales = result;
                             $timeout(function() {
                                 vm.completed = false;
                             }, delay)
