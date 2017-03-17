@@ -1,4 +1,4 @@
-tpv.controller('listadoArticulosController', [ '$timeout', 'f03Service',
+tpv.controller('ArticleListController', [ '$timeout', 'f03Service',
 		function($timeout, f03Service) {
 			"use strict";
 			var vm = this;

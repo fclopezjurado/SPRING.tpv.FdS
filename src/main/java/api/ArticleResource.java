@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import controllers.ArticleController;
-import entities.core.Article;
+import wrappers.ArticleWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION + Uris.ARTICLES)
@@ -25,7 +25,7 @@ public class ArticleResource {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Article> getAll() {
+    public List<ArticleWrapper> getAll() {
         return articleController.getAll();
     }
     
