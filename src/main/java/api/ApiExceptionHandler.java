@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import api.exceptions.AlreadyExistProviderFieldException;
 import api.exceptions.AlreadyExistUserFieldException;
 import api.exceptions.ApiException;
 import api.exceptions.ErrorMessage;
@@ -46,7 +47,7 @@ public class ApiExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler({AlreadyExistUserFieldException.class, AlreadyExistUserFieldException.class})
+    @ExceptionHandler({AlreadyExistUserFieldException.class, AlreadyExistUserFieldException.class, AlreadyExistProviderFieldException.class})
     @ResponseBody
     public ErrorMessage conflictRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);
