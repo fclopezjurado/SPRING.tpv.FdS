@@ -20,6 +20,10 @@ public class Uris {
 
     public static final String ALARMS = "/alarms";
 
+    public static final String ALARMS_FILTER = "/filter";
+
+    public static final String ALARMS_TYPE_ID = "/{type}";
+
     public static final String SEEDS = "/seeds";
 
     public static final String PROVIDERS = "/providers";
@@ -29,6 +33,8 @@ public class Uris {
     public static final String VOUCHERS = "/vouchers";
 
     public static final String ARTICLES = "/articles";
+
+    public static final String SEARCH = "/search";
 
     public static final String REFERENCE = "/{reference}";
 

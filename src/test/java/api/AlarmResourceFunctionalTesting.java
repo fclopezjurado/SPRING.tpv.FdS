@@ -1,6 +1,7 @@
 package api;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -118,7 +119,7 @@ public class AlarmResourceFunctionalTesting {
             fail();
         }
     }
-
+    
     @After
     public void after() {
         new RestService().deleteAll();
