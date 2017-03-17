@@ -18,7 +18,7 @@ public class ArticleControllerIT {
 
     @Autowired
     private ArticleController articleController;
-    
+
     @Test
     public void testUpdateStock() {
         int stock = articleController.getAll().get(0).getStock();
@@ -26,5 +26,5 @@ public class ArticleControllerIT {
         assertEquals(stock + 5, articleController.getAll().get(0).getStock());
         articleController.updateStock(articleController.getAll().get(0), stock);
     }
-    
+
 }
