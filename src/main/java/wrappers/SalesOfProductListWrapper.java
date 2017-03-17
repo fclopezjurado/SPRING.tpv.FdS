@@ -24,5 +24,9 @@ public class SalesOfProductListWrapper {
         return "SalesOfProductListWrapper [salesOfProductList=" + salesOfProductList + "]";
     }
 
+    public void add(SaleOfProductWrapper salesOfProduct) {
+        salesOfProductList.add(salesOfProduct);
+    }
+
 }
 
