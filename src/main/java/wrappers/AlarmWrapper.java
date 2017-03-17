@@ -3,7 +3,6 @@ package wrappers;
 import java.util.List;
 
 import entities.core.AlarmType;
-import entities.core.Article;
 
 public class AlarmWrapper {
 
@@ -13,13 +12,13 @@ public class AlarmWrapper {
 
     private AlarmType type;
     
-    private List<Article> productsList;
+    private List<ArticleWrapper> productsList;
     
     private int numProducts;
 
     public AlarmWrapper() {}
 
-    public AlarmWrapper(String name, AlarmType type, List<Article> products, int numProducts) {
+    public AlarmWrapper(String name, AlarmType type, List<ArticleWrapper> products, int numProducts) {
         super();
         this.name = name;
         this.type = type;
@@ -27,7 +26,7 @@ public class AlarmWrapper {
         this.numProducts = numProducts;
     }
     
-    public AlarmWrapper(int id, String name, List<Article> productsList, AlarmType type, int numProducts) {
+    public AlarmWrapper(int id, String name, List<ArticleWrapper> productsList, AlarmType type, int numProducts) {
         super();
         this.id = id;
         this.name = name;
@@ -60,11 +59,11 @@ public class AlarmWrapper {
         this.type = type;
     }
     
-    public List<Article> getProductsList() {
+    public List<ArticleWrapper> getProductsList() {
         return productsList;
     }
 
-    public void setProductsList(List<Article> productsList) {
+    public void setProductsList(List<ArticleWrapper> productsList) {
         this.productsList = productsList;
     }
 
