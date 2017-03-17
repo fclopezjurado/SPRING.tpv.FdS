@@ -1,11 +1,17 @@
 package api;
 
-import controllers.TicketController;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import wrappers.TicketWrapper;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import controllers.TicketController;
+import wrappers.TicketWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION)
@@ -22,6 +28,11 @@ public class TicketResource {
     public List<TicketWrapper> listTickets() {
         // TODO Implement ticket list
         return null;
+    }
+
+    @RequestMapping(value = Uris.TICKETS + Uris.REFERENCE, method = RequestMethod.GET)
+    public TicketWrapper getTicket(@PathVariable String reference) {
+        return (ticketController.getTicketByReference(reference));
     }
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET, params = "reference")
