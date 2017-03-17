@@ -1,12 +1,12 @@
 angular
 		.module("tpv")
 		.factory(
-				"newCashierBalancingService",
+				"getBalancesService",
 				function($http) {
 
 					const baseURL = "http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api/v0/cashierbalancing";
 					const responseMockWrong = "{\"error\": \"Not found\", \"code\": 401 }";
-					const responseMockOK = "{\"error\": \"\", \"code\": 200, \"data\": {\"id\": 1, \"day\": \"01-01-1970\", \"change\": 50, \"cash\": 50, \"checks\": 50, \"dataphone\": 50, \"totalMoney\": 200, \"balance\": \"+150\" }}";
+					const responseMockOK = "{\"error\": \"\", \"code\": 200, \"data\": [\n\ {\"id\": 1, \"day\": \"01-01-1970\", \"change\": 50, \"cash\": 50, \"checks\": 50, \"dataphone\": 50, \"totalMoney\": 200, \"balance\": \"+150\" }, \n\{\"id\": 2, \"day\": \"01-01-1970\", \"change\": 50, \"cash\": 50, \"checks\": 50, \"dataphone\": 50, \"totalMoney\": 200, \"balance\": \"+150\"} ]}";
 
 					/**
 					 * TODO: This end-point will return an invoice wrapper when
@@ -14,7 +14,7 @@ angular
 					 * this end point must be logged in.
 					 */
 					return {
-						create : function(cashierbalancing) {
+						findAll : function(cashierbalancing) {
 							var requestParameters = {
 								params : {
 									"cashierBalance" : cashierbalancing
