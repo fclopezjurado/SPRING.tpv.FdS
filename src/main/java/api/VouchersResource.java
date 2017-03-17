@@ -1,6 +1,7 @@
 package api;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,4 +63,17 @@ public class VouchersResource {
         return resulVoucherWrapper;
     }
 
+    @RequestMapping(value = Uris.ID, method = RequestMethod.GET)
+    public List<VoucherWrapper> search(@PathVariable(value = "id") String referencia)
+            throws InvalidVoucherReferenceException, NotFoundReferenceVoucherException {
+
+        if (referencia.isEmpty() || (referencia.length() < 27 && !referencia.equals("all"))) {
+            throw new InvalidVoucherReferenceException();
+        }
+
+        VoucherWrapper searchVoucherWrapper = new VoucherWrapper();
+        searchVoucherWrapper.setReference(referencia);
+
+        return voucherController.searchVoucher(searchVoucherWrapper);
+    }
 }

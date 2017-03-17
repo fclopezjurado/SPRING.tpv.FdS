@@ -1,13 +1,12 @@
 package controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import daos.core.ProviderDao;
 import entities.core.Provider;
 import wrappers.ProviderWrapper;
+import wrappers.ProvidersWrapper;
 
 @Controller
 public class ProviderController {
@@ -30,7 +29,25 @@ public class ProviderController {
         }
     }
 
-    public List<Provider> getAll() {
-        return providerDao.findAll();
+    public ProvidersWrapper getAll() {
+         return  new ProvidersWrapper(providerDao.findAll()); 
+    }
+
+    public ProviderWrapper editProvider(ProviderWrapper providerWrapper) {
+        Provider provider = providerDao.findById(providerWrapper.getId());
+        if(provider != null){
+            provider.setAddress(providerWrapper.getAddress());
+            provider.setCompany(providerWrapper.getCompany());
+            provider.setMobile(providerWrapper.getMobile());
+            provider.setNote(providerWrapper.getNote());
+            provider.setPaymentConditions(providerWrapper.getPaymentConditions());
+            provider.setPhone(providerWrapper.getMobile());
+            return new ProviderWrapper(providerDao.save(provider));
+        } else return null;
+    }
+
+    public void delete(String id) {
+        Integer providerId = Integer.parseInt(id);
+        providerDao.delete(providerId);
     }
 }
