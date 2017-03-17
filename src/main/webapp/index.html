@@ -27,8 +27,7 @@
     <script src="app/components/feature20/userController.js"></script>  
     <!-- Autor: Jorge Higuera y Daniel González -->
     <script src="app/components/feature10/f10Service.js"></script>  
-    <script src="app/components/feature10/createAlarmController.js"></script>
-    <script src="app/components/feature10/editAlarmController.js"></script>
+    <script src="app/components/feature10/listAlarmsController.js"></script>
     <!-- Author: Francisco López -->
     <script src="app/components/feature8.9/services/get_tickets_by_user_email.service.js"></script>
     <script src="app/components/feature8.9/services/get_tickets_by_user_mobile.service.js"></script>
@@ -53,6 +52,7 @@
     <script src="app/components/feature8.10/controllers/get_invoice.controller.js"></script>
     <!-- Author: Enrique Arranz -->
     <script src="app/components/feature09/new_cashier_balancing.service.js"></script>
+    <script src="app/components/feature09/get_cashier_balancing.service.js"></script>
     <script src="app/components/feature09/cashier_balancing.controller.js"></script>
         <!-- Autor: Cecilia Aguilar DAvid Blasco-->  
     <script src="app/components/feature03/f03Service.js"></script>  
@@ -98,8 +98,7 @@
            <!-- Feature 10  --> 
            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F10<b class="caret"></b></a>
              <ul class="dropdown-menu">
-               <li><a href="#/feature10/crear">Crear alarma</a></li>
-               <li><a href="#/feature10/edit">Editar alarmas</a></li>
+               <li><a href="#/feature10/list">Alarmas</a></li>
                 </ul>
                </li>
                 
@@ -123,6 +122,13 @@
              <ul class="dropdown-menu">
                <li><a href="#/feature8.9/invoices/create">Crear factura</a></li>
                <li><a href="#/feature8.10/invoices/details">Detalles de factura</a></li>
+             </ul>
+           </li>
+           <!-- FEature 09 -->
+           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F09<b class="caret"></b></a>
+             <ul class="dropdown-menu">
+               <li><a href="#/feature09/cierrecaja/nuevo">Crear cierre de caja</a></li>
+               <li><a href="#/feature09/cierrecaja">Listar cierre de caja</a></li>
              </ul>
            </li>
          </ul>

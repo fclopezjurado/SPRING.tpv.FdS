@@ -1,7 +1,9 @@
 package entities.core;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -13,23 +15,24 @@ public class CashierBalance {
 
     private Calendar day;
 
-    private double balance = 0;
+    private BigDecimal balance = new BigDecimal(0);
 
-    private double change;
+    @Column(name= "dayChange")
+    private BigDecimal change;
 
-    private double cash;
+    private BigDecimal cash;
 
-    private double checks;
+    private BigDecimal checks;
 
-    private double dataphone;
+    private BigDecimal dataphone;
 
-    private double totalTiketsMoney;
+    private BigDecimal totalTiketsMoney;
 
     public CashierBalance() {
         day = Calendar.getInstance();
     }
 
-    public CashierBalance(double change, double cash, double checks, double dataphone) {
+    public CashierBalance(BigDecimal change, BigDecimal cash, BigDecimal checks, BigDecimal dataphone) {
         super();
         this.change = change;
         this.cash = cash;
@@ -53,51 +56,51 @@ public class CashierBalance {
         this.day = day;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
-    public double getChange() {
+    public BigDecimal getChange() {
         return change;
     }
 
-    public void setChange(double change) {
+    public void setChange(BigDecimal change) {
         this.change = change;
     }
 
-    public double getCash() {
+    public BigDecimal getCash() {
         return cash;
     }
 
-    public void setCash(double cash) {
+    public void setCash(BigDecimal cash) {
         this.cash = cash;
     }
 
-    public double getChecks() {
+    public BigDecimal getChecks() {
         return checks;
     }
 
-    public void setChecks(double checks) {
+    public void setChecks(BigDecimal checks) {
         this.checks = checks;
     }
 
-    public double getDataphone() {
+    public BigDecimal getDataphone() {
         return dataphone;
     }
 
-    public void setDataphone(double dataphone) {
+    public void setDataphone(BigDecimal dataphone) {
         this.dataphone = dataphone;
     }
 
-    public double getTotalTiketsMoney() {
+    public BigDecimal getTotalTiketsMoney() {
         return totalTiketsMoney;
     }
 
-    public void setTotalTiketsMoney(double totalTiketsMoney) {
+    public void setTotalTiketsMoney(BigDecimal totalTiketsMoney) {
         this.totalTiketsMoney = totalTiketsMoney;
     }
 

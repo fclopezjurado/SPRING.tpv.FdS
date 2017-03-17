@@ -43,14 +43,9 @@ tpv.config(function ($routeProvider) {
             controller: "listadoPrendaImpresaController",
             controllerAs: "vm"
         })
-        .when("/feature10/crear", {
-            templateUrl: "app/components/feature10/createAlarm.html",
-            controller: "createAlarmController.js",
-            controllerAs: "vm"
-        })
-        .when("/feature10/edit", {
-            templateUrl: "app/components/feature10/editAlarm.html",
-            controller: "EditAlarmController",
+        .when("/feature10/list", {
+            templateUrl: "app/components/feature10/listAlarms.html",
+            controller: "ListAlarmsController",
             controllerAs: "vm"
         })
 
@@ -113,6 +108,11 @@ tpv.config(function ($routeProvider) {
         .when("/feature09/cierrecaja/nuevo", {
             templateUrl: "app/components/feature09/new_cashier_balancing.html",
             controller: "CashierBalancingController",
+            controllerAs: "vm"
+        })
+        .when("/feature11/ticket", {
+            templateUrl: "app/components/feature11/ticket.html",
+            controller: "ProductsServiceController",
             controllerAs: "vm"
         })
         .otherwise({

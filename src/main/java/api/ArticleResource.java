@@ -13,20 +13,18 @@ import wrappers.ArticleWrapper;
 @RestController
 @RequestMapping(Uris.VERSION + Uris.ARTICLES)
 
-
 public class ArticleResource {
-	 
-	   private ArticleController articleController;
 
-	    @Autowired
-	    public void setArticleController(ArticleController articleController) {
-	        this.articleController = articleController;
-	    }
+	private ArticleController articleController;
 
+	@Autowired
+	public void setArticleController(ArticleController articleController) {
+		this.articleController = articleController;
+	}
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<ArticleWrapper> getAll() {
-        return articleController.getAll();
-    }
-    
+	@RequestMapping(method = RequestMethod.GET)
+	public List<ArticleWrapper> getAll() {
+		return articleController.getAll();
+	}
+
 }
