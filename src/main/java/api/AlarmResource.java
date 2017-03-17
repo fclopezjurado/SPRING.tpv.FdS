@@ -1,6 +1,7 @@
 package api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,11 @@ public class AlarmResource {
     public void editAlarm(@RequestBody AlarmWrapper alarm) throws InvalidAlarmTypeException {
         validType(alarm.getType());
         alarmController.editAlarm(alarm);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
+    public void removeAlarm(@PathVariable(value = "id") int id) {
+        alarmController.removeAlarm(id);
     }
 
     private void validNewAlarm(AlarmWrapper alarm) throws InvalidNewAlarmException {

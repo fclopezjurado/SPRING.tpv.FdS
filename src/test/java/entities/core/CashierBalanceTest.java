@@ -2,6 +2,7 @@ package entities.core;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -18,11 +19,14 @@ public class CashierBalanceTest {
 
     @Test
     public void testCashierBalanceFieldsConstructor() {
-        CashierBalance cBalance = new CashierBalance(200, 500, 10, 10);
-        assertEquals(200, cBalance.getChange(), 0);
-        assertEquals(500, cBalance.getCash(), 0);
-        assertEquals(10, cBalance.getChecks(), 0);
-        assertEquals(10, cBalance.getDataphone(), 0);
+        BigDecimal doscientos = new BigDecimal(200);
+        BigDecimal quinientos = new BigDecimal(500);
+        BigDecimal diez = new BigDecimal(10);
+        CashierBalance cBalance = new CashierBalance(doscientos, quinientos, diez, diez);
+        assertEquals(doscientos, cBalance.getChange());
+        assertEquals(quinientos, cBalance.getCash());
+        assertEquals(diez, cBalance.getChecks());
+        assertEquals(diez, cBalance.getDataphone());
     }
 
 }

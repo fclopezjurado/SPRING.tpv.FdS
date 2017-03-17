@@ -6,14 +6,14 @@
 				class="alert alert-success">
 				<strong>¡CORRECTO!</strong> La alerta se modificó correctamente
 			</div>
-			<div ng-show="vm.send && !vm.successCreate && !vm.completed"
-				class="alert alert-danger">
-				<strong>¡ERROR!</strong> La alerta no se pudo crear
-			</div>
 			<div ng-show="vm.send && vm.successCreate && vm.completed"
 				class="alert alert-success">
 				<strong>¡CORRECTO!</strong> La alerta se creó correctamente
 			</div>
+			<div ng-show="vm.send && vm.successRemove && vm.completed"
+                class="alert alert-success">
+                <strong>¡CORRECTO!</strong> La alerta se eliminó correctamente
+            </div>
 			<div class="row text-left">
 				<button type="button" class="btn btn-primary btn-sm"
 					data-toggle="modal" data-target="#modalCreacion"
@@ -72,12 +72,16 @@
 				<h4 class="modal-title">Crear alarma</h4>
 			</div>
 			<div class="modal-body">
-				<div class="form-group">
-					<label for="email">Nombre:</label> <input type="text"
-						class="form-control" name="value" ng-model="vm.modifData.newName" />
+				<div ng-show="vm.send && !vm.successCreate && !vm.completed"
+					class="alert alert-danger">
+					<strong>¡ERROR!</strong> La alerta no se pudo crear
 				</div>
 				<div class="form-group">
-					<label for="email">Productos:</label>
+					<label for="new-name">Nombre:</label> <input type="text"
+						class="form-control" name="new-name" ng-model="vm.modifData.newName" />
+				</div>
+				<div class="form-group">
+					<label>Productos:</label>
 					<div class="row" style="max-height: 150px; overflow: auto;">
 						<div class="col-md-2"
 							ng-repeat="newProduct in vm.modifData.newProducts track by $index">
@@ -88,14 +92,14 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="email">Tipo:</label> <select name="type"
+					<label for="type">Tipo:</label> <select name="type"
 						ng-model="vm.modifData.newType">
 						<option value='WARNING'>Warning</option>
 						<option value='CRITICAL'>Critical</option>
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="email">Valor:</label> <input type="text"
+					<label for="value">Valor:</label> <input type="number" min="0"
 						class="form-control" name="value" ng-model="vm.modifData.newValue" />
 				</div>
 			</div>
@@ -120,11 +124,11 @@
 			</div>
 			<div class="modal-body">
 				<div class="form-group">
-					<label for="email">Nombre:</label> <input type="text"
-						class="form-control" name="value" ng-model="vm.modifData.newName" />
+					<label for="new-name">Nombre:</label> <input type="text"
+						class="form-control" name="new-name" ng-model="vm.modifData.newName" />
 				</div>
 				<div class="form-group">
-					<label for="email">Productos:</label>
+					<label>Productos:</label>
 					<div class="row" style="max-height: 150px; overflow: auto;">
 						<div class="col-md-2"
 							ng-repeat="newProduct in vm.modifData.newProducts track by $index">
@@ -135,7 +139,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="email">Tipo:</label> <select
+					<label for="type">Tipo:</label> <select name="type"
 						ng-init="vm.modifData.newType = 'WARNING'"
 						ng-model="vm.modifData.newType">
 						<option value='WARNING'>Warning</option>
@@ -143,7 +147,7 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="email">Valor:</label> <input type="text"
+					<label for="value">Valor:</label> <input type="number" min="0"
 						class="form-control" name="value" ng-model="vm.modifData.newValue" />
 				</div>
 			</div>
