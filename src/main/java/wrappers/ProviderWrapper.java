@@ -32,6 +32,14 @@ public class ProviderWrapper {
         this.note = note;
     }
 
+    public long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(long phone) {
+        this.phone = phone;
+    }
+
     public ProviderWrapper(Provider provider) {
         this.id = provider.getId();
         this.company = provider.getCompany();

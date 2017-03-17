@@ -36,6 +36,8 @@ public class Uris {
 
     public static final String SEARCH = "/search";
 
+    public static final String REFERENCE = "/{reference}";
+
     public static final String TOTAL_SALES = "/totalSales";
 
     public static final String BEST_SELLERS = "/BestSellesrs";

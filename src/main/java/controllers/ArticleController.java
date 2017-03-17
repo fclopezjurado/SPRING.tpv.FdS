@@ -11,7 +11,6 @@ import daos.core.ProviderDao;
 import entities.core.AlarmType;
 import entities.core.Article;
 import wrappers.ArticleWrapper;
-import wrappers.ProviderWrapper;
 
 @Controller
 public class ArticleController {
@@ -22,10 +21,10 @@ public class ArticleController {
     @Autowired
     private ProviderDao providerDao;
 
-    @Autowired
-    public void setArticleDao(ArticleDao articleDao) {
-        this.articlesDao = articleDao;
-    }
+	@Autowired
+	public void setArticleDao(ArticleDao articlesDao) {
+		this.articlesDao = articlesDao;
+	}
 
     public List<ArticleWrapper> getAll() {
         List<Article> articles = articlesDao.findAll();
@@ -56,8 +55,9 @@ public class ArticleController {
     private List<ArticleWrapper> articleListToArticleWrapperList(List<Article> articles) {
         List<ArticleWrapper> articleWrapperList = new ArrayList<ArticleWrapper>();
         for(Article article : articles) {
-            articleWrapperList.add(new ArticleWrapper(article.getId(), article.getReference(), article.getDescription(), article.getRetailPrice(), article.getStock(), article.getWholesalePrice(), new ProviderWrapper(article.getProvider())));
+            articleWrapperList.add(new ArticleWrapper(article));
         }
         return articleWrapperList;
     }
+
 }

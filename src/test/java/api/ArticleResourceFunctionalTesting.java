@@ -36,7 +36,7 @@ public class ArticleResourceFunctionalTesting {
         List<ArticleWrapper> articles = Arrays.asList(new RestBuilder<ArticleWrapper[]>(RestService.URL).path(Uris.ARTICLES)
                 .path(Uris.SEARCH).param("provider", String.valueOf(providerWrapper.getId())).param("type",AlarmType.WARNING.toString()).clazz(ArticleWrapper[].class).get().build());
         assertEquals(false, articles.isEmpty());
-        assertEquals(true, articles.get(0).getProvider().getId() == providerWrapper.getId());
+        assertEquals(true, articles.get(0).getProviderWrapper().getId() == providerWrapper.getId());
     }
     
     @Test
@@ -46,7 +46,7 @@ public class ArticleResourceFunctionalTesting {
         List<ArticleWrapper> articles = Arrays.asList(new RestBuilder<ArticleWrapper[]>(RestService.URL).path(Uris.ARTICLES)
                 .path(Uris.SEARCH).param("provider", String.valueOf(providerWrapper.getId())).param("type",null).clazz(ArticleWrapper[].class).get().build());
         assertEquals(false, articles.isEmpty());
-        assertEquals(true, articles.get(0).getProvider().getId() == providerWrapper.getId());
+        assertEquals(true, articles.get(0).getProviderWrapper().getId() == providerWrapper.getId());
     }
     
     @Test
@@ -56,7 +56,7 @@ public class ArticleResourceFunctionalTesting {
         List<ArticleWrapper> articles = Arrays.asList(new RestBuilder<ArticleWrapper[]>(RestService.URL).path(Uris.ARTICLES)
                 .path(Uris.SEARCH).param("provider", "0").param("type",AlarmType.WARNING.toString()).clazz(ArticleWrapper[].class).get().build());
         assertEquals(false, articles.isEmpty());
-        assertEquals(true, articles.get(0).getProvider().getId() == providerWrapper.getId());
+        assertEquals(true, articles.get(0).getProviderWrapper().getId() == providerWrapper.getId());
     }
     
     @After
