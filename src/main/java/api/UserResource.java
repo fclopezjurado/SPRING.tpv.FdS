@@ -55,16 +55,18 @@ public class UserResource {
     }
     
     @RequestMapping(value = Uris.USERS, method = RequestMethod.PUT)
-    public void updateUser(@RequestBody UserForEditWrapper userWrapper)
+    public String updateUser(@RequestBody UserForEditWrapper userWrapper)
             throws InvalidUserFieldException, NotFoundUserIdException {
         validateField(userWrapper.getUsername(), "username");
         //TODO use: this.userController.updateUser(userWrapper);
+        return "update llamado";
     }
     
     @RequestMapping(value = Uris.USERS, method = RequestMethod.DELETE)
-    public void deleteUser(@RequestBody long mobile)
+    public String deleteUser(@RequestBody long mobile)
             throws InvalidUserFieldException, NotFoundUserIdException {
         //TODO use: this.userController.deleteUser(mobile);
+        return "delete llamado";
     }
 
     private void validateField(String field, String msg) throws InvalidUserFieldException {
