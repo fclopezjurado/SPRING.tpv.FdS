@@ -1,0 +1,9 @@
+products:
+  - !product
+    reference: coffee
+    retailPrice: 20.22
+    description: Café
+  - !product
+    reference: ccola
+    retailPrice: 21.23
+    description: Cocacola
