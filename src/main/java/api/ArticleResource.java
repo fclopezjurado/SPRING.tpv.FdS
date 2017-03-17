@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import controllers.ArticleController;
 import entities.core.AlarmType;
-import entities.core.Article;
 import wrappers.ArticleWrapper;
 
 @RestController
@@ -27,8 +26,8 @@ public class ArticleResource {
     }
     
     @RequestMapping(value = Uris.SEARCH)
-    public List<Article> searchArticle(@RequestParam("provider") long provider, @RequestParam("type") AlarmType type) {
-        return articleController.filter(provider, type);
+    public List<ArticleWrapper> searchArticle(@RequestParam("provider") int provider, @RequestParam("type") AlarmType type) {
+        return articleController.search(provider, type);
     }
     
 }
