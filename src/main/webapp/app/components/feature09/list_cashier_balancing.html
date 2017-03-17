@@ -1,0 +1,43 @@
+<section class="container-fluid" ng-controller="CashierBalancingController as vm">
+    <div class="jumbotron text-center">
+        <fieldset>
+            <legend>Feature09. Listado de cierres de cajas</legend>
+            <div ng-show="vm.showAlert" class="alert alert-success">
+                <strong>¡CORRECTO!</strong> {{vm.alertMessage}}
+            </div>
+            <div class="row text-left">
+                <a href="#/feature09/cierrecaja/nuevo" class="btn btn-primary btn-sm">Nuevo cierre de caja</a>
+            </div>
+            <table class="table table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Cambio</th>
+                        <th>Total</th>
+                        <th>Balance</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5" ng-hide="vm.successList">Cargando...</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" ng-show="vm.successList && !vm.balances.length">No
+                            hay cierres de caja</td>
+                    </tr>
+                    <tr ng-show="vm.successList && vm.balances.length" ng-repeat="balance in vm.balances">
+                        <td>{{balance.day}}</td>
+                        <td>{{balance.change}}</td>
+                        <td>{{balance.totalMoney}}</td>
+                        <td>{{balance.balance}}</td>
+                        <td>
+                            <button type="button" class="btn btn-info btn-sm">Editar</button>
+                            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</section>
