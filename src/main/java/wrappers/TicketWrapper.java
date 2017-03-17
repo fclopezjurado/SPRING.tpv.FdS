@@ -21,7 +21,8 @@ public class TicketWrapper {
 
     private User user;
 
-    private TicketWrapper(Calendar created, String reference, TicketState ticketState, List<Shopping> shoppingList, User user) {
+    private TicketWrapper(long id, Calendar created, String reference, TicketState ticketState, List<Shopping> shoppingList, User user) {
+        this.id = id;
         this.created = created;
         this.reference = reference;
         this.ticketState = ticketState;
@@ -31,6 +32,10 @@ public class TicketWrapper {
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Calendar getCreated() {
