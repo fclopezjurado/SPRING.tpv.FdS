@@ -14,13 +14,17 @@ import wrappers.ArticleWrapper;
 @RequestMapping(Uris.VERSION + Uris.ARTICLES)
 
 public class ArticleResource {
-	 
-    @Autowired
+
 	private ArticleController articleController;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<ArticleWrapper> getAll() {
-        return articleController.getAll();
-    }
-    
+	@Autowired
+	public void setArticleController(ArticleController articleController) {
+		this.articleController = articleController;
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public List<ArticleWrapper> getAll() {
+		return articleController.getAll();
+	}
+
 }
