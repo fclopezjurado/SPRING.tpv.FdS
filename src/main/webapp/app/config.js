@@ -48,15 +48,9 @@ tpv.config(function ($routeProvider) {
             controller: "ListAlarmsController",
             controllerAs: "vm"
         })
-
-    	.when("/feature10/crear", {
-    		templateUrl: "app/components/feature10/createAlarm.html",
-        	controller: "CreateAlarmController",
-        	controllerAs: "vm"
-    	})
-    	.when("/feature10/edit", {
-    		templateUrl: "app/components/feature10/editAlarm.html",
-        	controller: "EditAlarmController",
+    	.when("/feature10/list/articles", {
+    		templateUrl: "app/components/feature10/listArticlesWarning.html",
+        	controller: "ListArticlesWarningController",
         	controllerAs: "vm"
     	})
         .when("/feature8.9/invoices/create", {

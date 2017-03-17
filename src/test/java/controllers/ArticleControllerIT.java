@@ -14,7 +14,6 @@ import config.PersistenceConfig;
 import config.TestsControllerConfig;
 import config.TestsPersistenceConfig;
 import entities.core.AlarmType;
-import entities.core.Provider;
 import wrappers.ArticleWrapper;
 import wrappers.ProviderWrapper;
 
@@ -38,7 +37,7 @@ public class ArticleControllerIT {
     
     @Test
     public void testSearchWithTwoParameters() {
-        Provider provider = providerController.getAll().get(0);
+        ProviderWrapper provider = providerController.getAll().getProvidersWrapper().get(0);
         List<ArticleWrapper> list = articleController.search(provider.getId(), AlarmType.WARNING);
         assertEquals(false, list.isEmpty());
         assertEquals(true, list.get(0).getProvider().getId() == provider.getId());
@@ -46,7 +45,7 @@ public class ArticleControllerIT {
     
     @Test
     public void testSearchByProvier() {
-        Provider provider = providerController.getAll().get(0);
+        ProviderWrapper provider = providerController.getAll().getProvidersWrapper().get(0);
         List<ArticleWrapper> list = articleController.search(provider.getId(), null);
         assertEquals(false, list.isEmpty());
         assertEquals(true, list.get(0).getProvider().getId() == provider.getId());
