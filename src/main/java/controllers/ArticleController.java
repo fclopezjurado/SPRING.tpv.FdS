@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import daos.core.ArticleDao;
+import entities.core.AlarmType;
 import entities.core.Article;
 
 @Controller
@@ -28,5 +29,13 @@ public class ArticleController {
         Article a = articlesDao.findById(article.getId());
         a.setStock(newStock);
         articlesDao.save(a);
+    }
+
+    public List<Article> filter(long provider, AlarmType type) {
+        List<Article> list = null;
+        if(provider != 0L && type == null) {
+            
+        }
+        return list;
     }
 }

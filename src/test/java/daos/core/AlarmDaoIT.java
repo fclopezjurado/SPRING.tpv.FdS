@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
+import entities.core.AlarmType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
@@ -28,5 +29,4 @@ public class AlarmDaoIT {
         assertEquals(1, alarmDao.findById(1).getId());
         assertNull(alarmDao.findById(2423));
     }
-
 }

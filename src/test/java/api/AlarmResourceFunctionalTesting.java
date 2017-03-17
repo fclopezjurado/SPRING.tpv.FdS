@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -128,9 +129,15 @@ public class AlarmResourceFunctionalTesting {
             fail();
         }
     }
+    /*
+    @Test
+    public void testAlarmsWithType() {
+        List<Alarm> alarms = Arrays.asList(new RestBuilder<Alarm[]>(RestService.URL).path(Uris.ALARMS).path(Uris.ALARMS).path("/" + AlarmType.WARNING).clazz(Alarm[].class).get().build());
+        assertEquals(false, alarms.isEmpty());
+    }
 
     @After
     public void after() {
         new RestService().deleteAll();
-    }
+    }*/
 }

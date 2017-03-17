@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 
 import daos.core.AlarmDao;
 import entities.core.Alarm;
+import entities.core.AlarmType;
 import entities.core.Article;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
