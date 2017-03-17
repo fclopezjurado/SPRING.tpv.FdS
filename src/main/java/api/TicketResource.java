@@ -2,6 +2,7 @@ package api;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,12 +24,12 @@ public class TicketResource {
         return null;
     }
 
-    @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET)
-    public TicketWrapper getTicket(@RequestParam String reference) {
+    @RequestMapping(value = Uris.TICKETS + Uris.REFERENCE, method = RequestMethod.GET)
+    public TicketWrapper getTicket(@PathVariable String reference ) {
         return (ticketController.getTicketByReference(reference));
     }
 
-    @RequestMapping(value = Uris.TICKETS, method = RequestMethod.POST)
+    @RequestMapping(value = Uris.TICKETS, method = RequestMethod.POST,params="")
     public TicketWrapper createTickets(@RequestBody TicketWrapper ticketWrapper) {
         // TODO Implement ticket creation
         return null;

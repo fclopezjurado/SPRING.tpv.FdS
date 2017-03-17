@@ -31,4 +31,6 @@ public class Uris {
     public static final String VOUCHERS = "/vouchers";
     
     public static final String ARTICLES = "/articles";
+
+    public static final String REFERENCE = "/{reference}";
 }
