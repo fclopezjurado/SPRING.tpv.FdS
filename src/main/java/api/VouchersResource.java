@@ -67,13 +67,13 @@ public class VouchersResource {
     public List<VoucherWrapper> search(@PathVariable(value = "id") String referencia)
             throws InvalidVoucherReferenceException, NotFoundReferenceVoucherException {
 
-        if (referencia.isEmpty() || (referencia.length() < 27 && !referencia.equals("all") )) {
+        if (referencia.isEmpty() || (referencia.length() < 27 && !referencia.equals("all"))) {
             throw new InvalidVoucherReferenceException();
-        }        
-            
+        }
+
         VoucherWrapper searchVoucherWrapper = new VoucherWrapper();
         searchVoucherWrapper.setReference(referencia);
-                
+
         return voucherController.searchVoucher(searchVoucherWrapper);
-    }    
+    }
 }
