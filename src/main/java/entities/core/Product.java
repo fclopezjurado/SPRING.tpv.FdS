@@ -9,7 +9,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Product {
+public abstract class Product implements ComponentProduct{
 
     @Id
     private long id;
