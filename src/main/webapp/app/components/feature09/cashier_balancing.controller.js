@@ -1,11 +1,15 @@
 angular.module("tpv").controller(
 		"CashierBalancingController",
-		function(newCashierBalancingService) {
+		function(newCashierBalancingService, getBalancesService) {
 			"use strict";
 
 			var vm = this;
 
-			var balances = [];
+			vm.balances = getBalancesService.findAll();
+
+			vm.successList = true;
+			vm.showAlert = false;
+			vm.alertMessage = '';
 
 			vm.cashierbalancing = {
 				date : new Date(),
@@ -13,9 +17,15 @@ angular.module("tpv").controller(
 			};
 
 			vm.createCashierBalancing = function() {
-				balances.push(angular.fromJson(newCashierBalancingService
-						.create(vm.cashierbalancing)));
+				vm.balances.push(newCashierBalancingService
+						.create(vm.cashierbalancing));
 
-				console.log(balances);
+				console.log(vm.balances);
+				//$window.location.href = '../cierrecaja';
+
+			}
+
+			vm.getBalances = function() {
+				return [];
 			}
 		});
