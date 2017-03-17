@@ -1,0 +1,48 @@
+<section class="container">
+	<div class="jumbotron">
+		<div class="table-responsive" ng-init="vm.getUsers()">
+			<table class="table table-hover">
+				<tbody>
+					<tr>
+						<th>Mobile</th>
+						<th>Username</th>
+						<th>DNI</th>
+						<th>Address</th>
+						<th>Email</th>
+						<th>Date</th>
+						<th>Active</th>
+						<th class="col-md-2"></th>
+					</tr>
+					<tr ng-repeat="user in vm.users" ng-include="vm.getTemplate(user)">
+					</tr>
+				</tbody>
+			</table>
+		    <script type="text/ng-template" id="display">
+                <td>{{user.mobile}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.dni}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.registrationDate}}</td>
+                <td>{{user.active}}</td>
+                <td>
+                    <button class="btn btn-primary" ng-click="vm.edit(user)">Edit</button>
+                    <button class="btn btn-danger" ng-click="vm.delete(user)">Delete</button>
+                </td>
+            </script>
+            <script type="text/ng-template" id="edit">
+                <td>{{user.mobile}}</td>
+                <td><input type="text" ng-model="vm.selected.username" class="form-control" /></td>
+                <td><input type="text" ng-model="vm.selected.dni" class="form-control" /></td>
+                <td><input type="text" ng-model="vm.selected.address" class="form-control" /></td>
+                <td><input type="text" ng-model="vm.selected.email" class="form-control" /></td>
+                <td>{{user.registrationDate}}</td>
+                <td><input type="checkbox" ng-model="vm.selected.active" class="form-check-input" /></td>
+                <td>
+                    <button class="btn btn-success" ng-click="vm.save($index)">Save</button>
+                    <button class="btn btn-primary" ng-click="vm.reset()">Cancel</button>
+                </td>
+            </script>
+		</div>
+	</div>
+</section>
