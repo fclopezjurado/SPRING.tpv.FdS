@@ -11,6 +11,8 @@ import wrappers.BestSellerProductWrapper;
 import wrappers.BestSellerProductsListWrapper;
 import wrappers.SaleOfProductWrapper;
 import wrappers.SalesOfProductListWrapper;
+import wrappers.StatisticsDateWrapper;
+import wrappers.StatisticsProductDateWrapper;
 
 @Controller
 public class StatisticsController {
@@ -29,24 +31,25 @@ public class StatisticsController {
         this.ticketDao = ticketDao;
     }
 
-    public int countTicketsBetweenDates(Calendar inicio, Calendar fin) {
-        return ticketDao.countTicketsBetweenDates(inicio, fin);
+    public int countTicketsBetweenDates(StatisticsDateWrapper statisticsDateWrapper) {
+        return ticketDao.countTicketsBetweenDates(statisticsDateWrapper.getInicio(), statisticsDateWrapper.getFin());
     }
 
-    public BestSellerProductsListWrapper getBestSellerProductsByDate(Calendar inicio, Calendar fin) {
+    public BestSellerProductsListWrapper getBestSellerProductsByDate(StatisticsDateWrapper statisticsDateWrapper) {
         BestSellerProductsListWrapper bestSellerListWrapper = new BestSellerProductsListWrapper();
-        for (Object[] row : shoppingDao.findBestSellersBetweenDates(inicio, fin)) {
+        for (Object[] row : shoppingDao.findBestSellersBetweenDates(statisticsDateWrapper.getInicio(), statisticsDateWrapper.getFin())) {
             BestSellerProductWrapper bestSellerProduct = new BestSellerProductWrapper((long) row[0], row[1].toString(),
                     Integer.parseInt(row[2].toString()));
             bestSellerListWrapper.add(bestSellerProduct);
         }
         return bestSellerListWrapper;
     }
-    
-    public SalesOfProductListWrapper getSalesOfProductByDate(long productId, Calendar inicio, Calendar fin) {
+
+    public SalesOfProductListWrapper getSalesOfProductByDate(StatisticsProductDateWrapper statisticsProductDateWrapper) {
         SalesOfProductListWrapper salesOfProductByDate = new SalesOfProductListWrapper();
-        for (Object[] row : shoppingDao.findSalesOfProductBetweenDates(productId, inicio, fin)) {
-            SaleOfProductWrapper salesOfProduct = new SaleOfProductWrapper((Calendar)row[0],(long) row[1],row[2].toString(),
+        for (Object[] row : shoppingDao.findSalesOfProductBetweenDates(statisticsProductDateWrapper.getProductId(),
+                statisticsProductDateWrapper.getInicio(), statisticsProductDateWrapper.getFin())) {
+            SaleOfProductWrapper salesOfProduct = new SaleOfProductWrapper((Calendar) row[0], (long) row[1], row[2].toString(),
                     Integer.parseInt(row[3].toString()));
             salesOfProductByDate.add(salesOfProduct);
         }
