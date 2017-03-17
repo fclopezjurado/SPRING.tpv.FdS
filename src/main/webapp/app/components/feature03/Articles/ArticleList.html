@@ -11,16 +11,15 @@
               <th>Description</th>
               <th>Retail price</th>
               <th>Wholesale Price</th>
-              <th>Provider</th>
+              <th> Provider ID</th>
             </tr>
           </thead>
-          <tbody ng-init="vm.initList()">
-            <tr ng-repeat="article in vm.data">
+          <tbody ng-init="vm.getAll()">
+            <tr ng-repeat="article in vm.response">
               <td>{{article.reference}}</td>
               <td>{{article.description}}</td>
               <td>{{article.retailPrice}}</td>
               <td>{{article.wholesalePrice}}</td>
-              <td>{{article.provider.company}}</td>
             </tr>
           </tbody>
         </table>
