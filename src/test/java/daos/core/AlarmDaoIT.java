@@ -20,7 +20,7 @@ public class AlarmDaoIT {
 
     @Test
     public void testCreateAlarm() {
-        assertEquals(2, alarmDao.count());
+        assertEquals(3, alarmDao.count());
     }
     
     @Test 

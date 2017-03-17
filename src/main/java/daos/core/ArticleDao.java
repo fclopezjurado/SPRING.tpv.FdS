@@ -7,5 +7,7 @@ import entities.core.Article;
 public interface ArticleDao extends JpaRepository<Article, Long> {
 
     Article findByDescription(String description);
+
+    Article findById(long id);
     
 }
