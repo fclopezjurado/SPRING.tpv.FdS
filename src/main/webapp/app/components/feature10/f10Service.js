@@ -59,7 +59,7 @@ tpv.service('f10Service', ['$http', '$q', function ($http, $q) {
 	this.getAllProducts = function() {
 		let config = {
 				method: 'GET',
-				url: urlBase + "/mock_products"
+				url: urlBase + "/articles"
 		}
 
 		return this.request(config);
