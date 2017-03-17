@@ -15,8 +15,8 @@ import config.TestsControllerConfig;
 import config.TestsPersistenceConfig;
 import entities.core.Alarm;
 import entities.core.AlarmType;
-import entities.core.Article;
 import wrappers.AlarmWrapper;
+import wrappers.ArticleWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
@@ -24,7 +24,7 @@ public class AlarmControllerIT {
 
     @Autowired
     private AlarmController alarmController;
-    
+
     @Autowired
     private ArticleController articleController;
 
@@ -35,18 +35,18 @@ public class AlarmControllerIT {
 
     @Test
     public void testEditAlarm() {
-        AlarmWrapper alarmWrapper = new AlarmWrapper(1, "Alarma modificada", new ArrayList<Article>(), AlarmType.CRITICAL, 1);
+        AlarmWrapper alarmWrapper = new AlarmWrapper(1, "Alarma modificada", new ArrayList<ArticleWrapper>(), AlarmType.CRITICAL, 1);
         alarmController.editAlarm(alarmWrapper);
         Alarm alarm = alarmController.getAll().getAlarms().get(0);
         assertEquals("Alarma modificada", alarm.getName());
         assertEquals(AlarmType.CRITICAL, alarm.getType());
-        //assertEquals(0, alarm.getArticleList().size());
+        // assertEquals(0, alarm.getArticleList().size());
         assertEquals(1, alarm.getValue());
     }
-    
+
     @Test
     public void testCreateAlarm() {
-        AlarmWrapper alarmWrapper = new AlarmWrapper("nuevaAlarma", AlarmType.CRITICAL, new ArrayList<Article>(), 1);
+        AlarmWrapper alarmWrapper = new AlarmWrapper("nuevaAlarma", AlarmType.CRITICAL, new ArrayList<ArticleWrapper>(), 1);
         alarmController.addNewAlarm(alarmWrapper);
         Alarm alarm = alarmController.getAll().getAlarms().get(alarmController.getAll().getAlarms().size() - 1);
         assertEquals("nuevaAlarma", alarm.getName());
@@ -55,17 +55,17 @@ public class AlarmControllerIT {
         assertNotEquals(0, alarm.getId());
         assertEquals(1, alarm.getValue());
     }
-    
+
     @Test
     public void testDeleteAlarm() {
-        AlarmWrapper alarmWrapper = new AlarmWrapper("nuevaAlarma", AlarmType.CRITICAL, new ArrayList<Article>(), 1);
+        AlarmWrapper alarmWrapper = new AlarmWrapper("nuevaAlarma", AlarmType.CRITICAL, new ArrayList<ArticleWrapper>(), 1);
         alarmController.addNewAlarm(alarmWrapper);
         Alarm alarm = alarmController.getAll().getAlarms().get(alarmController.getAll().getAlarms().size() - 1);
         alarmController.removeAlarm(alarm.getId());
         alarm = alarmController.getAll().getAlarms().get(alarmController.getAll().getAlarms().size() - 1);
         assertNotEquals(1, alarm.getId());
     }
-    
+
     @Test
     public void testSendAlarm() {
         int stock = articleController.getAll().get(2).getStock();
@@ -73,7 +73,7 @@ public class AlarmControllerIT {
         assertEquals(true, alarmController.checkAlarmArticle(articleController.getAll().get(2)));
         articleController.updateStock(articleController.getAll().get(2), stock);
     }
-    
+
     @Test
     public void testNoSendAlarm() {
         int stock = articleController.getAll().get(2).getStock();
