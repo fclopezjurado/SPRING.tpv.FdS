@@ -24,7 +24,7 @@ public class TicketController {
         return null;
     }
 
-    public boolean ticketExists(long ticketID) {
+    public boolean ticketExistsByReference(String ticketReference) {
         // TODO Implement this method
         return true;
     }
