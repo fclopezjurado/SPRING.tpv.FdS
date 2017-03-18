@@ -17,12 +17,13 @@ import api.exceptions.MalformedHeaderException;
 import api.exceptions.NotFoundUserIdException;
 import api.exceptions.UnauthorizedException;
 import api.exceptions.NotFoundReferenceVoucherException;
+import api.exceptions.NotFoundTicketReferenceException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler({NotFoundUserIdException.class, NotFoundReferenceVoucherException.class})
+    @ExceptionHandler({NotFoundUserIdException.class, NotFoundReferenceVoucherException.class, NotFoundTicketReferenceException.class})
     @ResponseBody
     public ErrorMessage notFoundRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);
