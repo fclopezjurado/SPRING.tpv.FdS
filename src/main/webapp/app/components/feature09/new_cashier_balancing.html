@@ -1,0 +1,58 @@
+<div class="container-fluid"
+	ng-controller="CashierBalancingController as vm">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3>Nuevo cierre de caja</h3>
+		</div>
+		<form class="" ng-submit="vm.createCashierBalancing()">
+			<div class="panel-body">
+				<div class="form-container">
+					<div class="well">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">Fecha</label> <input type="date"
+										class="form-control" ng-model="vm.cashierbalancing.date"
+										>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="control-label">Importe total</label> <input
+										type="number" class="form-control"
+										ng-model="vm.cashierbalancing.totalMoney" >
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="form-group">
+						<label class="control-label">Importe inicial</label> <input
+							type="number" class="form-control"
+							ng-model="vm.cashierbalancing.initialMoney">
+					</div>
+
+					<div class="form-group">
+						<label class="control-label">Importe datáfono</label> <input
+							type="number" class="form-control"
+							ng-model="vm.cashierbalancing.cardMoney">
+					</div>
+					<div class="form-group">
+						<label class="control-label">Importe metálico</label> <input
+							type="number" class="form-control"
+							ng-model="vm.cashierbalancing.cashMoney">
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer text-center">
+				<button class="btn btn-default" type="reset">
+					<i class="glyphicon glyphicon-trash"></i> Limpiar campos
+				</button>
+				<button class="btn btn-primary" type="submit">
+					<i class="glyphicon glyphicon-check"></i> Crear
+				</button>
+			</div>
+		</form>
+
+	</div>
+</div>

@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Alarm {
@@ -20,18 +22,19 @@ public class Alarm {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Article> articleList;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private AlarmType type;
 
     @Column(nullable = false)
     private int value;
-    
+
     public Alarm() {
         this.articleList = new ArrayList<>();
-    }    
+    }
 
     public Alarm(String name, List<Article> articleList, AlarmType type, int value) {
         super();
@@ -40,7 +43,6 @@ public class Alarm {
         this.type = type;
         this.value = value;
     }
-
 
     public int getId() {
         return id;

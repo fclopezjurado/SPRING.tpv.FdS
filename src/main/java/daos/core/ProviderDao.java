@@ -6,4 +6,8 @@ import entities.core.Provider;
 
 public interface ProviderDao extends JpaRepository<Provider, Integer> {
 
+    Provider findByMobile(long mobile);
+
+    Provider findById(int id);
+
 }

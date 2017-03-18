@@ -3,17 +3,25 @@ package api;
 import org.junit.Test;
 
 import wrappers.ProviderWrapper;
+import wrappers.ProvidersWrapper;
 
 public class ProviderResourceFunctionalTesting {
 
     @Test
     public void testCreateProvider() {
-        new RestBuilder<Object>(RestService.URL).path(Uris.PROVIDERS).body(new ProviderWrapper()).post().build();
+        ProviderWrapper providerWrapper = new ProviderWrapper();
+        providerWrapper.setCompany("Compañia");
+        providerWrapper.setMobile(666666679L);
+        new RestBuilder<Object>(RestService.URL).path(Uris.PROVIDERS).body(providerWrapper).post().build();
     }
 
     @Test
-    public void testRecoverProviders() {
-        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).param("id", "143").get().build();
+    public void testGetAll() {
+        ProvidersWrapper providers = new RestBuilder<ProvidersWrapper>(RestService.URL).path(Uris.PROVIDERS).get()
+                .clazz(ProvidersWrapper.class).build();
+        for (ProviderWrapper providerWrapper : providers.getProvidersWrapper()) {
+            System.out.println(providerWrapper.toString());
+        }
     }
 
     @Test
@@ -23,7 +31,7 @@ public class ProviderResourceFunctionalTesting {
 
     @Test
     public void testDeleteProviders() {
-        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).param("id", "143").delete().build();
+        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).param("id", "1").delete().build();
     }
 
 }

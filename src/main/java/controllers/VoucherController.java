@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -46,6 +49,48 @@ public class VoucherController {
             }
         }
         return voucherConsumido;
+    }
+
+    public List<VoucherWrapper> searchVoucher(VoucherWrapper consumeVoucherWrapper) {
+
+        List<VoucherWrapper> VoucherList = new ArrayList<>();
+
+        if (consumeVoucherWrapper.getReference().equals("all")) {
+
+            List<Voucher> vouchers = voucherDao.findAll();
+
+            for (Voucher voucher : vouchers) {
+
+                VoucherWrapper voucherConsultado = new VoucherWrapper();
+
+                voucherConsultado.setReference(voucher.getReference());
+                voucherConsultado.setValue(voucher.getValue());
+                voucherConsultado.setCreated(voucher.getCreated());
+                voucherConsultado.setDateOfUse(voucher.getDateOfUse());
+                voucherConsultado.setExpiration(voucher.getDateOfExpiration());
+
+                VoucherList.add(voucherConsultado);
+
+            }
+
+        } else {
+
+            Voucher voucherEntity = voucherDao.findFirstByReference(consumeVoucherWrapper.getReference());
+            VoucherWrapper voucherConsultado = new VoucherWrapper();
+
+            if (voucherEntity != null) {
+                voucherConsultado.setReference(voucherEntity.getReference());
+                voucherConsultado.setValue(voucherEntity.getValue());
+                voucherConsultado.setCreated(voucherEntity.getCreated());
+                voucherConsultado.setDateOfUse(voucherEntity.getDateOfUse());
+                voucherConsultado.setExpiration(voucherEntity.getDateOfExpiration());
+            }
+
+            VoucherList.add(voucherConsultado);
+
+        }
+
+        return VoucherList;
     }
 
 }

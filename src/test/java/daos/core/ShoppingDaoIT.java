@@ -1,6 +1,7 @@
 package daos.core;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Calendar;
 import java.util.List;
@@ -46,6 +47,38 @@ public class ShoppingDaoIT {
         List<Object[]> bestSellers = shoppingDao.findBestSellersBetweenDates(dateInicio, dateFin);
 
         assertEquals(0, bestSellers.size());
+    }
+    
+    @Test
+    public void findSalesOfProductBetweenDates() {
+
+        Calendar dateInicio = Calendar.getInstance();
+        int diaBase = dateInicio.get(Calendar.DAY_OF_MONTH);
+        dateInicio.set(Calendar.DAY_OF_MONTH, diaBase - 2);
+        Calendar dateFin = Calendar.getInstance();
+        dateFin.set(Calendar.DAY_OF_MONTH, diaBase + 1);
+        
+        List<Object[]> productSales = shoppingDao.findSalesOfProductBetweenDates(84000001111L,dateInicio, dateFin);
+        
+        for(Object[] p: productSales){
+            System.out.println(p[0]+" ID: "+ p[1] + "Producto: "+p[2] + "Cantidad total: "+p[3]);
+        }
+        
+        assertTrue(productSales.size()>0);
+    }
+    
+    @Test
+    public void findSalesOfProductBetweenFutureDates() {
+
+        Calendar dateInicio = Calendar.getInstance();
+        int diaBase = dateInicio.get(Calendar.DAY_OF_MONTH);
+        dateInicio.set(Calendar.DAY_OF_MONTH, diaBase + 1);
+        Calendar dateFin = Calendar.getInstance();
+        dateFin.set(Calendar.DAY_OF_MONTH, diaBase + 2);
+
+        List<Object[]> productSales = shoppingDao.findSalesOfProductBetweenDates(84000001111L,dateInicio, dateFin);
+        
+        assertEquals(0, productSales.size());
     }
 
 }
