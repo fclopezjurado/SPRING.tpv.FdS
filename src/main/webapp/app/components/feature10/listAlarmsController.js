@@ -48,7 +48,7 @@ tpv.controller('ListAlarmsController', [
 						numSelectedProducts = alarm.articleList.length;
 						productList = alarm.articleList;
 					}
-					$.each(result.products, function(index, value) {
+					$.each(result, function(index, value) {
 						for (var i = 0; i < numSelectedProducts; i++) {
 							if (productList[i]) {
 								if (productList[i].id === value.id) {
