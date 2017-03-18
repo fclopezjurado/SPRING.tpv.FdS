@@ -12,6 +12,8 @@ public interface TicketDao extends JpaRepository<Ticket, Long> {
 
     Ticket findByReference(String reference);
 
+    Ticket findFirstByOrderByIdDesc();
+
     @Query("select count(t) from Ticket t where t.created BETWEEN ?1 AND ?2")
     public int countTicketsBetweenDates(Calendar inicio, Calendar fin);
 
