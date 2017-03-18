@@ -20,8 +20,13 @@ public class TicketController {
 
     public TicketWrapper updateTicket(TicketWrapper ticketWrapper) {
         // TODO Implement this method
-        // TODO Feature 11: Check status after each update 
+        // TODO Feature 11: Check status after each update
         return null;
+    }
+
+    public boolean ticketExists(long ticketID) {
+        // TODO Implement this method
+        return true;
     }
 
 }
