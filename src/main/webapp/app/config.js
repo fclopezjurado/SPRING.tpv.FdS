@@ -109,6 +109,21 @@ tpv.config(function ($routeProvider) {
             controller: "ProductsServiceController",
             controllerAs: "vm"
         })
+        .when("/feature06/createTicket", {
+	        templateUrl: "app/components/feature06/createTicket.html",
+	        controller: "CreateTicketController",
+	        controllerAs: "vm"
+        })
+        .when("/feature06/searchTicket", {
+	        templateUrl: "app/components/feature06/searchTicket.html",
+	        controller: "SearchTicketController",
+	        controllerAs: "vm"
+        })
+        .when("/feature06/editTicket", {
+	        templateUrl: "app/components/feature06/editTicket.html",
+	        controller: "EditTicketController",
+	        controllerAs: "vm"
+        })
         .otherwise({
             redirectTo: '/'
         });
