@@ -2,91 +2,87 @@ package entities.core;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Family implements ComponentProduct{
+public class Family extends ComponentProduct{
     
-    @Id
-    @GeneratedValue
-    public int id;
+    private String name;
     
-    @Column(unique = true, nullable = false, length = 32)
-    public String name;
+    private String familyDescription;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    public List<ComponentProduct> products;
+    private List<ComponentProduct> componentFamilies;
     
-    public String desc;
-    
-    public Family(){      
+    public Family() {
     }
-    
-    public Family(String name, String desc, List<ComponentProduct> products) {
+
+    public Family(long id, String name, String familyDescription, List<ComponentProduct> componentFamilies) {
+        super(id);
         this.name = name;
-        this.desc = desc;
-        this.products = products;
+        this.familyDescription = familyDescription;
+        this.componentFamilies = componentFamilies;
     }
     
-    public String getDesc() {
-        return desc;
+    public String getFamilyDescription() {
+        return familyDescription;
     }
     
-    public int getId() {
-        return id;
+    public void setFamilyDescription(String familyDescription) {
+        this.familyDescription = familyDescription;
     }
+    
+    @Override
+    public void add(ComponentProduct componentProduct){
+        if (componentProduct != null && this.isFamily()) {
+            this.componentFamilies.add(componentProduct);
+        }
+    }
+    
+    @Override
+    public void remove(ComponentProduct componentProduct){
+        if (componentProduct != null && this.isFamily()) {
+            this.componentFamilies.remove(componentProduct);
+        }
+    }
+    
+    @Override
+    public int numberOfProducts(){
+        int n = 0;
+        for (ComponentProduct product : componentFamilies){
+            n += product.numberOfProducts();
+        }
+        return n;
+    }
+    
+    @Override
+    public boolean isFamily() {
+        return true;
+    }
+    
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public void setProducts(List<ComponentProduct> componentFamilies) {
+        this.componentFamilies = componentFamilies;
+    }
+    
     
     public String getName() {
         return name;
     }
     
     public List<ComponentProduct> getProducts() {
-        return products;
+        return componentFamilies;
     }
-    
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-    
-    public void setId(int id) {
-        this.id = id;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public void setProducts(List<ComponentProduct> products) {
-        this.products = products;
-    }
-    
-    @Override
-    public int hashCode() {
-        return id;
-    }
-   
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        return id == ((Family) obj).id;
-    }
-    
+     
     @Override
     public String toString() {
-        return "\nFamily [id=" + id + ", name=" + name + ", description=" + desc + ",\n   productsList=" + products + "]";
+        return "\nFamily [" + super.toString() + "name=" + name + ", description=" + ",\n   productsList=" +"]";
     }
 
 }
