@@ -1,6 +1,8 @@
 package wrappers;
  
  import java.math.BigDecimal;
+
+import entities.core.Embroidery;
  
  public class EmbroideryWrapper extends ProductWrapper {
  
@@ -13,14 +15,23 @@ package wrappers;
      public EmbroideryWrapper() {
  
      }
+     
+     
+    public EmbroideryWrapper(Embroidery embroidery) {
+
+        super(embroidery.getId(), embroidery.getReference(), embroidery.getDescription(), embroidery.getRetailPrice());
+        this.stitches = embroidery.getStitches();
+        this.colors = embroidery.getColors();
+        this.squareMillimeters = embroidery.getSquareMillimeters();
+    }
  
-     public EmbroideryWrapper(long id, String reference, String description, BigDecimal retailPrice, int stitches, int colors,
-             int squareMillimeters) {
-         super(id, reference, description, retailPrice);
-         this.stitches = stitches;
-         this.colors = colors;
-         this.squareMillimeters = squareMillimeters;
-     }
+    public EmbroideryWrapper(long id, String reference, String description, BigDecimal retailPrice, int stitches, int colors,
+            int squareMillimeters) {
+        super(id, reference, description, retailPrice);
+        this.stitches = stitches;
+        this.colors = colors;
+        this.squareMillimeters = squareMillimeters;
+    }
  
      public int getStitches() {
          return stitches;
@@ -45,6 +56,8 @@ package wrappers;
      public void setSquareMillimeters(int squareMillimeters) {
          this.squareMillimeters = squareMillimeters;
      }
- 
+
+
+
 }
 
