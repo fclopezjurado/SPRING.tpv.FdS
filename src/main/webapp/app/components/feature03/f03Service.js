@@ -29,5 +29,14 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
 	  return this.request(config); 
    }
    
+   this.getAllTextile = function() {
+	   let config = {
+ 	     method: 'GET',
+ 	     url: urlBase + "/textilePrinting",
+	  };
+	   
+  return this.request(config); 
+   }
+   
    
 }]);
