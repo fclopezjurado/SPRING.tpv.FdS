@@ -44,4 +44,6 @@ public class Uris {
 
     public static final String PRODUCT_SALES = "/ProductSales";
 
+    public static final String INVOICES = "/invoices";
+
 }
