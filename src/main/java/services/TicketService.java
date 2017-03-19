@@ -6,12 +6,12 @@ import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import daos.core.TicketDao;
 import entities.core.Ticket;
 
-@Service
 public class TicketService {
 
     private int PADDING = 10000;
