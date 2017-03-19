@@ -20,6 +20,15 @@ angular.module("tpv").controller("SearchProducts",
 	 	vm.articles	= "";
 		
 		
+	 	vm.searchProductos = {
+	 			reference: "",
+	 			description: "",
+	 			minRetailPrice: "",
+	 			maxRetailPrice: ""
+	 	}
+	 	
+	 	
+	 	
 		vm.onClickAdvancedSearch = () => {
 	 		vm.searchVisibility = !vm.searchVisibility;
 	 	}
@@ -51,6 +60,7 @@ angular.module("tpv").controller("SearchProducts",
         
         vm.getProductos = function () {
         	vm.mobile= "prueba" ;
+        	var prueba=vm.searchProductos ;
         	if (vm.showInputForArticle ==true){
            	 vm.requestToGetProducts(busquedaDeArticulos, vm.mobile);
            }
@@ -61,7 +71,9 @@ angular.module("tpv").controller("SearchProducts",
            	 vm.requestToGetProducts(busquedaDeTextilePrinting, vm.mobile);
            }
         	else {
-              	 vm.requestToGetProducts(busquedaDeProductos, vm.mobile);
+        		vm.validationProductoNumeric();
+              	 vm.requestToGetProducts(busquedaDeProductos,vm.searchProductos);
+              	
               }
         };
         
@@ -72,6 +84,18 @@ angular.module("tpv").controller("SearchProducts",
             vm.articles					= serverResponseBody.data;
             vm.showTableProducts		= true;
             
+        }
+        
+        vm.validationProductoNumeric = function (){
+        	vm.searchProductos.minRetailPrice=vm.ValidationNumeric(vm.searchProductos.minRetailPrice);
+        	vm.searchProductos.maxRetailPrice=vm.ValidationNumeric(vm.searchProductos.maxRetailPrice);
+        		
+        }
+        vm.ValidationNumeric = function (parametro){
+        	if ((parametro == undefined)||(parametro==null)||(parametro==""))
+        		return 0;
+        	else
+        		return parametro;
         }
 		
     });
