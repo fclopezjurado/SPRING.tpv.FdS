@@ -11,27 +11,19 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import config.PersistenceConfig;
-import config.TestsPersistenceConfig;
 import entities.core.Alarm;
 import entities.core.AlarmType;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
 import wrappers.ArticleWrapper;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
 public class AlarmResourceFunctionalTesting {
 
     public static final String URL = "http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api" + Uris.VERSION;
 
     @Before
     public void seedDataBase() {
-        new RestService().deleteAll();
         new RestService().seedDatabase();
     }
 

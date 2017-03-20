@@ -40,8 +40,14 @@ public class Uris {
 
     public static final String TOTAL_SALES = "/totalSales";
 
-    public static final String BEST_SELLERS = "/BestSellesrs";
+    public static final String BEST_SELLERS = "/BestSellers";
 
     public static final String PRODUCT_SALES = "/ProductSales";
+
+    public static final String INVOICES = "/invoices";
+    
+    public static final String TEXTILE_PRINTING = "/textilePrinting";
+    
+    public static final String EMBROIDERY = "/embroidery";
 
 }
