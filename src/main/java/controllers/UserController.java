@@ -46,4 +46,9 @@ public class UserController {
 
         return false;
     }
+
+    public UserWrapper getByMobile(long mobile) {
+        User user = this.userDao.findByMobile(mobile);
+        return new UserWrapper(user.getMobile(), user.getUsername(), user.getPassword());
+    }
 }
