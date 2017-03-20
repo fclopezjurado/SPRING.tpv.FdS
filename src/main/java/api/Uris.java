@@ -50,6 +50,8 @@ public class Uris {
     
     public static final String EMBROIDERY = "/embroidery";
     
+    public static final String CASHIER_BALANCE = "/balances";
+    
     public static final String FILTER ="/byFilter";
     
     public static final String PRODUCTS = "/products";
