@@ -27,6 +27,15 @@ angular.module("tpv").controller("SearchProducts",
 	 			maxRetailPrice: ""
 	 	}
 	 	
+	 	vm.searchArticles = {
+	 			reference: "",
+	 			description: "",
+	 			minRetailPrice: "",
+	 			maxRetailPrice: "",
+	 			minWholesalePrice:"",
+	 			maxWholesalePrice:"",
+	 			onStock: false  
+	 	}
 	 	
 	 	
 		vm.onClickAdvancedSearch = () => {
@@ -62,17 +71,20 @@ angular.module("tpv").controller("SearchProducts",
         	vm.mobile= "prueba" ;
         	var prueba=vm.searchProductos ;
         	if (vm.showInputForArticle ==true){
-           	 vm.requestToGetProducts(busquedaDeArticulos, vm.mobile);
+	        	 	vm.validationArticleNumeric();
+	        	 	vm.validationProductoNumeric();
+	        	 	vm.passArgumentsFromProducts(vm.searchArticles);
+	           	 	vm.requestToGetProducts(busquedaDeArticulos, vm.searchArticles);
            }
         	else if (vm.showInputForEmbroidery  ==true){
-            	 vm.requestToGetProducts(busquedaDeEmbroidery, vm.mobile);
+            	 	vm.requestToGetProducts(busquedaDeEmbroidery, vm.mobile);
             }
         	else if (vm.showInputForTextilePrinting ==true){
-           	 vm.requestToGetProducts(busquedaDeTextilePrinting, vm.mobile);
+           	 		vm.requestToGetProducts(busquedaDeTextilePrinting, vm.mobile);
            }
         	else {
-        		vm.validationProductoNumeric();
-              	 vm.requestToGetProducts(busquedaDeProductos,vm.searchProductos);
+        			vm.validationProductoNumeric();
+        			vm.requestToGetProducts(busquedaDeProductos,vm.searchProductos);
               	
               }
         };
@@ -86,11 +98,24 @@ angular.module("tpv").controller("SearchProducts",
             
         }
         
+
+        vm.passArgumentsFromProducts= function(model){
+	 		model.reference=vm.searchProductos.reference;
+        	model.description=vm.searchProductos.description;
+        	model.minRetailPrice=vm.searchProductos.minRetailPrice;
+        	model.maxRetailPrice=vm.searchProductos.maxRetailPrice;
+        }
+        
         vm.validationProductoNumeric = function (){
         	vm.searchProductos.minRetailPrice=vm.ValidationNumeric(vm.searchProductos.minRetailPrice);
         	vm.searchProductos.maxRetailPrice=vm.ValidationNumeric(vm.searchProductos.maxRetailPrice);
         		
         }
+        vm.validationArticleNumeric= function (){
+        	vm.searchArticles.minWholesalePrice=vm.ValidationNumeric(vm.searchArticles.minWholesalePrice);
+        	vm.searchArticles.maxWholesalePrice=vm.ValidationNumeric(vm.searchArticles.maxWholesalePrice);
+        }
+        
         vm.ValidationNumeric = function (parametro){
         	if ((parametro == undefined)||(parametro==null)||(parametro==""))
         		return 0;
