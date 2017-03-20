@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -8,6 +10,7 @@ import daos.core.TicketDao;
 import entities.core.Invoice;
 import entities.core.Ticket;
 import wrappers.InvoiceWrapper;
+import wrappers.InvoicesWrapper;
 
 @Controller
 public class InvoiceController {
@@ -48,6 +51,16 @@ public class InvoiceController {
     public boolean invoiceExists(int id) {
         Invoice invoice = invoiceDao.findOne(id);
         return invoice.getId() == id;
+    }
+
+    public InvoicesWrapper getInvoicesByUserMobile(long userMobile) {
+        List<Invoice> invoices = invoiceDao.findByUserMobile(userMobile);
+        InvoicesWrapper invoicesWrapper = new InvoicesWrapper();
+
+        for (Invoice invoice : invoices)
+            invoicesWrapper.addInvoiceWrapper(new InvoiceWrapper(invoice.getId(), invoice.getTicket().getId()));
+
+        return invoicesWrapper;
     }
 
 }
