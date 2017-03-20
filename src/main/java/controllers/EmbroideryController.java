@@ -40,4 +40,15 @@ public class EmbroideryController {
         embroideryDao.delete(embroidery);
 }
 
+    public void addEmbroidery(EmbroideryWrapper embroideryWrapper) {
+        Embroidery embroidery = embroideryDao.findOne(embroideryWrapper.getId());
+        if (embroidery == null) {
+            Embroidery newEmbroidery = new Embroidery(embroideryWrapper.getId(), embroideryWrapper.getReference(),
+                    embroideryWrapper.getRetailPrice(), embroideryWrapper.getDescription(), embroideryWrapper.getStitches(),
+                    embroideryWrapper.getColors(), embroideryWrapper.getSquareMillimeters());
+            this.embroideryDao.save(newEmbroidery);
+        }
+
+    }
+
 }

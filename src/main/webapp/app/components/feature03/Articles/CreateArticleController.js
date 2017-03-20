@@ -11,7 +11,7 @@ tpv.controller('CreateArticleController', [ '$timeout', 'f03Service',
 			function createArticle() {
 				const
 				delay = 10000;
-				f03Service.createArticle(vm.article).then(function(result) {
+				f03Service.addArticle(vm.article).then(function(result) {
 					vm.completed = true;
 					vm.response = result;
 					
