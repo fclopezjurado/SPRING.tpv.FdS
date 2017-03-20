@@ -36,6 +36,9 @@ public class TextilePrintingController {
         return textilePrintingWrapperList;
     }
 
-
+    public void removeTextilePrinting(long id) {
+        TextilePrinting textilePrinting = textilePrintingsDao.findOne(id);
+        textilePrintingsDao.delete(textilePrinting);
+}
 
 }
