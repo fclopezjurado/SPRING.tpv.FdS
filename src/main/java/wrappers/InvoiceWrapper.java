@@ -4,14 +4,14 @@ public class InvoiceWrapper {
 
     private int id;
 
-    private long ticket_id;
+    private String ticketReference;
 
     public InvoiceWrapper() {
     }
 
-    public InvoiceWrapper(int id, long ticket_id) {
+    public InvoiceWrapper(int id, String ticketReference) {
         this.id = id;
-        this.ticket_id = ticket_id;
+        this.ticketReference = ticketReference;
     }
 
     public int getId() {
@@ -22,17 +22,17 @@ public class InvoiceWrapper {
         this.id = id;
     }
 
-    public long getTicket_id() {
-        return ticket_id;
+    public String getTicketReference() {
+        return this.ticketReference;
     }
 
-    public void setTicket_id(long ticket_id) {
-        this.ticket_id = ticket_id;
+    public void setTicketReference(String ticketReference) {
+        this.ticketReference = ticketReference;
     }
 
     @Override
     public String toString() {
-        return "InvoiceWrapper [id=" + id + ", ticket_id=" + ticket_id + "]";
+        return "InvoiceWrapper [id=" + this.id + ", ticketReference=" + this.ticketReference + "]";
     }
 
 }
