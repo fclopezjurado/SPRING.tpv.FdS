@@ -1,5 +1,9 @@
 package controllers;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -8,10 +12,14 @@ import daos.users.UserDao;
 import entities.users.Authorization;
 import entities.users.Role;
 import entities.users.User;
+import wrappers.UserForEditListWrapper;
+import wrappers.UserForEditWrapper;
 import wrappers.UserWrapper;
 
 @Controller
 public class UserController {
+
+    private static final String DATE_FORMAT = "DD-MMM-yyyy";
 
     private UserDao userDao;
 
@@ -47,9 +55,16 @@ public class UserController {
         return false;
     }
 
-    public UserWrapper getByTicketReference(String ticketReference) {
-        User user = this.userDao.findByTicketReference(ticketReference);
-        return new UserWrapper(user.getMobile(), user.getUsername(), user.getPassword());
+    public UserForEditListWrapper getByTicketReference(String ticketReference) {
+        List<User> users = this.userDao.findByTicketReference(ticketReference);
+        List<UserForEditWrapper> usersWrapper = new ArrayList<UserForEditWrapper>();
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+
+        for (User user : users)
+            usersWrapper.add(new UserForEditWrapper(user.getMobile(), user.getUsername(), user.isActive(), user.getAddress(), user.getDni(),
+                    user.getEmail(), formatter.format(user.getRegistrationDate())));
+
+        return new UserForEditListWrapper(usersWrapper);
     }
 
 }
