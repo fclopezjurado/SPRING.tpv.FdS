@@ -59,12 +59,12 @@
 				<div class="col-lg-12">
 					<div class="form-group col-lg-3">
 						<label for="minWholesalePriceInput">Min wholesale price</label> <input
-							ng-model="vm.minWholesalePrice" type="number" min="0" step="0.01"
+							ng-model="vm.searchArticles.minWholesalePrice" type="number" min="0" step="0.01"
 							id="minWholesalePriceInput" class="form-control">
 					</div>
 					<div class="form-group col-lg-3">
 						<label for="maxWholesalePriceInput">Max wholesale price</label> <input
-							ng-model="vm.maxWholesalePrice" type="number" min="0" step="0.01"
+							ng-model="vm.searchArticles.maxWholesalePrice" type="number" min="0" step="0.01"
 							id="maxWholesalePriceInput" class="form-control">
 					</div>
 
@@ -72,7 +72,7 @@
 					<div class="form-group col-lg-3">
 						<div class="checkbox">
 							<br> <label> <input type="checkbox"
-								ng-model="vm.showOnlyOnStock">On stock
+								ng-model="vm.searchArticles.onStock">On stock
 							</label>
 						</div>
 					</div>
