@@ -25,7 +25,7 @@ public class StatisticsResource {
         return statisticsController.countTicketsBetweenDates(statisticsDateWrapper);
     }
     
-    @RequestMapping(value = Uris.BEST_SELLERS,method = RequestMethod.POST)
+   /* @RequestMapping(value = Uris.BEST_SELLERS,method = RequestMethod.POST)
     public BestSellerProductsListWrapper findBestSellersBetweenDates(@RequestBody StatisticsDateWrapper statisticsDateWrapper) {
         return statisticsController.getBestSellerProductsByDate(statisticsDateWrapper);
     }
@@ -33,6 +33,6 @@ public class StatisticsResource {
     @RequestMapping(value = Uris.PRODUCT_SALES,method = RequestMethod.POST)
     public SalesOfProductListWrapper findSalesOfProductBetweenDates(@RequestBody StatisticsProductDateWrapper statisticsProductDateWrapper) {
         return statisticsController.getSalesOfProductByDate(statisticsProductDateWrapper);
-    }
+    }*/
 
 }

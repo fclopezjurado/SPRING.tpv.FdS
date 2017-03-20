@@ -1,5 +1,8 @@
 package controllers;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Controller;
 
 import daos.core.ShoppingDao;
 import daos.core.TicketDao;
+import services.StatisticsDateParserService;
 import wrappers.BestSellerProductWrapper;
 import wrappers.BestSellerProductsListWrapper;
 import wrappers.SaleOfProductWrapper;
@@ -32,10 +36,16 @@ public class StatisticsController {
     }
 
     public int countTicketsBetweenDates(StatisticsDateWrapper statisticsDateWrapper) {
-        return ticketDao.countTicketsBetweenDates(statisticsDateWrapper.getInicio(), statisticsDateWrapper.getFin());
+        
+        StatisticsDateParserService statisticsDateParserService = new StatisticsDateParserService();
+        
+        Calendar inicio = statisticsDateParserService.getCalendarDateFromString(statisticsDateWrapper.getInicio());
+        Calendar fin =  statisticsDateParserService.getCalendarDateFromString(statisticsDateWrapper.getFin());
+                
+        return ticketDao.countTicketsBetweenDates(inicio, fin);
     }
 
-    public BestSellerProductsListWrapper getBestSellerProductsByDate(StatisticsDateWrapper statisticsDateWrapper) {
+    /*public BestSellerProductsListWrapper getBestSellerProductsByDate(StatisticsDateWrapper statisticsDateWrapper) {
         BestSellerProductsListWrapper bestSellerListWrapper = new BestSellerProductsListWrapper();
         for (Object[] row : shoppingDao.findBestSellersBetweenDates(statisticsDateWrapper.getInicio(), statisticsDateWrapper.getFin())) {
             BestSellerProductWrapper bestSellerProduct = new BestSellerProductWrapper((long) row[0], row[1].toString(),
@@ -54,6 +64,6 @@ public class StatisticsController {
             salesOfProductByDate.add(salesOfProduct);
         }
         return salesOfProductByDate;
-    }
+    }*/
 
 }
