@@ -1,4 +1,4 @@
-<section>
+<section ng-init="vm.getAll()">
     <div class="page-header">
     </div>
     <br/>
@@ -21,7 +21,7 @@
               <td>{{textilePrinting.retailPrice}}</td>
               <td>{{textilePrinting.type}}</td>
               <td style="vertical-align: middle;">
-              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeTextilePrinting(textilePrinting.id); vm.getAll() ">
+              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeTextilePrinting(textilePrinting.id)">
               </td>
             </tr>
           </tbody>

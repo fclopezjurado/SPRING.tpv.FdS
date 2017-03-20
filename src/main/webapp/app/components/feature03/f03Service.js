@@ -47,6 +47,7 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
   return this.request(config); 
    }
    
+   //Falta corregir
 	this.removeArticle = function(articleId) {
 		let config = {
 				method: 'DELETE',
@@ -70,5 +71,40 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
 		};
 		return this.request(config);
 	}
+	
+ //* Create
+	this.addArticle = function(article) {
+		let config = {
+				method: 'POST',
+				url: urlBase + "/articles"
+		};
+		return this.request(config);
+	}
+	
+	this.addEmbroidery = function(embroidery) {
+		let config = {
+				method: 'POST',
+				url: urlBase + "/embroidery",
+				 data:{
+		 	    	  'id': embroidery.id,
+		 	    	  'reference':embroidery.reference,
+		 	    	  'description': embroidery.description,
+		 	    	  'retailPrice':embroidery.retailPrice,
+		 	    	  'stitches':embroidery.stitches,
+		 	    	  'colors':embroidery.colors,
+		 	    	  'squareMillimeters':embroidery.millimiters
+		 	    	  }
+		};
+		return this.request(config);
+	}
+	
+	this.addTextilePrinting = function(textilePrinting) {
+		let config = {
+				method: 'POST',
+				url: urlBase + "/textilePrinting"
+		};
+		return this.request(config);
+	}
+   
    
 }]);

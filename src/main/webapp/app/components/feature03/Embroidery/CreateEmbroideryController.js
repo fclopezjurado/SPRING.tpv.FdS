@@ -6,12 +6,12 @@ tpv.controller('CreateEmbroideryController', [ '$timeout', 'f03Service',
 			vm.completed = false;
 			vm.error = false;
 			vm.response;
-			vm.createEmbroidery=createEmbroidery;
+			vm.addEmbroidery=addEmbroidery;
 
-			function createEmbroidery() {
+			function addEmbroidery() {
 				const
 				delay = 10000;
-				f03Service.createEmbroidery(vm.embroidery).then(function(result) {
+				f03Service.addEmbroidery(vm.embroidery).then(function(result) {
 					vm.completed = true;
 					vm.response = result;
 					

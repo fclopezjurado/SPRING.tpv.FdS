@@ -1,4 +1,4 @@
-<section>
+<section ng-init="vm.getAll()">
     <div class="page-header">
     </div>
     <br/>
@@ -25,7 +25,7 @@
               <td>{{embroidery.colors}}</td>
               <td>{{embroidery.squareMillimeters}}</td>
                <td style="vertical-align: middle;">
-              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeEmbroidery(embroidery.id) ; vm.getAll()">
+              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeEmbroidery(embroidery.id)">
               </td>
             </tr>
           </tbody>
