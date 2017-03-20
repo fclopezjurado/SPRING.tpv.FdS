@@ -24,6 +24,9 @@
               <td>{{embroidery.stitches}}</td>
               <td>{{embroidery.colors}}</td>
               <td>{{embroidery.squareMillimeters}}</td>
+               <td style="vertical-align: middle;">
+              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeEmbroidery(embroidery.id) ; vm.getAll()">
+              </td>
             </tr>
           </tbody>
         </table>
