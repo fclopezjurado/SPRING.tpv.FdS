@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 
 import daos.users.AuthorizationDao;
 import daos.users.UserDao;
+import entities.core.Ticket;
 import entities.users.Authorization;
 import entities.users.Role;
 import entities.users.User;
@@ -36,5 +37,14 @@ public class UserController {
         } else {
             return false;
         }
+    }
+
+    public boolean userExistsByMobile(long mobile) {
+        User user = this.userDao.findByMobile(mobile);
+
+        if (user != null)
+            return user.getMobile() == mobile;
+
+        return false;
     }
 }
