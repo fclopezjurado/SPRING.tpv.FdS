@@ -49,5 +49,7 @@ public class Uris {
     public static final String TEXTILE_PRINTING = "/textilePrinting";
     
     public static final String EMBROIDERY = "/embroidery";
+    
+    public static final String CASHIER_BALANCE = "/balances";
 
 }
