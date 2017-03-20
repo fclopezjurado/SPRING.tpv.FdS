@@ -3,6 +3,7 @@ package api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,5 +34,14 @@ public class ArticleResource {
     public List<ArticleWrapper> searchArticle(@RequestParam("provider") int provider, @RequestParam("type") AlarmType type) {
         return articleController.search(provider, type);
     }
+    
+    
+    @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
+    public void removeArticle(@PathVariable(value = "id")  long id) {
+      System.out.println(id);
+        this.articleController.removeArticle(id);
+    }
+
+
 
 }

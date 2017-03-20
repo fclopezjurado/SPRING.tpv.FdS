@@ -2,6 +2,7 @@ package entities.core;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,7 +13,7 @@ public class Article extends Product {
 
     private BigDecimal wholesalePrice;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn
     private Provider provider;
 
