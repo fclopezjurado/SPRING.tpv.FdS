@@ -17,7 +17,7 @@ import wrappers.InvoicesWrapper;
 import wrappers.TicketWrapper;
 
 @RestController
-@RequestMapping(Uris.VERSION + Uris.INVOICES)
+@RequestMapping(Uris.VERSION)
 public class InvoiceResource {
 
     private InvoiceController invoiceController;
@@ -41,7 +41,7 @@ public class InvoiceResource {
         this.userController = userController;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = Uris.INVOICES, method = RequestMethod.POST)
     public InvoiceWrapper createInvoice(@RequestBody TicketWrapper ticketWrapper) throws NotFoundTicketReferenceException {
         if (!this.ticketController.ticketExistsByReference(ticketWrapper.getReference()))
             throw new NotFoundTicketReferenceException();
@@ -49,8 +49,8 @@ public class InvoiceResource {
         return this.invoiceController.createInvoice(ticketWrapper.getReference());
     }
 
-    @RequestMapping(value = Uris.USER_MOBILE, method = RequestMethod.GET)
-    public InvoicesWrapper getInvoicesByUserMobile(@PathVariable long userMobile) throws NotFoundUserMobileException {
+    @RequestMapping(value = Uris.INVOICES + Uris.USER_MOBILE, method = RequestMethod.GET)
+    public InvoicesWrapper getInvoicesByUserMobile(@PathVariable(value = "mobile") long userMobile) throws NotFoundUserMobileException {
         if (!this.userController.userExistsByMobile(userMobile))
             throw new NotFoundUserMobileException();
 
