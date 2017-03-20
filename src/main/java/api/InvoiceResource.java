@@ -49,8 +49,8 @@ public class InvoiceResource {
         return this.invoiceController.createInvoice(ticketWrapper.getReference());
     }
 
-    @RequestMapping(value = Uris.ID, method = RequestMethod.GET)
-    public InvoicesWrapper getInvoicesByUserMobile(@PathVariable(value = "id") long userMobile) throws NotFoundUserMobileException {
+    @RequestMapping(value = Uris.USER_MOBILE, method = RequestMethod.GET)
+    public InvoicesWrapper getInvoicesByUserMobile(@PathVariable long userMobile) throws NotFoundUserMobileException {
         if (!this.userController.userExistsByMobile(userMobile))
             throw new NotFoundUserMobileException();
 
