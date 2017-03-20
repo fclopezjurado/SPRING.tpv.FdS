@@ -17,14 +17,14 @@ import wrappers.ProductsOutFilterWrapper;
 public class ProductResourceFunctionalTesting {
 
     @Test
-    public void testGetProductsMock() {
+    public void testGetProductsByFilterMock() {
         ProductFilterWrapper productsFilterWrapper = new ProductFilterWrapper();
         productsFilterWrapper.setDescription("descripcion");
         productsFilterWrapper.setReference("reference");
         productsFilterWrapper.setMinRetailPrice(new BigDecimal("0"));
         productsFilterWrapper.setMaxRetailPrice(new BigDecimal("0"));
         List<ProductsOutFilterWrapper> productosSalidaMock=Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
-                (RestService.URL).path("/products").clazz(ProductsOutFilterWrapper[].class).body(productsFilterWrapper).post().build());
+                (RestService.URL).path(Uris.PRODUCTS).clazz(ProductsOutFilterWrapper[].class).body(productsFilterWrapper).post().build());
         assertEquals(1, productosSalidaMock.size());
     }
 }
