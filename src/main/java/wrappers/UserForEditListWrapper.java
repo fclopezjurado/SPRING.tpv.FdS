@@ -21,14 +21,6 @@ public class UserForEditListWrapper {
         this.userList = userList;
     }
 
-    public boolean findByMobile(long mobile) {
-        for (UserForEditWrapper user : this.userList)
-            if (user.getMobile() == mobile)
-                return true;
-
-        return false;
-    }
-
     @Override
     public String toString() {
         return "UserForEditListWrapper [userList=" + userList + "]";
