@@ -121,6 +121,11 @@ tpv.config(function ($routeProvider) {
             controller: "bestSellersController",
             controllerAs: "vm"
         })
+        .when("/feature14/bestSellers", {
+            templateUrl: "app/components/feature14/productSalesDevelopment.html",
+            controller: "productSalesDevelopmentController",
+            controllerAs: "vm"
+        })
         .otherwise({
             redirectTo: '/'
         });

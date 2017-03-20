@@ -42,7 +42,6 @@ public class StatisticsResourceFunctionalTesting {
     
     @Test
     public void countTicketsBetweenDates() {
-        StatisticsDateWrapper statisticsDateWrapper = new StatisticsDateWrapper("19/03/2017", "19/03/2017");
         int result = new RestBuilder<Integer>(URL).path(Uris.TOTAL_SALES).body(statisticsDateWrapper).clazz(Integer.class).post().build();
         assertEquals(3, result);
     }
@@ -61,6 +60,6 @@ public class StatisticsResourceFunctionalTesting {
     
     @After
     public void after() {
-        //new RestService().deleteAll();
+        new RestService().deleteAll();
     }
 }

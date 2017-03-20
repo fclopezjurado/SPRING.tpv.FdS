@@ -39,7 +39,7 @@ public class StatisticsControllerIT {
 
     @Before
     public void before() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy H:m:s");
         Date inicio = new Date();
         Calendar calendar = Calendar.getInstance(); 
         calendar.setTime(inicio); 
