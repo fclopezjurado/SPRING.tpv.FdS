@@ -4,10 +4,10 @@ import java.util.List;
 
 public class UserForEditListWrapper {
     private List<UserForEditWrapper> userList;
-    
+
     public UserForEditListWrapper() {
     }
-    
+
     public UserForEditListWrapper(List<UserForEditWrapper> userList) {
         super();
         this.userList = userList;
@@ -21,10 +21,17 @@ public class UserForEditListWrapper {
         this.userList = userList;
     }
 
+    public boolean findByMobile(long mobile) {
+        for (UserForEditWrapper user : this.userList)
+            if (user.getMobile() == mobile)
+                return true;
+
+        return false;
+    }
+
     @Override
     public String toString() {
         return "UserForEditListWrapper [userList=" + userList + "]";
     }
-    
-    
+
 }
