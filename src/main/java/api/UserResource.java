@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import api.exceptions.AlreadyExistUserFieldException;
 import api.exceptions.InvalidUserFieldException;
+import api.exceptions.NotFoundTicketReferenceException;
 import api.exceptions.NotFoundUserIdException;
+import controllers.TicketController;
 import controllers.UserController;
 import entities.users.Role;
 import wrappers.UserForEditListWrapper;
@@ -24,9 +27,16 @@ public class UserResource {
 
     private UserController userController;
 
+    private TicketController ticketController;
+
     @Autowired
     public void setUserController(UserController userController) {
         this.userController = userController;
+    }
+
+    @Autowired
+    public void setTicketController(TicketController ticketController) {
+        this.ticketController = ticketController;
     }
 
     @RequestMapping(value = Uris.USERS, method = RequestMethod.POST)
@@ -69,6 +79,14 @@ public class UserResource {
         if (field == null || field.isEmpty()) {
             throw new InvalidUserFieldException(msg);
         }
+    }
+
+    @RequestMapping(value = Uris.USERS + Uris.REFERENCE, method = RequestMethod.GET)
+    public UserForEditListWrapper getByTicketReference(@PathVariable String ticketReference) throws NotFoundTicketReferenceException {
+        if (!this.ticketController.ticketExistsByReference(ticketReference))
+            throw new NotFoundTicketReferenceException();
+
+        return this.userController.getByTicketReference(ticketReference);
     }
 
 }
