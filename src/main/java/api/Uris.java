@@ -24,6 +24,8 @@ public class Uris {
 
     public static final String ALARMS_TYPE_ID = "/{type}";
 
+    public static final String USER_MOBILE = "/{mobile}";
+
     public static final String SEEDS = "/seeds";
 
     public static final String PROVIDERS = "/providers";
@@ -45,9 +47,9 @@ public class Uris {
     public static final String PRODUCT_SALES = "/ProductSales";
 
     public static final String INVOICES = "/invoices";
-    
+
     public static final String TEXTILE_PRINTING = "/textilePrinting";
-    
+
     public static final String EMBROIDERY = "/embroidery";
 
 }
