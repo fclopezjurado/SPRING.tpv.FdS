@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 
 import daos.users.AuthorizationDao;
 import daos.users.UserDao;
-import entities.core.Ticket;
 import entities.users.Authorization;
 import entities.users.Role;
 import entities.users.User;
