@@ -82,7 +82,8 @@ public class UserResource {
     }
 
     @RequestMapping(value = Uris.USERS + Uris.REFERENCE, method = RequestMethod.GET)
-    public UserForEditListWrapper getByTicketReference(@PathVariable String ticketReference) throws NotFoundTicketReferenceException {
+    public UserWrapper getByTicketReference(@PathVariable(value = "reference") String ticketReference)
+            throws NotFoundTicketReferenceException {
         if (!this.ticketController.ticketExistsByReference(ticketReference))
             throw new NotFoundTicketReferenceException();
 
