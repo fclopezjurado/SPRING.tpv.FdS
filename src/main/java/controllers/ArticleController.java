@@ -27,8 +27,8 @@ public class ArticleController {
 	}
 
     public List<ArticleWrapper> getAll() {
-        List<Article> articles = articlesDao.findAll();
-        return articleListToArticleWrapperList(articles);
+        List<Article> articleList = articlesDao.findAll();
+        return articleListToArticleWrapperList(articleList);
     }
 
     public void updateStock(ArticleWrapper article, int newStock) {
@@ -52,9 +52,9 @@ public class ArticleController {
         return articleListToArticleWrapperList(listArticle);
     }
     
-    private List<ArticleWrapper> articleListToArticleWrapperList(List<Article> articles) {
+    private List<ArticleWrapper> articleListToArticleWrapperList(List<Article> articleList) {
         List<ArticleWrapper> articleWrapperList = new ArrayList<ArticleWrapper>();
-        for(Article article : articles) {
+        for(Article article : articleList) {
             articleWrapperList.add(new ArticleWrapper(article));
         }
         return articleWrapperList;
