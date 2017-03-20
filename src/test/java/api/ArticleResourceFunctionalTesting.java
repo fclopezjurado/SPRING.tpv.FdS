@@ -2,6 +2,7 @@ package api;
 
 import static org.junit.Assert.assertEquals;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import entities.core.AlarmType;
+import wrappers.ArticleFilterWrapper;
 import wrappers.ArticleWrapper;
+import wrappers.ProductsOutFilterWrapper;
 import wrappers.ProviderWrapper;
 import wrappers.ProvidersWrapper;
 
@@ -51,6 +54,23 @@ public class ArticleResourceFunctionalTesting {
         assertEquals(false, articles.isEmpty());
         assertEquals(true, articles.get(0).getProviderWrapper().getId() == providerWrapper.getId());
     }
+    
+
+    @Test
+    public void testGetArticleByFilterMock() {
+        ArticleFilterWrapper articleFilterWrapper = new ArticleFilterWrapper();
+        articleFilterWrapper.setDescription("descripcion");
+        articleFilterWrapper.setReference("reference");
+        articleFilterWrapper.setMinRetailPrice(new BigDecimal("0"));
+        articleFilterWrapper.setMaxRetailPrice(new BigDecimal("0"));
+        articleFilterWrapper.setStock(1);
+        articleFilterWrapper.setMinWholesalePrice(new BigDecimal("0"));
+        articleFilterWrapper.setMaxWholesalePrice(new BigDecimal("0"));
+        List<ProductsOutFilterWrapper> productosSalidaMock=Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
+                (RestService.URL).path(Uris.ARTICLES+Uris.FILTER).clazz(ProductsOutFilterWrapper[].class).body(articleFilterWrapper).post().build());
+        assertEquals(1, productosSalidaMock.size());
+    }
+    
     
     @After
     public void after() {
