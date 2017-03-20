@@ -16,6 +16,7 @@ import api.exceptions.InvalidUserFieldException;
 import api.exceptions.InvalidVoucherReferenceException;
 import api.exceptions.MalformedHeaderException;
 import api.exceptions.NotFoundUserIdException;
+import api.exceptions.NotFoundUserMobileException;
 import api.exceptions.UnauthorizedException;
 import api.exceptions.NotFoundReferenceVoucherException;
 import api.exceptions.NotFoundTicketReferenceException;
@@ -24,7 +25,8 @@ import api.exceptions.NotFoundTicketReferenceException;
 public class ApiExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler({NotFoundUserIdException.class, NotFoundReferenceVoucherException.class, NotFoundTicketReferenceException.class})
+    @ExceptionHandler({NotFoundUserIdException.class, NotFoundReferenceVoucherException.class, NotFoundTicketReferenceException.class,
+            NotFoundUserMobileException.class})
     @ResponseBody
     public ErrorMessage notFoundRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);
