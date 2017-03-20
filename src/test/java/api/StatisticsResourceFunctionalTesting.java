@@ -36,13 +36,12 @@ public class StatisticsResourceFunctionalTesting {
         inicio.set(Calendar.DAY_OF_MONTH, diaInicio - 1);
         int diaFin = fin.get(Calendar.DAY_OF_MONTH);
         fin.set(Calendar.DAY_OF_MONTH, diaFin + 1);
-        statisticsDateWrapper = new StatisticsDateWrapper(inicio, fin);
-        statisticsProductDateWrapper = new StatisticsProductDateWrapper(84000001111L, inicio, fin);
+        statisticsDateWrapper = new StatisticsDateWrapper("19/03/2017", "19/03/2017");
+        statisticsProductDateWrapper = new StatisticsProductDateWrapper(84000001111L,"19/03/2017", "19/03/2017");
     }
     
     @Test
     public void countTicketsBetweenDates() {
-        StatisticsDateWrapper statisticsDateWrapper = new StatisticsDateWrapper(inicio, fin);
         int result = new RestBuilder<Integer>(URL).path(Uris.TOTAL_SALES).body(statisticsDateWrapper).clazz(Integer.class).post().build();
         assertEquals(3, result);
     }
