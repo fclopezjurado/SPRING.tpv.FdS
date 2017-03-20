@@ -20,6 +20,9 @@
               <td>{{textilePrinting.description}}</td>
               <td>{{textilePrinting.retailPrice}}</td>
               <td>{{textilePrinting.type}}</td>
+              <td style="vertical-align: middle;">
+              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeTextilePrinting(textilePrinting.id); vm.getAll() ">
+              </td>
             </tr>
           </tbody>
         </table>

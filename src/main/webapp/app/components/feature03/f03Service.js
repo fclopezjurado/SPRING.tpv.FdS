@@ -54,5 +54,21 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
 		};
 		return this.request(config);
 	}
+	
+	this.removeEmbroidery = function(embroideryId) {
+		let config = {
+				method: 'DELETE',
+				url: urlBase + "/embroidery/" + embroideryId
+		};
+		return this.request(config);
+	}
+	
+	this.removeTextilePrinting = function(textilePrintingId) {
+		let config = {
+				method: 'DELETE',
+				url: urlBase + "/textilePrinting/" + textilePrintingId
+		};
+		return this.request(config);
+	}
    
 }]);

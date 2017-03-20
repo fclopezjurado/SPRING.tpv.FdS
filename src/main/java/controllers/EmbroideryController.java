@@ -34,4 +34,10 @@ public class EmbroideryController {
         }
         return embroideryWrapperList;
     }
+    
+    public void removeEmbroidery(long id) {
+        Embroidery embroidery = embroideryDao.findOne(id);
+        embroideryDao.delete(embroidery);
+}
+
 }
