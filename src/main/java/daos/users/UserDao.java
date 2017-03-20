@@ -1,6 +1,7 @@
 package daos.users;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +16,6 @@ public interface UserDao extends JpaRepository<User, Integer> {
     public User findByMobile(long mobile);
 
     @Query("select t.user from Ticket t where t.reference = ?1")
-    User findByTicketReference(String reference);
+    List<User> findByTicketReference(String reference);
 
 }
