@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import daos.core.ArticleDao;
+import daos.core.ProviderDao;
+import entities.core.AlarmType;
 import entities.core.Article;
 import wrappers.ArticleWrapper;
 
@@ -15,19 +17,18 @@ public class ArticleController {
 
     @Autowired
     private ArticleDao articlesDao;
-
+    
     @Autowired
-    public void setArticleDao(ArticleDao articleDao) {
-        this.articlesDao = articleDao;
-    }
+    private ProviderDao providerDao;
+
+	@Autowired
+	public void setArticleDao(ArticleDao articlesDao) {
+		this.articlesDao = articlesDao;
+	}
 
     public List<ArticleWrapper> getAll() {
-        List<Article> articles = articlesDao.findAll();
-        List<ArticleWrapper> articleWrapperList = new ArrayList<ArticleWrapper>();
-        for(Article article : articles) {
-            articleWrapperList.add(new ArticleWrapper(article.getId(), article.getReference(), article.getDescription(), article.getRetailPrice(), article.getStock(), article.getWholesalePrice(), null));
-        }
-        return articleWrapperList;
+        List<Article> articleList = articlesDao.findAll();
+        return articleListToArticleWrapperList(articleList);
     }
 
     public void updateStock(ArticleWrapper article, int newStock) {
@@ -35,4 +36,28 @@ public class ArticleController {
         a.setStock(newStock);
         articlesDao.save(a);
     }
+
+    public List<ArticleWrapper> search(int provider, AlarmType type) {
+        List<Article> listArticle = null;
+        if(provider != 0 && type == null) {
+            listArticle = articlesDao.findArticlesOfOneProviderWithAlarmActive(providerDao.findById(provider));
+        }
+        else if (provider == 0 && type != null) {
+            listArticle = articlesDao.findArticlesWithAlarmActive(type);
+        }
+        else {
+            listArticle = articlesDao.findByProviderAndAlarmType(providerDao.findById(provider), type);
+        }
+        
+        return articleListToArticleWrapperList(listArticle);
+    }
+    
+    private List<ArticleWrapper> articleListToArticleWrapperList(List<Article> articleList) {
+        List<ArticleWrapper> articleWrapperList = new ArrayList<ArticleWrapper>();
+        for(Article article : articleList) {
+            articleWrapperList.add(new ArticleWrapper(article));
+        }
+        return articleWrapperList;
+    }
+
 }

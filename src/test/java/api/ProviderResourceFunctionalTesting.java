@@ -11,7 +11,7 @@ public class ProviderResourceFunctionalTesting {
     public void testCreateProvider() {
         ProviderWrapper providerWrapper = new ProviderWrapper();
         providerWrapper.setCompany("Compañia");
-        providerWrapper.setMobile(666666677L);
+        providerWrapper.setMobile(666666679L);
         new RestBuilder<Object>(RestService.URL).path(Uris.PROVIDERS).body(providerWrapper).post().build();
     }
 
@@ -31,7 +31,7 @@ public class ProviderResourceFunctionalTesting {
 
     @Test
     public void testDeleteProviders() {
-        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).param("id", "143").delete().build();
+        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).param("id", "1").delete().build();
     }
 
 }

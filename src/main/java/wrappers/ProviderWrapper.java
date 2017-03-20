@@ -10,6 +10,8 @@ public class ProviderWrapper {
 
     private String address;
 
+    private long phone;
+    
     private long mobile;
 
     private String paymentConditions;
@@ -20,13 +22,22 @@ public class ProviderWrapper {
 
     }
 
-    public ProviderWrapper(int id, String company, String address, long mobile, String paymentConditions, String note) {
+    public ProviderWrapper(int id, String company, String address, long mobile, long phone, String paymentConditions, String note) {
         this.id = id;
         this.company = company;
         this.address = address;
         this.mobile = mobile;
+        this.phone = phone;
         this.paymentConditions = paymentConditions;
         this.note = note;
+    }
+
+    public long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(long phone) {
+        this.phone = phone;
     }
 
     public ProviderWrapper(Provider provider) {
@@ -34,6 +45,7 @@ public class ProviderWrapper {
         this.company = provider.getCompany();
         this.address = provider.getAddress();
         this.mobile = provider.getMobile();
+        this.phone = provider.getPhone();
         this.paymentConditions = provider.getPaymentConditions();
         this.note = provider.getNote();
     }

@@ -36,7 +36,7 @@ public class VoucherWrapper {
     }
 
     public void setCreated(Calendar created) {
-        this.created = dateOfUse;
+        this.created = created;
     }
 
     public Calendar getCreated() {

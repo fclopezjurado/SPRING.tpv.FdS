@@ -1,19 +1,24 @@
-tpv.controller('listadoArticulosController', [ '$timeout', 'f03Service',
+tpv.controller('TextilePrintingListController', [ '$timeout', 'f03Service',
 		function($timeout, f03Service) {
 			"use strict";
 			var vm = this;
 
 			vm.completed = false;
-			vm.articles = null;
 			vm.error = false;
+			vm.response;
+			vm.getAll = getAll;
 
 			function getAll() {
 				const
-				delay = 2000;
-
-				f03Service.getAll().then(function(result) {
+				delay = 10000;
+				f03Service.getAllTextile().then(function(result) {
+					// promise was fullfilled
 					vm.completed = true;
-					vm.articles = result.articles;
+					vm.response = result;
+					
+					$timeout(function() {
+						vm.completed = false;
+					}, delay)
 				}, function(errors) {
 					// handle errors
 					vm.error = true;
@@ -23,5 +28,4 @@ tpv.controller('listadoArticulosController', [ '$timeout', 'f03Service',
 					}, delay)
 				});
 			}
-			getAll();
 		} ]);
