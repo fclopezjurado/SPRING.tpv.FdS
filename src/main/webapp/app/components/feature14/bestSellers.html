@@ -1,7 +1,7 @@
 <section class="container">
     <div class="jumbotron text-center">
         <fieldset>
-            <legend>Feature14. Total sales between two dates</legend>
+            <legend>Feature14. Best Sellers</legend>
             <form class="form-horizontal">
                 <div class="form-group">
                     <div class="container">
@@ -30,19 +30,29 @@
                         </div>
                         <label class="bg-success col-xs-12" ng-show="vm.completed">Petición correcta</label>
                         <div class="col-xs-2 col-xs-push-10">
-                            <button class="btn btn-primary btn-sm" ng-click="vm.totalSales()">Enviar</button>
+                            <button class="btn btn-primary btn-sm" ng-click="vm.bestSellers()">Enviar</button>
                         </div>   
+                        <div class="col-xs-12">
+                         <table class="table table-hover">
+			                <tbody>
+			                    <tr>
+			                        <th>ProductId</th>
+			                        <th>Description</th>
+			                        <th>Total Sales</th>
+			                    </tr>
+			                    <tr ng-repeat="product in vm.productList">
+			                         <td>{{ product.idProduct }}</td>
+			                         <td>{{ product.description }}</td>
+			                         <td>{{ product.totalAmount }}</td>
+			                    </tr>
+			                </tbody>
+			            </table>
+                        </div>
                         <div class=col-xs-12>
-	                        <label class="bg-danger col-xs-12" ng-show="vm.error">Error!!!</label>
-	                        <div class="col-xs-12">
-		                        <div class="col-xs-6 col-xs-push-4">
-		                          <label class="control-label">Respuesta:</label> 
-		                        </div>
-		                        <div class="col-xs-6">
-		                          <label class="control-label" ng-bind='vm.response'></label>
-	                            </div>
-		                     </div>
+	                        <label class="bg-danger col-xs-12" ng-show="vm.error">Error!!!</label> 
                         </div>  
+                        
+                        <div id="container"></div>
                 </div>
             </form>
         </fieldset>

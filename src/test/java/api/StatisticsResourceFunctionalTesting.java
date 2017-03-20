@@ -61,6 +61,6 @@ public class StatisticsResourceFunctionalTesting {
     
     @After
     public void after() {
-        new RestService().deleteAll();
+        //new RestService().deleteAll();
     }
 }

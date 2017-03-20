@@ -25,6 +25,8 @@ public class StatisticsController {
 
     private TicketDao ticketDao;
 
+    private StatisticsDateParserService statisticsDateParserService = new StatisticsDateParserService();
+
     @Autowired
     public void setShoppingDao(ShoppingDao shoppingDao) {
         this.shoppingDao = shoppingDao;
@@ -36,18 +38,22 @@ public class StatisticsController {
     }
 
     public int countTicketsBetweenDates(StatisticsDateWrapper statisticsDateWrapper) {
-        
+
         StatisticsDateParserService statisticsDateParserService = new StatisticsDateParserService();
-        
+
         Calendar inicio = statisticsDateParserService.getCalendarDateFromString(statisticsDateWrapper.getInicio());
-        Calendar fin =  statisticsDateParserService.getCalendarDateFromString(statisticsDateWrapper.getFin());
-                
+        Calendar fin = statisticsDateParserService.getCalendarDateFromString(statisticsDateWrapper.getFin());
+
         return ticketDao.countTicketsBetweenDates(inicio, fin);
     }
 
-    /*public BestSellerProductsListWrapper getBestSellerProductsByDate(StatisticsDateWrapper statisticsDateWrapper) {
+    public BestSellerProductsListWrapper getBestSellerProductsByDate(StatisticsDateWrapper statisticsDateWrapper) {
+
+        Calendar inicio = statisticsDateParserService.getCalendarDateFromString(statisticsDateWrapper.getInicio());
+        Calendar fin = statisticsDateParserService.getCalendarDateFromString(statisticsDateWrapper.getFin());
+
         BestSellerProductsListWrapper bestSellerListWrapper = new BestSellerProductsListWrapper();
-        for (Object[] row : shoppingDao.findBestSellersBetweenDates(statisticsDateWrapper.getInicio(), statisticsDateWrapper.getFin())) {
+        for (Object[] row : shoppingDao.findBestSellersBetweenDates(inicio, fin)) {
             BestSellerProductWrapper bestSellerProduct = new BestSellerProductWrapper((long) row[0], row[1].toString(),
                     Integer.parseInt(row[2].toString()));
             bestSellerListWrapper.add(bestSellerProduct);
@@ -57,13 +63,16 @@ public class StatisticsController {
 
     public SalesOfProductListWrapper getSalesOfProductByDate(StatisticsProductDateWrapper statisticsProductDateWrapper) {
         SalesOfProductListWrapper salesOfProductByDate = new SalesOfProductListWrapper();
-        for (Object[] row : shoppingDao.findSalesOfProductBetweenDates(statisticsProductDateWrapper.getProductId(),
-                statisticsProductDateWrapper.getInicio(), statisticsProductDateWrapper.getFin())) {
+
+        Calendar inicio = statisticsDateParserService.getCalendarDateFromString(statisticsProductDateWrapper.getInicio());
+        Calendar fin = statisticsDateParserService.getCalendarDateFromString(statisticsProductDateWrapper.getFin());
+
+        for (Object[] row : shoppingDao.findSalesOfProductBetweenDates(statisticsProductDateWrapper.getProductId(), inicio, fin)) {
             SaleOfProductWrapper salesOfProduct = new SaleOfProductWrapper((Calendar) row[0], (long) row[1], row[2].toString(),
                     Integer.parseInt(row[3].toString()));
             salesOfProductByDate.add(salesOfProduct);
         }
         return salesOfProductByDate;
-    }*/
+    }
 
 }

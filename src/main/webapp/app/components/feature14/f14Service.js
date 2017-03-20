@@ -29,6 +29,15 @@ tpv.service('f14Service', ['$http', '$q', function ($http, $q) {
       return this.request(config);
    }
    
+   this.bestSellers = function (inicio,fin) {
+	      let config = {
+	 	     method: 'POST',
+	 	     url: urlBase + "/BestSellers",
+	 	     data:{'inicio':inicio, 'fin': fin}
+		  };
+	      return this.request(config);
+	   }
+   
 
 
 }]);

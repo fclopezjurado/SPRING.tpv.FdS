@@ -58,7 +58,7 @@ public class StatisticsControllerIT {
         assertEquals(3, ticketCounter);
     }
 
-    /*@Test
+    @Test
     public void testFindSalesOfProductBetweenDates() {
         BestSellerProductsListWrapper bestSellerProductsList = statisticsController.getBestSellerProductsByDate(statisticsDateWrapper);
         assertTrue(bestSellerProductsList.getBestSellersList().size() > 0);
@@ -68,5 +68,5 @@ public class StatisticsControllerIT {
     public void testGetSalesOfProductByDate() {
         SalesOfProductListWrapper salesOfProductListWrapper = statisticsController.getSalesOfProductByDate(statisticsProductDateWrapper);
         assertTrue(salesOfProductListWrapper.getSalesOfProductList().size() > 0);
-    }*/
+    }
 }
