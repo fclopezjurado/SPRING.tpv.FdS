@@ -11,8 +11,11 @@ public class InvoicesWrapper {
         this.invoices = new ArrayList<InvoiceWrapper>();
     }
 
-    public List<InvoiceWrapper> getInvoices() {
-        return invoices;
+    public InvoiceWrapper getFirstInvoice() {
+        if (this.invoices.isEmpty())
+            return new InvoiceWrapper();
+
+        return this.invoices.get(0);
     }
 
     public void addInvoiceWrapper(InvoiceWrapper invoice) {
