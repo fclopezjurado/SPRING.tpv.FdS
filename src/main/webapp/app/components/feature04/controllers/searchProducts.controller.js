@@ -37,6 +37,13 @@ angular.module("tpv").controller("SearchProducts",
 	 			onStock: false  
 	 	}
 	 	
+	 	vm.searchTextilePriting = {
+	 			reference: "",
+	 			description: "",
+	 			minRetailPrice: "",
+	 			maxRetailPrice: "",
+	 			type:""
+	 	}
 	 	
 		vm.onClickAdvancedSearch = () => {
 	 		vm.searchVisibility = !vm.searchVisibility;
@@ -80,7 +87,9 @@ angular.module("tpv").controller("SearchProducts",
             	 	vm.requestToGetProducts(busquedaDeEmbroidery, vm.mobile);
             }
         	else if (vm.showInputForTextilePrinting ==true){
-           	 		vm.requestToGetProducts(busquedaDeTextilePrinting, vm.mobile);
+        			vm.validationProductoNumeric();
+        			vm.passArgumentsFromProducts(vm.searchTextilePriting);
+           	 		vm.requestToGetProducts(busquedaDeTextilePrinting, vm.searchTextilePriting);
            }
         	else {
         			vm.validationProductoNumeric();
