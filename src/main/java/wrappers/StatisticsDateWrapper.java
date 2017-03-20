@@ -1,7 +1,5 @@
 package wrappers;
 
-import java.util.Calendar;
-
 public class StatisticsDateWrapper {
 
     private String inicio;

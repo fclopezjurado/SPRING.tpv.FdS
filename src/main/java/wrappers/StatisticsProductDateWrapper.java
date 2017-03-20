@@ -1,7 +1,5 @@
 package wrappers;
 
-import java.util.Calendar;
-
 public class StatisticsProductDateWrapper extends StatisticsDateWrapper {
 
     private long productId;
