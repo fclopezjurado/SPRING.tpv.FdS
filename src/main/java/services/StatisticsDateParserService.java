@@ -11,7 +11,7 @@ public class StatisticsDateParserService {
     
     public Calendar getCalendarDateFromString (String date){
         
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy H:m:s");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Calendar calendar  = Calendar.getInstance();
         try {
             calendar.setTime(dateFormat.parse(date));
