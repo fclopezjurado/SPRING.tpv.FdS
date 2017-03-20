@@ -11,16 +11,12 @@ public class InvoicesWrapper {
         this.invoices = new ArrayList<InvoiceWrapper>();
     }
 
-    public InvoicesWrapper(List<InvoiceWrapper> invoices) {
-        this.invoices = invoices;
-    }
-
     public List<InvoiceWrapper> getInvoices() {
         return invoices;
     }
 
-    public void setInvoices(List<InvoiceWrapper> invoices) {
-        this.invoices = invoices;
+    public void addInvoiceWrapper(InvoiceWrapper invoice) {
+        this.invoices.add(invoice);
     }
 
     @Override
