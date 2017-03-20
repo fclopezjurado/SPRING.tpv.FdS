@@ -40,7 +40,7 @@ public class ArticleResource {
     }
     
     
-    @RequestMapping(value = "/byFilter",method = RequestMethod.POST)
+    @RequestMapping(value = Uris.FILTER,method = RequestMethod.POST)
     public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody ArticleFilterWrapper article){
         List<ProductsOutFilterWrapper> productosSalidaMock= new ArrayList<ProductsOutFilterWrapper> ();
         ProductsOutFilterWrapper productoMock= new ProductsOutFilterWrapper();
