@@ -5,12 +5,12 @@
 			<div class="form-group text-left">
 				<label for="type" class="col-md-3">Filtro por tipo:</label> <select
 					class="col-md-3" ng-init="vm.typeFilter = 'WARNING'"
-					ng-model="vm.typeFilter" ng-click="vm.getProductsWarning()">
+					ng-model="vm.typeFilter" ng-change="vm.getProductsWarning()">
 					<option value='WARNING'>Warning</option>
 					<option value='CRITICAL'>Critical</option>
 				</select> <label for="type" class="col-md-3">Filtro por proveedor:</label> <select
 					class="col-md-3" ng-init="vm.providerFilter = ''"
-					ng-model="vm.providerFilter" ng-click="vm.getProductsWarning()">
+					ng-model="vm.providerFilter" ng-change="vm.getProductsWarning()">
 					<option value=''></option>
 					<option ng-repeat="provider in vm.providersOpts" value="{{ provider.id }}">{{ provider.company }}</option>
 				</select>
@@ -30,14 +30,14 @@
 						<td colspan="5" ng-hide="vm.successList">Cargando...</td>
 					</tr>
 					<tr>
-						<td colspan="5" ng-show="vm.successList && !vm.alarms.length">No
+						<td colspan="5" ng-show="vm.successList && !vm.products.length">No
 							hay artículos en alerta</td>
 					</tr>
-					<tr ng-show="vm.successList && vm.articles.length"
+					<tr ng-show="vm.successList && vm.products.length"
 						ng-repeat="product in vm.products">
 						<td style="vertical-align: middle;">{{ product.reference }}</td>
 						<td>{{ product.description }}</td>
-						<td>{{ product.provider.company }}</td>
+						<td>{{ product.providerWrapper.company }}</td>
 						<td style="vertical-align: middle;">{{ product.stock }}</td>
 					</tr>
 				</tbody>
