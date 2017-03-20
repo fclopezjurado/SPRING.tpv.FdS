@@ -101,7 +101,14 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
 	this.addTextilePrinting = function(textilePrinting) {
 		let config = {
 				method: 'POST',
-				url: urlBase + "/textilePrinting"
+				url: urlBase + "/textilePrinting",
+				 data:{
+		 	    	  'id': textilePrinting.id,
+		 	    	  'reference':textilePrinting.reference,
+		 	    	  'description': textilePrinting.description,
+		 	    	  'retailPrice':textilePrinting.retailPrice,
+		 	    	  'type':textilePrinting.type
+		 	    	  }
 		};
 		return this.request(config);
 	}
