@@ -45,7 +45,7 @@ public class InvoiceController {
         Invoice invoice = new Invoice(newInvoiceID, ticket);
         this.invoiceDao.save(invoice);
 
-        return new InvoiceWrapper(newInvoiceID, ticket.getId());
+        return new InvoiceWrapper(newInvoiceID, ticket.getReference());
     }
 
     public boolean invoiceExists(int id) {
@@ -58,7 +58,7 @@ public class InvoiceController {
         InvoicesWrapper invoicesWrapper = new InvoicesWrapper();
 
         for (Invoice invoice : invoices)
-            invoicesWrapper.addInvoiceWrapper(new InvoiceWrapper(invoice.getId(), invoice.getTicket().getId()));
+            invoicesWrapper.addInvoiceWrapper(new InvoiceWrapper(invoice.getId(), invoice.getTicket().getReference()));
 
         return invoicesWrapper;
     }
