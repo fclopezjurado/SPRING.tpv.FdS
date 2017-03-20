@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import api.exceptions.NotFoundCashierBalanceDayException;
+import api.exceptions.NotFoundCashierBalanceIdException;
 import api.exceptions.AlreadyExistCashierBalanceDayException;
 import controllers.CashierBalanceController;
 import wrappers.CashierBalanceWrapper;
@@ -47,11 +47,11 @@ public class CashierBalanceResource {
 
     @RequestMapping(value = Uris.ID, method = RequestMethod.PUT)
     public CashierBalanceWrapper updateCashierBalance(@RequestBody CashierBalanceWrapper cashierBalanceWrapper)
-            throws NotFoundCashierBalanceDayException {
-        if (!cashierBalanceController.existCashierBalanceByDate(cashierBalanceWrapper.getDate())) {
-            throw new NotFoundCashierBalanceDayException();
+            throws NotFoundCashierBalanceIdException {
+        if (!cashierBalanceController.existCashierBalanceId(cashierBalanceWrapper.getId())) {
+            throw new NotFoundCashierBalanceIdException();
         }
 
-        return cashierBalanceController.createCashierBalance(cashierBalanceWrapper);
+        return cashierBalanceController.updateCashierBalance(cashierBalanceWrapper);
     }
 }

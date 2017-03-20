@@ -22,12 +22,22 @@ public class CashierBalanceController {
         return null;
     }
 
-    public boolean existCashierBalanceByDate(Object date) {
+    public boolean existCashierBalanceByDate(String date) {
         // TODO Auto-generated method stub
         return false;
     }
 
     public CashierBalanceWrapper getCashierBalanceByDateId(int dateId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public boolean existCashierBalanceId(int id) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public CashierBalanceWrapper updateCashierBalance(CashierBalanceWrapper cashierBalanceWrapper) {
         // TODO Auto-generated method stub
         return null;
     }

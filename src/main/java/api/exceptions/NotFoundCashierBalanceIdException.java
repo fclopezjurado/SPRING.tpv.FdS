@@ -1,6 +1,6 @@
 package api.exceptions;
 
-public class NotFoundCashierBalanceDayException extends ApiException {
+public class NotFoundCashierBalanceIdException extends ApiException {
 
     private static final long serialVersionUID = -1344640670884805385L;
 
@@ -8,11 +8,11 @@ public class NotFoundCashierBalanceDayException extends ApiException {
 
     public static final int CODE = 12;
 
-    public NotFoundCashierBalanceDayException() {
+    public NotFoundCashierBalanceIdException() {
         this("");
     }
 
-    public NotFoundCashierBalanceDayException(String detail) {
+    public NotFoundCashierBalanceIdException(String detail) {
         super(DESCRIPTION + ". " + detail, CODE);
     }
 
