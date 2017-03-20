@@ -10,7 +10,7 @@ public class StatisticsProductDateWrapper extends StatisticsDateWrapper {
         super();
     }
 
-    public StatisticsProductDateWrapper(long productId, Calendar inicio, Calendar fin) {
+    public StatisticsProductDateWrapper(long productId, String inicio, String fin) {
         super(inicio, fin);
         this.productId = productId;
     }
@@ -23,19 +23,19 @@ public class StatisticsProductDateWrapper extends StatisticsDateWrapper {
         this.productId = productId;
     }
 
-    public Calendar getInicio() {
+    public String getInicio() {
         return super.getInicio();
     }
 
-    public void setInicio(Calendar inicio) {
+    public void setInicio(String inicio) {
         super.setInicio(inicio);
     }
 
-    public Calendar getFin() {
+    public String getFin() {
         return super.getFin();
     }
 
-    public void setFin(Calendar fin) {
+    public void setFin(String fin) {
         super.setFin(fin);
     }
 
