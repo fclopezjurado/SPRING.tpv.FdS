@@ -29,7 +29,7 @@ public class StatisticsResourceFunctionalTesting {
         new RestService().deleteAll();
         new RestService().seedDatabase();
         
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy H:m:s");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date inicio = new Date();
         Calendar calendar = Calendar.getInstance(); 
         calendar.setTime(inicio); 
@@ -62,6 +62,6 @@ public class StatisticsResourceFunctionalTesting {
     
     @After
     public void after() {
-        new RestService().deleteAll();
+        //new RestService().deleteAll();
     }
 }
