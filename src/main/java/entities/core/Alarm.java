@@ -3,7 +3,6 @@ package entities.core;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,7 +22,7 @@ public class Alarm {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @ManyToMany(cascade= {CascadeType.REMOVE}, fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER)
     private List<Article> articleList;
 
     @Enumerated(EnumType.STRING)
