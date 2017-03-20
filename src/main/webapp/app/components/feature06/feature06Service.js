@@ -1,4 +1,4 @@
-tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
+tpv.service('f06Service', ['$http', '$q', function ($http, $q) {
    "use strict";
    
    const urlBase="http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api/v0";
@@ -20,23 +20,30 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
 	      return deferred.promise;	   
    }
    
-   this.getAll = function() {
+   this.getTicket = function() {
 	   let config = {
  	     method: 'GET',
- 	     url: urlBase + "/articles",
+ 	     url: urlBase + "/ticket",
 	  };
 	   
 	  return this.request(config); 
    }
-   
-   this.getAllTextile = function() {
+
+   this.createTicket = function(shoppings) {
 	   let config = {
- 	     method: 'GET',
- 	     url: urlBase + "/textilePrinting",
-	  };
-	   
-  return this.request(config); 
-   }
+		method: 'POST',
+		url: urlBase + "/ticket",
+		data:{'shoppings': shoppings}
+	   };
+	   return this.request(config);
+   };
    
-   
+   this.updateTicket = function(products, type, number) {
+	   let config = {
+		method: 'PUT',
+		url: urlBase + "/ticket",
+		data:{'products': products, 'type': type, 'number': number}
+	   };
+	   return this.request(config);
+   };
 }]);

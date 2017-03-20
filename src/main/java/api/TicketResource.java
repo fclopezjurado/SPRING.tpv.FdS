@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import controllers.TicketController;
+
 import wrappers.TicketWrapper;
 
 @RestController
@@ -20,14 +21,13 @@ public class TicketResource {
     private TicketController ticketController;
 
     @Autowired
-    public void setAdminController(TicketController ticketController) {
+    public void setTicketController(TicketController ticketController) {
         this.ticketController = ticketController;
     }
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET)
     public List<TicketWrapper> listTickets() {
-        // TODO Implement ticket list
-        return null;
+        return ticketController.findAll();
     }
 
     @RequestMapping(value = Uris.TICKETS + Uris.REFERENCE, method = RequestMethod.GET)

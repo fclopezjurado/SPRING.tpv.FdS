@@ -57,7 +57,13 @@
     <script src="app/components/feature09/cashier_balancing.controller.js"></script>
         <!-- Autor: Cecilia Aguilar DAvid Blasco-->  
     <script src="app/components/feature03/f03Service.js"></script>  
-    <script src="app/components/feature03/listadoArticulosController.js"></script>
+    <script src="app/components/feature03/Articles/ArticleListController.js"></script>
+    <script src="app/components/feature03/Embroidery/EmbroideryListController.js"></script>
+    <script src="app/components/feature03/TextilePrinting/TextilePrintingListController.js"></script>
+     <!-- Autor: Emilio Castellano , Alberto Bricio-->  
+    <script src="app/components/feature06/searchTicketController.js"></script>
+    <script src="app/components/feature06/editTicketController.js"></script>
+    <script src="app/components/feature06/createTicketController.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -114,9 +120,9 @@
                 <!-- Feature 03-01  -->     
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F03<b class="caret"></b></a>
              <ul class="dropdown-menu">
-               <li><a href="#/feature03/listadoArticulos">Listado de Articulos</a></li>
-               <li><a href="#/feature03/listadoBordados">Listado Bordado</a></li>
-               <li><a href="#/feature03/listadoPrendaImpresa">Listado Impresa</a></li>
+              <li><a href="#/feature03/Articles/ArticleList">ArticleList</a></li>
+               <li><a href="#/feature03/TextilePrinting/TextilePrintingList">TextilePrintingList</a></li>
+               <li><a href="#/feature03/Embroidery/EmbroideryList">EmbroideryList</a></li>
              </ul>
            </li>
            
@@ -133,6 +139,14 @@
                <li><a href="#/feature09/cierrecaja">Listar cierre de caja</a></li>
              </ul>
            </li>
+           <!-- Feature 6  --> 
+           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F6<b class="caret"></b></a>
+             <ul class="dropdown-menu">
+               <li><a href="#/feature06/createTicket">Crear ticket</a></li>
+               <li><a href="#/feature06/searchTicket">Consultar ticket</a></li>
+               <li><a href="#/feature06/editTicket">Modificar ticket</a></li>
+                </ul>
+                </li>
          </ul>
        </div>
      </nav>

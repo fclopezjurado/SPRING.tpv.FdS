@@ -8,19 +8,12 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import config.PersistenceConfig;
-import config.TestsPersistenceConfig;
 import entities.core.AlarmType;
 import wrappers.ArticleWrapper;
 import wrappers.ProviderWrapper;
 import wrappers.ProvidersWrapper;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
 public class ArticleResourceFunctionalTesting {
 
     @Before
