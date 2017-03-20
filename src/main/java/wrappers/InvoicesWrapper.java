@@ -11,6 +11,10 @@ public class InvoicesWrapper {
         this.invoices = new ArrayList<InvoiceWrapper>();
     }
 
+    public List<InvoiceWrapper> getInvoices() {
+        return invoices;
+    }
+
     public boolean isEmpty() {
         return this.invoices.isEmpty();
     }
