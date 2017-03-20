@@ -22,7 +22,7 @@ public class Alarm {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER)
     private List<Article> articleList;
 
     @Enumerated(EnumType.STRING)

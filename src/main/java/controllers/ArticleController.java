@@ -60,4 +60,8 @@ public class ArticleController {
         return articleWrapperList;
     }
 
+    public void removeArticle(long id) {
+        Article article = articlesDao.findOne(id);
+        articlesDao.delete(article);
+}
 }

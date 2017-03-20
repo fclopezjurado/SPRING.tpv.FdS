@@ -47,4 +47,12 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
   return this.request(config); 
    }
    
+	this.removeArticle = function(articleId) {
+		let config = {
+				method: 'DELETE',
+				url: urlBase + "/articles/" + articleId
+		};
+		return this.request(config);
+	}
+   
 }]);
