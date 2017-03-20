@@ -47,4 +47,9 @@ public class UserController {
         return false;
     }
 
+    public UserWrapper getByTicketReference(String ticketReference) {
+        User user = this.userDao.findByTicketReference(ticketReference);
+        return new UserWrapper(user.getMobile(), user.getUsername(), user.getPassword());
+    }
+
 }
