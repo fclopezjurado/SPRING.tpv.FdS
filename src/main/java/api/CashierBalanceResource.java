@@ -21,7 +21,7 @@ public class CashierBalanceResource {
     private CashierBalanceController cashierBalanceController;
 
     @Autowired
-    public void setArticleController(CashierBalanceController cashierBalanceController) {
+    public void setCashierBalanceController(CashierBalanceController cashierBalanceController) {
         this.cashierBalanceController = cashierBalanceController;
     }
 
