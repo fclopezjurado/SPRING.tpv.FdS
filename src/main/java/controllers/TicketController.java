@@ -1,14 +1,23 @@
 package controllers;
 
+import daos.core.TicketDao;
+import entities.core.Ticket;
+import entities.core.TicketState;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import wrappers.TicketWrapper;
 
 @Controller
 public class TicketController {
 
+    @Autowired
+    private TicketDao ticketDao;
+
     public TicketWrapper getTicketByReference(String reference) {
-        // TODO Implement this method
-        // TODO Feature 11: If ticket state is Committed no Wrapper will be returned
+        Ticket ticket = ticketDao.findByReference(reference);
+        if (ticket != null && ticket.getTicketState() != TicketState.COMMITTED) {
+            return new TicketWrapper(ticket);
+        }
         return null;
     }
 

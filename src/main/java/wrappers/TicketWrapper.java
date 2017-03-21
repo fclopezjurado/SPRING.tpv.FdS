@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import entities.core.Shopping;
+import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
 
@@ -21,12 +22,20 @@ public class TicketWrapper {
 
     private User user;
 
-    private TicketWrapper(Calendar created, String reference, TicketState ticketState, List<Shopping> shoppingList, User user) {
+    public TicketWrapper(Calendar created, String reference, TicketState ticketState, List<Shopping> shoppingList, User user) {
         this.created = created;
         this.reference = reference;
         this.ticketState = ticketState;
         this.shoppingList = shoppingList;
         this.user = user;
+    }
+
+    public TicketWrapper(Ticket ticket) {
+        this.created = ticket.getCreated();
+        this.reference = ticket.getReference();
+        this.ticketState = ticket.getTicketState();
+        this.shoppingList = ticket.getShoppingList();
+        this.user = ticket.getUser();
     }
 
     public long getId() {

@@ -1,5 +1,6 @@
 package api;
 
+import api.exceptions.NotFoundTicketReferenceException;
 import controllers.TicketController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,12 @@ public class TicketResource {
     }
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET, params = "reference")
-    public TicketWrapper getTicketByReference(@RequestParam String reference) {
-        return ticketController.getTicketByReference(reference);
+    public TicketWrapper getTicketByReference(@RequestParam String reference) throws NotFoundTicketReferenceException {
+        TicketWrapper ticketWrapper = ticketController.getTicketByReference(reference);
+        if (ticketWrapper == null) {
+            throw new NotFoundTicketReferenceException();
+        }
+        return ticketWrapper;
     }
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.POST)
