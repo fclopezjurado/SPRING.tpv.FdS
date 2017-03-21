@@ -2,6 +2,7 @@ package entities.core;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
@@ -9,21 +10,22 @@ import javax.persistence.ManyToMany;
 @Entity
 public class Family extends ComponentProduct{
     
+    @Column(unique=true)
     private String name;
     
     private String familyDescription;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<ComponentProduct> componentFamilies;
+    private List<ComponentProduct> componentProducts;
     
     public Family() {
     }
 
-    public Family(long id, String name, String familyDescription, List<ComponentProduct> componentFamilies) {
+    public Family(long id, String name, String familyDescription, List<ComponentProduct> componentProducts) {
         super(id);
         this.name = name;
         this.familyDescription = familyDescription;
-        this.componentFamilies = componentFamilies;
+        this.componentProducts = componentProducts;
     }
     
     public String getFamilyDescription() {
@@ -37,21 +39,21 @@ public class Family extends ComponentProduct{
     @Override
     public void add(ComponentProduct componentProduct){
         if (componentProduct != null && this.isFamily()) {
-            this.componentFamilies.add(componentProduct);
+            this.componentProducts.add(componentProduct);
         }
     }
     
     @Override
     public void remove(ComponentProduct componentProduct){
         if (componentProduct != null && this.isFamily()) {
-            this.componentFamilies.remove(componentProduct);
+            this.componentProducts.remove(componentProduct);
         }
     }
     
     @Override
     public int numberOfProducts(){
         int n = 0;
-        for (ComponentProduct product : componentFamilies){
+        for (ComponentProduct product : componentProducts){
             n += product.numberOfProducts();
         }
         return n;
@@ -68,7 +70,7 @@ public class Family extends ComponentProduct{
     }
     
     public void setProducts(List<ComponentProduct> componentFamilies) {
-        this.componentFamilies = componentFamilies;
+        this.componentProducts = componentFamilies;
     }
     
     
@@ -77,7 +79,7 @@ public class Family extends ComponentProduct{
     }
     
     public List<ComponentProduct> getProducts() {
-        return componentFamilies;
+        return componentProducts;
     }
      
     @Override

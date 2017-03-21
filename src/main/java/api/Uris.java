@@ -1,5 +1,7 @@
 package api;
 
+import java.security.PublicKey;
+
 public class Uris {
 
     public static final String SERVLET_MAP = "/api";
@@ -49,5 +51,9 @@ public class Uris {
     public static final String TEXTILE_PRINTING = "/textilePrinting";
     
     public static final String EMBROIDERY = "/embroidery";
+    
+    public static final String FAMILIES = "/families";
+    
+    public static final String FAMILY_NAME = "/{name}";
 
 }
