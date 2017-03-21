@@ -36,6 +36,19 @@ public class TextilePrintingController {
         return textilePrintingWrapperList;
     }
 
+    public void removeTextilePrinting(long id) {
+        TextilePrinting textilePrinting = textilePrintingsDao.findOne(id);
+        textilePrintingsDao.delete(textilePrinting);
+}
 
+
+    public void addTextilePrinting(TextilePrintingWrapper textilePrintingWrapper) {
+        TextilePrinting textilePrinting = textilePrintingsDao.findOne(textilePrintingWrapper.getId());
+        if (textilePrinting == null) {
+            TextilePrinting newTextilePrinting = new TextilePrinting(textilePrintingWrapper.getId(),textilePrintingWrapper.getReference(),textilePrintingWrapper.getRetailPrice(),textilePrintingWrapper.getDescription(),textilePrintingWrapper.getType());
+            this.textilePrintingsDao.save(newTextilePrinting);
+        }
+        
+    }
 
 }

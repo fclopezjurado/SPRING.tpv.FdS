@@ -1,9 +1,10 @@
-<section>
+<section ng-init="vm.getAll()">
     <div class="page-header">
-      <h1>Textile Printing List</h1>
     </div>
     <br/>
     <div class="table-responsive">
+      <fieldset>
+      <legend  align="right">Textile Printing List</legend>
        <table class="table table-striped">
          <thead>
             <tr>
@@ -19,6 +20,9 @@
               <td>{{textilePrinting.description}}</td>
               <td>{{textilePrinting.retailPrice}}</td>
               <td>{{textilePrinting.type}}</td>
+              <td style="vertical-align: middle;">
+              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeTextilePrinting(textilePrinting.id)">
+              </td>
             </tr>
           </tbody>
         </table>
@@ -26,5 +30,6 @@
         <div class="no-data" ng-if="vm.data.length === 0">
            <div class="panel-body"> No textilePrinting found </div>
         </div>
+        </fieldset>
     </div>
 </section>

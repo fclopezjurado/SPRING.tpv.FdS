@@ -43,6 +43,24 @@ tpv.config(function ($routeProvider) {
             controllerAs: "vm"
         })
         
+         .when("/feature03/Articles/CreateArticle", {
+	        templateUrl: "app/components/feature03/Articles/CreateArticle.html",
+	        controller: "CreateArticleController",
+	        controllerAs: "vm"
+        })
+        .when("/feature03/Embroidery/CreateEmbroidery", {
+            templateUrl: "app/components/feature03/Embroidery/CreateEmbroidery.html",
+            controller: "CreateEmbroideryController",
+            controllerAs: "vm"
+        })
+             .when("/feature03/TextilePrinting/CreateTextilePrinting", {
+            templateUrl: "app/components/feature03/TextilePrinting/CreateTextilePrinting.html",
+            controller: "CreateTextilePrintingController",
+            controllerAs: "vm"
+        })
+        
+        
+        
         .when("/feature10/list", {
             templateUrl: "app/components/feature10/listAlarms.html",
             controller: "ListAlarmsController",
@@ -104,6 +122,11 @@ tpv.config(function ($routeProvider) {
             controller: "CashierBalancingController",
             controllerAs: "vm"
         })
+        .when("/feature09/cierrecaja", {
+            templateUrl: "app/components/feature09/list_cashier_balancing.html",
+            controller: "CashierBalancingController",
+            controllerAs: "vm"
+        })
         .when("/feature11/ticket", {
             templateUrl: "app/components/feature11/ticket.html",
             controller: "ProductsServiceController",
@@ -124,6 +147,18 @@ tpv.config(function ($routeProvider) {
 	        controller: "EditTicketController",
 	        controllerAs: "vm"
         })
+        //Feature 14
+        .when("/feature14/totalSales", {
+            templateUrl: "app/components/feature14/totalSales.html",
+            controller: "totalSalesController",
+            controllerAs: "vm"
+        })
+        .when("/feature14/bestSellers", {
+            templateUrl: "app/components/feature14/bestSellers.html",
+            controller: "bestSellersController",
+            controllerAs: "vm"
+        })
+
         .otherwise({
             redirectTo: '/'
         });

@@ -18,8 +18,9 @@ tpv.controller('ListArticlesWarningController', [ '$timeout', 'f10Service',
 			vm.getProductsWarning = function() {
 				const
 				delay = 2000;
-				
-				f10Service.getProductsWarning(vm.typeFilter, vm.providerFilter).then(function(result) {
+				var typeFilter = vm.typeFilter == "" ? null : vm.typeFilter;
+				var providerFilter = vm.providerFilter == "" ? 0 : vm.providerFilter;
+				f10Service.getProductsWarning(typeFilter, providerFilter).then(function(result) {
 					vm.completed = true;
 					vm.successList = true;
 					vm.products = result;

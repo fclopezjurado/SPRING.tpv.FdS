@@ -49,7 +49,7 @@
 				<div class="col-lg-12">
 					<div class="form-group col-lg-3">
 						<label for="typeInput">Search by type</label> <input
-							ng-model="search.type" id="typeInput" placeholder="Vinyl"
+							ng-model="vm.searchTextilePriting.type" id="typeInput" placeholder="Vinyl"
 							class="form-control">
 					</div>
 				</div>
@@ -59,12 +59,12 @@
 				<div class="col-lg-12">
 					<div class="form-group col-lg-3">
 						<label for="minWholesalePriceInput">Min wholesale price</label> <input
-							ng-model="vm.minWholesalePrice" type="number" min="0" step="0.01"
+							ng-model="vm.searchArticles.minWholesalePrice" type="number" min="0" step="0.01"
 							id="minWholesalePriceInput" class="form-control">
 					</div>
 					<div class="form-group col-lg-3">
 						<label for="maxWholesalePriceInput">Max wholesale price</label> <input
-							ng-model="vm.maxWholesalePrice" type="number" min="0" step="0.01"
+							ng-model="vm.searchArticles.maxWholesalePrice" type="number" min="0" step="0.01"
 							id="maxWholesalePriceInput" class="form-control">
 					</div>
 
@@ -72,7 +72,7 @@
 					<div class="form-group col-lg-3">
 						<div class="checkbox">
 							<br> <label> <input type="checkbox"
-								ng-model="vm.showOnlyOnStock">On stock
+								ng-model="vm.searchArticles.onStock">On stock
 							</label>
 						</div>
 					</div>
@@ -87,25 +87,25 @@
 				<div class="col-lg-12">
 					<div class="form-group col-lg-3">
 						<label for="minSquareMillimetersInput">Min square
-							millimeters</label> <input ng-model="vm.minSquareMillimeters"
+							millimeters</label> <input ng-model="vm.searchEmbroidery.minSquareMillimeters"
 							type="number" min="0" step="0.01" id="minSquareMillimetersInput"
 							class="form-control">
 					</div>
 					<div class="form-group col-lg-3">
 						<label for="maxSquareMillimetersInput">Max square
-							millimeters</label> <input ng-model="vm.maxSquareMillimeters"
+							millimeters</label> <input ng-model="vm.searchEmbroidery.maxSquareMillimeters"
 							type="number" min="0" step="0.01" id="maxSquareMillimetersInput"
 							class="form-control">
 					</div>
 
 					<div class="form-group col-lg-3">
 						<label for="minStitchesInput">Min number of stitches</label> <input
-							ng-model="vm.minStitches" type="number" min="0"
+							ng-model="vm.searchEmbroidery.minStitches" type="number" min="0"
 							id="minStitchesInput" class="form-control">
 					</div>
 					<div class="form-group col-lg-3">
 						<label for="maxStitchesInput">Max number of stitches</label> <input
-							ng-model="vm.maxStitches" type="number" min="0"
+							ng-model="vm.searchEmbroidery.maxStitches" type="number" min="0"
 							id="maxStitchesInput" class="form-control">
 					</div>
 
@@ -116,12 +116,12 @@
 				<div class="col-lg-12">
 					<div class="form-group col-lg-3">
 						<label for="minColorsInput">Min number of colors</label> <input
-							ng-model="vm.minColors" type="number" min="0" id="minColorsInput"
+							ng-model="vm.searchEmbroidery.minColors" type="number" min="0" id="minColorsInput"
 							class="form-control">
 					</div>
 					<div class="form-group col-lg-3">
 						<label for="maxColorsInput">Max number of colors</label> <input
-							ng-model="vm.maxColors" type="number" min="0" id="maxColorsInput"
+							ng-model="vm.searchEmbroidery.maxColors" type="number" min="0" id="maxColorsInput"
 							class="form-control">
 					</div>
 
