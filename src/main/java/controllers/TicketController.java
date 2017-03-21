@@ -75,9 +75,16 @@ public class TicketController {
     }
 
     public TicketWrapper updateTicket(TicketWrapper ticketWrapper) {
-        // TODO Implement this method
+        Ticket ticket = ticketDao.findById(ticketWrapper.getId());
+        if (ticket != null) {
+            ticket.setShoppingList(ticketWrapper.getShoppingList());
+            ticket.setTicketState(ticketWrapper.getTicketState());
+            return new TicketWrapper(ticketDao.save(ticket));
+        }
         // TODO Feature 11: Check status after each update
-        return null;
+        else {
+            return null;
+        }
     }
 
     public boolean ticketExistsByReference(String ticketReference) {
