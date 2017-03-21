@@ -15,6 +15,7 @@ import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
 import wrappers.TicketWrapper;
+import wrappers.TicketsWrapper;
 
 @Controller
 public class TicketController {
@@ -116,6 +117,17 @@ public class TicketController {
 
     public Ticket getLastTicket() {
         return lastTicket;
+    }
+
+    public TicketsWrapper getByUserMobile(long userMobile) {
+        List<Ticket> tickets = this.ticketDao.findByUserMobile(userMobile);
+        TicketsWrapper ticketsWrapper = new TicketsWrapper();
+
+        for (Ticket ticket : tickets)
+            ticketsWrapper.addTicketWrapper(new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(),
+                    ticket.getTicketState(), ticket.getShoppingList(), ticket.getUser()));
+
+        return ticketsWrapper;
     }
 
 }
