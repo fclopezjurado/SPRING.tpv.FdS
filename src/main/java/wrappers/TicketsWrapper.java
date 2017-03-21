@@ -3,6 +3,8 @@ package wrappers;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.core.Ticket;
+
 public class TicketsWrapper {
 
     private List<TicketWrapper> tickets;
@@ -33,6 +35,12 @@ public class TicketsWrapper {
                     return true;
 
         return false;
+    }
+
+    public void wrapTickets(List<Ticket> tickets) {
+        for (Ticket ticket : tickets)
+            this.addTicketWrapper(new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
+                    ticket.getShoppingList(), ticket.getUser()));
     }
 
     public void addTicketWrapper(TicketWrapper ticket) {
