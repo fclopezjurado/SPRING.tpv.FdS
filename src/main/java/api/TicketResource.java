@@ -68,11 +68,11 @@ public class TicketResource {
         return this.ticketController.getByUserMobile(userMobile);
     }
 
-    @RequestMapping(value = Uris.TICKETS + Uris.USER_EMAIL_PATH + Uris.USER_EMAIL_PATH_VARIABLE, method = RequestMethod.GET)
-    public TicketsWrapper getTicketsByUserEmail(@PathVariable(value = "email") String userEmail) throws NotFoundUserEmailException {
-        if (!this.userController.userExistsByEmail(userEmail))
+    @RequestMapping(value = Uris.TICKETS + Uris.USER_EMAIL_PATH, method = RequestMethod.GET)
+    public TicketsWrapper getTicketsByUserEmail(@RequestBody TicketWrapper ticketWrapper) throws NotFoundUserEmailException {
+        if (!this.userController.userExistsByEmail(ticketWrapper.getUser().getEmail()))
             throw new NotFoundUserEmailException();
 
-        return this.ticketController.getByUserEmail(userEmail);
+        return this.ticketController.getByUserEmail(ticketWrapper.getUser().getEmail());
     }
 }
