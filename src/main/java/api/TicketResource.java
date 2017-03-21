@@ -61,7 +61,7 @@ public class TicketResource {
         return null;
     }
 
-    @RequestMapping(value = Uris.TICKETS + Uris.USER_MOBILE, method = RequestMethod.GET)
+    @RequestMapping(value = Uris.TICKETS + Uris.USER_MOBILE_PATH + Uris.USER_MOBILE, method = RequestMethod.GET)
     public TicketsWrapper getTicketsByUserMobile(@PathVariable(value = "mobile") long userMobile) throws NotFoundUserMobileException {
         if (!this.userController.userExistsByMobile(userMobile))
             throw new NotFoundUserMobileException();
