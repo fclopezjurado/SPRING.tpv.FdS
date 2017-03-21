@@ -14,6 +14,7 @@ import controllers.TicketController;
 import controllers.UserController;
 import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
+import wrappers.UserForEditWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION)
@@ -69,10 +70,10 @@ public class TicketResource {
     }
 
     @RequestMapping(value = Uris.TICKETS + Uris.USER_EMAIL_PATH, method = RequestMethod.GET)
-    public TicketsWrapper getTicketsByUserEmail(@RequestBody TicketWrapper ticketWrapper) throws NotFoundUserEmailException {
-        if (!this.userController.userExistsByEmail(ticketWrapper.getUser().getEmail()))
+    public TicketsWrapper getTicketsByUserEmail(@RequestBody UserForEditWrapper userWrapper) throws NotFoundUserEmailException {
+        if (!this.userController.userExistsByEmail(userWrapper.getEmail()))
             throw new NotFoundUserEmailException();
 
-        return this.ticketController.getByUserEmail(ticketWrapper.getUser().getEmail());
+        return this.ticketController.getByUserEmail(userWrapper.getEmail());
     }
 }
