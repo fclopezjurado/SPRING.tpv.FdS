@@ -1,7 +1,5 @@
 package api;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.exceptions.NotFoundUserEmailException;
 import api.exceptions.NotFoundUserMobileException;
 import controllers.TicketController;
 import controllers.UserController;
@@ -35,7 +34,7 @@ public class TicketResource {
     }
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET)
-    public List<TicketWrapper> listTickets() {
+    public TicketsWrapper listTickets() {
         return ticketController.findAll();
     }
 
@@ -67,5 +66,13 @@ public class TicketResource {
             throw new NotFoundUserMobileException();
 
         return this.ticketController.getByUserMobile(userMobile);
+    }
+
+    @RequestMapping(value = Uris.TICKETS + Uris.USER_EMAIL_PATH + Uris.USER_EMAIL_PATH_VARIABLE, method = RequestMethod.GET)
+    public TicketsWrapper getTicketsByUserEmail(@PathVariable(value = "email") String userEmail) throws NotFoundUserEmailException {
+        if (!this.userController.userExistsByEmail(userEmail))
+            throw new NotFoundUserEmailException();
+
+        return this.ticketController.getByUserEmail(userEmail);
     }
 }
