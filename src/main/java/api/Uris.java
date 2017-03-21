@@ -57,5 +57,9 @@ public class Uris {
     public static final String FILTER ="/byFilter";
     
     public static final String PRODUCTS = "/products";
+    
+    public static final String FAMILIES = "/families";
+    
+    public static final String FAMILY_NAME = "/{name}";
 
 }
