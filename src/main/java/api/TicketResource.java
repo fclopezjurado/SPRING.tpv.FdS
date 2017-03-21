@@ -42,8 +42,8 @@ public class TicketResource {
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.POST)
     public TicketWrapper createTickets(@RequestBody TicketWrapper ticketWrapper) {
-        // TODO Implement ticket creation
-        return null;
+        assert ticketWrapper !=null;
+        return ticketController.createTicket(ticketWrapper.getShoppingList(), ticketWrapper.getUser());
     }
 
     @RequestMapping(value = Uris.TICKETS + Uris.ID, method = RequestMethod.PUT)

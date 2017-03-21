@@ -50,5 +50,21 @@ public class EmbroideryController {
         }
 
     }
+    
+    public void updateEmbroidery (EmbroideryWrapper embroideryWrapper){
+        Embroidery embroidery = embroideryDao.findOne(embroideryWrapper.getId());
+        if (embroidery != null) {
+            embroidery.setDescription(embroideryWrapper.getDescription());
+            embroidery.setReference(embroideryWrapper.getReference());
+            embroidery.setRetailPrice(embroideryWrapper.getRetailPrice());
+            
+            /*TODO */
+            /*embroidery.setStitches(embroideryWrapper.getStitches());
+            embroidery.setSquareMillimeters(embroideryWrapper.getSquareMillimeters());
+            embroidery.setColors(embroideryWrapper.getColors());*/
+            
+            this.embroideryDao.save(embroidery);
+        }
+    }
 
 }
