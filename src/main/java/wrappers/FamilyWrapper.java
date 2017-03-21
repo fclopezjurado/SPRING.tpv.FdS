@@ -8,16 +8,13 @@ public class FamilyWrapper {
     
     private String familyDescription;
     
-    private MockProductsWrapper mockProductsWrapper;
-    
     public FamilyWrapper() {
     }
     
-    public FamilyWrapper(Long id, String name, String familyDescription, MockProductsWrapper mockProductsWrapper){
+    public FamilyWrapper(Long id, String name, String familyDescription){
         this.id = id;
         this.name = name;
         this.familyDescription = familyDescription;
-        this.mockProductsWrapper = mockProductsWrapper;
     }
     
     public long getId() {
@@ -39,15 +36,7 @@ public class FamilyWrapper {
     public String getFamilyDescription() {
         return familyDescription;
     }
-    
-    public void setProductWrappers(MockProductsWrapper mockProductsWrapper) {
-        this.mockProductsWrapper = mockProductsWrapper;
-    }
-    
-    public MockProductsWrapper getProductWrappers() {
-        return mockProductsWrapper;
-    }
-    
+ 
     @Override
     public int hashCode() {
         return (int) id;

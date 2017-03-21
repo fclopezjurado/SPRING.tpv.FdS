@@ -1,7 +1,5 @@
 package api;
 
-import java.security.PublicKey;
-
 public class Uris {
 
     public static final String SERVLET_MAP = "/api";
