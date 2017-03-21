@@ -37,6 +37,15 @@ public class TicketsWrapper {
         return false;
     }
 
+    public boolean userHasTicketsByEmail(String email) {
+        if (!this.isEmpty())
+            for (TicketWrapper ticket : this.tickets)
+                if (ticket.getUser().getEmail().equals(email))
+                    return true;
+
+        return false;
+    }
+
     public void wrapTickets(List<Ticket> tickets) {
         for (Ticket ticket : tickets)
             this.addTicketWrapper(new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
