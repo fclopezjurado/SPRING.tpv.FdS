@@ -37,4 +37,19 @@ public class UserController {
             return false;
         }
     }
+
+    public boolean userExistsByMobile(long mobile) {
+        User user = this.userDao.findByMobile(mobile);
+
+        if (user != null)
+            return user.getMobile() == mobile;
+
+        return false;
+    }
+
+    public UserWrapper getByTicketReference(String ticketReference) {
+        User user = this.userDao.findByTicketReference(ticketReference);
+        return new UserWrapper(user.getMobile(), user.getUsername(), user.getPassword());
+    }
+
 }

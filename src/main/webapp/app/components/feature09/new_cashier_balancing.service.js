@@ -124,10 +124,10 @@ angular
 								}
 							}
 
-							$http.defaults.headers.common['Authorization'] = 'Basic '
-									+ Base64.encode(sessionStorage.token + ':');
+							/*$http.defaults.headers.common['Authorization'] = 'Basic '
+									+ Base64.encode(sessionStorage.token + ':');*/
 
-							return responseMockOK;
+							return angular.fromJson(responseMockOK).data;
 						}
 					}
 

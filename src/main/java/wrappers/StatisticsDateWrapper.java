@@ -1,34 +1,32 @@
 package wrappers;
 
-import java.util.Calendar;
-
 public class StatisticsDateWrapper {
 
-    private Calendar inicio;
+    private String inicio;
 
-    private Calendar fin;
+    private String fin;
 
     public StatisticsDateWrapper() {
     }
 
-    public StatisticsDateWrapper(Calendar inicio, Calendar fin) {
+    public StatisticsDateWrapper(String inicio, String fin) {
         this.inicio = inicio;
         this.fin = fin;
     }
 
-    public Calendar getInicio() {
+    public String getInicio() {
         return inicio;
     }
 
-    public void setInicio(Calendar inicio) {
+    public void setInicio(String inicio) {
         this.inicio = inicio;
     }
 
-    public Calendar getFin() {
+    public String getFin() {
         return fin;
     }
 
-    public void setFin(Calendar fin) {
+    public void setFin(String fin) {
         this.fin = fin;
     }
 

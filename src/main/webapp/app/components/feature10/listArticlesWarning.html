@@ -1,0 +1,47 @@
+<section class="container">
+	<div class="jumbotron text-center">
+		<fieldset>
+			<legend>Feature10. Listado de articulos en alerta</legend>
+			<div class="form-group text-left">
+				<label for="type" class="col-md-3">Filtro por tipo:</label> <select
+					class="col-md-3" ng-init="vm.typeFilter = 'WARNING'"
+					ng-model="vm.typeFilter" ng-change="vm.getProductsWarning()">
+					<option value='WARNING'>Warning</option>
+					<option value='CRITICAL'>Critical</option>
+				</select> <label for="type" class="col-md-3">Filtro por proveedor:</label> <select
+					class="col-md-3" ng-init="vm.providerFilter = ''"
+					ng-model="vm.providerFilter" ng-change="vm.getProductsWarning()">
+					<option value=''></option>
+					<option ng-repeat="provider in vm.providersOpts" value="{{ provider.id }}">{{ provider.company }}</option>
+				</select>
+			</div>
+			<br />
+			<table class="table table-condensed table-hover">
+				<thead>
+					<tr>
+						<th>Referencia</th>
+						<th>Descripción</th>
+						<th>Proveedor</th>
+						<th>Stock actual</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="5" ng-hide="vm.successList">Cargando...</td>
+					</tr>
+					<tr>
+						<td colspan="5" ng-show="vm.successList && !vm.products.length">No
+							hay artículos en alerta</td>
+					</tr>
+					<tr ng-show="vm.successList && vm.products.length"
+						ng-repeat="product in vm.products">
+						<td style="vertical-align: middle;">{{ product.reference }}</td>
+						<td>{{ product.description }}</td>
+						<td>{{ product.providerWrapper.company }}</td>
+						<td style="vertical-align: middle;">{{ product.stock }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</fieldset>
+	</div>
+</section>

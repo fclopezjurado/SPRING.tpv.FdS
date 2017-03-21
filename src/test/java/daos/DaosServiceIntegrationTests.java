@@ -1,6 +1,7 @@
 package daos;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import daos.core.AlarmDao;
 import daos.core.ArticleDao;
 import daos.core.BudgetDao;
 import daos.core.EmbroideryDao;
+import daos.core.FamilyDao;
 import daos.core.InvoiceDao;
 import daos.core.ProviderDao;
 import daos.core.TextilePrintingDao;
@@ -24,8 +26,10 @@ import daos.users.UserDao;
 import entities.core.Alarm;
 import entities.core.AlarmType;
 import entities.core.Article;
+import entities.core.ComponentProduct;
 import entities.core.Budget;
 import entities.core.Embroidery;
+import entities.core.Family;
 import entities.core.Invoice;
 import entities.core.Product;
 import entities.core.Provider;
@@ -81,6 +85,10 @@ public class DaosServiceIntegrationTests {
 
     @Autowired
     private AlarmDao alarmDao;
+    
+    @Autowired
+    private FamilyDao familyDao;
+    
 
     @PostConstruct
     public void populate() {
@@ -93,6 +101,7 @@ public class DaosServiceIntegrationTests {
         this.createBudgets();
         this.createInvoices();
         this.createAlarms();
+        this.createFamilies();
     }
 
     public void createUsers(int initial, int size, Role role) {
@@ -250,5 +259,16 @@ public class DaosServiceIntegrationTests {
         alarmDao.save(new Alarm("Alarma Warning", articles, AlarmType.WARNING, 5));
         alarmDao.save(new Alarm("Alarma Critical", null, AlarmType.CRITICAL, 2));
         alarmDao.save(new Alarm("Alarma extra", articles, AlarmType.WARNING, 5));
+    }
+    
+    public void createFamilies() {
+        
+        List<ComponentProduct> lists = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            ComponentProduct componentFamily = articleDao.findOne(84000001111L + i);
+            lists.add(componentFamily);
+        }
+        
+        familyDao.save(new Family(1L, "name1", "description1", lists));
     }
 }
