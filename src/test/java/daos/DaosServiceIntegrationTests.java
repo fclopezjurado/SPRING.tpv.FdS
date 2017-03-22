@@ -1,6 +1,7 @@
 package daos;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import daos.core.AlarmDao;
 import daos.core.ArticleDao;
+import daos.core.BudgetDao;
 import daos.core.EmbroideryDao;
+import daos.core.FamilyDao;
 import daos.core.InvoiceDao;
 import daos.core.ProviderDao;
 import daos.core.TextilePrintingDao;
@@ -23,7 +26,10 @@ import daos.users.UserDao;
 import entities.core.Alarm;
 import entities.core.AlarmType;
 import entities.core.Article;
+import entities.core.ComponentProduct;
+import entities.core.Budget;
 import entities.core.Embroidery;
+import entities.core.Family;
 import entities.core.Invoice;
 import entities.core.Product;
 import entities.core.Provider;
@@ -70,12 +76,19 @@ public class DaosServiceIntegrationTests {
 
     @Autowired
     private TicketDao ticketDao;
+    
+    @Autowired
+    private BudgetDao budgetDao;
 
     @Autowired
     private InvoiceDao invoiceDao;
 
     @Autowired
     private AlarmDao alarmDao;
+    
+    @Autowired
+    private FamilyDao familyDao;
+    
 
     @PostConstruct
     public void populate() {
@@ -85,8 +98,10 @@ public class DaosServiceIntegrationTests {
         this.createProviders();
         this.createProducts();
         this.createTickets();
+        this.createBudgets();
         this.createInvoices();
         this.createAlarms();
+        this.createFamilies();
     }
 
     public void createUsers(int initial, int size, Role role) {
@@ -207,6 +222,32 @@ public class DaosServiceIntegrationTests {
         }
         ticketDao.save(ticket);
     }
+    
+    public void createBudgets() {
+        Budget budget;
+
+        budget = new Budget(1L);
+        for (int i = 0; i < 4; i++) {
+            Product product = articleDao.findOne(84000001111L + i);
+            budget.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budget.setUser(userDao.findByMobile(666000000));
+        budgetDao.save(budget);
+
+        budget = new Budget(2L);
+        for (int i = 0; i < 4; i++) {
+            Product product = embroideryDao.findOne(84000002222L + i);
+            budget.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budgetDao.save(budget);
+
+        budget = new Budget(3L);
+        for (int i = 0; i < 4; i++) {
+            Product product = textilePrintingDao.findOne(84000003333L + i);
+            budget.addShopping(new Shopping(1 + i, 10, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budgetDao.save(budget);
+    }
 
     public void createInvoices() {
         invoiceDao.save(new Invoice(1, ticketDao.findOne(1L)));
@@ -218,5 +259,16 @@ public class DaosServiceIntegrationTests {
         alarmDao.save(new Alarm("Alarma Warning", articles, AlarmType.WARNING, 5));
         alarmDao.save(new Alarm("Alarma Critical", null, AlarmType.CRITICAL, 2));
         alarmDao.save(new Alarm("Alarma extra", articles, AlarmType.WARNING, 5));
+    }
+    
+    public void createFamilies() {
+        
+        List<ComponentProduct> lists = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            ComponentProduct componentFamily = articleDao.findOne(84000001111L + i);
+            lists.add(componentFamily);
+        }
+        
+        familyDao.save(new Family(1L, "name1", "description1", lists));
     }
 }

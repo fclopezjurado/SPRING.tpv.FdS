@@ -1,6 +1,8 @@
 package wrappers;
  
  import java.math.BigDecimal;
+
+import entities.core.TextilePrinting;
  
  public class TextilePrintingWrapper extends ProductWrapper {
  
@@ -10,6 +12,14 @@ package wrappers;
  
      }
  
+     
+    public TextilePrintingWrapper(TextilePrinting textilePrinting) {
+
+        super(textilePrinting.getId(), textilePrinting.getReference(), textilePrinting.getDescription(), textilePrinting.getRetailPrice());
+        this.type = textilePrinting.getType();
+    }
+     
+     
      public TextilePrintingWrapper(long id, String reference, String description, BigDecimal retailPrice, String type) {
          super(id, reference, description, retailPrice);
          this.type = type;

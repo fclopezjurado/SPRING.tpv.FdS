@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 
 import daos.core.AlarmDao;
@@ -73,6 +74,9 @@ public class AdminController {
     
     @Autowired
     private AlarmDao alarmDao;
+    
+    @Autowired
+    private Environment environment;
 
     @Autowired
     public void setDataService(DataService dataService) {
@@ -194,6 +198,7 @@ public class AdminController {
             Product product = articleDao.findOne(84000001111L + i);
             ticket.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
         }
+        ticket.setUser(userDao.findByMobile(Long.valueOf(environment.getProperty("admin.mobile"))));
         ticketDao.save(ticket);
 
         ticket = new Ticket(2L, TicketState.OPENED);

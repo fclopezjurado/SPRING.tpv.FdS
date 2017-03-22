@@ -1,47 +1,35 @@
 package api;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import config.PersistenceConfig;
-import config.TestsPersistenceConfig;
 import entities.core.Alarm;
 import entities.core.AlarmType;
-import entities.core.Article;
-import entities.core.Provider;
 import wrappers.AlarmWrapper;
 import wrappers.AlarmsWrapper;
+import wrappers.ArticleWrapper;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
 public class AlarmResourceFunctionalTesting {
 
     public static final String URL = "http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api" + Uris.VERSION;
 
     @Before
-    public void seedDataBase(){
-        new RestService().deleteAll();
+    public void seedDataBase() {
         new RestService().seedDatabase();
     }
 
     @Test
     public void testPostAlarm() {
-        List<Article> articles = new ArrayList<>();      
-        Provider provider = new Provider("company0", "address0", 666100000L, 916661000L, "No", "No");
-        Article article = new Article(84000001111L, "article0", new BigDecimal(20), "article0", new BigDecimal(10), provider);
-        articles.add(article);
-
+        List<ArticleWrapper> articles = Arrays.asList(new RestBuilder<ArticleWrapper[]>(RestService.URL).path(Uris.ARTICLES).clazz(ArticleWrapper[].class).get().build());
         AlarmWrapper newAlarm = new AlarmWrapper("alarma2", AlarmType.WARNING, articles, 5);
         new RestBuilder<Object>(RestService.URL).path(Uris.ALARMS).body(newAlarm).post().build();
         AlarmsWrapper wrapp = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
@@ -70,7 +58,7 @@ public class AlarmResourceFunctionalTesting {
         AlarmsWrapper alarmsWrapper = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get()
                 .build();
         AlarmWrapper alarmWrapper = new AlarmWrapper(alarmsWrapper.getAlarms().get(0).getId(), "Alarma modificada",
-                new ArrayList<Article>(), AlarmType.CRITICAL, 4);
+                new ArrayList<ArticleWrapper>(), AlarmType.CRITICAL, 4);
         new RestBuilder<AlarmWrapper>(RestService.URL).path(Uris.ALARMS).body(alarmWrapper).put().build();
         alarmsWrapper = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
 
@@ -89,12 +77,8 @@ public class AlarmResourceFunctionalTesting {
     }
 
     @Test
-    public void testDelete(){
-        List<Article> articles = new ArrayList<>();      
-        Provider provider = new Provider("company0", "address0", 666100000L, 916661000L, "No", "No");
-        Article article = new Article(84000001111L, "article0", new BigDecimal(20), "article0", new BigDecimal(10), provider);
-        articles.add(article);
-
+    public void testDelete() {
+        List<ArticleWrapper> articles = Arrays.asList(new RestBuilder<ArticleWrapper[]>(RestService.URL).path(Uris.ARTICLES).clazz(ArticleWrapper[].class).get().build());
         AlarmWrapper newAlarm = new AlarmWrapper(String.valueOf((new Date()).getTime()), AlarmType.WARNING, articles, 5);
         new RestBuilder<Object>(RestService.URL).path(Uris.ALARMS).body(newAlarm).post().build();
 
@@ -104,13 +88,13 @@ public class AlarmResourceFunctionalTesting {
         while (!found && i < wrapp.getAlarms().size()) {
             if (wrapp.getAlarms().get(i).getName().equals(newAlarm.getName())) {
                 found = true;
-            }
-            else {
+            } else {
                 i++;
             }
         }
 
-        new RestBuilder<Object>(RestService.URL).path(Uris.ALARMS).path("/" + String.valueOf(wrapp.getAlarms().get(i).getId())).delete().build();
+        new RestBuilder<Object>(RestService.URL).path(Uris.ALARMS).path("/" + String.valueOf(wrapp.getAlarms().get(i).getId())).delete()
+                .build();
 
         wrapp = new RestBuilder<AlarmsWrapper>(RestService.URL).path(Uris.ALARMS).clazz(AlarmsWrapper.class).get().build();
         found = false;
@@ -118,8 +102,7 @@ public class AlarmResourceFunctionalTesting {
         while (!found && i < wrapp.getAlarms().size()) {
             if (wrapp.getAlarms().get(i).getName().equals(newAlarm.getName())) {
                 found = true;
-            }
-            else {
+            } else {
                 i++;
             }
         }
@@ -128,7 +111,7 @@ public class AlarmResourceFunctionalTesting {
             fail();
         }
     }
-
+    
     @After
     public void after() {
         new RestService().deleteAll();
