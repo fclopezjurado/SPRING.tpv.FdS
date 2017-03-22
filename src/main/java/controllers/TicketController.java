@@ -1,7 +1,6 @@
 package controllers;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +14,7 @@ import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
 import wrappers.TicketWrapper;
+import wrappers.TicketsWrapper;
 
 @Controller
 public class TicketController {
@@ -31,15 +31,9 @@ public class TicketController {
         this.ticketDao = ticketDao;
     }
 
-    public List<TicketWrapper> findAll() {
-        List<Ticket> tickets = ticketDao.findAll();
-        List<TicketWrapper> ticketsWrapper = new ArrayList<TicketWrapper>();
-
-        for (Ticket ticket : tickets) {
-            ticketsWrapper.add(new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
-                    ticket.getShoppingList(), ticket.getUser()));
-        }
-
+    public TicketsWrapper findAll() {
+        TicketsWrapper ticketsWrapper = new TicketsWrapper();
+        ticketsWrapper.wrapTickets(ticketDao.findAll());
         return ticketsWrapper;
     }
 
@@ -123,6 +117,18 @@ public class TicketController {
 
     public Ticket getLastTicket() {
         return lastTicket;
+    }
+
+    public TicketsWrapper getByUserMobile(long userMobile) {
+        TicketsWrapper ticketsWrapper = new TicketsWrapper();
+        ticketsWrapper.wrapTickets(this.ticketDao.findByUserMobile(userMobile));
+        return ticketsWrapper;
+    }
+
+    public TicketsWrapper getByUserEmail(String userEmail) {
+        TicketsWrapper ticketsWrapper = new TicketsWrapper();
+        ticketsWrapper.wrapTickets(this.ticketDao.findByUserEmail(userEmail));
+        return ticketsWrapper;
     }
 
 }

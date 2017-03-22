@@ -20,13 +20,14 @@ import api.exceptions.NotFoundUserMobileException;
 import api.exceptions.UnauthorizedException;
 import api.exceptions.NotFoundReferenceVoucherException;
 import api.exceptions.NotFoundTicketReferenceException;
+import api.exceptions.NotFoundUserEmailException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({NotFoundUserIdException.class, NotFoundReferenceVoucherException.class, NotFoundTicketReferenceException.class,
-            NotFoundUserMobileException.class})
+            NotFoundUserMobileException.class, NotFoundUserEmailException.class})
     @ResponseBody
     public ErrorMessage notFoundRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);
@@ -50,7 +51,8 @@ public class ApiExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.CONFLICT)
-    @ExceptionHandler({AlreadyExistUserFieldException.class, AlreadyExistUserFieldException.class, AlreadyExistProviderFieldException.class})
+    @ExceptionHandler({AlreadyExistUserFieldException.class, AlreadyExistUserFieldException.class,
+            AlreadyExistProviderFieldException.class})
     @ResponseBody
     public ErrorMessage conflictRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);

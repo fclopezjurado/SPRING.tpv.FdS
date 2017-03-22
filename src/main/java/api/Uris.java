@@ -51,15 +51,19 @@ public class Uris {
     public static final String TEXTILE_PRINTING = "/textilePrinting";
 
     public static final String EMBROIDERY = "/embroidery";
-    
+
     public static final String CASHIER_BALANCE = "/balances";
-    
-    public static final String FILTER ="/byFilter";
-    
+
+    public static final String FILTER = "/byFilter";
+
     public static final String PRODUCTS = "/products";
-    
+
     public static final String FAMILIES = "/families";
-    
+
     public static final String FAMILY_NAME = "/{name}";
 
+    public static final String USER_MOBILE_PATH = "/mobile";
+    
+    public static final String USER_EMAIL_PATH = "/email";
+    
 }
