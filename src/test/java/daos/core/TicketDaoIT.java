@@ -70,7 +70,7 @@ public class TicketDaoIT {
     @Test
     public void testFindByInvoiceID() {
         Invoice invoice = invoiceDao.findOne(1);
-        assertEquals(invoice.getTicket().getReference(), ticketDao.findByInvoiceID(invoice.getId()).get(0).getReference());
+        assertEquals(invoice.getTicket().getReference(), ticketDao.findByInvoiceID(invoice.getId()).getReference());
     }
 
 }
