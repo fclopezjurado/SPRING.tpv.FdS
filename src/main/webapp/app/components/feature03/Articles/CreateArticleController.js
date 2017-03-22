@@ -1,19 +1,23 @@
-tpv.controller('listadoArticulosController', [ '$timeout', 'f03Service',
+tpv.controller('CreateArticleController', [ '$timeout', 'f03Service',
 		function($timeout, f03Service) {
 			"use strict";
 			var vm = this;
 
 			vm.completed = false;
-			vm.articles = null;
 			vm.error = false;
+			vm.response;
+			vm.createArticle=createArticle;
 
-			function getAll() {
+			function createArticle() {
 				const
-				delay = 2000;
-
-				f03Service.getAll().then(function(result) {
+				delay = 10000;
+				f03Service.addArticle(vm.article).then(function(result) {
 					vm.completed = true;
-					vm.articles = result.articles;
+					vm.response = result;
+					
+					$timeout(function() {
+						vm.completed = false;
+					}, delay)
 				}, function(errors) {
 					// handle errors
 					vm.error = true;
@@ -23,5 +27,5 @@ tpv.controller('listadoArticulosController', [ '$timeout', 'f03Service',
 					}, delay)
 				});
 			}
-			getAll();
+		
 		} ]);

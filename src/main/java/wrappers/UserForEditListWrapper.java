@@ -4,10 +4,10 @@ import java.util.List;
 
 public class UserForEditListWrapper {
     private List<UserForEditWrapper> userList;
-    
+
     public UserForEditListWrapper() {
     }
-    
+
     public UserForEditListWrapper(List<UserForEditWrapper> userList) {
         super();
         this.userList = userList;
@@ -25,6 +25,5 @@ public class UserForEditListWrapper {
     public String toString() {
         return "UserForEditListWrapper [userList=" + userList + "]";
     }
-    
-    
+
 }

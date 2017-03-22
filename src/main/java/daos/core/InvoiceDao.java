@@ -11,5 +11,8 @@ public interface InvoiceDao extends JpaRepository<Invoice, Integer> {
 
     @Query("select i from Invoice i where i.ticket.user.mobile = ?1")
     List<Invoice> findByUserMobile(long userMobile);
+    
+    @Query("select max(i.id) from Invoice i")
+    int findMaxInvoiceID();
 
 }
