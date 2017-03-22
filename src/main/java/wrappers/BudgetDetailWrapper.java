@@ -1,9 +1,12 @@
 package wrappers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import entities.core.Budget;
 import entities.core.Shopping;
 
-public class BudgetWrapper {
+public class BudgetDetailWrapper {
 
     private String reference;
     
@@ -11,12 +14,24 @@ public class BudgetWrapper {
     
     private float total;
     
-    public BudgetWrapper(Budget budget) {
+    private List<Shopping> shoppingList;
+    
+    public List<Shopping> getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(List<Shopping> shoppingList) {
+        this.shoppingList = shoppingList;
+    }
+
+    public BudgetDetailWrapper(Budget budget) {
         reference = budget.getReference();
         created = budget.getCreated().toString();
         total = 0;
+        shoppingList = new ArrayList<Shopping>();
         for (Shopping shopping : budget.getShoppingList()){
             total += shopping.getRetailPrice().floatValue() * shopping.getAmount();
+            shoppingList.add(shopping);
         }
     }
 
@@ -43,10 +58,11 @@ public class BudgetWrapper {
     public void setTotal(float total) {
         this.total = total;
     }
-    
+
     @Override
     public String toString() {
-        return "BudgetWrapper [reference=" + reference + ", created=" + created + ", total=" + total + "]";
+        return "BudgetDetailWrapper [reference=" + reference + ", created=" + created + ", total=" + total + ", shoppingList="
+                + shoppingList + "]";
     }
 
 }

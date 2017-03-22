@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 
 import daos.core.BudgetDao;
 import entities.core.Budget;
+import entities.core.Shopping;
+import wrappers.BudgetDetailWrapper;
 import wrappers.BudgetListWrapper;
-import wrappers.BudgetWrapper;
-import wrappers.UserWrapper;
 
 @Controller
 public class BudgetController {
@@ -21,21 +21,20 @@ public class BudgetController {
         this.budgetDao = budgetDao;
     }
     
-    public BudgetListWrapper getAllBudgetsByUser(UserWrapper user) {
-        return new BudgetListWrapper(budgetDao.findByUserMobile(user.getMobile()));
+    public BudgetListWrapper findAll() {
+        return new BudgetListWrapper(budgetDao.findAll());
     }
     
-    public BudgetWrapper getBudgetByReference(String reference) {
-        return new BudgetWrapper(budgetDao.findByReference(reference));
+    public BudgetDetailWrapper getBudgetByReference(String reference) {
+        return new BudgetDetailWrapper(budgetDao.findByReference(reference));
     }
     
-    public void deleteBudget(BudgetWrapper budgetWrapper) {
-        Budget budget = budgetDao.findByReference(budgetWrapper.getReference());
+    public void deleteBudget(String reference) {
+        Budget budget = budgetDao.findByReference(reference);
         budgetDao.delete(budget);
     }
     
-    public void updateBudget(BudgetWrapper budgetWrapper) {
-        Budget budget = budgetDao.findByReference(budgetWrapper.getReference());
-        budgetDao.save(budget);
+    public void addProduct(String reference, Shopping shopping) {
+        
     }
 }
