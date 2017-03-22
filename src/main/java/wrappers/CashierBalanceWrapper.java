@@ -1,5 +1,9 @@
 package wrappers;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class CashierBalanceWrapper {
 
     private int id;
@@ -11,6 +15,8 @@ public class CashierBalanceWrapper {
     private double checks;
 
     private double dataphone;
+    
+    private double cash;
 
     private String date;
 
@@ -25,6 +31,16 @@ public class CashierBalanceWrapper {
         this.dataphone = dataphone;
         this.date = date;
     }
+    
+    public CashierBalanceWrapper(int id, BigDecimal change, BigDecimal total, BigDecimal checks, BigDecimal dataphone, Calendar date) {
+        SimpleDateFormat dateFormater = new SimpleDateFormat(dateFormat);
+        this.id = id;
+        this.change = change.doubleValue();
+        this.total = total.doubleValue();
+        this.checks = checks.doubleValue();
+        this.dataphone = dataphone.doubleValue();
+        this.date = dateFormater.format(date);
+    }
 
     public CashierBalanceWrapper(double change, double total, double checks, double dataphone, String date) {
         super();
@@ -34,6 +50,7 @@ public class CashierBalanceWrapper {
         this.dataphone = dataphone;
         this.date = date;
     }
+
 
     public int getId() {
         return id;
@@ -115,6 +132,14 @@ public class CashierBalanceWrapper {
         if (id != other.id)
             return false;
         return true;
+    }
+
+    public double getCash() {
+        return cash;
+    }
+
+    public void setCash(double cash) {
+        this.cash = cash;
     }
 
 }
