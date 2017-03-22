@@ -1,8 +1,5 @@
 package api;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,10 +55,7 @@ public class UserResource {
 
     @RequestMapping(value = Uris.USERS, method = RequestMethod.GET)
     public UserForEditListWrapper getAllUsers() {
-        // TODO use instead of mock: this.userController.findAll();
-        List<UserForEditWrapper> list = new ArrayList<UserForEditWrapper>();
-        list.add(new UserForEditWrapper(66000000, "Prueba", true, "Calle prueba", "12345678Z", "prueba@mail.com", "25/10/2008"));
-        return new UserForEditListWrapper(list);
+        return this.userController.findAll();
     }
 
     @RequestMapping(value = Uris.USERS, method = RequestMethod.PUT)
