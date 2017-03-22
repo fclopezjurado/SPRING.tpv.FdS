@@ -12,7 +12,7 @@ import wrappers.ProductFilterWrapper;
 import wrappers.ProductsOutFilterWrapper;
 
 @RestController
-@RequestMapping(Uris.VERSION + "/products")
+@RequestMapping(Uris.VERSION + Uris.PRODUCTS)
 public class ProductResource {
     
     @RequestMapping(method = RequestMethod.POST)

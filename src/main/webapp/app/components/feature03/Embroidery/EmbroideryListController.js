@@ -7,6 +7,7 @@ tpv.controller('EmbroideryListController', [ '$timeout', 'f03Service',
 			vm.error = false;
 			vm.response;
 			vm.getAll = getAll;
+			vm.removeEmbroidery = removeEmbroidery;
 
 			function getAll() {
 				const
@@ -21,6 +22,25 @@ tpv.controller('EmbroideryListController', [ '$timeout', 'f03Service',
 					}, delay)
 				}, function(errors) {
 					// handle errors
+					vm.error = true;
+					vm.response = errors;
+					$timeout(function() {
+						vm.error = false;
+					}, delay)
+				});
+			}
+			
+			function removeEmbroidery(id) {
+				const
+				delay = 10000;
+				f03Service.removeEmbroidery(id).then(function(result) {
+					vm.completed = true;
+					vm.response = result;
+					
+					$timeout(function() {
+						vm.completed = false;
+					}, delay)
+				}, function(errors) {
 					vm.error = true;
 					vm.response = errors;
 					$timeout(function() {

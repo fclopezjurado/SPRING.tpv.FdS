@@ -1,5 +1,6 @@
 package controllers;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import daos.core.ArticleDao;
 import daos.core.ProviderDao;
 import entities.core.AlarmType;
 import entities.core.Article;
+import entities.core.TextilePrinting;
 import wrappers.ArticleWrapper;
+import wrappers.TextilePrintingWrapper;
 
 @Controller
 public class ArticleController {
@@ -60,4 +63,27 @@ public class ArticleController {
         return articleWrapperList;
     }
 
+    public void removeArticle(long id) {
+        Article article = articlesDao.findOne(id);
+        articlesDao.delete(article);
+    }
+    
+    public void updateWholeSalePrice(ArticleWrapper article, BigDecimal newWholeSalePrice) {
+        Article a = articlesDao.findById(article.getId());
+        a.setWholesalePrice(newWholeSalePrice);
+        articlesDao.save(a);
+    }
+    
+    public void updateArticle(ArticleWrapper articleWrapper) {
+        Article  article = articlesDao.findOne(articleWrapper.getId());
+        if (article != null) {
+            article.setDescription(articleWrapper.getDescription());
+            article.setReference(articleWrapper.getReference());
+            article.setRetailPrice(articleWrapper.getRetailPrice());
+            article.setStock(articleWrapper.getStock());
+            article.setWholesalePrice(articleWrapper.getWholesalePrice());
+            
+            this.articlesDao.save(article);
+        }
+    }
 }

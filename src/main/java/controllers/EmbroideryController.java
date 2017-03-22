@@ -34,4 +34,37 @@ public class EmbroideryController {
         }
         return embroideryWrapperList;
     }
+    
+    public void removeEmbroidery(long id) {
+        Embroidery embroidery = embroideryDao.findOne(id);
+        embroideryDao.delete(embroidery);
+}
+
+    public void addEmbroidery(EmbroideryWrapper embroideryWrapper) {
+        Embroidery embroidery = embroideryDao.findOne(embroideryWrapper.getId());
+        if (embroidery == null) {
+            Embroidery newEmbroidery = new Embroidery(embroideryWrapper.getId(), embroideryWrapper.getReference(),
+                    embroideryWrapper.getRetailPrice(), embroideryWrapper.getDescription(), embroideryWrapper.getStitches(),
+                    embroideryWrapper.getColors(), embroideryWrapper.getSquareMillimeters());
+            this.embroideryDao.save(newEmbroidery);
+        }
+
+    }
+    
+    public void updateEmbroidery (EmbroideryWrapper embroideryWrapper){
+        Embroidery embroidery = embroideryDao.findOne(embroideryWrapper.getId());
+        if (embroidery != null) {
+            embroidery.setDescription(embroideryWrapper.getDescription());
+            embroidery.setReference(embroideryWrapper.getReference());
+            embroidery.setRetailPrice(embroideryWrapper.getRetailPrice());
+            
+            /*TODO */
+            /*embroidery.setStitches(embroideryWrapper.getStitches());
+            embroidery.setSquareMillimeters(embroideryWrapper.getSquareMillimeters());
+            embroidery.setColors(embroideryWrapper.getColors());*/
+            
+            this.embroideryDao.save(embroidery);
+        }
+    }
+
 }

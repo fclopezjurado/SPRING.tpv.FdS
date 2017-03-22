@@ -36,6 +36,31 @@ public class TextilePrintingController {
         return textilePrintingWrapperList;
     }
 
+    public void removeTextilePrinting(long id) {
+        TextilePrinting textilePrinting = textilePrintingsDao.findOne(id);
+        textilePrintingsDao.delete(textilePrinting);
+}
 
+
+    public void addTextilePrinting(TextilePrintingWrapper textilePrintingWrapper) {
+        TextilePrinting textilePrinting = textilePrintingsDao.findOne(textilePrintingWrapper.getId());
+        if (textilePrinting == null) {
+            TextilePrinting newTextilePrinting = new TextilePrinting(textilePrintingWrapper.getId(),textilePrintingWrapper.getReference(),textilePrintingWrapper.getRetailPrice(),textilePrintingWrapper.getDescription(),textilePrintingWrapper.getType());
+            this.textilePrintingsDao.save(newTextilePrinting);
+        }
+        
+    }
+    
+    public void updateTextilePrinting(TextilePrintingWrapper textilePrintingWrapper) {
+        TextilePrinting textilePrinting = textilePrintingsDao.findOne(textilePrintingWrapper.getId());
+        if (textilePrinting != null) {
+            textilePrinting.setDescription(textilePrintingWrapper.getDescription());
+            textilePrinting.setReference(textilePrintingWrapper.getReference());
+            textilePrinting.setRetailPrice(textilePrintingWrapper.getRetailPrice());
+            textilePrinting.setType(textilePrintingWrapper.getType());
+                     
+            this.textilePrintingsDao.save(textilePrinting);
+        } 
+    }
 
 }
