@@ -10,7 +10,6 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import wrappers.InvoiceWrapper;
 import wrappers.InvoicesWrapper;
-import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
 import wrappers.UserWrapper;
 
@@ -32,20 +31,17 @@ public class InvoiceResourceFunctionalTesting {
     public void testCreateInvoice() {
         TicketsWrapper tickets = new RestBuilder<TicketsWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketsWrapper.class).get()
                 .build();
-        InvoiceWrapper invoice = new RestBuilder<InvoiceWrapper>(RestService.URL).path(Uris.INVOICES).body(tickets.getFirstTicket())
-                .clazz(InvoiceWrapper.class).post().build();
+        InvoiceWrapper invoice = new RestBuilder<InvoiceWrapper>(RestService.URL).path(Uris.INVOICES)
+                .param("reference", tickets.getFirstTicket().getReference()).clazz(InvoiceWrapper.class).post().build();
 
         assertEquals(invoice.getTicketReference(), tickets.getFirstTicket().getReference());
     }
 
     @Test
     public void testCreateInvoiceException() {
-        TicketWrapper ticketForRequest = new TicketWrapper();
-        ticketForRequest.setReference(ticketReferenceWrong);
-
         try {
-            new RestBuilder<InvoiceWrapper>(RestService.URL).path(Uris.INVOICES).body(ticketForRequest).clazz(InvoiceWrapper.class).post()
-                    .build();
+            new RestBuilder<InvoiceWrapper>(RestService.URL).path(Uris.INVOICES).param("reference", ticketReferenceWrong)
+                    .clazz(InvoiceWrapper.class).post().build();
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.NOT_FOUND, httpError.getStatusCode());
         }
