@@ -50,5 +50,17 @@ public class TextilePrintingController {
         }
         
     }
+    
+    public void updateTextilePrinting(TextilePrintingWrapper textilePrintingWrapper) {
+        TextilePrinting textilePrinting = textilePrintingsDao.findOne(textilePrintingWrapper.getId());
+        if (textilePrinting != null) {
+            textilePrinting.setDescription(textilePrintingWrapper.getDescription());
+            textilePrinting.setReference(textilePrintingWrapper.getReference());
+            textilePrinting.setRetailPrice(textilePrintingWrapper.getRetailPrice());
+            textilePrinting.setType(textilePrintingWrapper.getType());
+                     
+            this.textilePrintingsDao.save(textilePrinting);
+        } 
+    }
 
 }
