@@ -27,7 +27,7 @@ public class TicketResource {
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET, params = "reference")
     public TicketWrapper getTicketByReference(@RequestParam String reference) throws NotFoundTicketReferenceException {
-        TicketWrapper ticketWrapper = ticketController.getTicketByReference(reference);
+        TicketWrapper ticketWrapper = ticketController.getTicketByReferenceNotCommitted(reference);
         if (ticketWrapper == null) {
             throw new NotFoundTicketReferenceException();
         }

@@ -13,7 +13,7 @@ public class TicketController {
     @Autowired
     private TicketDao ticketDao;
 
-    public TicketWrapper getTicketByReference(String reference) {
+    public TicketWrapper getTicketByReferenceNotCommitted(String reference) {
         Ticket ticket = ticketDao.findByReference(reference);
         if (ticket != null && ticket.getTicketState() != TicketState.COMMITTED) {
             return new TicketWrapper(ticket);
