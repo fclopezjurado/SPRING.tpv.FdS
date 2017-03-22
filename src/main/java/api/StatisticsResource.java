@@ -32,6 +32,7 @@ public class StatisticsResource {
     
     @RequestMapping(value = Uris.PRODUCT_SALES,method = RequestMethod.POST)
     public SalesOfProductListWrapper findSalesOfProductBetweenDates(@RequestBody StatisticsProductDateWrapper statisticsProductDateWrapper) {
+        System.out.println(statisticsProductDateWrapper);
         return statisticsController.getSalesOfProductByDate(statisticsProductDateWrapper);
     }
 
