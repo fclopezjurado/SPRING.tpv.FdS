@@ -15,6 +15,7 @@ import wrappers.EmbroideryFilterWrapper;
 import wrappers.EmbroideryWrapper;
 import wrappers.ProductsOutFilterWrapper;
 
+
 @RestController
 @RequestMapping(Uris.VERSION + Uris.EMBROIDERY)
 public class EmbroideryResource {
@@ -51,5 +52,10 @@ public class EmbroideryResource {
     @RequestMapping(method = RequestMethod.POST)
     public void addEmbroidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
         this.embroideryController.addEmbroidery(embroideryWrapper);
+    }
+    
+    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
+    public void updateEmproidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
+        this.embroideryController.updateEmbroidery(embroideryWrapper);
     }
 }
