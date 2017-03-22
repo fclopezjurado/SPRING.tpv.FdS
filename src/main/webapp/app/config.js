@@ -64,6 +64,22 @@ tpv.config(function ($routeProvider) {
             controllerAs: "vm"
         })
         
+                 .when("/feature03/Articles/UpdateArticle", {
+	        templateUrl: "app/components/feature03/Articles/UpdateArticle.html",
+	        controller: "UpdateArticleController",
+	        controllerAs: "vm"
+        })
+        .when("/feature03/Embroidery/UpdateEmbroidery", {
+            templateUrl: "app/components/feature03/Embroidery/UpdateEmbroidery.html",
+            controller: "UpdateEmbroideryController",
+            controllerAs: "vm"
+        })
+             .when("/feature03/TextilePrinting/UpdateTextilePrinting", {
+            templateUrl: "app/components/feature03/TextilePrinting/UpdateTextilePrinting.html",
+            controller: "UpdateTextilePrintingController",
+            controllerAs: "vm"
+        })
+        
         
         
         .when("/feature10/list", {
