@@ -1,8 +1,10 @@
 package api;
 
+import api.exceptions.NotFoundInvoiceIdException;
 import api.exceptions.NotFoundTicketReferenceException;
 import api.exceptions.NotFoundUserEmailException;
 import api.exceptions.NotFoundUserMobileException;
+import controllers.InvoiceController;
 import controllers.TicketController;
 import controllers.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class TicketResource {
 
     private UserController userController;
 
+    private InvoiceController invoiceController;
+
     @Autowired
     public void setTicketController(TicketController ticketController) {
         this.ticketController = ticketController;
@@ -26,6 +30,11 @@ public class TicketResource {
     @Autowired
     public void setUserController(UserController userController) {
         this.userController = userController;
+    }
+
+    @Autowired
+    public void setInvoiceController(InvoiceController invoiceController) {
+        this.invoiceController = invoiceController;
     }
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET)
@@ -49,7 +58,7 @@ public class TicketResource {
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.POST)
     public TicketWrapper createTickets(@RequestBody TicketWrapper ticketWrapper) {
-        assert ticketWrapper !=null;
+        assert ticketWrapper != null;
         return ticketController.createTicket(ticketWrapper.getShoppingList(), ticketWrapper.getUser());
     }
 
@@ -73,5 +82,13 @@ public class TicketResource {
             throw new NotFoundUserEmailException();
 
         return this.ticketController.getByUserEmail(userEmail);
+    }
+
+    @RequestMapping(value = Uris.TICKETS + Uris.INVOICE + Uris.ID, method = RequestMethod.GET)
+    public TicketWrapper getTicketByInvoiceID(@RequestParam(value = "id") int invoiceID) throws NotFoundInvoiceIdException {
+        if (!this.invoiceController.invoiceExists(invoiceID))
+            throw new NotFoundInvoiceIdException();
+
+        return this.ticketController.getByInvoiceID(invoiceID);
     }
 }
