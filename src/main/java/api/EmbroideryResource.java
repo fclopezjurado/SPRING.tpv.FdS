@@ -14,7 +14,7 @@ import controllers.EmbroideryController;
 import wrappers.EmbroideryFilterWrapper;
 import wrappers.EmbroideryWrapper;
 import wrappers.ProductsOutFilterWrapper;
-import wrappers.TicketWrapper;
+
 
 @RestController
 @RequestMapping(Uris.VERSION + Uris.EMBROIDERY)
