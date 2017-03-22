@@ -46,7 +46,4 @@ tpv.service('f14Service', ['$http', '$q', function ($http, $q) {
 		  };
 	      return this.request(config);
 	   }
-   
-
-
 }]);
