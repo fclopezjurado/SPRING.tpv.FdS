@@ -1,7 +1,27 @@
-angular.module("tpv").factory("busquedaDeProductos", function ($http) {
-    const baseURL 			= "http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api/v0/products";
+	tpv.service('busquedaDeProductos', function ($http, $q) {
+		"use strict"; 
+		
+	const urlBase="http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api/v0";
         
     
+	this.request = function(config) {
+	      let deferred = $q.defer();
+	      $http(config).then(function (response) {
+	    	  deferred.resolve(response.data);
+	      }, function (response){
+	    	  let errorMsg;
+	    	  if(response.data.error === undefined) {
+	    		  errorMsg="";
+	    	  }else{
+	    		  errorMsg = " --- " + response.data.error + ":" + response.data.description;
+	    	  }
+	    	  deferred.reject( 
+	    		 "Error (" + response.status + ":" + response.statusText + ")" + errorMsg );
+	      });
+	      return deferred.promise;	   
+	}
+	
+	
  	var productosAjax = {"code":200,"data":[
 
  		{
@@ -30,20 +50,26 @@ angular.module("tpv").factory("busquedaDeProductos", function ($http) {
  	
 
     
-
+ 	
     
     
     /**
-	 * TODO: This end-point will return a set of ticket wrappers, when the user
-	 * has information in "DNI", "USERNAME" and "ADDRESS" attributes. The user
-	 * who uses this end point must be logged in.
+	 * TODO: 
 	 */
-    return {
-    	getProducts: function (products) {
+
+    	this.getProducts= function (products) {
+    		let config = {
+    				method: 'POST',
+    				url: urlBase + "/products",
+    				data:products
+    		};
+    		this.request(config); 
             
             return productosAjax;
         }
-    }
+    	
+    
+    
 	
 	    
 
