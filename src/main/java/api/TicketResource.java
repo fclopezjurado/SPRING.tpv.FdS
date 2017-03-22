@@ -1,17 +1,12 @@
 package api;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import api.exceptions.NotFoundTicketReferenceException;
 import api.exceptions.NotFoundUserEmailException;
 import api.exceptions.NotFoundUserMobileException;
 import controllers.TicketController;
 import controllers.UserController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
 
@@ -44,8 +39,12 @@ public class TicketResource {
     }
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.GET, params = "reference")
-    public TicketWrapper getTicketByReference(@RequestParam String reference) {
-        return ticketController.getTicketByReference(reference);
+    public TicketWrapper getTicketByReference(@RequestParam String reference) throws NotFoundTicketReferenceException {
+        TicketWrapper ticketWrapper = ticketController.getTicketByReferenceNotCommitted(reference);
+        if (ticketWrapper == null) {
+            throw new NotFoundTicketReferenceException();
+        }
+        return ticketWrapper;
     }
 
     @RequestMapping(value = Uris.TICKETS, method = RequestMethod.POST)

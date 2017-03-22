@@ -1,48 +1,23 @@
 package daos;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import daos.core.AlarmDao;
-import daos.core.ArticleDao;
-import daos.core.BudgetDao;
-import daos.core.EmbroideryDao;
-import daos.core.FamilyDao;
-import daos.core.InvoiceDao;
-import daos.core.ProviderDao;
-import daos.core.TextilePrintingDao;
-import daos.core.TicketDao;
-import daos.core.VoucherDao;
+import daos.core.*;
 import daos.users.AuthorizationDao;
 import daos.users.TokenDao;
 import daos.users.UserDao;
-import entities.core.Alarm;
-import entities.core.AlarmType;
-import entities.core.Article;
-import entities.core.ComponentProduct;
-import entities.core.Budget;
-import entities.core.Embroidery;
-import entities.core.Family;
-import entities.core.Invoice;
-import entities.core.Product;
-import entities.core.Provider;
-import entities.core.Shopping;
-import entities.core.TextilePrinting;
-import entities.core.Ticket;
-import entities.core.TicketState;
-import entities.core.Voucher;
+import entities.core.*;
 import entities.users.Authorization;
 import entities.users.Role;
 import entities.users.Token;
 import entities.users.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import services.DataService;
+
+import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class DaosServiceIntegrationTests {
@@ -215,7 +190,7 @@ public class DaosServiceIntegrationTests {
         }
         ticketDao.save(ticket);
 
-        ticket = new Ticket(3L, TicketState.OPENED);
+        ticket = new Ticket(3L, TicketState.COMMITTED);
         for (int i = 0; i < 4; i++) {
             Product product = textilePrintingDao.findOne(84000003333L + i);
             ticket.addShopping(new Shopping(1 + i, 10, product.getId(), product.getDescription(), product.getRetailPrice()));

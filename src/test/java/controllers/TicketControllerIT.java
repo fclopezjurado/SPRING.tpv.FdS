@@ -1,19 +1,5 @@
 package controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import config.PersistenceConfig;
 import config.TestsControllerConfig;
 import config.TestsPersistenceConfig;
@@ -25,7 +11,19 @@ import entities.core.Shopping;
 import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
+import org.apache.logging.log4j.LogManager;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import wrappers.TicketWrapper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
@@ -43,13 +41,21 @@ public class TicketControllerIT {
     @Autowired
     private UserDao userDao;
 
-    Ticket ticket;
+    private Ticket ticket;
 
-    User user;
+    private Ticket committedTicket;
+
+    private User user;
 
     @Before
     public void setup() {
         ticket = ticketDao.findById(1L);
+        committedTicket = ticketDao
+                .findAll()
+                .stream()
+                .filter(t -> t.getTicketState() == TicketState.COMMITTED)
+                .findFirst()
+                .orElse(null);
         user = userDao.findByMobile(666000000);
         LogManager.getLogger(this.getClass()).info(ticket.getReference());
     }
@@ -60,6 +66,29 @@ public class TicketControllerIT {
 
         assertTrue(ticketWrapper.getReference().length() > 20);
         assertEquals(ticketWrapper.getTicketState(), TicketState.CLOSED);
+    }
+
+    @Test
+    public void testGetTicketByReferenceNotCommitted() {
+        TicketWrapper ticketWrapper = ticketController.getTicketByReferenceNotCommitted(ticket.getReference());
+
+        assertTrue(ticketWrapper.getReference().length() > 20);
+        assertEquals(ticketWrapper.getTicketState(), TicketState.CLOSED);
+    }
+
+    @Test
+    public void testGetTicketByReferenceCommitted() {
+        assertNotNull(committedTicket);
+        TicketWrapper ticketWrapper = ticketController.getTicketByReferenceNotCommitted(committedTicket.getReference());
+
+        assertNull(ticketWrapper);
+    }
+
+    @Test
+    public void testGetTicketByReferenceWithInvalidReference() {
+        TicketWrapper ticketWrapper = ticketController.getTicketByReferenceNotCommitted("Invalid Reference");
+
+        assertNull(ticketWrapper);
     }
 
     @Test

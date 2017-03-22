@@ -1,5 +1,6 @@
 package api;
 
+import api.exceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -7,20 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import api.exceptions.AlreadyExistProviderFieldException;
-import api.exceptions.AlreadyExistUserFieldException;
-import api.exceptions.ApiException;
-import api.exceptions.ErrorMessage;
-import api.exceptions.InvalidNewVoucherException;
-import api.exceptions.InvalidUserFieldException;
-import api.exceptions.InvalidVoucherReferenceException;
-import api.exceptions.MalformedHeaderException;
-import api.exceptions.NotFoundUserIdException;
-import api.exceptions.NotFoundUserMobileException;
-import api.exceptions.UnauthorizedException;
-import api.exceptions.NotFoundReferenceVoucherException;
-import api.exceptions.NotFoundTicketReferenceException;
-import api.exceptions.NotFoundUserEmailException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
