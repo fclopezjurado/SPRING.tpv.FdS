@@ -26,6 +26,11 @@ tpv.config(function ($routeProvider) {
 	        controller: "DeleteAllController",
 	        controllerAs: "vm"
         })
+        .when("/feature02/registration", {
+	        templateUrl: "app/components/feature02/registration.html",
+	        controller: "ProviderController",
+	        controllerAs: "vm"
+        })
         //Feature 03 -01 
        .when("/feature03/Articles/ArticleList", {
 	        templateUrl: "app/components/feature03/Articles/ArticleList.html",
