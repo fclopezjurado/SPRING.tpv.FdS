@@ -1,27 +1,25 @@
 package controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import daos.core.TicketDao;
 import entities.core.Shopping;
 import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class TicketController {
 
     private final int PADDING = 10000;
 
-    @Autowired
     private TicketDao ticketDao;
 
     private Ticket lastTicket;
