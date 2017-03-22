@@ -1,28 +1,28 @@
-tpv.controller('ProductsServiceController', [ '$timeout', 'f11Service',
-		function($timeout, f11Service) {
-			"use strict";
-			var vm = this;
+(function () {
+    'use strict';
 
-			vm.completed = false;
-			vm.ticket = null;
-			vm.error = false;
-			vm.response = "";
+    angular
+        .module('tpv')
+        .controller('ProductsServiceController', ProductsServiceController);
 
-			//TODO Check function and develop implementation 
-			function productsServiceState(reference) {
-				const delay = 2000;
+    ProductsServiceController.$inject = ['$location', 'productsServiceDataService'];
 
-				f11Service.getAll().then(function(result) {
-					vm.completed = true;
-					vm.ticket = result.ticket;
-				}, function(errors) {
-					// handle errors
-					vm.error = true;
-					vm.response = errors;
-					$timeout(function() {
-						vm.error = false;
-					}, delay)
-				});
-			}
-			productsServiceState(reference);
-		} ]);
+    function ProductsServiceController($location, productsServiceDataService) {
+        let vm = this;
+
+        if ('reference' in $location.search()) {
+            productsServiceDataService.getTicketByReference($location.search()['reference'])
+                .then(handleSuccess)
+                .then(handleFailure)
+        }
+
+        function handleSuccess(response) {
+            console.log("Success", response)
+        }
+
+        function handleFailure(response) {
+            console.log("Failure", response)
+        }
+    }
+
+})();
