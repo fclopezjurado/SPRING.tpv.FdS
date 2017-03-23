@@ -50,7 +50,11 @@ public class InvoiceController {
 
     public boolean invoiceExists(int id) {
         Invoice invoice = invoiceDao.findOne(id);
-        return invoice.getId() == id;
+
+        if (invoice != null)
+            return invoice.getId() == id;
+
+        return false;
     }
 
     public InvoicesWrapper getInvoicesByUserMobile(long userMobile) {
