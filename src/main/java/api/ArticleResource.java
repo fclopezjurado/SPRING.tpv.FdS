@@ -22,28 +22,27 @@ import wrappers.ProductsOutFilterWrapper;
 
 public class ArticleResource {
 
-	private ArticleController articleController;
+    private ArticleController articleController;
 
-	@Autowired
-	public void setArticleController(ArticleController articleController) {
-	    this.articleController = articleController;
-	}
-	
+    @Autowired
+    public void setArticleController(ArticleController articleController) {
+        this.articleController = articleController;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public List<ArticleWrapper> getAll() {
         return articleController.getAll();
     }
-    
+
     @RequestMapping(value = Uris.SEARCH)
     public List<ArticleWrapper> searchArticle(@RequestParam("provider") int provider, @RequestParam("type") AlarmType type) {
         return articleController.search(provider, type);
     }
-    
-    
-    @RequestMapping(value = Uris.FILTER,method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody ArticleFilterWrapper article){
-        List<ProductsOutFilterWrapper> productosSalidaMock= new ArrayList<ProductsOutFilterWrapper> ();
-        ProductsOutFilterWrapper productoMock= new ProductsOutFilterWrapper();
+
+    @RequestMapping(value = Uris.FILTER, method = RequestMethod.POST)
+    public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody ArticleFilterWrapper article) {
+        List<ProductsOutFilterWrapper> productosSalidaMock = new ArrayList<ProductsOutFilterWrapper>();
+        ProductsOutFilterWrapper productoMock = new ProductsOutFilterWrapper();
         productoMock.setId(0);
         productoMock.setReference("referenceMock");
         productoMock.setDescription("descriptionMock");
@@ -52,12 +51,14 @@ public class ArticleResource {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
-    public void removeArticle(@PathVariable(value = "id")  long id) {
-      System.out.println(id);
+    public void removeArticle(@PathVariable(value = "id") long id) {
+        System.out.println(id);
         this.articleController.removeArticle(id);
     }
 
-
-
+    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
+    public void updateArticle(@RequestBody ArticleWrapper articleWrapper) {
+        this.articleController.updateArticle(articleWrapper);
+    }
 
 }

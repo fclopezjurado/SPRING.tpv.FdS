@@ -1,14 +1,12 @@
 package daos.core;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
+import entities.core.Alarm;
+import entities.core.AlarmType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import entities.core.Alarm;
-import entities.core.AlarmType;
+import javax.transaction.Transactional;
+import java.util.List;
 
 public interface AlarmDao extends JpaRepository<Alarm, Integer> {
 

@@ -1,11 +1,10 @@
 package daos.core;
 
-import java.util.List;
-
+import entities.core.Budget;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import entities.core.Budget;
+import java.util.List;
 
 public interface BudgetDao extends JpaRepository<Budget, Long> {
 

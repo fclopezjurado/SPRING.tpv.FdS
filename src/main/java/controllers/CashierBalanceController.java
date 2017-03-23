@@ -1,9 +1,8 @@
 package controllers;
 
-import java.util.List;
-
 import wrappers.CashierBalanceWrapper;
-import wrappers.TicketWrapper;
+
+import java.util.List;
 
 public class CashierBalanceController {
 

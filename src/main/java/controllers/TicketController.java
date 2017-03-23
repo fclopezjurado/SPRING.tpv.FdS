@@ -1,27 +1,25 @@
 package controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import daos.core.TicketDao;
 import entities.core.Shopping;
 import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import wrappers.TicketWrapper;
+import wrappers.TicketsWrapper;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class TicketController {
 
     private final int PADDING = 10000;
 
-    @Autowired
     private TicketDao ticketDao;
 
     private Ticket lastTicket;
@@ -31,15 +29,9 @@ public class TicketController {
         this.ticketDao = ticketDao;
     }
 
-    public List<TicketWrapper> findAll() {
-        List<Ticket> tickets = ticketDao.findAll();
-        List<TicketWrapper> ticketsWrapper = new ArrayList<TicketWrapper>();
-
-        for (Ticket ticket : tickets) {
-            ticketsWrapper.add(new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
-                    ticket.getShoppingList(), ticket.getUser()));
-        }
-
+    public TicketsWrapper findAll() {
+        TicketsWrapper ticketsWrapper = new TicketsWrapper();
+        ticketsWrapper.wrapTickets(ticketDao.findAll());
         return ticketsWrapper;
     }
 
@@ -50,6 +42,14 @@ public class TicketController {
                 ticket.getShoppingList(), ticket.getUser());
         // TODO Feature 11: If ticket state is Committed no Wrapper will be returned
         return (ticketWrapper);
+    }
+
+    public TicketWrapper getTicketByReferenceNotCommitted(String reference) {
+        Ticket ticket = ticketDao.findByReference(reference);
+        if (ticket != null && ticket.getTicketState() != TicketState.COMMITTED) {
+            return new TicketWrapper(ticket);
+        }
+        return null;
     }
 
     public TicketWrapper createTicket(List<Shopping> shoppingList, User user) {
@@ -75,9 +75,16 @@ public class TicketController {
     }
 
     public TicketWrapper updateTicket(TicketWrapper ticketWrapper) {
-        // TODO Implement this method
+        Ticket ticket = ticketDao.findById(ticketWrapper.getId());
+        if (ticket != null) {
+            ticket.setShoppingList(ticketWrapper.getShoppingList());
+            ticket.setTicketState(ticketWrapper.getTicketState());
+            return new TicketWrapper(ticketDao.save(ticket));
+        }
         // TODO Feature 11: Check status after each update
-        return null;
+        else {
+            return null;
+        }
     }
 
     public boolean ticketExistsByReference(String ticketReference) {
@@ -116,6 +123,24 @@ public class TicketController {
 
     public Ticket getLastTicket() {
         return lastTicket;
+    }
+
+    public TicketsWrapper getByUserMobile(long userMobile) {
+        TicketsWrapper ticketsWrapper = new TicketsWrapper();
+        ticketsWrapper.wrapTickets(this.ticketDao.findByUserMobile(userMobile));
+        return ticketsWrapper;
+    }
+
+    public TicketsWrapper getByUserEmail(String userEmail) {
+        TicketsWrapper ticketsWrapper = new TicketsWrapper();
+        ticketsWrapper.wrapTickets(this.ticketDao.findByUserEmail(userEmail));
+        return ticketsWrapper;
+    }
+
+    public TicketWrapper getByInvoiceID(int invoiceID) {
+        Ticket ticket = this.ticketDao.findByInvoiceID(invoiceID);
+        return new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
+                ticket.getShoppingList(), ticket.getUser());
     }
 
 }

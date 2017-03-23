@@ -1,19 +1,13 @@
 package controllers;
 
-import java.util.Calendar;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-
 import daos.core.ShoppingDao;
 import daos.core.TicketDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import services.StatisticsDateParserService;
-import wrappers.BestSellerProductWrapper;
-import wrappers.BestSellerProductsListWrapper;
-import wrappers.SaleOfProductWrapper;
-import wrappers.SalesOfProductListWrapper;
-import wrappers.StatisticsDateWrapper;
-import wrappers.StatisticsProductDateWrapper;
+import wrappers.*;
+
+import java.util.Calendar;
 
 @Controller
 public class StatisticsController {

@@ -54,5 +54,10 @@ public class TextilePrintingResource {
     public void addTextilePrinting(@RequestBody TextilePrintingWrapper textilePrintingWrapper) {
         this.textilePrintingController.addTextilePrinting(textilePrintingWrapper);
     }
+    
+    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
+    public void updateTextilePrinting(@RequestBody TextilePrintingWrapper textilePrintingWrapper) {
+        this.textilePrintingController.updateTextilePrinting(textilePrintingWrapper);
+    }
 
 }
