@@ -26,7 +26,7 @@ public class BudgetController {
     }
     
     public void createBudget() {
-        Budget budget = new Budget();
+        Budget budget = new Budget(System.currentTimeMillis());
         budgetDao.save(budget);
     }
     
