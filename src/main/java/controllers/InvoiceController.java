@@ -6,6 +6,8 @@ import entities.core.Invoice;
 import entities.core.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import api.exceptions.NotFoundTicketReferenceException;
 import wrappers.InvoiceWrapper;
 import wrappers.InvoicesWrapper;
 
@@ -32,9 +34,12 @@ public class InvoiceController {
         this.ticketDao = ticketDao;
     }
 
-    public InvoiceWrapper createInvoice(String ticketReference) {
-        Ticket ticket = this.ticketDao.findByReference(ticketReference);
+    public InvoiceWrapper createInvoice(String ticketReference) throws NotFoundTicketReferenceException {
         int newInvoiceID = this.invoiceDao.findMaxInvoiceID();
+        Ticket ticket = this.ticketDao.findByReference(ticketReference);
+
+        if (ticket == null)
+            throw new NotFoundTicketReferenceException();
 
         if (newInvoiceID < FIRST_INVOICE_ID)
             newInvoiceID = FIRST_INVOICE_ID;
