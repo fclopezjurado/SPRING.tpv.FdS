@@ -23,8 +23,8 @@ public class BudgetResource {
     }
 
     @RequestMapping(value = Uris.BUDGETS, method = RequestMethod.POST)
-    public void createBudget(@RequestBody BudgetWrapper budgetWrapper) {
-        //budgetController.createBudget(budgetWrapper);
+    public void createBudget() {
+        budgetController.createBudget();
     }
 
     @RequestMapping(value = Uris.BUDGETS, method = RequestMethod.GET)
