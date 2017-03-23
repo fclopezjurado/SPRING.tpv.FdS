@@ -85,12 +85,12 @@ public class UserResourceFunctionalTesting {
                     .info("testCreateCustomerForbidden (" + httpError.getMessage() + "):\n " + httpError.getResponseBodyAsString());
         }
     }
-    
+
     @Test
     public void testGetAllUsers() {
         try {
-            UserForEditListWrapper users = new RestBuilder<UserForEditListWrapper>(RestService.URL).path(Uris.USERS).clazz(UserForEditListWrapper.class)
-                    .get().build();
+            UserForEditListWrapper users = new RestBuilder<UserForEditListWrapper>(RestService.URL).path(Uris.USERS)
+                    .clazz(UserForEditListWrapper.class).get().build();
             assertEquals(1, users.getUserList().size());
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
