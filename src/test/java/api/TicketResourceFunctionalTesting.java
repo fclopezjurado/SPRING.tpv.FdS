@@ -1,7 +1,10 @@
 package api;
 
-import entities.core.Ticket;
-import entities.core.TicketState;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.apache.logging.log4j.LogManager;
 import org.junit.After;
 import org.junit.Before;
@@ -10,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 
+import entities.core.Ticket;
+import entities.core.TicketState;
 import wrappers.InvoicesWrapper;
 import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
-
-import static org.junit.Assert.*;
 
 public class TicketResourceFunctionalTesting {
 
@@ -29,12 +32,12 @@ public class TicketResourceFunctionalTesting {
     private static final String wrongEmail = "test@test.es";
 
     private static final int wrongInvoiceID = 999;
-    
+
     @Autowired
     private Ticket ticket;
-    
+
     TicketWrapper ticketWrapper;
-    
+
     @Before
     public void seedDataBase() {
         new RestService().deleteAll();
@@ -50,31 +53,31 @@ public class TicketResourceFunctionalTesting {
         assertTrue(tickets.getFirstTicket().getReference().length() > 20);
     }
 
-
     @Test
     public void testupdateTickets() {
-        TicketWrapper ticketCreated = new RestBuilder<TicketWrapper>(RestService.URL)
-                .path(Uris.TICKETS)
-                .clazz(TicketWrapper.class)
-                .body(ticketWrapper)
-                .post().build();
+        TicketWrapper ticketCreated = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketWrapper.class)
+                .body(ticketWrapper).post().build();
 
         ticketCreated.setTicketState(TicketState.OPENED);
-        new RestBuilder<TicketWrapper>(RestService.URL)
-                .path(Uris.TICKETS)
-                .clazz(TicketWrapper.class)
-                .body(ticketCreated)
-                .put().build();
-                
-        TicketWrapper ticketObtained = new RestBuilder<TicketWrapper>(RestService.URL)
-                .path(Uris.TICKETS).path("/"+ ticketCreated.getReference())
-                .clazz(TicketWrapper.class)
-                .get().build();
-        
+        new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketWrapper.class).body(ticketCreated).put().build();
+
+        TicketWrapper ticketObtained = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS)
+                .path("/" + ticketCreated.getReference()).clazz(TicketWrapper.class).get().build();
+
         assertEquals(TicketState.OPENED, ticketObtained.getTicketState());
     }
-    
-    
+
+    @Test
+    public void testCreateAndGetTicketbyReference() {
+        TicketWrapper ticketCreated = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketWrapper.class)
+                .body(ticketWrapper).post().build();
+
+        TicketWrapper ticketObtained = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS)
+                .path("/" + ticketCreated.getReference()).clazz(TicketWrapper.class).get().build();
+
+        assertEquals(ticketCreated.getId(), ticketObtained.getId());
+    }
+
     @Test
     public void testGetTicketByReferenceNotCommitted() {
         TicketsWrapper tickets = new RestBuilder<TicketsWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketsWrapper.class).get()
@@ -199,7 +202,7 @@ public class TicketResourceFunctionalTesting {
         /**
          * TODO: Use of "org.springframework.core.env.Environment" to get administrator mobile number from properties file. long adminMobile
          * = Long.valueOf(environment.getProperty("admin.mobile"));
-         * 
+         *
          * InvoicesWrapper invoices = new RestBuilder<InvoicesWrapper>(RestService.URL).path(Uris.INVOICES).path("/" +
          * adminMobile).clazz(InvoicesWrapper.class).get().build(); assertEquals(false, invoices.isEmpty());
          */
@@ -213,7 +216,7 @@ public class TicketResourceFunctionalTesting {
 
     @After
     public void after() {
-                new RestService().deleteAll();
+        new RestService().deleteAll();
     }
 
 }
