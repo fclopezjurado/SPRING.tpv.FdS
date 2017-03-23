@@ -1,12 +1,12 @@
 package wrappers;
 
-import java.util.Calendar;
-import java.util.List;
-
 import entities.core.Shopping;
 import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class TicketWrapper {
 

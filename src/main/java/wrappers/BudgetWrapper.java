@@ -11,6 +11,10 @@ public class BudgetWrapper {
     
     private float total;
     
+    public BudgetWrapper() {
+        
+    }
+    
     public BudgetWrapper(Budget budget) {
         reference = budget.getReference();
         created = budget.getCreated().toString();

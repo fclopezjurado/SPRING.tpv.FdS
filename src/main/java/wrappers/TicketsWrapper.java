@@ -1,9 +1,9 @@
 package wrappers;
 
+import entities.core.Ticket;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import entities.core.Ticket;
 
 public class TicketsWrapper {
 

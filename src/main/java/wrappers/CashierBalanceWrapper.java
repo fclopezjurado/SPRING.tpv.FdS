@@ -2,6 +2,8 @@ package wrappers;
 
 public class CashierBalanceWrapper {
 
+    public static final String dateFormat = "dd-MM-yyyy";
+
     private int id;
 
     private double change;
@@ -13,8 +15,6 @@ public class CashierBalanceWrapper {
     private double dataphone;
 
     private String date;
-
-    public static final String dateFormat = "dd-MM-yyyy";
 
     public CashierBalanceWrapper(int id, double change, double total, double checks, double dataphone, String date) {
         super();

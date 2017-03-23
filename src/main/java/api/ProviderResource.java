@@ -1,5 +1,4 @@
 package api;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,8 @@ public class ProviderResource {
     }
 
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.POST)
-    public void providerRegistration(@RequestBody ProviderWrapper providerWrapper) throws MalformedHeaderException, AlreadyExistProviderFieldException {
+    public void providerRegistration(@RequestBody ProviderWrapper providerWrapper)
+            throws MalformedHeaderException, AlreadyExistProviderFieldException {
         validateFields(providerWrapper);
         if (!this.providerController.registration(providerWrapper)) {
             throw new AlreadyExistProviderFieldException();
