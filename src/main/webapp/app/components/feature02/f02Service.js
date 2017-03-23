@@ -38,5 +38,13 @@ tpv.service('f02Service', ['$http', '$q', function ($http, $q) {
 	   
 	  return this.request(config); 
    }
+   
+   this.removeProvider = function (providerId) {
+       let config = {
+           method: 'DELETE',
+           url: urlBase + "/providers/" + providerId
+       };
+       return this.request(config);
+   }
 
 }]);
