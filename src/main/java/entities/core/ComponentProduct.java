@@ -1,5 +1,7 @@
 package entities.core;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
@@ -34,7 +36,7 @@ public abstract class ComponentProduct {
     @Transient
     public abstract void remove(ComponentProduct componentFamily);
     @Transient
-    public abstract int numberOfProducts();
+    public abstract List<Product> getAllProducts();
     
     @Override
     public int hashCode() {
