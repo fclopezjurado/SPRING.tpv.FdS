@@ -1,15 +1,16 @@
 package api;
+import java.util.List;
 
-import api.exceptions.AlreadyExistProviderFieldException;
-import api.exceptions.MalformedHeaderException;
-import controllers.ProviderController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import api.exceptions.AlreadyExistProviderFieldException;
+import api.exceptions.MalformedHeaderException;
+import controllers.ProviderController;
 import wrappers.ProviderWrapper;
-import wrappers.ProvidersWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION)
@@ -32,7 +33,7 @@ public class ProviderResource {
     }
 
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.GET)
-    public ProvidersWrapper getAll() throws Exception {
+    public List<ProviderWrapper> getAll() throws Exception {
         return providerController.getAll();
     }
 
