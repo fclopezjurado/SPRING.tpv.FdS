@@ -37,7 +37,7 @@ public class ArticleControllerIT {
     
     @Test
     public void testSearchWithTwoParameters() {
-        ProviderWrapper provider = providerController.getAll().getProvidersWrapper().get(0);
+        ProviderWrapper provider = providerController.getAll().get(0);
         List<ArticleWrapper> list = articleController.search(provider.getId(), AlarmType.WARNING);
         assertEquals(false, list.isEmpty());
         assertEquals(true, list.get(0).getProviderWrapper().getId() == provider.getId());
@@ -45,7 +45,7 @@ public class ArticleControllerIT {
     
     @Test
     public void testSearchByProvier() {
-        ProviderWrapper provider = providerController.getAll().getProvidersWrapper().get(0);
+        ProviderWrapper provider = providerController.getAll().get(0);
         List<ArticleWrapper> list = articleController.search(provider.getId(), null);
         assertEquals(false, list.isEmpty());
         assertEquals(true, list.get(0).getProviderWrapper().getId() == provider.getId());

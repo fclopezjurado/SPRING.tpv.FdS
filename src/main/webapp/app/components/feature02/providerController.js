@@ -13,6 +13,7 @@ tpv.controller('ProviderController', [
 			vm.payment;
 			vm.notes;
 			vm.registration = registration;
+			vm.getAll = getAll;
 			vm.respuesta = "";
 			
 
@@ -25,6 +26,26 @@ tpv.controller('ProviderController', [
 					// promise was fullfilled
 					vm.completed = true;
 					vm.response = "";
+					$timeout(function() {
+						vm.completed = false;
+					}, delay)
+				}, function(errors) {
+					// handle errors
+					vm.error = true;
+					vm.response = errors;
+					$timeout(function() {
+						vm.error = false;
+					}, delay)
+				});
+			}
+			
+			function getAll() {
+				const
+				delay = 10000;
+				f02Service.getAll().then(function(result) {
+					vm.completed = true;
+					vm.response = result;
+					
 					$timeout(function() {
 						vm.completed = false;
 					}, delay)

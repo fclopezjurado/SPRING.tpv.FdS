@@ -15,7 +15,6 @@ import wrappers.ArticleFilterWrapper;
 import wrappers.ArticleWrapper;
 import wrappers.ProductsOutFilterWrapper;
 import wrappers.ProviderWrapper;
-import wrappers.ProvidersWrapper;
 
 public class ArticleResourceFunctionalTesting {
 
@@ -27,8 +26,8 @@ public class ArticleResourceFunctionalTesting {
     
     @Test
     public void testSearchByTwoParameters() {
-        ProviderWrapper providerWrapper = new RestBuilder<ProvidersWrapper>(RestService.URL).path(Uris.PROVIDERS)
-                .clazz(ProvidersWrapper.class).get().build().getProvidersWrapper().get(0);
+        ProviderWrapper providerWrapper = Arrays.asList(new RestBuilder<ProviderWrapper[]>(RestService.URL).path(Uris.PROVIDERS)
+                .clazz(ProviderWrapper[].class).get().build()).get(0);
         List<ArticleWrapper> articles = Arrays.asList(new RestBuilder<ArticleWrapper[]>(RestService.URL).path(Uris.ARTICLES)
                 .path(Uris.SEARCH).param("provider", String.valueOf(providerWrapper.getId())).param("type",AlarmType.WARNING.toString()).clazz(ArticleWrapper[].class).get().build());
         assertEquals(false, articles.isEmpty());
@@ -37,8 +36,8 @@ public class ArticleResourceFunctionalTesting {
     
     @Test
     public void testSearchByProvider() {
-        ProviderWrapper providerWrapper = new RestBuilder<ProvidersWrapper>(RestService.URL).path(Uris.PROVIDERS)
-                .clazz(ProvidersWrapper.class).get().build().getProvidersWrapper().get(0);
+        ProviderWrapper providerWrapper = Arrays.asList(new RestBuilder<ProviderWrapper[]>(RestService.URL).path(Uris.PROVIDERS)
+                .clazz(ProviderWrapper[].class).get().build()).get(0);
         List<ArticleWrapper> articles = Arrays.asList(new RestBuilder<ArticleWrapper[]>(RestService.URL).path(Uris.ARTICLES)
                 .path(Uris.SEARCH).param("provider", String.valueOf(providerWrapper.getId())).param("type",null).clazz(ArticleWrapper[].class).get().build());
         assertEquals(false, articles.isEmpty());
@@ -47,8 +46,8 @@ public class ArticleResourceFunctionalTesting {
     
     @Test
     public void testSearchByType() {
-        ProviderWrapper providerWrapper = new RestBuilder<ProvidersWrapper>(RestService.URL).path(Uris.PROVIDERS)
-                .clazz(ProvidersWrapper.class).get().build().getProvidersWrapper().get(0);
+        ProviderWrapper providerWrapper = Arrays.asList(new RestBuilder<ProviderWrapper[]>(RestService.URL).path(Uris.PROVIDERS)
+                .clazz(ProviderWrapper[].class).get().build()).get(0);
         List<ArticleWrapper> articles = Arrays.asList(new RestBuilder<ArticleWrapper[]>(RestService.URL).path(Uris.ARTICLES)
                 .path(Uris.SEARCH).param("provider", "0").param("type",AlarmType.WARNING.toString()).clazz(ArticleWrapper[].class).get().build());
         assertEquals(false, articles.isEmpty());
