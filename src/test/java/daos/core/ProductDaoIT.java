@@ -58,7 +58,12 @@ public class ProductDaoIT {
 
     @Test
     public void testFindArticlesWithAlarmActive() {
-        assertEquals(false, articleDao.findArticlesWithAlarmActive(AlarmType.WARNING).isEmpty());
+        assertEquals(false, articleDao.findArticlesWithAlarmActive().isEmpty());
+    }
+    
+    @Test
+    public void testFindArticlesWithAlarmActiveByType() {
+        assertEquals(false, articleDao.findArticlesWithAlarmActiveByType(AlarmType.WARNING).isEmpty());
     }
 
     @Test
