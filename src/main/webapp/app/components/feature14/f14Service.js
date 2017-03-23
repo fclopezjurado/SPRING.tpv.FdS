@@ -36,8 +36,14 @@ tpv.service('f14Service', ['$http', '$q', function ($http, $q) {
 	 	     data:{'inicio':inicio, 'fin': fin}
 		  };
 	      return this.request(config);
+   }
+
+   this.productSales = function (productId, inicio,fin) {
+	      let config = {
+	 	     method: 'POST',
+	 	     url: urlBase + "/ProductSales",
+	 	     data:{'productId':productId, 'inicio':inicio, 'fin': fin}
+		  };
+	      return this.request(config);
 	   }
-   
-
-
 }]);
