@@ -2,16 +2,16 @@ tpv.controller('UpdateArticleController', [ '$timeout', 'f03Service',
 		function($timeout, f03Service) {
 			"use strict";
 			var vm = this;
-
+			
 			vm.completed = false;
 			vm.error = false;
 			vm.response;
-			vm.createArticle=createArticle;
+			vm.Article=updateArticle;
 
-			function createArticle() {
+			function updateArticle() {
 				const
 				delay = 10000;
-				f03Service.addArticle(vm.article).then(function(result) {
+				f03Service.updateArticle(vm.article).then(function(result) {
 					vm.completed = true;
 					vm.response = result;
 					
