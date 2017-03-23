@@ -12,6 +12,7 @@
               <th>Mobile</th>
               <th>Payment conditions</th>
               <th>Notes</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody ng-init="vm.getAll()" >
@@ -22,7 +23,7 @@
               <td>{{provider.payment}}</td>
               <td>{{provider.notes}}</td>
               <td style="vertical-align: middle;">
-              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeArticle(article.id)">
+              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeProvider(provider.id)">
               </td>
             </tr>
           </tbody>
@@ -32,7 +33,9 @@
         <div class="no-data" ng-if="vm.data.length === 0">
            <div class="panel-body"> No Articles found </div>
         </div>
-   
+        <div align="center">
+            <span class="author" >Author: Javier Molina</span>
+        </div>
     </fieldset>
      </div>
 </section>
