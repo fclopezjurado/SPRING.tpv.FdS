@@ -25,6 +25,11 @@ public class BudgetController {
         return new BudgetListWrapper(budgetDao.findAll());
     }
     
+    public void createBudget() {
+        Budget budget = new Budget();
+        budgetDao.save(budget);
+    }
+    
     public BudgetDetailWrapper getBudgetByReference(String reference) {
         return new BudgetDetailWrapper(budgetDao.findByReference(reference));
     }
