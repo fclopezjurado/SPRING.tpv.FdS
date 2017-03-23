@@ -13,7 +13,7 @@ import wrappers.BudgetDetailWrapper;
 import wrappers.BudgetListWrapper;
 
 @RestController
-@RequestMapping(Uris.VERSION)
+@RequestMapping(Uris.VERSION + Uris.BUDGETS)
 public class BudgetResource {
 
     private BudgetController budgetController;
@@ -23,29 +23,29 @@ public class BudgetResource {
         this.budgetController = budgetController;
     }
 
-    @RequestMapping(value = Uris.BUDGETS, method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public void createBudget() {
         budgetController.createBudget();
     }
 
-    @RequestMapping(value = Uris.BUDGETS, method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public BudgetListWrapper getBudgets() {
         return budgetController.findAll();
     }
     
-    @RequestMapping(value = Uris.BUDGETS, method = RequestMethod.GET)
+    @RequestMapping(value = Uris.REFERENCE, method = RequestMethod.GET)
     public BudgetDetailWrapper getBudgetsByReference(@PathVariable String reference) {
         return budgetController.getBudgetByReference(reference);
     }
 
-    @RequestMapping(value = Uris.BUDGETS, method = RequestMethod.DELETE)
+    @RequestMapping(method = RequestMethod.DELETE)
     public void deleteBudget(@RequestBody String reference) {
         budgetController.deleteBudget(reference);
     }
     
-    @RequestMapping(value = Uris.BUDGETS, method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public void updateBudget(BudgetDetailWrapper budgetWrapper) {
-        //BudgetController.updateBudget(budgetWrapper);
+        budgetController.updateBudget(budgetWrapper);
     }
 
 }
