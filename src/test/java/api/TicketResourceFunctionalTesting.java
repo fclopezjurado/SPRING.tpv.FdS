@@ -157,7 +157,7 @@ public class TicketResourceFunctionalTesting {
 
     @After
     public void after() {
-        new RestService().deleteAll();
+        //        new RestService().deleteAll();
     }
 
 }

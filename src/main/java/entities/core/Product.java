@@ -1,14 +1,13 @@
 package entities.core;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import java.math.BigDecimal;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Product extends ComponentProduct{
+public abstract class Product extends ComponentProduct {
 
     private String reference;
 
@@ -53,25 +52,25 @@ public abstract class Product extends ComponentProduct{
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     @Override
     public void add(ComponentProduct componentFamily) {
         // TODO Auto-generated method stub
-        
+
     }
-    
+
     @Override
     public void remove(ComponentProduct componentFamily) {
         // TODO Auto-generated method stub
-        
+
     }
-    
+
     @Override
     public boolean isFamily() {
         // TODO Auto-generated method stub
         return false;
     }
-    
+
     @Override
     public int numberOfProducts() {
         // TODO Auto-generated method stub

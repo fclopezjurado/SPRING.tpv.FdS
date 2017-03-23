@@ -51,7 +51,7 @@ public class DaosServiceIntegrationTests {
 
     @Autowired
     private TicketDao ticketDao;
-    
+
     @Autowired
     private BudgetDao budgetDao;
 
@@ -60,7 +60,7 @@ public class DaosServiceIntegrationTests {
 
     @Autowired
     private AlarmDao alarmDao;
-    
+
     @Autowired
     private FamilyDao familyDao;
     
@@ -197,7 +197,7 @@ public class DaosServiceIntegrationTests {
         }
         ticketDao.save(ticket);
     }
-    
+
     public void createBudgets() {
         Budget budget;
 
@@ -235,15 +235,15 @@ public class DaosServiceIntegrationTests {
         alarmDao.save(new Alarm("Alarma Critical", null, AlarmType.CRITICAL, 2));
         alarmDao.save(new Alarm("Alarma extra", articles, AlarmType.WARNING, 5));
     }
-    
+
     public void createFamilies() {
-        
+
         List<ComponentProduct> lists = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             ComponentProduct componentFamily = articleDao.findOne(84000001111L + i);
             lists.add(componentFamily);
         }
-        
+
         familyDao.save(new Family(1L, "name1", "description1", lists));
     }
 }

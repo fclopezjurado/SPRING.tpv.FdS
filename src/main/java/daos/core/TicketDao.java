@@ -1,12 +1,11 @@
 package daos.core;
 
-import java.util.Calendar;
-import java.util.List;
-
+import entities.core.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import entities.core.Ticket;
+import java.util.Calendar;
+import java.util.List;
 
 public interface TicketDao extends JpaRepository<Ticket, Long> {
 

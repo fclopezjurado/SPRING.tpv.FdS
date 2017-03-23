@@ -1,25 +1,24 @@
 package api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import wrappers.BestSellerProductsListWrapper;
 import wrappers.SalesOfProductListWrapper;
 import wrappers.StatisticsDateWrapper;
 import wrappers.StatisticsProductDateWrapper;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class StatisticsResourceFunctionalTesting {
 
     public static final String URL = "http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api" + Uris.VERSION;
-        
+
     StatisticsDateWrapper statisticsDateWrapper;
 
     StatisticsProductDateWrapper statisticsProductDateWrapper;
@@ -28,18 +27,18 @@ public class StatisticsResourceFunctionalTesting {
     public void seedDataBase(){
         new RestService().deleteAll();
         new RestService().seedDatabase();
-        
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date inicio = new Date();
-        Calendar calendar = Calendar.getInstance(); 
-        calendar.setTime(inicio); 
-        calendar.add(Calendar.DATE, -1);       
-        String s_inicio = simpleDateFormat.format(calendar.getTime()); 
-        calendar.add(Calendar.DATE, +2);   
-        String s_fin = simpleDateFormat.format(calendar.getTime()); 
-        
-        statisticsDateWrapper = new StatisticsDateWrapper(s_inicio,s_fin);
-        statisticsProductDateWrapper = new StatisticsProductDateWrapper(84000001111L,s_inicio,s_fin);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(inicio);
+        calendar.add(Calendar.DATE, -1);
+        String s_inicio = simpleDateFormat.format(calendar.getTime());
+        calendar.add(Calendar.DATE, +2);
+        String s_fin = simpleDateFormat.format(calendar.getTime());
+
+        statisticsDateWrapper = new StatisticsDateWrapper(s_inicio, s_fin);
+        statisticsProductDateWrapper = new StatisticsProductDateWrapper(84000001111L, s_inicio, s_fin);
     }
     
     @Test

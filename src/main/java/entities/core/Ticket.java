@@ -1,15 +1,14 @@
 package entities.core;
 
+import entities.users.Encrypting;
+import entities.users.User;
+
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.*;
-
-import entities.users.Encrypting;
-import entities.users.User;
 
 @Entity
 public class Ticket {
