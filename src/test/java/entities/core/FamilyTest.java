@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import javassist.expr.NewArray;
+
 
 public class FamilyTest {
     
@@ -50,23 +52,23 @@ public class FamilyTest {
     }
     
     @Test
-    public void testNumberOfProducts(){
-        assertEquals(1, new Embroidery().numberOfProducts());
-        assertEquals(2, family1.numberOfProducts());
-        assertEquals(3, family2.numberOfProducts());
-        assertEquals(5, family3.numberOfProducts());
+    public void testGetAllProducts(){
+        assertEquals(2, family1.getAllProducts().size());
+        assertEquals(3, family2.getAllProducts().size());
+        assertEquals(5, family3.getAllProducts().size());
+        assertNull(new Article().getAllProducts());
     }
     
     @Test
     public void testAdd(){
         family1.add(new Article());
-        assertEquals(3, family1.numberOfProducts());
+        assertEquals(3, family1.getProducts().size());
     }
     
     @Test 
     public void testRemove(){
         family1.remove(product1);
-        assertEquals(1, family1.numberOfProducts());
+        assertEquals(1, family1.getProducts().size());
     }
     
     @Test
