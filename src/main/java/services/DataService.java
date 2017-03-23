@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import daos.core.AlarmDao;
 import daos.core.ArticleDao;
+import daos.core.BudgetDao;
 import daos.core.EmbroideryDao;
 import daos.core.InvoiceDao;
 import daos.core.ProviderDao;
@@ -47,6 +48,9 @@ public class DataService {
 
     @Autowired
     private TicketDao ticketDao;
+    
+    @Autowired
+    private BudgetDao budgetDao;
 
     @Autowired
     private InvoiceDao invoiceDao;
@@ -57,6 +61,7 @@ public class DataService {
     public void deleteAllExceptAdmin() {
         invoiceDao.deleteAll();
         ticketDao.deleteAll();
+        budgetDao.deleteAll();
 
         authorizationDao.deleteAll();
         tokenDao.deleteAll();

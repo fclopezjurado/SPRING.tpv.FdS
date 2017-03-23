@@ -49,6 +49,9 @@ public class AdminController {
 
     @Autowired
     private TicketDao ticketDao;
+    
+    @Autowired
+    private BudgetDao budgetDao;
 
     @Autowired
     private InvoiceDao invoiceDao;
@@ -75,6 +78,7 @@ public class AdminController {
         this.createProviders();
         this.createProducts();
         this.createTickets();
+        this.createBudgets();
         this.createInvoices();
         this.createAlarms();
     }
@@ -195,6 +199,32 @@ public class AdminController {
             ticket.addShopping(new Shopping(1 + i, 10, product.getId(), product.getDescription(), product.getRetailPrice()));
         }
         ticketDao.save(ticket);
+    }
+    
+    public void createBudgets() {
+        Budget budget;
+
+        budget = new Budget(1L);
+        for (int i = 0; i < 4; i++) {
+            Product product = articleDao.findOne(84000001111L + i);
+            budget.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budget.setUser(userDao.findByMobile(666000000));
+        budgetDao.save(budget);
+
+        budget = new Budget(2L);
+        for (int i = 0; i < 4; i++) {
+            Product product = embroideryDao.findOne(84000002222L + i);
+            budget.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budgetDao.save(budget);
+
+        budget = new Budget(3L);
+        for (int i = 0; i < 4; i++) {
+            Product product = textilePrintingDao.findOne(84000003333L + i);
+            budget.addShopping(new Shopping(1 + i, 10, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budgetDao.save(budget);
     }
 
     public void createInvoices() {

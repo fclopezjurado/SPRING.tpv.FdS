@@ -66,4 +66,6 @@ public class Uris {
     
     public static final String USER_EMAIL_PATH = "/email";
     
+    public static final String BUDGETS = "/budgets";
+    
 }
