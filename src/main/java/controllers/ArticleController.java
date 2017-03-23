@@ -49,7 +49,10 @@ public class ArticleController {
             listArticle = articlesDao.findArticlesOfOneProviderWithAlarmActive(providerDao.findById(provider));
         }
         else if (provider == 0 && type != null) {
-            listArticle = articlesDao.findArticlesWithAlarmActive(type);
+            listArticle = articlesDao.findArticlesWithAlarmActiveByType(type);
+        }
+        else if(provider == 0 && type == null) {
+            listArticle = articlesDao.findArticlesWithAlarmActive();
         }
         else {
             listArticle = articlesDao.findByProviderAndAlarmType(providerDao.findById(provider), type);
