@@ -1,4 +1,4 @@
-tpv.controller('CreateArticleController', [ '$timeout', 'f03Service',
+tpv.controller('UpdateArticleController', [ '$timeout', 'f03Service',
 		function($timeout, f03Service) {
 			"use strict";
 			var vm = this;

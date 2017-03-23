@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 
 import daos.core.BudgetDao;
 import entities.core.Budget;
-import entities.core.Shopping;
 import wrappers.BudgetDetailWrapper;
 import wrappers.BudgetListWrapper;
 

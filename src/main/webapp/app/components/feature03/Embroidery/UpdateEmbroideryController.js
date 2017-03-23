@@ -1,4 +1,4 @@
-tpv.controller('CreateEmbroideryController', [ '$timeout', 'f03Service',
+tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 		function($timeout, f03Service) {
 			"use strict";
 			var vm = this;
