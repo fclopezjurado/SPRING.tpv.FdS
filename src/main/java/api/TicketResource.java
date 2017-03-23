@@ -85,7 +85,7 @@ public class TicketResource {
     }
 
     @RequestMapping(value = Uris.TICKETS + Uris.INVOICE + Uris.ID, method = RequestMethod.GET)
-    public TicketWrapper getTicketByInvoiceID(@RequestParam(value = "id") int invoiceID) throws NotFoundInvoiceIdException {
+    public TicketWrapper getTicketByInvoiceID(@PathVariable(value = "id") int invoiceID) throws NotFoundInvoiceIdException {
         if (!this.invoiceController.invoiceExists(invoiceID))
             throw new NotFoundInvoiceIdException();
 
