@@ -22,9 +22,10 @@ tpv.controller('BudgetController', [
 				});
 			}
 			
-			function getDetails(){
-				f18Service.getBudgetDetail().then(function(result) {
-					vm.detail = result.budget;
+			function getDetails(budget){
+				f18Service.getBudgetDetail(budget.reference).then(function(result) {
+					vm.detail = result;
+					console.log(vm.detail);
 				}, function(errors) {
 					vm.error = true;
 					vm.response = errors;
@@ -33,12 +34,25 @@ tpv.controller('BudgetController', [
 			}
 			
 			function createBudget(){
+				f18Service.createBudget().then(function(result) {
+					vm.getBudgets();
+				}, function(errors) {
+					vm.error = true;
+					vm.response = errors;
+					vm.error = false;
+				});
 			}
 			
 			function addProduct(){
 			}
 			
-			function deleteBudget(){
-				
+			function deleteBudget(budget){
+				f18Service.deleteBudget(budget.reference).then(function(result) {
+					vm.getBudgets();
+				}, function(errors) {
+					vm.error = true;
+					vm.response = errors;
+					vm.error = false;
+				});
 			}
 		} ]);
