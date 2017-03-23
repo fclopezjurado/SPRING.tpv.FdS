@@ -1,24 +1,18 @@
 package api;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import api.exceptions.AlreadyExistCashierBalanceDayException;
 import api.exceptions.NotFoundCashierBalanceIdException;
 import controllers.CashierBalanceController;
+import org.springframework.web.bind.annotation.*;
 import wrappers.CashierBalanceWrapper;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(Uris.VERSION + Uris.CASHIER_BALANCE)
 public class CashierBalanceResource {
 
     private CashierBalanceController cashierBalanceController;
-
 
     public void setCashierBalanceController(CashierBalanceController cashierBalanceController) {
         this.cashierBalanceController = cashierBalanceController;

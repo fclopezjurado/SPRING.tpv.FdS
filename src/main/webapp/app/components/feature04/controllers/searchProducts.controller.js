@@ -18,45 +18,45 @@ angular.module("tpv").controller("SearchProducts",
 	 	vm.sortType = "reference";
 	 	vm.sortReverse = false;
 	 	vm.articles	= "";
-		
-		
-	 	vm.searchProductos = {
-	 			reference: "",
-	 			description: "",
-	 			minRetailPrice: "",
-	 			maxRetailPrice: ""
-	 	}
-	 	
-	 	vm.searchArticles = {
-	 			reference: "",
-	 			description: "",
-	 			minRetailPrice: "",
-	 			maxRetailPrice: "",
-	 			minWholesalePrice:"",
-	 			maxWholesalePrice:"",
-	 			onStock: false  
-	 	}
-	 	
-	 	vm.searchTextilePriting = {
-	 			reference: "",
-	 			description: "",
-	 			minRetailPrice: "",
-	 			maxRetailPrice: "",
-	 			type:""
-	 	}
-	 	
-	 	vm.searchEmbroidery = {
-	 			reference: "",
-	 			description: "",
-	 			minRetailPrice: "",
-	 			maxRetailPrice: "",
-	 			minSquareMillimeters:"",
-	 			maxSquareMillimeters:"",
-	 			minStitches:"",
-	 			maxStitches:"",
-	 			minColors:"",
-	 			maxColors:"" 
-	 	}
+
+
+        vm.searchProductos = {
+            reference: "",
+            description: "",
+            minRetailPrice: "",
+            maxRetailPrice: ""
+        }
+
+        vm.searchArticles = {
+            reference: "",
+            description: "",
+            minRetailPrice: "",
+            maxRetailPrice: "",
+            minWholesalePrice: "",
+            maxWholesalePrice: "",
+            onStock: false
+        }
+
+        vm.searchTextilePriting = {
+            reference: "",
+            description: "",
+            minRetailPrice: "",
+            maxRetailPrice: "",
+            type: ""
+        }
+
+        vm.searchEmbroidery = {
+            reference: "",
+            description: "",
+            minRetailPrice: "",
+            maxRetailPrice: "",
+            minSquareMillimeters: "",
+            maxSquareMillimeters: "",
+            minStitches: "",
+            maxStitches: "",
+            minColors: "",
+            maxColors: ""
+        }
 	 	
 		vm.onClickAdvancedSearch = () => {
 	 		vm.searchVisibility = !vm.searchVisibility;
@@ -89,27 +89,27 @@ angular.module("tpv").controller("SearchProducts",
         
         vm.getProductos = function () {
         	vm.mobile= "prueba" ;
-        	var prueba=vm.searchProductos ;
+            var prueba = vm.searchProductos;
         	if (vm.showInputForArticle ==true){
-	        	 	vm.validationArticleNumeric();
-	        	 	vm.validationProductoNumeric();
-	        	 	vm.passArgumentsFromProducts(vm.searchArticles);
-	           	 	vm.requestToGetProducts(busquedaDeArticulos, vm.searchArticles);
+                vm.validationArticleNumeric();
+                vm.validationProductoNumeric();
+                vm.passArgumentsFromProducts(vm.searchArticles);
+                vm.requestToGetProducts(busquedaDeArticulos, vm.searchArticles);
            }
-        	else if (vm.showInputForEmbroidery  ==true){        		
-        			vm.validationEmbroideryNumeric();
-        			vm.validationProductoNumeric();
-        			vm.passArgumentsFromProducts(vm.searchEmbroidery);
-            	 	vm.requestToGetProducts(busquedaDeEmbroidery, vm.searchEmbroidery);
+            else if (vm.showInputForEmbroidery == true) {
+                vm.validationEmbroideryNumeric();
+                vm.validationProductoNumeric();
+                vm.passArgumentsFromProducts(vm.searchEmbroidery);
+                vm.requestToGetProducts(busquedaDeEmbroidery, vm.searchEmbroidery);
             }
         	else if (vm.showInputForTextilePrinting ==true){
-        			vm.validationProductoNumeric();
-        			vm.passArgumentsFromProducts(vm.searchTextilePriting);
-           	 		vm.requestToGetProducts(busquedaDeTextilePrinting, vm.searchTextilePriting);
+                vm.validationProductoNumeric();
+                vm.passArgumentsFromProducts(vm.searchTextilePriting);
+                vm.requestToGetProducts(busquedaDeTextilePrinting, vm.searchTextilePriting);
            }
         	else {
-        			vm.validationProductoNumeric();
-        			vm.requestToGetProducts(busquedaDeProductos,vm.searchProductos);
+                vm.validationProductoNumeric();
+                vm.requestToGetProducts(busquedaDeProductos, vm.searchProductos);
               	
               }
         };
@@ -122,40 +122,40 @@ angular.module("tpv").controller("SearchProducts",
             vm.showTableProducts		= true;
             
         }
-        
 
-        vm.passArgumentsFromProducts= function(model){
-	 		model.reference=vm.searchProductos.reference;
-        	model.description=vm.searchProductos.description;
-        	model.minRetailPrice=vm.searchProductos.minRetailPrice;
-        	model.maxRetailPrice=vm.searchProductos.maxRetailPrice;
-        }
-        
-        vm.validationProductoNumeric = function (){
-        	vm.searchProductos.minRetailPrice=vm.ValidationNumeric(vm.searchProductos.minRetailPrice);
-        	vm.searchProductos.maxRetailPrice=vm.ValidationNumeric(vm.searchProductos.maxRetailPrice);
-        		
-        }
-        vm.validationArticleNumeric= function (){
-        	vm.searchArticles.minWholesalePrice=vm.ValidationNumeric(vm.searchArticles.minWholesalePrice);
-        	vm.searchArticles.maxWholesalePrice=vm.ValidationNumeric(vm.searchArticles.maxWholesalePrice);
-        }
-        
 
-        vm.validationEmbroideryNumeric= function (){
-        	vm.searchEmbroidery.minSquareMillimeters=vm.ValidationNumeric(vm.searchArticles.minSquareMillimeters);
-        	vm.searchEmbroidery.maxSquareMillimeters=vm.ValidationNumeric(vm.searchArticles.maxSquareMillimeters);
-        	vm.searchEmbroidery.minStitches=vm.ValidationNumeric(vm.searchArticles.minStitches);
-        	vm.searchEmbroidery.maxStitches=vm.ValidationNumeric(vm.searchArticles.maxStitches);
-        	vm.searchEmbroidery.minColors=vm.ValidationNumeric(vm.searchArticles.minColors);
-        	vm.searchEmbroidery.maxColors=vm.ValidationNumeric(vm.searchArticles.maxColors);
+        vm.passArgumentsFromProducts = function (model) {
+            model.reference = vm.searchProductos.reference;
+            model.description = vm.searchProductos.description;
+            model.minRetailPrice = vm.searchProductos.minRetailPrice;
+            model.maxRetailPrice = vm.searchProductos.maxRetailPrice;
         }
-        
-        vm.ValidationNumeric = function (parametro){
-        	if ((parametro == undefined)||(parametro==null)||(parametro==""))
-        		return 0;
-        	else
-        		return parametro;
+
+        vm.validationProductoNumeric = function () {
+            vm.searchProductos.minRetailPrice = vm.ValidationNumeric(vm.searchProductos.minRetailPrice);
+            vm.searchProductos.maxRetailPrice = vm.ValidationNumeric(vm.searchProductos.maxRetailPrice);
+
+        }
+        vm.validationArticleNumeric = function () {
+            vm.searchArticles.minWholesalePrice = vm.ValidationNumeric(vm.searchArticles.minWholesalePrice);
+            vm.searchArticles.maxWholesalePrice = vm.ValidationNumeric(vm.searchArticles.maxWholesalePrice);
+        }
+
+
+        vm.validationEmbroideryNumeric = function () {
+            vm.searchEmbroidery.minSquareMillimeters = vm.ValidationNumeric(vm.searchArticles.minSquareMillimeters);
+            vm.searchEmbroidery.maxSquareMillimeters = vm.ValidationNumeric(vm.searchArticles.maxSquareMillimeters);
+            vm.searchEmbroidery.minStitches = vm.ValidationNumeric(vm.searchArticles.minStitches);
+            vm.searchEmbroidery.maxStitches = vm.ValidationNumeric(vm.searchArticles.maxStitches);
+            vm.searchEmbroidery.minColors = vm.ValidationNumeric(vm.searchArticles.minColors);
+            vm.searchEmbroidery.maxColors = vm.ValidationNumeric(vm.searchArticles.maxColors);
+        }
+
+        vm.ValidationNumeric = function (parametro) {
+            if ((parametro == undefined) || (parametro == null) || (parametro == ""))
+                return 0;
+            else
+                return parametro;
         }
 		
     });
