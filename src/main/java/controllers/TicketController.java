@@ -137,4 +137,10 @@ public class TicketController {
         return ticketsWrapper;
     }
 
+    public TicketWrapper getByInvoiceID(int invoiceID) {
+        Ticket ticket = this.ticketDao.findByInvoiceID(invoiceID);
+        return new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
+                ticket.getShoppingList(), ticket.getUser());
+    }
+
 }
