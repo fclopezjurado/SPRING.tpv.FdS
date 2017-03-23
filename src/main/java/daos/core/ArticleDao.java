@@ -14,8 +14,11 @@ public interface ArticleDao extends JpaRepository<Article, Long> {
 
     Article findById(long id);
 
+    @Query("SELECT distinct list FROM Alarm al join al.articleList list where list.stock <= al.value")
+    List<Article> findArticlesWithAlarmActive();
+    
     @Query("SELECT distinct list FROM Alarm al join al.articleList list where al.type = ?1 and list.stock <= al.value")
-    List<Article> findArticlesWithAlarmActive(AlarmType type);
+    List<Article> findArticlesWithAlarmActiveByType(AlarmType type);
 
     @Query("SELECT distinct list FROM Alarm al join al.articleList list where list.provider = ?1 and list.stock <= al.value")
     List<Article> findArticlesOfOneProviderWithAlarmActive(Provider provider);
