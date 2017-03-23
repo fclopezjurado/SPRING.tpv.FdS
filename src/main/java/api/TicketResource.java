@@ -62,10 +62,10 @@ public class TicketResource {
         return ticketController.createTicket(ticketWrapper.getShoppingList(), ticketWrapper.getUser());
     }
 
-    @RequestMapping(value = Uris.TICKETS + Uris.ID, method = RequestMethod.PUT)
+    @RequestMapping(value = Uris.TICKETS,method = RequestMethod.PUT)
     public TicketWrapper updateTickets(@RequestBody TicketWrapper ticketWrapper) {
-        // TODO Implement ticket modification
-        return null;
+        assert ticketWrapper != null;
+        return ticketController.updateTicket(ticketWrapper);
     }
 
     @RequestMapping(value = Uris.TICKETS + Uris.USER_MOBILE_PATH + Uris.USER_MOBILE, method = RequestMethod.GET)

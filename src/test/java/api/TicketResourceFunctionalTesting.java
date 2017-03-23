@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -28,11 +29,18 @@ public class TicketResourceFunctionalTesting {
     private static final String wrongEmail = "test@test.es";
 
     private static final int wrongInvoiceID = 999;
-
+    
+    @Autowired
+    private Ticket ticket;
+    
+    TicketWrapper ticketWrapper;
+    
     @Before
     public void seedDataBase() {
         new RestService().deleteAll();
         new RestService().seedDatabase();
+        ticket = new Ticket(69L, TicketState.COMMITTED);
+        ticketWrapper = new TicketWrapper(ticket);
     }
 
     @Test
@@ -42,6 +50,31 @@ public class TicketResourceFunctionalTesting {
         assertTrue(tickets.getFirstTicket().getReference().length() > 20);
     }
 
+
+    @Test
+    public void testupdateTickets() {
+        TicketWrapper ticketCreated = new RestBuilder<TicketWrapper>(RestService.URL)
+                .path(Uris.TICKETS)
+                .clazz(TicketWrapper.class)
+                .body(ticketWrapper)
+                .post().build();
+
+        ticketCreated.setTicketState(TicketState.OPENED);
+        new RestBuilder<TicketWrapper>(RestService.URL)
+                .path(Uris.TICKETS)
+                .clazz(TicketWrapper.class)
+                .body(ticketCreated)
+                .put().build();
+                
+        TicketWrapper ticketObtained = new RestBuilder<TicketWrapper>(RestService.URL)
+                .path(Uris.TICKETS).path("/"+ ticketCreated.getReference())
+                .clazz(TicketWrapper.class)
+                .get().build();
+        
+        assertEquals(TicketState.OPENED, ticketObtained.getTicketState());
+    }
+    
+    
     @Test
     public void testGetTicketByReferenceNotCommitted() {
         TicketsWrapper tickets = new RestBuilder<TicketsWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketsWrapper.class).get()
@@ -180,7 +213,7 @@ public class TicketResourceFunctionalTesting {
 
     @After
     public void after() {
-        //        new RestService().deleteAll();
+                new RestService().deleteAll();
     }
 
 }
