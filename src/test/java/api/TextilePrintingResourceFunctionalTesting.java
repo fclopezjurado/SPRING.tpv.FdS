@@ -1,16 +1,14 @@
 package api;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import wrappers.ProductsOutFilterWrapper;
+import wrappers.TextilePritingFilterWrapper;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Test;
-
-
-import wrappers.ProductsOutFilterWrapper;
-import wrappers.TextilePritingFilterWrapper;
+import static org.junit.Assert.assertEquals;
 
 public class TextilePrintingResourceFunctionalTesting {
     @Test

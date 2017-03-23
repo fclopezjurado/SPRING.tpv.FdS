@@ -8,7 +8,7 @@ tpv.controller('createController', [
 			vm.completed = false;
 			vm.error = false;
 			vm.response = "";
-			vm.value = 10;
+            vm.value = 10;
 			vm.crear = crear;
 			vm.expiration = new Date();
 

@@ -1,17 +1,16 @@
 package api;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
-
 import wrappers.InvoiceWrapper;
 import wrappers.InvoicesWrapper;
 import wrappers.TicketsWrapper;
 import wrappers.UserWrapper;
+
+import static org.junit.Assert.assertEquals;
 
 public class InvoiceResourceFunctionalTesting {
 

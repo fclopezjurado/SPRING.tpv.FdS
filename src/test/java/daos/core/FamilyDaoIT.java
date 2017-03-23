@@ -16,10 +16,17 @@ import config.TestsPersistenceConfig;
 public class FamilyDaoIT {
     
     @Autowired
-    private FamilyDao familyDao;
+    private FamilyDaoImpl familyDaoImpl;
     
     @Test
-    public void testCreate() {
-        assertEquals(1, familyDao.count());
+    public void testFindAll(){
+        assertEquals(3, familyDaoImpl.findAllFamilies().size());
+    }
+    
+    @Test
+    public void testFindProductByFamilyName(){
+        assertEquals(4, familyDaoImpl.findProductByFamilyName("familyName1").size());
+        assertEquals(8, familyDaoImpl.findProductByFamilyName("familyName2").size());
+        assertEquals(12, familyDaoImpl.findProductByFamilyName("familyName3").size());
     }
 }
