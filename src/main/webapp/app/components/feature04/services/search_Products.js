@@ -63,9 +63,9 @@
     				url: urlBase + "/products",
     				data:products
     		};
-    		this.request(config); 
+    		return this.request(config); 
             
-            return productosAjax;
+           // return productosAjax;
         }
     	
     
