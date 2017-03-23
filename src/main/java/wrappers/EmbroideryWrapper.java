@@ -1,8 +1,8 @@
 package wrappers;
- 
- import java.math.BigDecimal;
 
 import entities.core.Embroidery;
+
+import java.math.BigDecimal;
  
  public class EmbroideryWrapper extends ProductWrapper {
  
@@ -15,23 +15,22 @@ import entities.core.Embroidery;
      public EmbroideryWrapper() {
  
      }
-     
-     
-    public EmbroideryWrapper(Embroidery embroidery) {
 
-        super(embroidery.getId(), embroidery.getReference(), embroidery.getDescription(), embroidery.getRetailPrice());
-        this.stitches = embroidery.getStitches();
-        this.colors = embroidery.getColors();
-        this.squareMillimeters = embroidery.getSquareMillimeters();
-    }
- 
-    public EmbroideryWrapper(long id, String reference, String description, BigDecimal retailPrice, int stitches, int colors,
-            int squareMillimeters) {
-        super(id, reference, description, retailPrice);
-        this.stitches = stitches;
-        this.colors = colors;
-        this.squareMillimeters = squareMillimeters;
-    }
+     public EmbroideryWrapper(Embroidery embroidery) {
+
+         super(embroidery.getId(), embroidery.getReference(), embroidery.getDescription(), embroidery.getRetailPrice());
+         this.stitches = embroidery.getStitches();
+         this.colors = embroidery.getColors();
+         this.squareMillimeters = embroidery.getSquareMillimeters();
+     }
+
+     public EmbroideryWrapper(long id, String reference, String description, BigDecimal retailPrice, int stitches, int colors,
+             int squareMillimeters) {
+         super(id, reference, description, retailPrice);
+         this.stitches = stitches;
+         this.colors = colors;
+         this.squareMillimeters = squareMillimeters;
+     }
  
      public int getStitches() {
          return stitches;
@@ -57,7 +56,5 @@ import entities.core.Embroidery;
          this.squareMillimeters = squareMillimeters;
      }
 
-
-
-}
+ }
 

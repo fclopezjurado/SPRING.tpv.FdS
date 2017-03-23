@@ -1,9 +1,9 @@
 package daos.core;
 
+import entities.core.TextilePrinting;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import entities.core.TextilePrinting;
-
 public interface TextilePrintingDao extends JpaRepository<TextilePrinting, Long> {
+    TextilePrinting findById(long id);
 
 }

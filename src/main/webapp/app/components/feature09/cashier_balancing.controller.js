@@ -1,6 +1,6 @@
 angular.module("tpv").controller(
 		"CashierBalancingController",
-		function(newCashierBalancingService, getBalancesService) {
+    function ($location, newCashierBalancingService, getBalancesService) {
 			"use strict";
 
 			var vm = this;
@@ -21,7 +21,7 @@ angular.module("tpv").controller(
 						.create(vm.cashierbalancing));
 
 				console.log(vm.balances);
-				//$window.location.href = '../cierrecaja';
+                $location.path("/feature09/cierrecaja");
 
 			}
 
