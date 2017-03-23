@@ -16,12 +16,8 @@ public class BudgetDetailWrapper {
     
     private List<Shopping> shoppingList;
     
-    public List<Shopping> getShoppingList() {
-        return shoppingList;
-    }
-
-    public void setShoppingList(List<Shopping> shoppingList) {
-        this.shoppingList = shoppingList;
+    public BudgetDetailWrapper() {
+        
     }
 
     public BudgetDetailWrapper(Budget budget) {
@@ -57,6 +53,14 @@ public class BudgetDetailWrapper {
 
     public void setTotal(float total) {
         this.total = total;
+    }
+    
+    public List<Shopping> getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(List<Shopping> shoppingList) {
+        this.shoppingList = shoppingList;
     }
 
     @Override
