@@ -1,18 +1,13 @@
 package controllers;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-=======
->>>>>>> develop
 import daos.core.ProviderDao;
 import entities.core.Provider;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import wrappers.ProviderWrapper;
 
 @Controller
