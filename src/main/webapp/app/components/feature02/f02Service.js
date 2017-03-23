@@ -30,5 +30,13 @@ tpv.service('f02Service', ['$http', '$q', function ($http, $q) {
 		  };
 	      return this.request(config);
 	   }
+   this.getAll = function() {
+	   let config = {
+ 	     method: 'GET',
+ 	     url: urlBase + "/providers",
+	  };
+	   
+	  return this.request(config); 
+   }
 
 }]);

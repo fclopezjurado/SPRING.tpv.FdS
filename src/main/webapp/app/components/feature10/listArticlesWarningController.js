@@ -11,14 +11,14 @@ tpv.controller('ListArticlesWarningController', ['$timeout', 'f10Service',
         vm.error = false;
 
         vm.providersOpts = null;
-        vm.typeFilter = 'WARNING';
+        vm.typeFilter = '';
         vm.providerFilter = 0;
         vm.products = [];
 
         vm.getProductsWarning = function () {
             const
                 delay = 2000;
-            var typeFilter = vm.typeFilter == "" ? null : vm.typeFilter;
+            var typeFilter = vm.typeFilter == "" ? '' : vm.typeFilter;
             var providerFilter = vm.providerFilter == "" ? 0 : vm.providerFilter;
             f10Service.getProductsWarning(typeFilter, providerFilter).then(function (result) {
                 vm.completed = true;
