@@ -39,7 +39,9 @@ public class BudgetController {
         budgetDao.delete(budget);
     }
     
-    public void addProduct(String reference, Shopping shopping) {
-        
+    public void updateBudget(BudgetDetailWrapper budgetWrapper) {
+        Budget budget = budgetDao.findByReference(budgetWrapper.getReference());
+        budget.setShoppingList(budgetWrapper.getShoppingList());
+        budgetDao.save(budget);
     }
 }
