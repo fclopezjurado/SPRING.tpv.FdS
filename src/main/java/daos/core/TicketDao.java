@@ -23,8 +23,8 @@ public interface TicketDao extends JpaRepository<Ticket, Long> {
     @Query("select t from Ticket t where t.user.mobile = ?1")
     List<Ticket> findByUserMobile(long userMobile);
 
-    @Query("select t from Invoice i join i.ticket t where i.id = ?1")
-    List<Ticket> findByInvoiceID(int id);
+    @Query("select i.ticket from Invoice i where i.id = ?1")
+    Ticket findByInvoiceID(int id);
 
     public Ticket findById(long id);
 }

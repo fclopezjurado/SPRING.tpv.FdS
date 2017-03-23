@@ -2,9 +2,9 @@ package api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.exceptions.NotFoundTicketReferenceException;
@@ -14,7 +14,6 @@ import controllers.TicketController;
 import controllers.UserController;
 import wrappers.InvoiceWrapper;
 import wrappers.InvoicesWrapper;
-import wrappers.TicketWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION)
@@ -42,11 +41,11 @@ public class InvoiceResource {
     }
 
     @RequestMapping(value = Uris.INVOICES, method = RequestMethod.POST)
-    public InvoiceWrapper createInvoice(@RequestBody TicketWrapper ticketWrapper) throws NotFoundTicketReferenceException {
-        if (!this.ticketController.ticketExistsByReference(ticketWrapper.getReference()))
+    public InvoiceWrapper createInvoice(@RequestParam(value = "reference") String ticketReference) throws NotFoundTicketReferenceException {
+        if (!this.ticketController.ticketExistsByReference(ticketReference))
             throw new NotFoundTicketReferenceException();
 
-        return this.invoiceController.createInvoice(ticketWrapper.getReference());
+        return this.invoiceController.createInvoice(ticketReference);
     }
 
     @RequestMapping(value = Uris.INVOICES + Uris.USER_MOBILE, method = RequestMethod.GET)

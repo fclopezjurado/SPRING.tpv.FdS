@@ -2,9 +2,9 @@ package api.exceptions;
 
 public class NotFoundTicketReferenceException extends ApiException {
 
-    private static final long serialVersionUID = -1344640670884805385L;
+    private static final long serialVersionUID = 3117076866914877491L;
 
-    public static final String DESCRIPTION = "No se encuentra la referencia de ticket utilizado";
+    public static final String DESCRIPTION = "No se encuentra el ticket con la referencia indicada";
 
     public static final int CODE = 10;
 

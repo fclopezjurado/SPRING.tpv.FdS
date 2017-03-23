@@ -1,46 +1,23 @@
 package daos;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import daos.core.AlarmDao;
-import daos.core.ArticleDao;
-import daos.core.EmbroideryDao;
-import daos.core.FamilyDao;
-import daos.core.InvoiceDao;
-import daos.core.ProviderDao;
-import daos.core.TextilePrintingDao;
-import daos.core.TicketDao;
-import daos.core.VoucherDao;
+import daos.core.*;
 import daos.users.AuthorizationDao;
 import daos.users.TokenDao;
 import daos.users.UserDao;
-import entities.core.Alarm;
-import entities.core.AlarmType;
-import entities.core.Article;
-import entities.core.ComponentProduct;
-import entities.core.Embroidery;
-import entities.core.Family;
-import entities.core.Invoice;
-import entities.core.Product;
-import entities.core.Provider;
-import entities.core.Shopping;
-import entities.core.TextilePrinting;
-import entities.core.Ticket;
-import entities.core.TicketState;
-import entities.core.Voucher;
+import entities.core.*;
 import entities.users.Authorization;
 import entities.users.Role;
 import entities.users.Token;
 import entities.users.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import services.DataService;
+
+import javax.annotation.PostConstruct;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 @Service
 public class DaosServiceIntegrationTests {
@@ -74,6 +51,9 @@ public class DaosServiceIntegrationTests {
 
     @Autowired
     private TicketDao ticketDao;
+    
+    @Autowired
+    private BudgetDao budgetDao;
 
     @Autowired
     private InvoiceDao invoiceDao;
@@ -93,6 +73,7 @@ public class DaosServiceIntegrationTests {
         this.createProviders();
         this.createProducts();
         this.createTickets();
+        this.createBudgets();
         this.createInvoices();
         this.createAlarms();
         this.createFamilies();
@@ -170,7 +151,7 @@ public class DaosServiceIntegrationTests {
         Provider provider = providerDao.findAll().get(0);
         for (int i = 0; i < 4; i++) {
             article = new Article(84000001111L + i, "article" + i, new BigDecimal(20 + i), "article" + i, new BigDecimal(10 + i), provider);
-            articleDao.save(article); 
+            articleDao.save(article);
         }
         provider = providerDao.findAll().get(1);
         for (int i = 5; i < 9; i++) {
@@ -209,12 +190,38 @@ public class DaosServiceIntegrationTests {
         }
         ticketDao.save(ticket);
 
-        ticket = new Ticket(3L, TicketState.OPENED);
+        ticket = new Ticket(3L, TicketState.COMMITTED);
         for (int i = 0; i < 4; i++) {
             Product product = textilePrintingDao.findOne(84000003333L + i);
             ticket.addShopping(new Shopping(1 + i, 10, product.getId(), product.getDescription(), product.getRetailPrice()));
         }
         ticketDao.save(ticket);
+    }
+    
+    public void createBudgets() {
+        Budget budget;
+
+        budget = new Budget(1L);
+        for (int i = 0; i < 4; i++) {
+            Product product = articleDao.findOne(84000001111L + i);
+            budget.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budget.setUser(userDao.findByMobile(666000000));
+        budgetDao.save(budget);
+
+        budget = new Budget(2L);
+        for (int i = 0; i < 4; i++) {
+            Product product = embroideryDao.findOne(84000002222L + i);
+            budget.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budgetDao.save(budget);
+
+        budget = new Budget(3L);
+        for (int i = 0; i < 4; i++) {
+            Product product = textilePrintingDao.findOne(84000003333L + i);
+            budget.addShopping(new Shopping(1 + i, 10, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budgetDao.save(budget);
     }
 
     public void createInvoices() {
@@ -250,3 +257,4 @@ public class DaosServiceIntegrationTests {
         familyDao.save(family3);
     }
 }
+

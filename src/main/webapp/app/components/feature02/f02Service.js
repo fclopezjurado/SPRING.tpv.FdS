@@ -1,4 +1,4 @@
-tpv.service('f14Service', ['$http', '$q', function ($http, $q) {
+tpv.service('f02Service', ['$http', '$q', function ($http, $q) {
    "use strict";
 
    const urlBase="http://localhost:8080/SPRING.tpv.FdS.1.2.0-SNAPSHOT/api/v0";
@@ -20,30 +20,15 @@ tpv.service('f14Service', ['$http', '$q', function ($http, $q) {
 	      return deferred.promise;	   
    }
 
-   this.totalSales = function (inicio,fin) {
-      let config = {
- 	     method: 'POST',
- 	     url: urlBase + "/totalSales",
- 	     data:{'inicio':inicio, 'fin': fin}
-	  };
-      return this.request(config);
-   }
    
-   this.bestSellers = function (inicio,fin) {
-	      let config = {
-	 	     method: 'POST',
-	 	     url: urlBase + "/BestSellers",
-	 	     data:{'inicio':inicio, 'fin': fin}
-		  };
-	      return this.request(config);
-   }
-
-   this.productSales = function (productId, inicio,fin) {
-	      let config = {
-	 	     method: 'POST',
-	 	     url: urlBase + "/ProductSales",
-	 	     data:{'productId':productId, 'inicio':inicio, 'fin': fin}
+   this.registration = function (company, address, mobile, payment, notes){
+	      let resource="providers";
+		  let config = {
+	 	      method: 'POST',
+	 	      url: urlBase + "/"+ resource,
+	 	      data: {'company':company, 'address': address, 'mobile': mobile, 'payment': payment, 'notes': notes}
 		  };
 	      return this.request(config);
 	   }
+
 }]);
