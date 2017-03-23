@@ -1,12 +1,14 @@
 package controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import daos.users.AuthorizationDao;
 import daos.users.UserDao;
 import entities.users.Authorization;
 import entities.users.Role;
 import entities.users.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import wrappers.UserForEditListWrapper;
 import wrappers.UserWrapper;
 
 @Controller
@@ -58,6 +60,12 @@ public class UserController {
     public UserWrapper getByTicketReference(String ticketReference) {
         User user = this.userDao.findByTicketReference(ticketReference);
         return new UserWrapper(user.getMobile(), user.getUsername(), user.getPassword());
+    }
+
+    public UserForEditListWrapper findAll() {
+        UserForEditListWrapper usersWrapper = new UserForEditListWrapper();
+        usersWrapper.wrapUsers(this.userDao.findAll());
+        return usersWrapper;
     }
 
 }

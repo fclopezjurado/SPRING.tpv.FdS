@@ -1,11 +1,26 @@
 package api;
 
+import org.junit.Before;
 import org.junit.Test;
 import wrappers.ProviderWrapper;
 import wrappers.ProvidersWrapper;
 
 public class ProviderResourceFunctionalTesting {
+    
+    public static String id = "1";
+    
+    @Before
+    public void setUp() {
+        ProvidersWrapper providers = new RestBuilder<ProvidersWrapper>(RestService.URL).path(Uris.PROVIDERS).get()
+                .clazz(ProvidersWrapper.class).build();
+        
+        if(providers!=null  && providers.getProvidersWrapper()!=null
+                && providers.getProvidersWrapper().size() >0 && providers.getProvidersWrapper().get(0)!=null){
+            id = String.valueOf(providers.getProvidersWrapper().get(0).getId());
+        }
 
+    }
+    
     @Test
     public void testCreateProvider() {
         ProviderWrapper providerWrapper = new ProviderWrapper();
@@ -30,7 +45,7 @@ public class ProviderResourceFunctionalTesting {
 
     @Test
     public void testDeleteProviders() {
-        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).param("id", "1").delete().build();
+        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).param("id", id).delete().build();
     }
 
 }

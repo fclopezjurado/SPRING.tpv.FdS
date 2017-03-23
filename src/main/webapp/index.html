@@ -15,6 +15,9 @@
     <script src="assets/js/route.min.js"></script>
     <script src="assets/js/angular-css.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Configuración -->
@@ -27,6 +30,9 @@
     <script src="app/components/feature00/loginController.js"></script>
     <script src="app/components/feature00/registrationController.js"></script>
     <script src="app/components/feature00/deleteAllController.js"></script>
+    <!-- Autor: Javier Molina -->
+    <script src="app/components/feature02/f02Service.js"></script>
+    <script src="app/components/feature02/providerController.js"></script>
     <!-- Autor: Jorge Cárdenas -->
     <script src="app/components/feature20/f20Service.js"></script>
     <script src="app/components/feature20/userController.js"></script>
@@ -69,7 +75,9 @@
     <script src="app/components/feature03/Articles/CreateArticleController.js"></script>
     <script src="app/components/feature03/Embroidery/CreateEmbroideryController.js"></script>
     <script src="app/components/feature03/TextilePrinting/CreateTextilePrintingController.js"></script>
-
+    <script src="app/components/feature03/Articles/UpdateArticleController.js"></script>
+    <script src="app/components/feature03/Embroidery/UpdateEmbroideryController.js"></script>
+    <script src="app/components/feature03/TextilePrinting/UpdateTextilePrintingController.js"></script>
     <!-- Autor: Emilio Castellano , Alberto Bricio-->
     <script src="app/components/feature06/searchTicketController.js"></script>
     <script src="app/components/feature06/editTicketController.js"></script>
@@ -77,6 +85,7 @@
     <!-- Autor: Jose Maria Moreno-->
     <script src="app/components/feature14/totalSalesController.js"></script>
     <script src="app/components/feature14/bestSellersController.js"></script>
+    <script src="app/components/feature14/productSalesController.js"></script>
     <script src="app/components/feature14/f14Service.js"></script>
 
 
@@ -115,6 +124,11 @@
                     <li><a href="#/feature00/delete-all">Delete All</a></li>
                 </ul>
             </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F02<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature02/registration">Provider Registration</a></li>
+                </ul>
+            </li>
             <li><a href="#/feature20/users">F20</a></li>
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F07<b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -148,6 +162,9 @@
                     <li><a href="#/feature03/Articles/CreateArticle">Create Article</a></li>
                     <li><a href="#/feature03/TextilePrinting/CreateTextilePrinting">Create Textile Printing</a></li>
                     <li><a href="#/feature03/Embroidery/CreateEmbroidery">Create Embroidery</a></li>
+                    <li><a href="#/feature03/Articles/UpdateArticle">Update Article</a></li>
+                    <li><a href="#/feature03/TextilePrinting/UpdateTextilePrinting">Update Textile Printing</a></li>
+                    <li><a href="#/feature03/Embroidery/UpdateEmbroidery">Update Embroidery</a></li>
                 </ul>
             </li>
 
@@ -177,9 +194,9 @@
                 <ul class="dropdown-menu">
                     <li><a href="#/feature14/totalSales">Total Sales</a></li>
                     <li><a href="#/feature14/bestSellers">Best Sellers</a></li>
+                    <li><a href="#/feature14/productSales">Product sales development</a></li>
                 </ul>
             </li>
-
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F11<b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#/feature11/ticket">Ver estado pedido</a></li>

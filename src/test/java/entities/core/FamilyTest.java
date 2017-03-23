@@ -1,21 +1,23 @@
 package entities.core;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+
+import javassist.expr.NewArray;
+
 
 public class FamilyTest {
-
+    
     private Family family1, family2, family3;
-
     private ComponentProduct product1;
-
+    
     @Before
-    public void init() {
+    public void init(){
         List<ComponentProduct> products = new ArrayList<>();
         List<ComponentProduct> productsAndFamilies = new ArrayList<>();
         List<ComponentProduct> families = new ArrayList<>();
@@ -29,54 +31,54 @@ public class FamilyTest {
         families.add(family1);
         families.add(family2);
         family3 = new Family(3, "family3", "desc3", families);
-
+        
     }
-
+    
     @Test
-    public void testGetName() {
+    public void testGetName(){
         assertEquals("family1", family1.getName());
     }
-
+    
     @Test
-    public void testGetDescription() {
+    public void testGetDescription(){
         assertEquals("desc1", family1.getFamilyDescription());
     }
-
+    
     @Test
-    public void testGetProducts() {
+    public void testGetProducts(){
         assertEquals(2, family1.getProducts().size());
         assertEquals(2, family2.getProducts().size());
         assertEquals(2, family3.getProducts().size());
     }
-
+    
     @Test
-    public void testNumberOfProducts() {
-        assertEquals(1, new Embroidery().numberOfProducts());
-        assertEquals(2, family1.numberOfProducts());
-        assertEquals(3, family2.numberOfProducts());
-        assertEquals(5, family3.numberOfProducts());
+    public void testGetAllProducts(){
+        assertEquals(2, family1.getAllProducts().size());
+        assertEquals(3, family2.getAllProducts().size());
+        assertEquals(5, family3.getAllProducts().size());
+        assertNull(new Article().getAllProducts());
     }
-
+    
     @Test
-    public void testAdd() {
+    public void testAdd(){
         family1.add(new Article());
-        assertEquals(3, family1.numberOfProducts());
+        assertEquals(3, family1.getProducts().size());
     }
-
-    @Test
-    public void testRemove() {
+    
+    @Test 
+    public void testRemove(){
         family1.remove(product1);
-        assertEquals(1, family1.numberOfProducts());
+        assertEquals(1, family1.getProducts().size());
     }
-
+    
     @Test
-    public void testSetName() {
+    public void testSetName(){
         family1.setName("new name");
         assertEquals("new name", family1.getName());
     }
-
+    
     @Test
-    public void testSetDesc() {
+    public void testSetDesc(){
         family2.setFamilyDescription("new");
         assertEquals("new", family2.getFamilyDescription());
     }

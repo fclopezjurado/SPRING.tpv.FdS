@@ -1,5 +1,12 @@
 package api;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import api.exceptions.AlreadyExistUserFieldException;
 import api.exceptions.InvalidUserFieldException;
 import api.exceptions.NotFoundTicketReferenceException;
@@ -7,14 +14,9 @@ import api.exceptions.NotFoundUserIdException;
 import controllers.TicketController;
 import controllers.UserController;
 import entities.users.Role;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import wrappers.UserForEditListWrapper;
 import wrappers.UserForEditWrapper;
 import wrappers.UserWrapper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping(Uris.VERSION)
@@ -53,10 +55,7 @@ public class UserResource {
 
     @RequestMapping(value = Uris.USERS, method = RequestMethod.GET)
     public UserForEditListWrapper getAllUsers() {
-        // TODO use instead of mock: this.userController.findAll();
-        List<UserForEditWrapper> list = new ArrayList<UserForEditWrapper>();
-        list.add(new UserForEditWrapper(66000000, "Prueba", true, "Calle prueba", "12345678Z", "prueba@mail.com", "25/10/2008"));
-        return new UserForEditListWrapper(list);
+        return this.userController.findAll();
     }
 
     @RequestMapping(value = Uris.USERS, method = RequestMethod.PUT)

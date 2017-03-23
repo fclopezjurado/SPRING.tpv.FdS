@@ -26,6 +26,11 @@ tpv.config(function ($routeProvider) {
 	        controller: "DeleteAllController",
 	        controllerAs: "vm"
         })
+        .when("/feature02/registration", {
+	        templateUrl: "app/components/feature02/registration.html",
+	        controller: "ProviderController",
+	        controllerAs: "vm"
+        })
         //Feature 03 -01 
         .when("/feature03/Articles/ArticleList", {
             templateUrl: "app/components/feature03/Articles/ArticleList.html",
@@ -56,6 +61,22 @@ tpv.config(function ($routeProvider) {
         .when("/feature03/TextilePrinting/CreateTextilePrinting", {
             templateUrl: "app/components/feature03/TextilePrinting/CreateTextilePrinting.html",
             controller: "CreateTextilePrintingController",
+            controllerAs: "vm"
+        })
+        
+                 .when("/feature03/Articles/UpdateArticle", {
+	        templateUrl: "app/components/feature03/Articles/UpdateArticle.html",
+	        controller: "UpdateArticleController",
+	        controllerAs: "vm"
+        })
+        .when("/feature03/Embroidery/UpdateEmbroidery", {
+            templateUrl: "app/components/feature03/Embroidery/UpdateEmbroidery.html",
+            controller: "UpdateEmbroideryController",
+            controllerAs: "vm"
+        })
+             .when("/feature03/TextilePrinting/UpdateTextilePrinting", {
+            templateUrl: "app/components/feature03/TextilePrinting/UpdateTextilePrinting.html",
+            controller: "UpdateTextilePrintingController",
             controllerAs: "vm"
         })
         
@@ -156,6 +177,11 @@ tpv.config(function ($routeProvider) {
         .when("/feature14/bestSellers", {
             templateUrl: "app/components/feature14/bestSellers.html",
             controller: "bestSellersController",
+            controllerAs: "vm"
+        })
+        .when("/feature14/productSales", {
+            templateUrl: "app/components/feature14/productSales.html",
+            controller: "productSalesController",
             controllerAs: "vm"
         })
 
