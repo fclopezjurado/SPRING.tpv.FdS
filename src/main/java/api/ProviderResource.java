@@ -44,7 +44,6 @@ public class ProviderResource {
         return wrapper;
     }
 
-//    @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.DELETE)
     @RequestMapping(value = Uris.PROVIDERS+Uris.ID, method = RequestMethod.DELETE)
     public void providerDelete(@PathVariable(value = "id") String id) throws Exception {
         providerController.delete(id);
