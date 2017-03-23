@@ -63,9 +63,11 @@ public class Uris {
     public static final String FAMILY_NAME = "/{name}";
 
     public static final String USER_MOBILE_PATH = "/mobile";
-
+    
     public static final String USER_EMAIL_PATH = "/email";
 
     public static final String INVOICE = "/invoice";
 
+    public static final String BUDGETS = "/budgets";
+    
 }

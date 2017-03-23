@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 
 import daos.core.BudgetDao;
 import entities.core.Budget;
-import entities.core.Shopping;
 import wrappers.BudgetDetailWrapper;
 import wrappers.BudgetListWrapper;
 
@@ -39,7 +38,9 @@ public class BudgetController {
         budgetDao.delete(budget);
     }
     
-    public void addProduct(String reference, Shopping shopping) {
-        
+    public void updateBudget(BudgetDetailWrapper budgetWrapper) {
+        Budget budget = budgetDao.findByReference(budgetWrapper.getReference());
+        budget.setShoppingList(budgetWrapper.getShoppingList());
+        budgetDao.save(budget);
     }
 }
