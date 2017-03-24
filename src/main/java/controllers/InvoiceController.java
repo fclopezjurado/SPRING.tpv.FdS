@@ -6,6 +6,10 @@ import entities.core.Invoice;
 import entities.core.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import api.exceptions.NotFoundInvoiceIdException;
+import api.exceptions.NotFoundTicketReferenceException;
+import api.exceptions.NotFoundUserMobileException;
 import wrappers.InvoiceWrapper;
 import wrappers.InvoicesWrapper;
 
@@ -32,9 +36,12 @@ public class InvoiceController {
         this.ticketDao = ticketDao;
     }
 
-    public InvoiceWrapper createInvoice(String ticketReference) {
-        Ticket ticket = this.ticketDao.findByReference(ticketReference);
+    public InvoiceWrapper createInvoice(String ticketReference) throws NotFoundTicketReferenceException {
         int newInvoiceID = this.invoiceDao.findMaxInvoiceID();
+        Ticket ticket = this.ticketDao.findByReference(ticketReference);
+
+        if (ticket == null)
+            throw new NotFoundTicketReferenceException();
 
         if (newInvoiceID < FIRST_INVOICE_ID)
             newInvoiceID = FIRST_INVOICE_ID;
@@ -47,17 +54,21 @@ public class InvoiceController {
         return new InvoiceWrapper(newInvoiceID, ticket.getReference());
     }
 
-    public boolean invoiceExists(int id) {
+    public boolean invoiceExists(int id) throws NotFoundInvoiceIdException {
         Invoice invoice = invoiceDao.findOne(id);
 
-        if (invoice != null)
-            return invoice.getId() == id;
+        if (invoice == null)
+            throw new NotFoundInvoiceIdException();
 
-        return false;
+        return invoice.getId() == id;
     }
 
-    public InvoicesWrapper getInvoicesByUserMobile(long userMobile) {
+    public InvoicesWrapper getInvoicesByUserMobile(long userMobile) throws NotFoundUserMobileException {
         List<Invoice> invoices = invoiceDao.findByUserMobile(userMobile);
+
+        if (invoices == null)
+            throw new NotFoundUserMobileException();
+
         InvoicesWrapper invoicesWrapper = new InvoicesWrapper();
 
         for (Invoice invoice : invoices)

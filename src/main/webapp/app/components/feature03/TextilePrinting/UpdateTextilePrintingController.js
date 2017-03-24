@@ -1,4 +1,4 @@
-tpv.controller('CreateTextilePrintingController', [ '$timeout', 'f03Service',
+tpv.controller('UpdateTextilePrintingController', [ '$timeout', 'f03Service',
 		function($timeout, f03Service) {
 			"use strict";
 			var vm = this;

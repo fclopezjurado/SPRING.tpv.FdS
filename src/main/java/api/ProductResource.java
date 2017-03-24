@@ -22,6 +22,8 @@ public class ProductResource {
         productoMock.setReference("referenceMock");
         productoMock.setDescription("descriptionMock");
         productosSalidaMock.add(productoMock);
+        productosSalidaMock.add(productoMock);
+        productosSalidaMock.add(productoMock);
         return productosSalidaMock;
     }
 }
