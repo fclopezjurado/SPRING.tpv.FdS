@@ -112,6 +112,30 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         };
         return this.request(config);
     }
-   
+    
+    //* Update
+    this.updateArticle = function (articleId) {
+        let config = {
+            metod: 'PUT',
+            url: urlBase + "/articles/" + articleId
+        };
+        return this.request(config);
+    }
+
+    this.updateEmbroidery = function (embroideryId) {
+        let config = {
+            method: 'PUT',
+            url: urlBase + "/embroidery/" + embroideryId
+        };
+        return this.request(config);
+    }
+
+    this.updateTextilePrinting = function (textilePrintingId) {
+        let config = {
+            method: 'PUT',
+            url: urlBase + "/textilePrinting/" + textilePrintingId
+        };
+        return this.request(config);
+    }
    
 }]);
