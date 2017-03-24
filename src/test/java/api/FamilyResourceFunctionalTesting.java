@@ -1,18 +1,18 @@
 package api;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import wrappers.FamilyWrapper;
-import wrappers.ProductsFilterByFamilyWrapper;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
+
+import wrappers.FamilyWrapper;
+import wrappers.ProductsFilterByFamilyWrapper;
 
 public class FamilyResourceFunctionalTesting {
-    
+
     @Before
     public void seedDataBase() {
         new RestService().seedDatabase();
@@ -28,14 +28,9 @@ public class FamilyResourceFunctionalTesting {
 
     @Test
     public void testGetAllFamilies() {
-        List<FamilyWrapper> familyWrappers = Arrays.asList(new RestBuilder<FamilyWrapper[]>(RestService.URL).path(Uris.FAMILIES)
-                .clazz(FamilyWrapper[].class).get().build());
+        List<FamilyWrapper> familyWrappers = Arrays
+                .asList(new RestBuilder<FamilyWrapper[]>(RestService.URL).path(Uris.FAMILIES).clazz(FamilyWrapper[].class).get().build());
         assertEquals(3, familyWrappers.size());
-    }
-    
-    @After
-    public void after() {
-        new RestService().deleteAll();
     }
 
 }
