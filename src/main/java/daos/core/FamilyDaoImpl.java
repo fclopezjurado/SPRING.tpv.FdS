@@ -15,7 +15,10 @@ public class FamilyDaoImpl implements FamilyExtented{
     @Override
     public List<Product> findProductByFamilyName(String name) {
         Family family = familyDao.findByName(name);
-        return family.getAllProducts();
+        if (family != null) {
+            return family.getAllProducts();
+        }
+        return null;
     }
 
     @Override
