@@ -1,17 +1,16 @@
 package api;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import api.exceptions.AlreadyExistCashierBalanceDayException;
 import api.exceptions.NotFoundCashierBalanceIdException;
+import org.junit.Before;
+import org.junit.Test;
 import wrappers.CashierBalanceWrapper;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class CashierBalanceResourceTest {
 

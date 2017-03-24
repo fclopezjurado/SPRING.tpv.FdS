@@ -4,21 +4,24 @@
 			<legend>Feature10. Listado de articulos en alerta</legend>
 			<div class="form-group text-left">
 				<label for="type" class="col-md-3">Filtro por tipo:</label> <select
-					class="col-md-3" ng-init="vm.typeFilter = 'WARNING'"
+					class="col-md-3" ng-init="vm.typeFilter = ''"
 					ng-model="vm.typeFilter" ng-change="vm.getProductsWarning()">
+					<option value=''>TODOS</option>
 					<option value='WARNING'>Warning</option>
 					<option value='CRITICAL'>Critical</option>
 				</select> <label for="type" class="col-md-3">Filtro por proveedor:</label> <select
 					class="col-md-3" ng-init="vm.providerFilter = ''"
 					ng-model="vm.providerFilter" ng-change="vm.getProductsWarning()">
-					<option value=''></option>
-					<option ng-repeat="provider in vm.providersOpts" value="{{ provider.id }}">{{ provider.company }}</option>
+					<option value=''>TODOS</option>
+					<option ng-repeat="provider in vm.providersOpts"
+						value="{{ provider.id }}">{{ provider.company }}</option>
 				</select>
 			</div>
 			<br />
 			<table class="table table-condensed table-hover">
 				<thead>
 					<tr>
+						<th>Nº</th>
 						<th>Referencia</th>
 						<th>Descripción</th>
 						<th>Proveedor</th>
@@ -34,7 +37,8 @@
 							hay artículos en alerta</td>
 					</tr>
 					<tr ng-show="vm.successList && vm.products.length"
-						ng-repeat="product in vm.products">
+						ng-repeat="product in vm.products track by $index">
+						<td>{{ $index + 1 }}</td>
 						<td style="vertical-align: middle;">{{ product.reference }}</td>
 						<td>{{ product.description }}</td>
 						<td>{{ product.providerWrapper.company }}</td>
