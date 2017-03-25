@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface ArticleDao extends JpaRepository<Article, Long> {
+public interface ArticleDao extends JpaRepository<Article, Long> , ArticleExtended {
 
     Article findByDescription(String description);
 
