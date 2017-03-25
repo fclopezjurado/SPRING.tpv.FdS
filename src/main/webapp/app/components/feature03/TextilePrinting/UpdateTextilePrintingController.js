@@ -6,12 +6,12 @@ tpv.controller('UpdateTextilePrintingController', [ '$timeout', 'f03Service',
 			vm.completed = false;
 			vm.error = false;
 			vm.response;
-			vm.addTextilePrinting=addTextilePrinting;
+			vm.TextilePrinting=updateTextilePrinting;
 
-			function addTextilePrinting() {
+			function updateTextilePrinting() {
 				const
 				delay = 10000;
-				f03Service.addTextilePrinting(vm.textilePrinting).then(function(result) {
+				f03Service.updateTextilePrinting(vm.textilePrinting).then(function(result) {
 					vm.completed = true;
 					vm.response = result;
 					
