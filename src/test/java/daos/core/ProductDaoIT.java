@@ -15,9 +15,11 @@ import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
 import entities.core.AlarmType;
 import entities.core.Product;
+import entities.core.TextilePrinting;
 import wrappers.ArticleFilterWrapper;
 import wrappers.EmbroideryFilterWrapper;
 import wrappers.ProductFilterWrapper;
+import wrappers.TextilePritingFilterWrapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
@@ -127,6 +129,18 @@ public class ProductDaoIT {
         articleFront.setMaxWholesalePrice(new BigDecimal("1"));
         articleFront.setMinWholesalePrice(new BigDecimal("10"));
         assertEquals(0,articleDao.findArticlesByFilter(articleFront).size());
+    }
+    
+    @Test
+    public void testFindTextilePrintingByFilterNormal() {
+        TextilePrinting textilePrinting=textilePrintingDao.findAll().get(0);
+        TextilePritingFilterWrapper textilePrintingFront= new TextilePritingFilterWrapper ();
+        textilePrintingFront.setDescription(textilePrinting.getDescription());
+        textilePrintingFront.setReference("");
+        textilePrintingFront.setMaxRetailPrice(new BigDecimal("0"));
+        textilePrintingFront.setMinRetailPrice(new BigDecimal("1"));
+        textilePrintingFront.setType("");        
+        assertNotNull(textilePrintingDao.findArticlesByFilter(textilePrintingFront));
     }
     
     
