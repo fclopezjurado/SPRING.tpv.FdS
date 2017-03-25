@@ -5,16 +5,17 @@ tpv.controller('productsFamilyController', [ '$timeout', 'f05Service',
 
 			vm.completed = false;
 			vm.error = false;
-			vm.response = "";
-			vm.getFamily=getFamily;
+			vm.response;
+			vm.response1;
+			vm.getAll=getAll;
 			vm.getFamilyName=getFamilyName;
 
-			function getFamily() {
+			function getAll() {
 				const
-				delay = 2000;
-				f05Service.getFamily().then(function(result) {
+				delay = 10000;
+				f05Service.getAll().then(function(result) {
 					vm.completed = true;
-					vm.response = result.getFamily;
+					vm.response = result;
 					$timeout(function() {
 						vm.completed = false;
 					}, delay)
@@ -31,17 +32,17 @@ tpv.controller('productsFamilyController', [ '$timeout', 'f05Service',
 			
 			function getFamilyName(name) {
 				const
-				delay = 2000;
-				f05Service.getFamilyName().then(function(result) {
+				delay = 10000;
+				f05Service.getFamilyName(name).then(function(result) {
 					vm.completed = true;
-					vm.response = result.getFamilyName;
+					vm.response1 = result;
 					$timeout(function() {
 						vm.completed = false;
 					}, delay)
 				}, function(errors) {
 					// handle errors
 					vm.error = true;
-					vm.response = errors;
+					vm.response1 = errors;
 					$timeout(function() {
 						vm.error = false;
 					}, delay)

@@ -1,6 +1,7 @@
 package entities.core;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -73,9 +74,9 @@ public abstract class Product extends ComponentProduct{
     }
     
     @Override
-    public int numberOfProducts() {
+    public List<Product> getAllProducts() {
         // TODO Auto-generated method stub
-        return 1;
+        return null;
     }
 
     @Override

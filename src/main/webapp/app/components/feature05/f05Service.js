@@ -50,7 +50,7 @@ tpv.service('f05Service', ['$http', '$q', function ($http, $q) {
     *  */ 
    
    
-   this.getFamily = function() {
+   this.getAll = function() {
 	   let config = {
  	     method: 'GET',
  	     url: urlBase + "/families",
@@ -90,8 +90,7 @@ tpv.service('f05Service', ['$http', '$q', function ($http, $q) {
    this.getFamilyName= function (name) {
 		let config = {
 				method: 'POST',
-				url: urlBase + "/families/{name}",
-				data:name
+				url: urlBase + "/families/" + name
 		};
 		return this.request(config);  
    }

@@ -1,34 +1,33 @@
 <style type="text/css">
 
    h3 {
-   text-align: center
+   text-align: center；
+   margin－top：20px；
    }
    
    ul.columnas li{
-   Display:inline; 
-   Float: left;
-   Width:25%;
-   } 
+    Display:inline; 
+   }  
    
-   div{
-   padding-top: 20px;
+   p{
+    color:#0000FF;
    }
    
 </style>
 
 <section class="container">
-
     <h3>Products Family</h3>
-    
-    <div class="row" ng-init="vm.getFamily()">
-        <div ng-repeat="family in vm.response">
+ 
+    <div ng-init="vm.getAll()">
+        <div ng-repeat="families in vm.response">
             <ul class="columnas">
-                <li id="subCategory"><a href="#" ng-click="vm.getFamilyName(family.name)">{{family.name}}</a></li>
+                <li id="subCategory" ng-click="vm.getFamilyName(families.name)"><p>{{families.name}}</p></li>
             </ul>         
          </div>
     </div>
     
-    <div class="table-responsive">
+    
+     <div class="table-responsive">
         <table class="table">
             <thead>
                 <tr>
@@ -38,7 +37,7 @@
                 </tr>
             </thead>
             <tbody ng-init="vm.getFamilyName(family.name)">
-                <tr ng-app="" ng-repeat="familyName in vm.response">
+                <tr ng-repeat="familyName in vm.response1">
                 <td>{{familyName.id}}</td>
                 <td>{{familyName.reference}}</td>
                 <td>{{familyName.retailPrice}}</td>
@@ -46,5 +45,8 @@
             </tbody>
         </table>     
       </div>    
+  
+    
+    
     
 </section>

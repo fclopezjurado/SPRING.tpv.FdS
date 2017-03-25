@@ -1,26 +1,29 @@
 package api;
 
-import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.client.HttpClientErrorException;
+import wrappers.TotalVouchersWrapper;
+import wrappers.VoucherWrapper;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
-
-import wrappers.TotalVouchersWrapper;
-import wrappers.VoucherWrapper;
+import static org.junit.Assert.*;
 
 public class VoucherResourceFunctionalTesting {
+
+    String tokenManager;
 
     @Before
     public void init() {
         new RestService().deleteAll();
+        tokenManager = new RestService().registerAndLoginManager();
+
     }
 
     @Test
@@ -28,47 +31,49 @@ public class VoucherResourceFunctionalTesting {
 
         VoucherWrapper newVoucherWrapper = new VoucherWrapper();
         newVoucherWrapper.setValue(new BigDecimal("100.50"));
-        new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class).body(newVoucherWrapper).post()
-                .build();
+        new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).basicAuth(tokenManager, "").clazz(VoucherWrapper.class)
+                .body(newVoucherWrapper).post().build();
 
         newVoucherWrapper = new VoucherWrapper();
         newVoucherWrapper.setValue(new BigDecimal("50"));
         newVoucherWrapper.setExpiration(new GregorianCalendar(2015, 5, 5));
 
-        new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class).body(newVoucherWrapper).post()
-                .build();
+        new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).basicAuth(tokenManager, "").clazz(VoucherWrapper.class)
+                .body(newVoucherWrapper).post().build();
 
         newVoucherWrapper = new VoucherWrapper();
         newVoucherWrapper.setValue(new BigDecimal("25"));
 
         VoucherWrapper voucherWrapperToconsume = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS)
-                .clazz(VoucherWrapper.class).body(newVoucherWrapper).post().build();
+                .basicAuth(tokenManager, "").clazz(VoucherWrapper.class).body(newVoucherWrapper).post().build();
 
         new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).path("/" + voucherWrapperToconsume.getReference())
                 .clazz(VoucherWrapper.class).post().build();
 
-        TotalVouchersWrapper totalVouchersWrapper = new RestBuilder<TotalVouchersWrapper>(RestService.URL).path(Uris.VOUCHERS)
-                .clazz(TotalVouchersWrapper.class).get().build();
+        TotalVouchersWrapper totalVouchersWrapper = new RestBuilder<TotalVouchersWrapper>(RestService.URL).basicAuth(tokenManager, "")
+                .path(Uris.VOUCHERS).clazz(TotalVouchersWrapper.class).get().build();
 
         assertEquals(new BigDecimal("100.50"), totalVouchersWrapper.getTotal());
     }
 
     @Test
     public void createVoucher() {
+
         VoucherWrapper newVoucherWrapper = new VoucherWrapper();
         newVoucherWrapper.setValue(new BigDecimal("100"));
-        VoucherWrapper voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class)
-                .body(newVoucherWrapper).post().build();
+        VoucherWrapper voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).basicAuth(tokenManager, "")
+                .clazz(VoucherWrapper.class).body(newVoucherWrapper).post().build();
 
         assertNotNull(voucherWrapper.getReference());
     }
 
     @Test
     public void consumeVoucher() {
+
         VoucherWrapper newVoucherWrapper = new VoucherWrapper();
         newVoucherWrapper.setValue(new BigDecimal("101.00"));
-        VoucherWrapper voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class)
-                .body(newVoucherWrapper).post().build();
+        VoucherWrapper voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).basicAuth(tokenManager, "")
+                .clazz(VoucherWrapper.class).body(newVoucherWrapper).post().build();
 
         VoucherWrapper consumedvoucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS)
                 .path("/" + voucherWrapper.getReference()).clazz(VoucherWrapper.class).post().build();
@@ -81,22 +86,24 @@ public class VoucherResourceFunctionalTesting {
 
         new RestService().deleteAll();
 
+        tokenManager = new RestService().registerAndLoginManager();
+
         VoucherWrapper newVoucherWrapper = new VoucherWrapper();
         newVoucherWrapper.setValue(new BigDecimal("133.00"));
-        VoucherWrapper voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class)
-                .body(newVoucherWrapper).post().build();
+        VoucherWrapper voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).basicAuth(tokenManager, "")
+                .clazz(VoucherWrapper.class).body(newVoucherWrapper).post().build();
 
         List<VoucherWrapper> VoucherList = Arrays.asList(new RestBuilder<VoucherWrapper[]>(RestService.URL).path(Uris.VOUCHERS)
-                .path("/" + voucherWrapper.getReference()).clazz(VoucherWrapper[].class).get().build());
+                .path("/" + voucherWrapper.getReference()).basicAuth(tokenManager, "").clazz(VoucherWrapper[].class).get().build());
 
         assertEquals(1, VoucherList.size());
 
         newVoucherWrapper.setValue(new BigDecimal("134.00"));
-        voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class)
-                .body(newVoucherWrapper).post().build();
+        voucherWrapper = new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).basicAuth(tokenManager, "")
+                .clazz(VoucherWrapper.class).body(newVoucherWrapper).post().build();
 
         VoucherList = Arrays.asList(new RestBuilder<VoucherWrapper[]>(RestService.URL).path(Uris.VOUCHERS).path("/all")
-                .clazz(VoucherWrapper[].class).get().build());
+                .basicAuth(tokenManager, "").clazz(VoucherWrapper[].class).get().build());
 
         assertEquals(2, VoucherList.size());
 
@@ -111,8 +118,8 @@ public class VoucherResourceFunctionalTesting {
 
         try {
 
-            new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class).body(newVoucherWrapper).post()
-                    .build();
+            new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).basicAuth(tokenManager, "").clazz(VoucherWrapper.class)
+                    .body(newVoucherWrapper).post().build();
             fail();
 
         } catch (HttpClientErrorException httpError) {
@@ -126,8 +133,8 @@ public class VoucherResourceFunctionalTesting {
 
         try {
 
-            new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).clazz(VoucherWrapper.class).body(newVoucherWrapper).post()
-                    .build();
+            new RestBuilder<VoucherWrapper>(RestService.URL).path(Uris.VOUCHERS).basicAuth(tokenManager, "").clazz(VoucherWrapper.class)
+                    .body(newVoucherWrapper).post().build();
             fail();
 
         } catch (HttpClientErrorException httpError) {
@@ -195,7 +202,7 @@ public class VoucherResourceFunctionalTesting {
         try {
 
             Arrays.asList(new RestBuilder<VoucherWrapper[]>(RestService.URL).path(Uris.VOUCHERS)
-                    .path("/" + newVoucherWrapper.getReference()).clazz(VoucherWrapper[].class).get().build());
+                    .path("/" + newVoucherWrapper.getReference()).basicAuth(tokenManager, "").clazz(VoucherWrapper[].class).get().build());
             fail();
 
         } catch (HttpClientErrorException httpError) {
@@ -210,7 +217,7 @@ public class VoucherResourceFunctionalTesting {
         try {
 
             Arrays.asList(new RestBuilder<VoucherWrapper[]>(RestService.URL).path(Uris.VOUCHERS)
-                    .path("/" + newVoucherWrapper.getReference()).clazz(VoucherWrapper[].class).get().build());
+                    .path("/" + newVoucherWrapper.getReference()).basicAuth(tokenManager, "").clazz(VoucherWrapper[].class).get().build());
             fail();
 
         } catch (HttpClientErrorException httpError) {
