@@ -4,6 +4,7 @@ import daos.core.EmbroideryDao;
 import entities.core.Embroidery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import wrappers.EmbroideryWrapper;
 
 import java.util.ArrayList;
@@ -63,6 +64,12 @@ public class EmbroideryController {
 
             this.embroideryDao.save(embroidery);
         }
+    }
+    public EmbroideryWrapper getEmbroidery(long id) {
+        Embroidery embroidery = embroideryDao.findById(id);
+        EmbroideryWrapper wrapper = new EmbroideryWrapper(embroidery);
+        return wrapper;
+        
     }
 
 }

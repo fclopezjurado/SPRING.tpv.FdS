@@ -173,6 +173,22 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         return this.request(config);
     }
     
+    this.findTextilePrinting = function (textilePrintingId) {
+        let config = {
+            method: 'GET',
+            url: urlBase + "/textilePrinting/" + textilePrintingId,
+        };
+
+        return this.request(config);
+    }
     
+    this.findEmbroidery = function (embroideryId) {
+        let config = {
+            method: 'GET',
+            url: urlBase + "/embroidery/" + embroideryId,
+        };
+
+        return this.request(config);
+    }
    
 }]);

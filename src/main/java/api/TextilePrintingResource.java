@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import controllers.TextilePrintingController;
+import wrappers.EmbroideryWrapper;
 import wrappers.ProductsOutFilterWrapper;
 import wrappers.TextilePrintingWrapper;
 import wrappers.TextilePritingFilterWrapper;
@@ -58,6 +59,11 @@ public class TextilePrintingResource {
     @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
     public void updateTextilePrinting(@RequestBody TextilePrintingWrapper textilePrintingWrapper) {
         this.textilePrintingController.updateTextilePrinting(textilePrintingWrapper);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
+    public TextilePrintingWrapper getTextilePrinting(@PathVariable(value = "id") long id) {
+        return this.textilePrintingController.getTextilePrinting(id);
     }
 
 }
