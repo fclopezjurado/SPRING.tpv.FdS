@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,6 +59,11 @@ public class ArticleResource {
     @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
     public void updateArticle(@RequestBody ArticleWrapper articleWrapper) {
         this.articleController.updateArticle(articleWrapper);
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public void addArticle(@RequestBody ArticleWrapper article) {
+        this.articleController.add(article);
     }
 
 }

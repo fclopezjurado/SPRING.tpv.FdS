@@ -13,6 +13,7 @@ import daos.core.ProviderDao;
 import entities.core.Alarm;
 import entities.core.AlarmType;
 import entities.core.Article;
+import entities.core.Provider;
 import wrappers.ArticleWrapper;
 
 @Controller
@@ -68,7 +69,6 @@ public class ArticleController {
         }
         return articleWrapperList;
     }
-/**********************Pediente de solucionar*********************/
     public void removeArticle(long id) {
         List<Alarm> listAlarm = alarmDao.findByArticleListContaining(id);
 
@@ -76,31 +76,29 @@ public class ArticleController {
             Article article = articlesDao.findOne(id);
             articlesDao.delete(article);
         } else {
-            System.out.println(listAlarm.toString());
+
             for (int i = 0; i < listAlarm.size(); i++) {
 
                 List<Article> articleList = new ArrayList<>(listAlarm.get(i).getArticleList());
-                System.out.println(articleList.toString());
+
                 for (int j = 0; j < articleList.size(); j++) {
-                   
+
                     long reference = articleList.get(j).getId();
                     if (reference == id) {
-                        System.out.println("entra");
+
                         articleList.remove(j);
                     }
 
                 }
-                System.out.println("final::" + articleList.toString());
                 Alarm busqueda = alarmDao.findById(listAlarm.get(i).getId());
                 busqueda.setArticleList(articleList);
-                alarmDao.save(busqueda); 
+                alarmDao.save(busqueda);
             }
-           
+
             Article article = articlesDao.findOne(id);
             articlesDao.delete(article);
         }
     }
-    /*********************************************************/
        
     public void updateWholeSalePrice(ArticleWrapper article, BigDecimal newWholeSalePrice) {
         Article a = articlesDao.findById(article.getId());
@@ -119,5 +117,12 @@ public class ArticleController {
             
             this.articlesDao.save(article);
         }
+    }
+
+    public void add(ArticleWrapper article) {
+    
+        Provider provider = providerDao.findById(article.getProviderID());
+        Article newArticle = new Article(article.getId(), article.getReference(), article.getRetailPrice(), article.getDescription(), article.getWholesalePrice(), provider);
+        this.articlesDao.save(newArticle);
     }
 }

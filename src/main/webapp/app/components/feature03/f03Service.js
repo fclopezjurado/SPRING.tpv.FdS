@@ -76,7 +76,15 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
     this.addArticle = function (article) {
         let config = {
             method: 'POST',
-            url: urlBase + "/articles"
+            url: urlBase + "/articles",
+            data: {
+                'id': article.id,
+                'reference': article.reference,
+                'description': article.description,
+                'retailPrice': article.retailPrice,
+                'wholesalePrice': article.wholesalePrice,
+                'provider': article.provider
+            }
         };
         return this.request(config);
     }
@@ -137,5 +145,7 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         };
         return this.request(config);
     }
+    
+
    
 }]);
