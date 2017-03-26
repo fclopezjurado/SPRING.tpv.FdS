@@ -1,5 +1,5 @@
 Cashierbalances:
-  - !cashierbalance:
+  - !entities.core.CashierBalance:
     id: 001
     day: 01-01-2016
     balance: 102.32

@@ -1,19 +1,19 @@
 alarms:
-  - !alarm:
+  - !entities.core.Alarm:
     id: 001
     name: alarma_martes
     articleList: 
-      - !article
+      - !entities.core.Article
         id: 001
-      - !article
+      - !entities.core.Article
         id: 002
     type: CRITICAL
-  - !alarm:
+  - !entities.core.Alarm:
     id: 002
     name: alarma_sabado
     articleList: 
-      - !article
+      - !entities.core.Article
         id: 003
-      - !article
+      - !entities.core.Article
         id: 004
     type: WARNING
