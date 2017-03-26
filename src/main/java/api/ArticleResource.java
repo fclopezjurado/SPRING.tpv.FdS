@@ -57,8 +57,9 @@ public class ArticleResource {
     }
 
     @RequestMapping(method = RequestMethod.PUT)
-    public void updateArticle(@RequestBody ArticleWrapper articleWrapper) {
-        this.articleController.updateArticle(articleWrapper);
+    public ArticleWrapper updateArticle(@RequestBody ArticleWrapper articleWrapper) {
+       this.articleController.updateArticle(articleWrapper);
+       return articleWrapper;
     }
     
     @RequestMapping(method = RequestMethod.POST)
