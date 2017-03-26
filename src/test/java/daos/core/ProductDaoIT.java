@@ -140,7 +140,7 @@ public class ProductDaoIT {
         textilePrintingFront.setMaxRetailPrice(new BigDecimal("0"));
         textilePrintingFront.setMinRetailPrice(new BigDecimal("1"));
         textilePrintingFront.setType("");        
-        assertNotNull(textilePrintingDao.findArticlesByFilter(textilePrintingFront));
+        assertNotNull(textilePrintingDao.findTextilePrintingsByFilter(textilePrintingFront));
     }
     
     

@@ -57,9 +57,9 @@ tpv.service('busquedaDeArticulos', function ($http, $q) {
             url: urlBase + "/articles/byFilter",
             data: products
         };
-        this.request(config);
+       return this.request(config);
 
-        return articles;
+        //return articles;
     }
 	
 	    

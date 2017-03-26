@@ -18,26 +18,25 @@ tpv.controller('UpdateArticleController', [ '$timeout', 'f03Service',
 			vm.Mwholesale;
 			vm.Mprovider;
 
-			function updateArticle() {
-				const
-				delay = 10000;
-				f03Service.updateArticle(vm.article).then(function(result) {
-					vm.completed = true;
-					vm.response = result;
-					
-					$timeout(function() {
-						vm.completed = false;
-					}, delay)
-				}, function(errors) {
-					vm.error = true;
-					vm.response = errors;
-					$timeout(function() {
-						vm.error = false;
-					}, delay)
-				});
-			}
-			
-			
+			  function updateArticle() {
+		            const
+		                delay = 10000;
+		            f03Service.updateArticle(vm.article).then(function (result) {
+		                vm.completed = true;
+		                vm.response = result;
+		                console.log(vm.data);
+		                $timeout(function () {
+		                    vm.completed = false;
+		                }, delay)
+		            }, function (errors) {
+		                vm.error = true;
+		                vm.response = errors;
+		                $timeout(function () {
+		                    vm.error = false;
+		                }, delay)
+		            });
+		        }
+		        
 	        
 	        function getArticle() {
 	        	f03Service.getAll().then(function success(response){
