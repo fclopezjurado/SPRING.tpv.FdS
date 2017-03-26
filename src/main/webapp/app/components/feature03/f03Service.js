@@ -18,12 +18,21 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
 	    		 "Error (" + response.status + ":" + response.statusText + ")" + errorMsg );
 	      });
 	      return deferred.promise;	   
-   }
+}
    
    this.getAll = function() {
 	   let config = {
  	     method: 'GET',
  	     url: urlBase + "/articles",
+	  };
+	   
+	  return this.request(config); 
+   }
+   
+   this.findProviders = function() {
+	   let config = {
+ 	     method: 'GET',
+ 	     url: urlBase + "/providers",
 	  };
 	   
 	  return this.request(config); 

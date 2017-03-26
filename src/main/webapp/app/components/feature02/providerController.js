@@ -27,6 +27,11 @@ tpv.controller('ProviderController', [
 					// promise was fullfilled
 					vm.completed = true;
 					vm.response = "";
+					vm.company = "";
+					vm.address = ""; 
+					vm.mobile = "";
+					vm.payment = "";
+					vm.notes = "";
 					$timeout(function() {
 						vm.completed = false;
 					}, delay)
