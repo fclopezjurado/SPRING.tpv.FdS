@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,30 @@ public class ProviderController {
         }
     }
 
-    public List<Provider> getAll() {
-        return providerDao.findAll();
+    public List<ProviderWrapper> getAll() {
+        List<ProviderWrapper> providerWrapperList = new ArrayList<ProviderWrapper>();
+        for(Provider provider : providerDao.findAll()){
+            providerWrapperList.add(new ProviderWrapper(provider));
+        }
+         return  providerWrapperList; 
+    }
+
+    public ProviderWrapper editProvider(ProviderWrapper providerWrapper) {
+        Provider provider = providerDao.findById(providerWrapper.getId());
+        if (provider != null) {
+            provider.setAddress(providerWrapper.getAddress());
+            provider.setCompany(providerWrapper.getCompany());
+            provider.setMobile(providerWrapper.getMobile());
+            provider.setNote(providerWrapper.getNote());
+            provider.setPaymentConditions(providerWrapper.getPaymentConditions());
+            provider.setPhone(providerWrapper.getMobile());
+            return new ProviderWrapper(providerDao.save(provider));
+        } else
+            return null;
+    }
+
+    public void delete(String id) {
+        Integer providerId = Integer.parseInt(id);
+        providerDao.delete(providerId);
     }
 }
