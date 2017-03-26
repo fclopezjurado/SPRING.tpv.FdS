@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import controllers.TextilePrintingController;
-import wrappers.EmbroideryWrapper;
 import wrappers.ProductsOutFilterWrapper;
 import wrappers.TextilePrintingWrapper;
 import wrappers.TextilePritingFilterWrapper;

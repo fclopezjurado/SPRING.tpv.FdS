@@ -52,7 +52,7 @@ tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 					f03Service.findEmbroidery(id).then(function(result) {
 						vm.completed = true;
 						vm.response = result;
-						vm.Mdescription=result.description;;
+						vm.Mdescription=result.description;
 						vm.Mreference=result.reference;
 						vm.Mprice=result.retailPrice;
 						

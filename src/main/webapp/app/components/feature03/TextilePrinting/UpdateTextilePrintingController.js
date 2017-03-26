@@ -52,7 +52,7 @@ tpv.controller('UpdateTextilePrintingController', [ '$timeout', 'f03Service',
 					f03Service.findTextilePrinting(id).then(function(result) {
 						vm.completed = true;
 						vm.response = result;
-						vm.Mdescription=result.description;;
+						vm.Mdescription=result.description;
 						vm.Mreference=result.reference;
 						vm.Mprice=result.retailPrice;
 						vm.Mtype=result.type;
