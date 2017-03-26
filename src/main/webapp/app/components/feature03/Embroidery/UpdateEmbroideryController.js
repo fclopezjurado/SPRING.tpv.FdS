@@ -13,6 +13,9 @@ tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 			vm.Mdescription;
 			vm.Mreference;
 			vm.Mprice;
+			vm.Mstitches;
+			vm.Mcolor;
+			vm.Msquaremilimeters;
 
 			function updateEmbroidery() {
 				const
@@ -55,6 +58,9 @@ tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 						vm.Mdescription=result.description;
 						vm.Mreference=result.reference;
 						vm.Mprice=result.retailPrice;
+						vm.Mstitches=result.stitches;
+						vm.Mcolor=result.color;
+						vm.Msquaremillimeters=result.squaremillimeters;
 						
 						
 						$timeout(function() {
