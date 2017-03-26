@@ -32,7 +32,7 @@ public class ArticleResourceFunctionalTesting {
                 .path(Uris.SEARCH).param("provider", String.valueOf(providerWrapper.getId())).param("type", AlarmType.WARNING.toString())
                 .clazz(ArticleWrapper[].class).get().build());
         assertEquals(false, articles.isEmpty());
-        assertEquals(true, articles.get(0).getProviderWrapper().getId() == providerWrapper.getId());
+        assertEquals(true, articles.get(0).getId() == providerWrapper.getId());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ArticleResourceFunctionalTesting {
                 .path(Uris.SEARCH).param("provider", String.valueOf(providerWrapper.getId())).param("type", null)
                 .clazz(ArticleWrapper[].class).get().build());
         assertEquals(false, articles.isEmpty());
-        assertEquals(true, articles.get(0).getProviderWrapper().getId() == providerWrapper.getId());
+        assertEquals(true, articles.get(0).getId() == providerWrapper.getId());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class ArticleResourceFunctionalTesting {
                 .path(Uris.SEARCH).param("provider", "0").param("type", AlarmType.WARNING.toString()).clazz(ArticleWrapper[].class).get()
                 .build());
         assertEquals(false, articles.isEmpty());
-        assertEquals(true, articles.get(0).getProviderWrapper().getId() == providerWrapper.getId());
+        assertEquals(true, articles.get(0).getId() == providerWrapper.getId());
     }
 
     @Test
