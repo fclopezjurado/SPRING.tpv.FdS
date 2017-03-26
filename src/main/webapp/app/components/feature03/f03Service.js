@@ -56,7 +56,7 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         return this.request(config);
     }
 
-    //Falta corregir
+    // Falta corregir
     this.removeArticle = function (articleId) {
         let config = {
             method: 'DELETE',
@@ -81,7 +81,7 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         return this.request(config);
     }
 
-    //* Create
+    // * Create
     this.addArticle = function (article) {
         let config = {
             method: 'POST',
@@ -130,11 +130,20 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         return this.request(config);
     }
     
-    //* Update
-    this.updateArticle = function (articleId) {
+    // * Update
+    this.updateArticle = function (article) {
         let config = {
             metod: 'PUT',
-            url: urlBase + "/articles/" + articleId
+            url: urlBase + "/articles",
+            data:{
+     	      'id': article.id,
+  	    	  'reference': article.reference,
+  	    	  'description': article.description,
+  	    	  'retailPrice': article.retailPrice,
+  	    	  'wholesalePrice': article.wholesalePrice,
+  	    	  'stock': article.stock,
+  	    	  'providerId': article.providerId
+            }
         };
         return this.request(config);
     }
@@ -155,6 +164,15 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         return this.request(config);
     }
     
+    this.findArticle = function (articleId) {
+        let config = {
+            method: 'GET',
+            url: urlBase + "/articles/" + articleId,
+        };
 
+        return this.request(config);
+    }
+    
+    
    
 }]);
