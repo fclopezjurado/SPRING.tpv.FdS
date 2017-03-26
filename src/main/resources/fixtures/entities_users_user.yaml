@@ -1,5 +1,5 @@
 users:
-  - !user
+  - !entities.users.User
     id: 001
     mobile: 654654654
     username: Marcos
@@ -9,7 +9,7 @@ users:
     password: marcosmarcos
     registrationDate: 01-11-2016
     active: 0
-  - !user
+  - !entities.users.User
     id: 002
     mobile: 654645654
     username: Laura
@@ -19,7 +19,7 @@ users:
     password: lauralaura
     registrationDate: 13-01-2017
     active: 1
-  - !user
+  - !entities.users.User
     id: 003
     mobile: 654333555
     username: Alba
@@ -29,7 +29,7 @@ users:
     password: albaalba
     registrationDate: 25-12-2016
     active: 1
-  - !user
+  - !entities.users.User
     id: 004
     mobile: 654654654
     username: Luis

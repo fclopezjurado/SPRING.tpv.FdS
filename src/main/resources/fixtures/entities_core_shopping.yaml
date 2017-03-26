@@ -1,26 +1,26 @@
 shoppings:
-  - !shopping
+  - !entities.core.Shopping
     id: 001
     amount: 5
     discount: 2
     productID: 002 
     description: Bebidas.
     retailPrice: 17
-  - !shopping
+  - !entities.core.Shopping
     id: 002
     amount: 10
     discount: 5
     productID: 001 
     description: Bebidas desayuno.
     retailPrice: 54
-  - !shopping
+  - !entities.core.Shopping
     id: 003
     amount: 3
     discount: 15
     productID: 003 
     description: Promoción 3x2 pan.
     retailPrice: 5
-  - !shopping
+  - !entities.core.Shopping
     id: 004
     amount: 3
     discount: 15

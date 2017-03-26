@@ -1,10 +1,10 @@
 invoices:
-  - !invoice
+  - !entities.core.Invoice
     id: 001
     ticket: 002
-  - !invoice
+  - !entities.core.Invoice
     id: 002
     ticket: 001
-  - !invoice
+  - !entities.core.Invoice
     id: 003
     ticket: 003

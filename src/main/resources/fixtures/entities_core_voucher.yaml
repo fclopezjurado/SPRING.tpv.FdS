@@ -1,19 +1,19 @@
 vouchers:
-  - !voucher
+  - !entities.core.voucher
     id: 001
     reference: 0001
     value: 50
     created: 10-10-2016
     dateOfUse: 10-05-2017
     expiration: 10-05-2017
-  - !voucher
+  - !entities.core.voucher
     id: 002
     reference: 0002
     value: 25
     created: 10-12-2016
     dateOfUse: 10-07-2017
     expiration: 10-07-2017
-  - !voucher
+  - !entities.core.voucher
     id: 003
     reference: 0003
     value: 105

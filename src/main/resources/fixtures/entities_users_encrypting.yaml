@@ -1,9 +1,9 @@
 encryptings:
-  - !encrypting:
+  - !entities.users.Encrypting:
     algorithm: SHA-1
-  - !encrypting:
+  - !entities.users.Encrypting:
     algorithm: SHA-256
-  - !encrypting:
+  - !entities.users.Encrypting:
     algorithm: SHA-384
-  - !encrypting:
+  - !entities.users.Encrypting:
     algorithm: SHA-512
