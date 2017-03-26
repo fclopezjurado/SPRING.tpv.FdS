@@ -6,7 +6,9 @@ tpv.controller('UpdateArticleController', [ '$timeout', 'f03Service',
 			vm.completed = false;
 			vm.error = false;
 			vm.response;
-			vm.Article=updateArticle;
+			vm.updateArticle=updateArticle;
+			vm.providers = [];
+			vm.getArticle = getArticle;
 
 			function updateArticle() {
 				const
@@ -27,5 +29,20 @@ tpv.controller('UpdateArticleController', [ '$timeout', 'f03Service',
 					}, delay)
 				});
 			}
+			
+			
+	        
+	        function getArticle() {
+	        	f03Service.getAll().then(function success(response){
+	        	      vm.data = response;
+	        	      console.log(vm.data);
+	        	    	    $.each(vm.data, function (i, item) {
+	        	    	        vm.article.push({"id": item['id'], "description": item['description']});
+	        	    	    });
+	        	    },
+	        	    function error(errors){
+	        	      console.log(errors);
+	        	});
+	        }
 		
 		} ]);
