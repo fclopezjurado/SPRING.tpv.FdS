@@ -50,6 +50,12 @@ public class ArticleResource {
         return productosSalidaMock;
     }
 
+    @RequestMapping(value = Uris.FILTER+"SinMock", method = RequestMethod.POST)
+    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody ArticleFilterWrapper article) {
+        List<ProductsOutFilterWrapper> productosSalida = this.articleController.getArticlesByFilter(article);
+        return productosSalida;
+    }
+    
     @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
     public void removeArticle(@PathVariable(value = "id") long id) {
         System.out.println(id);

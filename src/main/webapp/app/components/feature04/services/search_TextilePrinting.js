@@ -62,9 +62,9 @@ tpv.service('busquedaDeTextilePrinting', function ($http, $q) {
             url: urlBase + "/textilePrinting/byFilter",
             data: products
         };
-        this.request(config);
+        return this.request(config);
 
-        return textilePrintings;
+       // return textilePrintings;
     }
 	    
 
