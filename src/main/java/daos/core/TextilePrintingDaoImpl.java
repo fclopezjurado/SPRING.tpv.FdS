@@ -23,7 +23,7 @@ public class TextilePrintingDaoImpl implements TextilePritingFExtended{
     }
 
     @Override
-    public List<TextilePrinting> findArticlesByFilter(TextilePritingFilterWrapper textilePriting) {
+    public List<TextilePrinting> findTextilePrintingsByFilter(TextilePritingFilterWrapper textilePriting) {
         String consulta = "select t  " + "from TextilePrinting t " + " WHERE 1=1 ";
         
         consulta += this.componerConsulta(textilePriting);

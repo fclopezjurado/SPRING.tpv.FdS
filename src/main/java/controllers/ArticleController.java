@@ -13,24 +13,26 @@ import daos.core.ProviderDao;
 import entities.core.Alarm;
 import entities.core.AlarmType;
 import entities.core.Article;
+import wrappers.ArticleFilterWrapper;
 import wrappers.ArticleWrapper;
+import wrappers.ProductsOutFilterWrapper;
 
 @Controller
 public class ArticleController {
 
     @Autowired
     private ArticleDao articlesDao;
-    
+
     @Autowired
     private AlarmDao alarmDao;
-    
+
     @Autowired
     private ProviderDao providerDao;
 
-	@Autowired
-	public void setArticleDao(ArticleDao articlesDao) {
-		this.articlesDao = articlesDao;
-	}
+    @Autowired
+    public void setArticleDao(ArticleDao articlesDao) {
+        this.articlesDao = articlesDao;
+    }
 
     public List<ArticleWrapper> getAll() {
         List<Article> articleList = articlesDao.findAll();
@@ -45,30 +47,28 @@ public class ArticleController {
 
     public List<ArticleWrapper> search(int provider, AlarmType type) {
         List<Article> listArticle = null;
-        if(provider != 0 && type == null) {
+        if (provider != 0 && type == null) {
             listArticle = articlesDao.findArticlesOfOneProviderWithAlarmActive(providerDao.findById(provider));
-        }
-        else if (provider == 0 && type != null) {
+        } else if (provider == 0 && type != null) {
             listArticle = articlesDao.findArticlesWithAlarmActiveByType(type);
-        }
-        else if(provider == 0 && type == null) {
+        } else if (provider == 0 && type == null) {
             listArticle = articlesDao.findArticlesWithAlarmActive();
-        }
-        else {
+        } else {
             listArticle = articlesDao.findByProviderAndAlarmType(providerDao.findById(provider), type);
         }
-        
+
         return articleListToArticleWrapperList(listArticle);
     }
-    
+
     private List<ArticleWrapper> articleListToArticleWrapperList(List<Article> articleList) {
         List<ArticleWrapper> articleWrapperList = new ArrayList<ArticleWrapper>();
-        for(Article article : articleList) {
+        for (Article article : articleList) {
             articleWrapperList.add(new ArticleWrapper(article));
         }
         return articleWrapperList;
     }
-/**********************Pediente de solucionar*********************/
+
+    /********************** Pediente de solucionar *********************/
     public void removeArticle(long id) {
         List<Alarm> listAlarm = alarmDao.findByArticleListContaining(id);
 
@@ -82,7 +82,7 @@ public class ArticleController {
                 List<Article> articleList = new ArrayList<>(listAlarm.get(i).getArticleList());
                 System.out.println(articleList.toString());
                 for (int j = 0; j < articleList.size(); j++) {
-                   
+
                     long reference = articleList.get(j).getId();
                     if (reference == id) {
                         System.out.println("entra");
@@ -93,31 +93,43 @@ public class ArticleController {
                 System.out.println("final::" + articleList.toString());
                 Alarm busqueda = alarmDao.findById(listAlarm.get(i).getId());
                 busqueda.setArticleList(articleList);
-                alarmDao.save(busqueda); 
+                alarmDao.save(busqueda);
             }
-           
+
             Article article = articlesDao.findOne(id);
             articlesDao.delete(article);
         }
     }
+
     /*********************************************************/
-       
+
     public void updateWholeSalePrice(ArticleWrapper article, BigDecimal newWholeSalePrice) {
         Article a = articlesDao.findById(article.getId());
         a.setWholesalePrice(newWholeSalePrice);
         articlesDao.save(a);
     }
-    
+
     public void updateArticle(ArticleWrapper articleWrapper) {
-        Article  article = articlesDao.findOne(articleWrapper.getId());
+        Article article = articlesDao.findOne(articleWrapper.getId());
         if (article != null) {
             article.setDescription(articleWrapper.getDescription());
             article.setReference(articleWrapper.getReference());
             article.setRetailPrice(articleWrapper.getRetailPrice());
             article.setStock(articleWrapper.getStock());
             article.setWholesalePrice(articleWrapper.getWholesalePrice());
-            
+
             this.articlesDao.save(article);
         }
     }
+
+    public List<ProductsOutFilterWrapper> getArticlesByFilter(ArticleFilterWrapper articleFilter) {
+        List<Article> articulosDeBusqueda = this.articlesDao.findArticlesByFilter(articleFilter);
+        List<ProductsOutFilterWrapper> articulosSalida = new ArrayList<ProductsOutFilterWrapper>();
+        for (Article articulo : articulosDeBusqueda) {
+            ProductsOutFilterWrapper productoOutWrapper = new ProductsOutFilterWrapper(articulo);
+            articulosSalida.add(productoOutWrapper);
+        }
+        return articulosSalida;
+    }
+
 }

@@ -34,15 +34,22 @@ public class EmbroideryResource {
 
     @RequestMapping(value = Uris.FILTER, method = RequestMethod.POST)
     public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody EmbroideryFilterWrapper embroidery) {
+        List<ProductsOutFilterWrapper> productosSalida = this.embroideryController.getEmroiderysByFilter(embroidery);
         List<ProductsOutFilterWrapper> productosSalidaMock = new ArrayList<ProductsOutFilterWrapper>();
         ProductsOutFilterWrapper productoMock = new ProductsOutFilterWrapper();
         productoMock.setId(0);
         productoMock.setReference("referenceMock");
         productoMock.setDescription("descriptionMock");
         productosSalidaMock.add(productoMock);
-        return productosSalidaMock;
+        return productosSalida;
     }
 
+    @RequestMapping(value = Uris.FILTER+"SinMock", method = RequestMethod.POST)
+    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody EmbroideryFilterWrapper embroidery) {
+        List<ProductsOutFilterWrapper> productosSalida = this.embroideryController.getEmroiderysByFilter(embroidery);
+        return productosSalida;
+    }
+    
     @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
     public void removeEmbroidery(@PathVariable(value = "id") long id) {
         this.embroideryController.removeEmbroidery(id);

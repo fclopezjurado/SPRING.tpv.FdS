@@ -1,16 +1,20 @@
 package controllers;
 
-import daos.core.TextilePrintingDao;
-import entities.core.TextilePrinting;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import wrappers.TextilePrintingWrapper;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import daos.core.TextilePrintingDao;
+import entities.core.TextilePrinting;
+import wrappers.ProductsOutFilterWrapper;
+import wrappers.TextilePrintingWrapper;
+import wrappers.TextilePritingFilterWrapper;
+
 @Controller
 public class TextilePrintingController {
+    
 
     @Autowired
     private TextilePrintingDao textilePrintingsDao;
@@ -59,5 +63,17 @@ public class TextilePrintingController {
             this.textilePrintingsDao.save(textilePrinting);
         }
     }
+    
+    public List<ProductsOutFilterWrapper> getTextilePrintingByFilter(TextilePritingFilterWrapper TextilePrintingFilter) {
+        List<TextilePrinting> textilePrintingDeBusqueda = this.textilePrintingsDao.findTextilePrintingsByFilter(TextilePrintingFilter);
+        List<ProductsOutFilterWrapper> textilePrintingSalida = new ArrayList<ProductsOutFilterWrapper>();
+        for (TextilePrinting producto : textilePrintingDeBusqueda) {
+            ProductsOutFilterWrapper productoOutWrapper = new ProductsOutFilterWrapper(producto);
+            textilePrintingSalida.add(productoOutWrapper);
+        }
+        return textilePrintingSalida;
+    }
+    
+   
 
 }
