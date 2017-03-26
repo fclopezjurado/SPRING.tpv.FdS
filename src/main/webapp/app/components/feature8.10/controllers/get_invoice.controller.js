@@ -53,19 +53,29 @@ angular.module("tpv").controller("GetInvoiceController",
         };
         
         vm.requestToGetInvoices = function (serviceToGetInvoices, queryParameter) {
-            var serverResponseBody;
-
-            serverResponseBody 	= angular.fromJson(serviceToGetInvoices.getInvoices(queryParameter));
-            vm.invoices 		= serverResponseBody.data;
-            
-            if (vm.invoices.length === 0) {
-            	vm.formError = THERE_ARE_NOT_INVOICES_MESSAGE;
-            	vm.disableGetInvoice = true;
-            }
-            else {
-            	vm.formError = null;
-            	vm.disableGetInvoice = false;
-            }
+            serviceToGetInvoices.getInvoices(queryParameter).then(function (serverResponse) {
+                var serverResponse = angular.fromJson(serverResponse);
+                
+                if (serverResponse.status === OK_RESPONSE_CODE) {
+                	vm.invoices = serverResponse.data.invoices;
+                	
+                	if (vm.invoices.length === 0) {
+                		vm.formError 			= THERE_ARE_NOT_INVOICES_MESSAGE;
+                    	vm.disableGetInvoice 	= true;
+                    }
+                    else {
+                    	vm.formError 			= null;
+                    	vm.disableGetInvoice 	= false;
+                    }
+                }
+                else {
+                	vm.formError 			= BAD_REQUEST_MESSAGE;
+        			vm.disableGetInvoice 	= true;
+                }
+            }, function () {
+            	vm.formError 			= BAD_REQUEST_MESSAGE;
+    			vm.disableGetInvoice 	= true;
+            });
         }
         
         vm.getTicket = function () {
