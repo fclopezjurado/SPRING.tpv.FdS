@@ -10,7 +10,9 @@ public class ArticleWrapper extends ProductWrapper {
 
     private BigDecimal wholesalePrice;
 
-    private ProviderWrapper providerWrapper;
+//    private ProviderWrapper providerWrapper;
+//    
+    private int providerID;
 
     public ArticleWrapper() {
 
@@ -21,7 +23,7 @@ public class ArticleWrapper extends ProductWrapper {
         super(article.getId(), article.getReference(), article.getDescription(), article.getRetailPrice());
         this.stock = article.getStock();
         this.wholesalePrice = article.getWholesalePrice();
-        this.providerWrapper = new ProviderWrapper(article.getProvider());
+        this.providerID = article.getProvider().getId();
     }
 
     public int getStock() {
@@ -40,12 +42,22 @@ public class ArticleWrapper extends ProductWrapper {
         this.wholesalePrice = wholesalePrice;
     }
 
-    public ProviderWrapper getProviderWrapper() {
-        return providerWrapper;
+    public int getProviderID() {
+        return providerID;
     }
 
-    public void setProviderWrapper(ProviderWrapper providerWrapper) {
-        this.providerWrapper = providerWrapper;
+    public void setProviderID(int providerID) {
+        this.providerID = providerID;
     }
+
+//    public ProviderWrapper getProviderWrapper() {
+//        return providerWrapper;
+//    }
+
+//    public void setProviderWrapper(ProviderWrapper providerWrapper) {
+//        this.providerWrapper = providerWrapper;
+//    }
+    
+    
 
 }
