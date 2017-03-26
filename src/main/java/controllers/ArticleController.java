@@ -139,4 +139,11 @@ public class ArticleController {
         this.articlesDao.save(newArticle);
     }
 
+    public ArticleWrapper getArticle(long id) {
+        Article article = articlesDao.findById(id);
+        ArticleWrapper wrapper = new ArticleWrapper(article);
+        return wrapper;
+        
+    }
+
 }
