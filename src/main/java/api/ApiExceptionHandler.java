@@ -38,7 +38,7 @@ public class ApiExceptionHandler {
 
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler({AlreadyExistUserFieldException.class, AlreadyExistUserFieldException.class,
-            AlreadyExistProviderFieldException.class})
+            AlreadyExistProviderFieldException.class, ProviderWithArticlesException.class})
     @ResponseBody
     public ErrorMessage conflictRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);

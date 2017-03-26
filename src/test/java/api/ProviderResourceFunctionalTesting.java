@@ -3,24 +3,15 @@ package api;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
+
+import entities.core.Provider;
 import wrappers.ProviderWrapper;
 
 public class ProviderResourceFunctionalTesting {
     
-    public static String id = "1";
+    public static int id = 1;
     
-    @Before
-    public void setUp() {
-        List<ProviderWrapper> providers = Arrays.asList(new RestBuilder<ProviderWrapper[]>(RestService.URL).path(Uris.PROVIDERS).get()
-                .clazz(ProviderWrapper[].class).build());
-        
-        if(providers!=null  && providers.size() >0 && providers.get(0)!=null){
-            id = String.valueOf(providers.get(0).getId());
-        }
-
-    }
     
     @Test
     public void testCreateProvider() {
@@ -46,7 +37,17 @@ public class ProviderResourceFunctionalTesting {
 
     @Test
     public void testDeleteProviders() {
-        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).param("id", id).delete().build();
+    	Provider provider = new Provider("company", "address", 173656738675748927L, 666, "paymentConditions", "note");
+    	ProviderWrapper providerWrapper = new ProviderWrapper(provider);
+    	Provider p = new RestBuilder<Provider>(RestService.URL).path(Uris.PROVIDERS).body(providerWrapper).clazz(Provider.class).post().build();
+    	id = p.getId();
+    	
+        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).path("/"+ id).delete().build();
+    }
+    
+    @Test
+    public void testDeleteProvidersException() {
+        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).path("/"+ 1).delete().build();
     }
 
 }
