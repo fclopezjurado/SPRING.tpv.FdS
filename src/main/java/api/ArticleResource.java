@@ -56,7 +56,7 @@ public class ArticleResource {
         this.articleController.removeArticle(id);
     }
 
-    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public void updateArticle(@RequestBody ArticleWrapper articleWrapper) {
         this.articleController.updateArticle(articleWrapper);
     }
@@ -64,6 +64,11 @@ public class ArticleResource {
     @RequestMapping(method = RequestMethod.POST)
     public void addArticle(@RequestBody ArticleWrapper article) {
         this.articleController.add(article);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
+    public ArticleWrapper getArticle(@PathVariable(value = "id") long id) {
+        return this.articleController.getArticle(id);
     }
 
 }

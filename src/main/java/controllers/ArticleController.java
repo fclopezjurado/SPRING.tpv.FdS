@@ -125,4 +125,11 @@ public class ArticleController {
         Article newArticle = new Article(article.getId(), article.getReference(), article.getRetailPrice(), article.getDescription(), article.getWholesalePrice(), provider);
         this.articlesDao.save(newArticle);
     }
+
+    public ArticleWrapper getArticle(long id) {
+        Article article = articlesDao.findById(id);
+        ArticleWrapper wrapper = new ArticleWrapper(article);
+        return wrapper;
+        
+    }
 }
