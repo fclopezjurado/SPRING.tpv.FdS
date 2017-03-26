@@ -6,7 +6,7 @@
     <div class="table-responsive">
         <fieldset>
             <legend align="right">Create Article</legend>
-            <form class="form-horizontal">
+            <form class="form-horizontal" ng-submit="vm.createArticle()">
                 <div class="form-group">
                     <label class="control-label label-id col-md-1">Id</label>
                     <div class="col-md-4">
@@ -50,18 +50,20 @@
                 <div class="form-group">
                     <label class="control-label label-colors col-md-1">Provider</label>
                     <div class="col-md-4">
-                        <select class="form-control" name='providerId'
+                        <select class="form-control" name='providerId' ng-init="vm.findProviders()"
                                 ng-model="vm.article.providerId"
-                                ng-options="p.id as p.company for p in vm.providers" required>
+                                ng-options="p.id as p.company for p in vm.response" required>
                             <option value="">Choose Option</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-primary " value="add">
+                    <div class="col-sm-offset-2 col-sm-2 ">
+                        <input type="submit" class="btn btn-primary " value="Enviar">
                     </div>
+                    <label class="bg-success col-sm-6" ng-show="vm.completed">Petición
+                        correcta</label> <label class="bg-danger col-sm-6" ng-show="vm.error">Error</label>
                 </div>
 
             </form>

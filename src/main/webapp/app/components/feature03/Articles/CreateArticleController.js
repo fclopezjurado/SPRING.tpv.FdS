@@ -7,7 +7,8 @@ tpv.controller('CreateArticleController', ['$timeout', 'f03Service',
         vm.error = false;
         vm.response;
         vm.createArticle = createArticle;
-
+        vm.findProviders = findProviders;
+        
         function createArticle() {
             const
                 delay = 10000;
@@ -27,5 +28,27 @@ tpv.controller('CreateArticleController', ['$timeout', 'f03Service',
                 }, delay)
             });
         }
+        
+        function findProviders() {
+            const
+                delay = 10000;
+            f03Service.findProviders().then(function (result) {
+                vm.completed = true;
+                vm.response = result;
 
+                $timeout(function () {
+                    vm.completed = false;
+                }, delay)
+            }, function (errors) {
+                // handle errors
+                vm.error = true;
+                vm.response = errors;
+                $timeout(function () {
+                    vm.error = false;
+                }, delay)
+            });
+        }
+
+        
+        
     }]);
