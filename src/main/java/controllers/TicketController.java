@@ -5,6 +5,8 @@ import entities.core.Shopping;
 import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
+import api.MailService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import wrappers.TicketWrapper;
@@ -23,6 +25,9 @@ public class TicketController {
     private TicketDao ticketDao;
 
     private Ticket lastTicket;
+    
+    @Autowired
+    private MailService mailService;
 
     @Autowired
     public void setTicketDao(TicketDao ticketDao) {
@@ -141,6 +146,10 @@ public class TicketController {
         Ticket ticket = this.ticketDao.findByInvoiceID(invoiceID);
         return new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
                 ticket.getShoppingList(), ticket.getUser());
+    }
+    
+    private void sendTicketEmail(TicketState state,String emailRecipient){
+        mailService.sendMail("miw.upm.fds@gmail.com", emailRecipient, "Cambio en el estado de su ticket ", "Mail Service test");
     }
 
 }
