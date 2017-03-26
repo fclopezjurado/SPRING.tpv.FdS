@@ -72,7 +72,6 @@ public class DataService {
         userDao.deleteAll();
 
         voucherDao.deleteAll();
-
         alarmDao.deleteAll();
         articleDao.deleteAll();
         embroideryDao.deleteAll();

@@ -85,7 +85,15 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
     this.addArticle = function (article) {
         let config = {
             method: 'POST',
-            url: urlBase + "/articles"
+            url: urlBase + "/articles",
+            data: {
+                'id': article.id,
+                'reference': article.reference,
+                'description': article.description,
+                'retailPrice': article.retailPrice,
+                'wholesalePrice': article.wholesalePrice,
+                'provider': article.provider
+            }
         };
         return this.request(config);
     }
@@ -121,6 +129,32 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         };
         return this.request(config);
     }
-   
+    
+    //* Update
+    this.updateArticle = function (articleId) {
+        let config = {
+            metod: 'PUT',
+            url: urlBase + "/articles/" + articleId
+        };
+        return this.request(config);
+    }
+
+    this.updateEmbroidery = function (embroideryId) {
+        let config = {
+            method: 'PUT',
+            url: urlBase + "/embroidery/" + embroideryId
+        };
+        return this.request(config);
+    }
+
+    this.updateTextilePrinting = function (textilePrintingId) {
+        let config = {
+            method: 'PUT',
+            url: urlBase + "/textilePrinting/" + textilePrintingId
+        };
+        return this.request(config);
+    }
+    
+
    
 }]);

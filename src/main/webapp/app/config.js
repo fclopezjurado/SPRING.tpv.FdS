@@ -184,9 +184,16 @@ tpv.config(function ($routeProvider) {
             controller: "bestSellersController",
             controllerAs: "vm"
         })
+        
         .when("/feature14/productSales", {
             templateUrl: "app/components/feature14/productSales.html",
             controller: "productSalesController",
+            controllerAs: "vm"
+        })
+         //Feature 05
+        .when("/feature05/productsFamily", {
+            templateUrl: "app/components/feature05/productsFamily.html",
+            controller: "productsFamilyController",
             controllerAs: "vm"
         })
 
