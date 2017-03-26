@@ -1,0 +1,33 @@
+articles:
+  - !article:
+    id: 001
+    stock: 300
+    wholesalePrice: 270
+    provider: 001
+    reference: cola
+    retailPrice: 21.23
+    description: Cocacola
+  - !article:
+    id: 002
+    stock: 80
+    wholesalePrice: 130
+    provider: 002
+    reference: pan
+    retailPrice: 0.45
+    description: Pan
+  - !article:
+    id: 003
+    stock: 130
+    wholesalePrice: 89
+    provider: 001
+    reference: pizza
+    retailPrice: 21.23
+    description: Piza
+  - !article:
+    id: 004
+    stock: 130
+    wholesalePrice: 89
+    provider: 003
+    reference: f_naranja
+    retailPrice: 0.9
+    description: Fanta de naranja

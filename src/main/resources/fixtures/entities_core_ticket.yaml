@@ -1,0 +1,34 @@
+tickets:
+  - !ticket
+    id: 001
+    created: 16-05-2016
+    reference: 1001
+    ticketState: STARTED
+    shoppingList:  
+      - !shopping
+        id: 001
+      - !shopping
+        id: 002
+    user: 001
+  - !ticket
+    id: 002
+    created: 10-01-2017
+    reference: 1002
+    ticketState: STARTED
+    shoppingList:  
+      - !shopping
+        id: 001
+      - !shopping
+        id: 002
+      - !shopping
+        id: 004
+    user: 002
+  - !ticket
+    id: 003
+    created: 14-02-2017
+    reference: 1003
+    ticketState: STARTED
+    shoppingList:  
+      - !shopping
+        id: 003
+    user: 002

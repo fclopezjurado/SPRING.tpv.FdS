@@ -1,0 +1,10 @@
+invoices:
+  - !invoice
+    id: 001
+    ticket: 002
+  - !invoice
+    id: 002
+    ticket: 001
+  - !invoice
+    id: 003
+    ticket: 003

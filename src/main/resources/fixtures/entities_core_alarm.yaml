@@ -1,0 +1,19 @@
+alarms:
+  - !alarm:
+    id: 001
+    name: alarma_martes
+    articleList: 
+      - !article
+        id: 001
+      - !article
+        id: 002
+    type: CRITICAL
+  - !alarm:
+    id: 002
+    name: alarma_sabado
+    articleList: 
+      - !article
+        id: 003
+      - !article
+        id: 004
+    type: WARNING

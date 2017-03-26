@@ -1,0 +1,17 @@
+authorizations:
+  - !authorization
+    id: 001
+    user: 001
+    role: CUSTOMER
+  - !authorization
+    id: 002
+    user: 002
+    role: admin
+  - !authorization
+    id: 003
+    user: 003
+    role: ANONYMOUS
+  - !authorization
+    id: 004
+    user: 004
+    role: AUTHENTICATED

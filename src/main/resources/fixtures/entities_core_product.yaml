@@ -1,9 +1,31 @@
 products:
   - !product
-    reference: coffee
+    id: 001
+    reference: cafe
     retailPrice: 20.22
     description: Café
   - !product
-    reference: ccola
+    id: 002
+    reference: cola
     retailPrice: 21.23
     description: Cocacola
+  - !product
+    id: 003
+    reference: pan
+    retailPrice: 0.45
+    description: Pan
+  - !product
+    id: 004
+    reference: pizza
+    retailPrice: 21.23
+    description: Piza
+  - !product
+    id: 005
+    reference: leche
+    retailPrice: 1.3
+    description: Leche
+  - !product
+    id: 006
+    reference: pollo
+    retailPrice: 4
+    description: Pollo

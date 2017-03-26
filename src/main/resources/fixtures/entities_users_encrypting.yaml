@@ -1,0 +1,9 @@
+encryptings:
+  - !encrypting:
+    algorithm: SHA-1
+  - !encrypting:
+    algorithm: SHA-256
+  - !encrypting:
+    algorithm: SHA-384
+  - !encrypting:
+    algorithm: SHA-512
