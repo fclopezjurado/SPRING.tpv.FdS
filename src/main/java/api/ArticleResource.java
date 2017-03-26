@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,6 +50,12 @@ public class ArticleResource {
         return productosSalidaMock;
     }
 
+    @RequestMapping(value = Uris.FILTER+"SinMock", method = RequestMethod.POST)
+    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody ArticleFilterWrapper article) {
+        List<ProductsOutFilterWrapper> productosSalida = this.articleController.getArticlesByFilter(article);
+        return productosSalida;
+    }
+    
     @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
     public void removeArticle(@PathVariable(value = "id") long id) {
         System.out.println(id);
@@ -59,6 +65,11 @@ public class ArticleResource {
     @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
     public void updateArticle(@RequestBody ArticleWrapper articleWrapper) {
         this.articleController.updateArticle(articleWrapper);
+    }
+    
+    @RequestMapping(method = RequestMethod.POST)
+    public void addArticle(@RequestBody ArticleWrapper article) {
+        this.articleController.add(article);
     }
 
 }

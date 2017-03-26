@@ -36,7 +36,7 @@ public class InvoiceResource {
     }
 
     @RequestMapping(value = Uris.INVOICES, method = RequestMethod.POST)
-    public InvoiceWrapper createInvoice(@RequestParam(value = "reference") String ticketReference) throws NotFoundTicketReferenceException {
+    public InvoiceWrapper createInvoice(@RequestBody String ticketReference) throws NotFoundTicketReferenceException {
         if (!this.ticketController.ticketExistsByReference(ticketReference))
             throw new NotFoundTicketReferenceException();
 

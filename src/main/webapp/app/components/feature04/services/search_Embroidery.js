@@ -58,9 +58,9 @@ tpv.service('busquedaDeEmbroidery', function ($http, $q) {
             url: urlBase + "/embroidery/byFilter",
             data: products
         };
-        this.request(config);
+        return this.request(config);
 
-        return embroideries;
+        //return embroideries;
     }
 	
 	    

@@ -18,12 +18,21 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
 	    		 "Error (" + response.status + ":" + response.statusText + ")" + errorMsg );
 	      });
 	      return deferred.promise;	   
-   }
+}
    
    this.getAll = function() {
 	   let config = {
  	     method: 'GET',
  	     url: urlBase + "/articles",
+	  };
+	   
+	  return this.request(config); 
+   }
+   
+   this.findProviders = function() {
+	   let config = {
+ 	     method: 'GET',
+ 	     url: urlBase + "/providers",
 	  };
 	   
 	  return this.request(config); 
@@ -76,7 +85,15 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
     this.addArticle = function (article) {
         let config = {
             method: 'POST',
-            url: urlBase + "/articles"
+            url: urlBase + "/articles",
+            data: {
+                'id': article.id,
+                'reference': article.reference,
+                'description': article.description,
+                'retailPrice': article.retailPrice,
+                'wholesalePrice': article.wholesalePrice,
+                'providerID': article.providerID
+            }
         };
         return this.request(config);
     }
@@ -137,5 +154,7 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         };
         return this.request(config);
     }
+    
+
    
 }]);
