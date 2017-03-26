@@ -5,17 +5,25 @@
 	<br />
 	<div class="table-responsive">
 		<fieldset>
-			<legend align="right">Create Article</legend>
-			<form class="form-horizontal">
-				<div class="form-group">
-					<label class="control-label label-id col-md-1">Id</label>
-					<div class="col-md-4">
-						<input type="number" class="form-control" 
-							ng-model='vm.article.id' required>
-					</div>
-				</div>
+			<legend align="right">Update Article</legend>
+			<form class="form-horizontal" ng-init="vm.getArticle()">
+
 
 				<div class="form-group">
+					<label class="control-label label-stitches col-md-1">Article</label>
+					<div class="col-md-4">
+						<div>
+							<select class="form-control" name='article' ng-model="vm.article"
+								ng-options="p.id as p.description for p in articles" required>
+								<option value="">Choose Article</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</form>
+
+            <form class="form-horizontal">
+			<div class="form-group">
 					<label class="control-label label-reference col-md-1">Reference</label>
 					<div class="col-md-4">
 						<input type="text" class="form-control" 

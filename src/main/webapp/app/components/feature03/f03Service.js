@@ -92,7 +92,7 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
                 'description': article.description,
                 'retailPrice': article.retailPrice,
                 'wholesalePrice': article.wholesalePrice,
-                'provider': article.provider
+                'providerID': article.providerID
             }
         };
         return this.request(config);
