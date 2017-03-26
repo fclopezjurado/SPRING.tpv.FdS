@@ -5,7 +5,7 @@ import java.util.List;
 
 import entities.core.CashierBalance;
 
-public class CashierBalancesWrapper extends ArrayList<CashierBalanceWrapper> {
+public class CashierBalancesListWrapper extends ArrayList<CashierBalanceWrapper> {
 
     private static final long serialVersionUID = 1L;
 

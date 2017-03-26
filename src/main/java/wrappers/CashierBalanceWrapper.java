@@ -39,7 +39,7 @@ public class CashierBalanceWrapper {
         this.total = total.doubleValue();
         this.checks = checks.doubleValue();
         this.dataphone = dataphone.doubleValue();
-        this.date = dateFormater.format(date);
+        this.date = dateFormater.format(date.getTime());
     }
 
     public CashierBalanceWrapper(double change, double total, double checks, double dataphone, String date) {

@@ -6,12 +6,14 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import daos.core.CashierBalanceDao;
 import entities.core.CashierBalance;
 import wrappers.CashierBalanceWrapper;
-import wrappers.CashierBalancesWrapper;
+import wrappers.CashierBalancesListWrapper;
 
+@Controller
 public class CashierBalanceController {
 
     private CashierBalanceDao cashierBalanceDao;
@@ -22,7 +24,7 @@ public class CashierBalanceController {
     }
 
     public List<CashierBalanceWrapper> getAll() {
-        CashierBalancesWrapper cashierBalancesWrapper = new CashierBalancesWrapper();
+        CashierBalancesListWrapper cashierBalancesWrapper = new CashierBalancesListWrapper();
         cashierBalancesWrapper.wrapCashierBalances(cashierBalanceDao.findAll());
         return cashierBalancesWrapper;
     }
