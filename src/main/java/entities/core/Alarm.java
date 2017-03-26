@@ -1,16 +1,8 @@
 package entities.core;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Alarm {
@@ -22,7 +14,7 @@ public class Alarm {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Article> articleList;
 
     @Enumerated(EnumType.STRING)
@@ -56,16 +48,16 @@ public class Alarm {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getValue() {
         return value;
     }
 
     public void setValue(int value) {
         this.value = value;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public List<Article> getArticleList() {

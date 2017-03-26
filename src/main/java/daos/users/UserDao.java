@@ -1,11 +1,10 @@
 package daos.users;
 
-import java.util.Date;
-
+import entities.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import entities.users.User;
+import java.util.Date;
 
 public interface UserDao extends JpaRepository<User, Integer> {
 
@@ -13,7 +12,7 @@ public interface UserDao extends JpaRepository<User, Integer> {
     public User findByTokenValue(String tokenValue, Date ahoraMenosTiempoExpiracion);
 
     public User findByMobile(long mobile);
-    
+
     public User findByEmail(String email);
 
     @Query("select t.user from Ticket t where t.reference = ?1")

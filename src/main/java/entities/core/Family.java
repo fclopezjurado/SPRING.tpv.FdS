@@ -1,7 +1,9 @@
 package entities.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +17,7 @@ public class Family extends ComponentProduct{
     
     private String familyDescription;
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade= CascadeType.PERSIST)
     private List<ComponentProduct> componentProducts;
     
     public Family() {
@@ -51,15 +53,6 @@ public class Family extends ComponentProduct{
     }
     
     @Override
-    public int numberOfProducts(){
-        int n = 0;
-        for (ComponentProduct product : componentProducts){
-            n += product.numberOfProducts();
-        }
-        return n;
-    }
-    
-    @Override
     public boolean isFamily() {
         return true;
     }
@@ -85,6 +78,23 @@ public class Family extends ComponentProduct{
     @Override
     public String toString() {
         return "\nFamily [" + super.toString() + "name=" + name + ", description=" + ",\n   productsList=" +"]";
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        List<Product> products = new ArrayList<>();
+        if (this.componentProducts != null) {
+            for (ComponentProduct componentProduct : this.componentProducts){
+                if (!componentProduct.isFamily()){
+                    products.add((Product)componentProduct);
+                }else{
+                    for(ComponentProduct componentProductChild : componentProduct.getAllProducts()){
+                        products.add((Product)componentProductChild);
+                    }
+                }
+            }
+        }
+        return products;
     }
 
 }

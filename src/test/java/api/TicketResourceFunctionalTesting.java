@@ -1,17 +1,23 @@
 package api;
 
-import entities.core.Ticket;
-import entities.core.TicketState;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.apache.logging.log4j.LogManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
+
+import entities.core.Ticket;
+import entities.core.TicketState;
+import wrappers.InvoicesWrapper;
 import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
-
-import static org.junit.Assert.*;
 
 public class TicketResourceFunctionalTesting {
 
@@ -25,10 +31,19 @@ public class TicketResourceFunctionalTesting {
 
     private static final String wrongEmail = "test@test.es";
 
+    private static final int wrongInvoiceID = 999;
+
+    @Autowired
+    private Ticket ticket;
+
+    TicketWrapper ticketWrapper;
+
     @Before
     public void seedDataBase() {
         new RestService().deleteAll();
         new RestService().seedDatabase();
+        ticket = new Ticket(69L, TicketState.COMMITTED);
+        ticketWrapper = new TicketWrapper(ticket);
     }
 
     @Test
@@ -39,19 +54,39 @@ public class TicketResourceFunctionalTesting {
     }
 
     @Test
+    public void testupdateTickets() {
+        TicketWrapper ticketCreated = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketWrapper.class)
+                .body(ticketWrapper).post().build();
+
+        ticketCreated.setTicketState(TicketState.OPENED);
+        new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketWrapper.class).body(ticketCreated).put().build();
+
+        TicketWrapper ticketObtained = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS)
+                .path("/" + ticketCreated.getReference()).clazz(TicketWrapper.class).get().build();
+
+        assertEquals(TicketState.OPENED, ticketObtained.getTicketState());
+    }
+
+    @Test
+    public void testCreateAndGetTicketbyReference() {
+        TicketWrapper ticketCreated = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketWrapper.class)
+                .body(ticketWrapper).post().build();
+
+        TicketWrapper ticketObtained = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS)
+                .path("/" + ticketCreated.getReference()).clazz(TicketWrapper.class).get().build();
+
+        assertEquals(ticketCreated.getId(), ticketObtained.getId());
+    }
+
+    @Test
     public void testGetTicketByReferenceNotCommitted() {
         TicketsWrapper tickets = new RestBuilder<TicketsWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketsWrapper.class).get()
                 .build();
-        TicketWrapper ticket = tickets
-                .getTickets()
-                .stream()
-                .filter(t -> t.getTicketState() != TicketState.COMMITTED)
-                .findFirst()
+        TicketWrapper ticket = tickets.getTickets().stream().filter(t -> t.getTicketState() != TicketState.COMMITTED).findFirst()
                 .orElse(null);
         assertNotNull(ticket);
-        ticket = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS)
-                .param("reference", ticket.getReference()).clazz(TicketWrapper.class).get()
-                .build();
+        ticket = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).param("reference", ticket.getReference())
+                .clazz(TicketWrapper.class).get().build();
         assertTrue(ticket.getReference().length() > 20);
     }
 
@@ -60,37 +95,29 @@ public class TicketResourceFunctionalTesting {
         try {
             TicketsWrapper tickets = new RestBuilder<TicketsWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketsWrapper.class).get()
                     .build();
-            TicketWrapper ticket = tickets
-                    .getTickets()
-                    .stream()
-                    .filter(t -> t.getTicketState() == TicketState.COMMITTED)
-                    .findFirst()
+            TicketWrapper ticket = tickets.getTickets().stream().filter(t -> t.getTicketState() == TicketState.COMMITTED).findFirst()
                     .orElse(null);
             assertNotNull(ticket);
-            new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS)
-                    .param("reference", ticket.getReference()).clazz(TicketWrapper.class).get()
-                    .build();
+            new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).param("reference", ticket.getReference())
+                    .clazz(TicketWrapper.class).get().build();
             fail();
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.NOT_FOUND, httpError.getStatusCode());
-            LogManager.getLogger(this.getClass())
-                    .info("testGetTicketByReferenceCommitted (" + httpError.getMessage() + "):\n     " + httpError
-                            .getResponseBodyAsString());
+            LogManager.getLogger(this.getClass()).info(
+                    "testGetTicketByReferenceCommitted (" + httpError.getMessage() + "):\n     " + httpError.getResponseBodyAsString());
         }
     }
 
     @Test
     public void testGetTicketByReferenceWithInvalidReference() {
         try {
-            new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS)
-                    .param("reference", "Invalid Reference").clazz(TicketWrapper.class).get()
-                    .build();
+            new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).param("reference", "Invalid Reference")
+                    .clazz(TicketWrapper.class).get().build();
             fail();
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.NOT_FOUND, httpError.getStatusCode());
-            LogManager.getLogger(this.getClass())
-                    .info("testGetTicketByReferenceWithInvalidReference (" + httpError.getMessage() + "):\n     " + httpError
-                            .getResponseBodyAsString());
+            LogManager.getLogger(this.getClass()).info("testGetTicketByReferenceWithInvalidReference (" + httpError.getMessage()
+                    + "):\n     " + httpError.getResponseBodyAsString());
         }
     }
 
@@ -150,6 +177,38 @@ public class TicketResourceFunctionalTesting {
         try {
             new RestBuilder<TicketsWrapper>(RestService.URL).path(Uris.TICKETS).path(Uris.USER_EMAIL_PATH).param("email", wrongEmail)
                     .clazz(TicketsWrapper.class).get().build();
+        } catch (HttpClientErrorException httpError) {
+            assertEquals(HttpStatus.NOT_FOUND, httpError.getStatusCode());
+        }
+    }
+
+    @Test
+    public void testGetTicketByInvoiceID() {
+        /**
+         * TODO: Use of "org.springframework.core.env.Environment" to get administrator mobile number from properties file. long adminMobile
+         * = Long.valueOf(environment.getProperty("admin.mobile"));
+         */
+        InvoicesWrapper invoices = new RestBuilder<InvoicesWrapper>(RestService.URL).path(Uris.INVOICES).path("/" + adminMobile)
+                .clazz(InvoicesWrapper.class).get().build();
+        assertEquals(false, invoices.isEmpty());
+
+        TicketWrapper ticket = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).path(Uris.INVOICE)
+                .path("/" + invoices.getFirstInvoice().getId()).clazz(TicketWrapper.class).get().build();
+        assertEquals(adminMobile, ticket.getUser().getMobile());
+    }
+
+    @Test
+    public void testGetTicketByInvoiceIDException() {
+        /**
+         * TODO: Use of "org.springframework.core.env.Environment" to get administrator mobile number from properties file. long adminMobile
+         * = Long.valueOf(environment.getProperty("admin.mobile"));
+         *
+         * InvoicesWrapper invoices = new RestBuilder<InvoicesWrapper>(RestService.URL).path(Uris.INVOICES).path("/" +
+         * adminMobile).clazz(InvoicesWrapper.class).get().build(); assertEquals(false, invoices.isEmpty());
+         */
+        try {
+            new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).path(Uris.INVOICE).path("/" + wrongInvoiceID)
+                    .clazz(TicketWrapper.class).get().build();
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.NOT_FOUND, httpError.getStatusCode());
         }

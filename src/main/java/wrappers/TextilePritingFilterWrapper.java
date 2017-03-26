@@ -1,12 +1,12 @@
 package wrappers;
 
-public class TextilePritingFilterWrapper  extends ProductFilterWrapper {
+public class TextilePritingFilterWrapper extends ProductFilterWrapper {
 
     private String type;
 
     public String getType() {
         return type;
-    } 
+    }
 
     public void setType(String type) {
         this.type = type;
