@@ -47,7 +47,7 @@ public class BudgetResourceFunctionalTesting {
 
     @After
     public void after() {
-        //new RestService().deleteAll();
+        new RestService().deleteAll();
     }
 
 }
