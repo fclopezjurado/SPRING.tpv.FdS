@@ -15,7 +15,7 @@ tpv.controller('UpdateTextilePrintingController', [ '$timeout', 'f03Service',
 			vm.Mprice;
 			vm.Mtype;
 		    vm.getAll = getAll;
-		    vm.textiles = [];
+
 
 
 			function updateTextilePrinting() {

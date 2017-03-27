@@ -6,27 +6,13 @@
     <div class="table-responsive">
         <fieldset>
             <legend align="right">Update Embroidery</legend>
-<<<<<<< HEAD
             <form class="form-horizontal" ng-submit="vm.updateEmbroidery()" >
                 <div class="form-group" ng-init="vm.getEmbroidery()">
                     <label class="control-label label-id col-md-1">Id</label>
-=======
-            <form class="form-horizontal" ng-submit="vm.updateEmbroidery()" ng-init="vm.getAll()" >
-                <div class="form-group">
-                    <label class="control-label label-stitches col-md-1">Id</label>
->>>>>>> refs/heads/develop
                     <div class="col-md-4">
-<<<<<<< HEAD
                         <select class="form-control" name='id'  ng-change="vm.findEmbroidery(vm.embroidery.id)" ng-model="vm.embroidery.id" ng-options="p.id as p.description for p in vm.embroideries" required>
-                            <option value="">Choose Option</option>
+                            <option value="">Seleccionar</option>
                         </select>
-=======
-                       <div> 
-                       <select class="form-control" name='id' ng-model='vm.embroidery.id' ng-options="e.id as e.description for e in vm.embroiderys" required>
-                        <option value="">Seleccionar</option>
-                    </select>
-                    </div>
->>>>>>> refs/heads/develop
                     </div>
                 </div>
 

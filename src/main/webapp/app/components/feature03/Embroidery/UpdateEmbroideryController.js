@@ -18,7 +18,7 @@ tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 			vm.Msquaremilimeters;
 			vm.embroidery=updateEmbroidery;
 		    vm.getAll = getAll;
-		    vm.embroiderys = [];
+		    vm.embroideries = [];
 
 
 			function updateEmbroidery() {
