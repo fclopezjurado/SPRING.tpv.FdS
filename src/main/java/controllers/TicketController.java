@@ -5,12 +5,18 @@ import entities.core.Shopping;
 import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import services.MailService;
 import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,6 +33,9 @@ public class TicketController {
     
     @Autowired
     private MailService mailService;
+
+    @Value("classpath:emailTemplate.html")
+    private Resource emailTemplate;
 
     @Autowired
     public void setTicketDao(TicketDao ticketDao) {
@@ -152,10 +161,27 @@ public class TicketController {
 
     private void sendTicketEmail(Ticket ticket) {
         User user = ticket.getUser();
+        String emailText = getEmailTemplateString();
         if (user != null) {
             mailService.sendHtmlMail("miw.upm.fds@gmail.com", "miw.upm.fds@gmail.com", "Cambio en el estado de su ticket ",
-                    "<html><body><center>Test</center></body></html>");
+                    String.format(emailText, ticket.getTicketState(), ticket.getReference()));
         }
+    }
+
+    private String getEmailTemplateString() {
+        String emailText = "";
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(emailTemplate.getInputStream()));
+            StringBuilder out = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                out.append(line);
+            }
+            emailText = out.toString();
+        } catch (IOException e) {
+            LogManager.getLogger(this.getClass()).error("TicketController: " + e.getMessage());
+        }
+        return emailText;
     }
 
 }
