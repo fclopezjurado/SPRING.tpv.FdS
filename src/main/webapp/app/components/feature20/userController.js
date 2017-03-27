@@ -12,6 +12,8 @@ tpv.controller('UserController', [
 			vm.getUsers = getUsers;
 			vm.updateUser = updateUser;
 			vm.deleteUser = deleteUser;
+			vm.setUser = setUser;
+			vm.user = {};
 			vm.selected = {};
 			
 			function getUsers(){
@@ -58,4 +60,8 @@ tpv.controller('UserController', [
 			function reset() {
 		        vm.selected = {};
 		    }
+			
+			function setUser(user) {
+				vm.user = user;
+			}
 		} ]);
