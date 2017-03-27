@@ -23,11 +23,12 @@
                 <td>{{user.dni}}</td>
                 <td>{{user.address}}</td>
                 <td>{{user.email}}</td>
-                <td>{{user.registrationDate}}</td>
+                <td>{{user.registrationDate | date:"dd-MM-yyyy hh:mm"}}</td>
                 <td>{{user.active}}</td>
                 <td>
                     <button class="btn btn-primary" ng-click="vm.edit(user)">Edit</button>
-                    <button class="btn btn-danger" ng-click="vm.delete(user)">Delete</button>
+                    <!--<button class="btn btn-danger" ng-click="vm.deleteUser(user)">Delete</button>-->
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 </td>
             </script>
             <script type="text/ng-template" id="edit">
@@ -36,13 +37,31 @@
                 <td><input type="text" ng-model="vm.selected.dni" class="form-control" /></td>
                 <td><input type="text" ng-model="vm.selected.address" class="form-control" /></td>
                 <td><input type="text" ng-model="vm.selected.email" class="form-control" /></td>
-                <td>{{user.registrationDate}}</td>
+                <td>{{user.registrationDate | date:"dd-MM-yyyy hh:mm"}}</td>
                 <td><input type="checkbox" ng-model="vm.selected.active" class="form-check-input" /></td>
                 <td>
-                    <button class="btn btn-success" ng-click="vm.save($index)">Save</button>
+                    <button class="btn btn-success" ng-click="vm.updateUser()">Save</button>
                     <button class="btn btn-primary" ng-click="vm.reset()">Cancel</button>
                 </td>
             </script>
 		</div>
 	</div>
 </section>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Confirm user delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>Do you want to delete the user?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.deleteUser(user)">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

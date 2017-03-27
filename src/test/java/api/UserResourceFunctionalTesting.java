@@ -3,6 +3,8 @@ package api;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.Calendar;
+
 import org.apache.logging.log4j.LogManager;
 import org.junit.After;
 import org.junit.Test;
@@ -103,7 +105,7 @@ public class UserResourceFunctionalTesting {
     @Test
     public void testUpdateUser() {
         try {
-            String msg = new RestBuilder<String>(RestService.URL).path(Uris.USERS).body(new UserForEditWrapper(660000,"test",true,"calle prueba","12345678Z","prueba@mail.com","20/12/2012")).clazz(String.class)
+            String msg = new RestBuilder<String>(RestService.URL).path(Uris.USERS).body(new UserForEditWrapper(660000,"test",true,"calle prueba","12345678Z","prueba@mail.com",Calendar.getInstance())).clazz(String.class)
                     .put().build();
             assertEquals("update llamado", msg);
         } catch (HttpClientErrorException httpError) {

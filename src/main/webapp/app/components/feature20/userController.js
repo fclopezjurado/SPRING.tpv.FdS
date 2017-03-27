@@ -10,6 +10,8 @@ tpv.controller('UserController', [
 			vm.getTemplate = getTemplate;
 			vm.reset = reset;
 			vm.getUsers = getUsers;
+			vm.updateUser = updateUser;
+			vm.deleteUser = deleteUser;
 			vm.selected = {};
 			
 			function getUsers(){
@@ -30,6 +32,28 @@ tpv.controller('UserController', [
 		        if (user.mobile === vm.selected.mobile) return 'edit';
 		        else return 'display';
 		    }
+			
+			function updateUser() {
+				f20Service.updateUser(vm.selected).then(function(result) {
+					vm.selected = {};
+					vm.getUsers();
+				}, function(errors) {
+					vm.error = true;
+					vm.response = errors;
+					vm.error = false;
+				});
+			}
+			
+			function deleteUser(user) {
+				f20Service.deleteUser(user.mobile).then(function(result) {
+					vm.selected = {};
+					vm.getUsers();
+				}, function(errors) {
+					vm.error = true;
+					vm.response = errors;
+					vm.error = false;
+				});
+			}
 			
 			function reset() {
 		        vm.selected = {};
