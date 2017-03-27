@@ -26,6 +26,8 @@ public class UserControllerIT {
 
     private static final String USER_PASSWORD = "password";
 
+    private static final String USER_EMAIL = "test@test.com";
+
     @Autowired
     private UserController userController;
 
@@ -53,5 +55,15 @@ public class UserControllerIT {
     @Test
     public void testUserExistsByMobileWrong() {
         assertFalse(userController.userExistsByMobile(USER_MOBILE));
+    }
+
+    @Test
+    public void testUserExistsByEmail() {
+        assertTrue(userController.userExistsByEmail(environment.getProperty("admin.email")));
+    }
+
+    @Test
+    public void testUserExistsByEmailWrong() {
+        assertFalse(userController.userExistsByEmail(USER_EMAIL));
     }
 }
