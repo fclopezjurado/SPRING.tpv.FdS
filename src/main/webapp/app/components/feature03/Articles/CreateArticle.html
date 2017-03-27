@@ -1,0 +1,74 @@
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<section>
+    <div class="page-header"></div>
+    <br/>
+    <div class="table-responsive">
+        <fieldset>
+            <legend align="right">Create Article</legend>
+            <form class="form-horizontal" ng-submit="vm.addArticle()" ng-init="vm.getProvider()">
+                <div class="form-group">
+                    <label class="control-label label-id col-md-1">Id</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control"
+                               ng-model='vm.article.id' required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label label-reference col-md-1">Reference</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control"
+                               ng-model='vm.article.reference' required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label label-description col-md-1">Description</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control"
+                               ng-model='vm.article.description' required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label label-price col-md-1">Retail-Price</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control" name="price"
+                               ng-model='vm.article.retailPrice' required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label label-stitches col-md-1">wholesalePrice</label>
+                    <div class="col-md-4">
+                        <input type="number" class="form-control"
+                               ng-model='vm.article.wholesalePrice' required>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                <label class="control-label label-stitches col-md-1">Provider</label>
+
+                    <div class="col-md-4">
+                     <div> 
+                    <select class="form-control" name='providerID' ng-model="vm.article.providerID"  ng-options="p.id as p.company for p in vm.providers" required>
+                    <option value="">Seleccionar</option>
+					</select>
+                    </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+            </form>
+
+
+        </fieldset>
+    </div>
+</section>

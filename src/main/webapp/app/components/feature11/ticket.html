@@ -1,3 +1,119 @@
-<div>
-    Feature11
-</div>
+<style>
+    * {
+        font-family: 'Muli', sans-serif;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .no-padding {
+        padding: 0 !important;
+    }
+
+    .no-margin {
+        margin: 0 !important;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .state-panel h4 {
+        font-size: 15px;
+        text-align: center;
+        color: darkgray;
+        margin-bottom: 0;
+    }
+
+    .state-panel .active h4 {
+        color: black;
+    }
+
+    .state-panel .indicator {
+        text-align: center;
+    }
+
+    .progress {
+        margin-top: 15px;
+    }
+
+    .material-icons {
+        color: #a9a9a9;
+    }
+
+    .active .material-icons {
+        color: #000000;
+    }
+</style>
+<section class="container">
+    <div ng-if="!vm.reference">
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="form-group">
+                <label>Indique una referencia</label>
+                <input class="form-control" type="text" ng-model="vm.referenceInput">
+            </div>
+            <button class="btn btn-default" type="button" ng-click="vm.submitReference()">Submit</button>
+        </div>
+    </div>
+    <div ng-if="vm.reference">
+        <h1 ng-if="vm.loading" class="text-center">
+            Cargando...
+        </h1>
+        <div ng-if="!vm.loading">
+            <div ng-if="vm.error" class="alert alert-danger text-center">
+                <h1><strong>{{vm.errorCode}}</strong> {{vm.error}}</h1>
+            </div>
+            <div ng-if="!vm.error" class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="no-margin">Ticket nº {{vm.ticket['reference']}}</h1>
+                </div>
+                <div class="panel-body state-panel">
+
+                    <div ng-repeat="state in vm.ticketStates">
+                        <div class="col-md-4" ng-class="{'active': state == vm.ticket.ticketState}">
+                            <h4>{{state}}</h4>
+                            <div class="col-md-12 indicator">
+                                <i ng-if="state != vm.ticket.ticketState" class="material-icons">lens</i>
+                                <i ng-if="state == vm.ticket.ticketState" class="material-icons">panorama_fish_eye</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-offset-1 col-md-10 progress no-padding">
+                        <div class="progress-bar progress-bar-info" role="progressbar"
+                             aria-valuenow="{{vm.ticketProgress}}" aria-valuemin="0" aria-valuemax="100"
+                             ng-style="{width: vm.ticketProgress + '%'}">
+                            <span class="sr-only">{{vm.ticketProgress}}% Complete</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <h3>Ticket products</h3>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Reference</th>
+                                <th>Amount</th>
+                                <th>Retail price</th>
+                                <th>Discount</th>
+                                <th>Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="product in vm.ticket.shoppingList">
+                                <td>{{product.productId}}</td>
+                                <td>{{product.description}}</td>
+                                <td>{{product.amount}}</td>
+                                <td>{{product.retailPrice}}</td>
+                                <td>{{product.discount}}%</td>
+                                <td>{{product.amount * product.retailPrice - product.amount * product.retailPrice / 100 * product.discount}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

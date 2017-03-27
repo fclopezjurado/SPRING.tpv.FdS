@@ -1,8 +1,10 @@
 package api;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,11 +31,13 @@ public class VouchersResource {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasRole('MANAGER')")
     public TotalVouchersWrapper total() {
         return voucherController.GetTotal();
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('OPERATOR')")
     public VoucherWrapper createVoucher(@RequestBody VoucherWrapper voucherWrapper) throws InvalidNewVoucherException {
         validNewVoucher(voucherWrapper);
         return voucherController.createVoucher(voucherWrapper);
@@ -62,4 +66,18 @@ public class VouchersResource {
         return resulVoucherWrapper;
     }
 
+    @RequestMapping(value = Uris.ID, method = RequestMethod.GET)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('OPERATOR')")
+    public List<VoucherWrapper> search(@PathVariable(value = "id") String referencia)
+            throws InvalidVoucherReferenceException, NotFoundReferenceVoucherException {
+
+        if (referencia.isEmpty() || (referencia.length() < 27 && !referencia.equals("all"))) {
+            throw new InvalidVoucherReferenceException();
+        }
+
+        VoucherWrapper searchVoucherWrapper = new VoucherWrapper();
+        searchVoucherWrapper.setReference(referencia);
+
+        return voucherController.searchVoucher(searchVoucherWrapper);
+    }
 }
