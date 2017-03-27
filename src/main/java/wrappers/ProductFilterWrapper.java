@@ -11,21 +11,18 @@ public class ProductFilterWrapper {
 
     private String description;
 
-    
-    public ProductFilterWrapper(){
-        
+    public ProductFilterWrapper() {
+
     }
-    
-    
+
     public ProductFilterWrapper(String reference, BigDecimal minRetailPrice, BigDecimal maxRetailPrice, String description) {
         super();
         this.reference = reference;
-        this.minRetailPrice = (minRetailPrice==null) ? new BigDecimal("0"): minRetailPrice;
-        this.maxRetailPrice = (maxRetailPrice==null) ? new BigDecimal("0"): minRetailPrice;;
+        this.minRetailPrice = (minRetailPrice == null) ? new BigDecimal("0") : minRetailPrice;
+        this.maxRetailPrice = (maxRetailPrice == null) ? new BigDecimal("0") : minRetailPrice;
+        ;
         this.description = description;
     }
-
-
 
     public String getReference() {
         return reference;

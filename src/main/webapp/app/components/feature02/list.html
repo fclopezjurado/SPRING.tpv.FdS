@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<section>
+    <div class="table-responsive">
+     <fieldset>
+      <legend  align="center">Feature02. <b>Provider List.</b></legend>
+      
+       <table class="table table-striped">
+         <thead align="center">
+            <tr>
+              <th>Company</th>
+              <th>Address</th>
+              <th>Mobile</th>
+              <th>Payment conditions</th>
+              <th>Notes</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody ng-init="vm.getAll()" >
+          <label class="bg-danger col-sm-6" ng-show="vm.error">Error: No se puede borrar un proveedor con articulos activos</label>
+            <tr ng-repeat="provider in vm.provider"  >
+              <td>{{provider.company}}</td>
+              <td>{{provider.address}}</td>
+              <td>{{provider.mobile}}</td>
+              <td>{{provider.payment}}</td>
+              <td>{{provider.notes}}</td>
+              <td style="vertical-align: middle;">
+              <div class="form-group">
+                   <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeProvider(provider.id)">
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          
+        </table>
+            
+        <div class="no-data" ng-if="vm.data.length === 0">
+           <div class="panel-body"> No Articles found </div>
+        </div>
+        <div align="center">
+            <span class="author" >Author: Javier Molina</span>
+        </div>
+    </fieldset>
+     </div>
+</section>

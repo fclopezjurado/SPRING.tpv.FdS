@@ -26,10 +26,25 @@ tpv.config(function ($routeProvider) {
 	        controller: "DeleteAllController",
 	        controllerAs: "vm"
         })
+        .when("/feature02/registration", {
+	        templateUrl: "app/components/feature02/registration.html",
+	        controller: "ProviderController",
+	        controllerAs: "vm"
+        })
+        .when("/feature02/list", {
+	        templateUrl: "app/components/feature02/list.html",
+	        controller: "ProviderController",
+	        controllerAs: "vm"
+        })
+        .when("/feature02/update", {
+	        templateUrl: "app/components/feature02/update.html",
+	        controller: "ProviderController",
+	        controllerAs: "vm"
+        })
         //Feature 03 -01 
-       .when("/feature03/Articles/ArticleList", {
-	        templateUrl: "app/components/feature03/Articles/ArticleList.html",
-	        controller: "ArticleListController",
+        .when("/feature03/Articles/ArticleList", {
+            templateUrl: "app/components/feature03/Articles/ArticleList.html",
+            controller: "ArticleListController",
 	        controllerAs: "vm"
         })
         .when("/feature03/Embroidery/EmbroideryList", {
@@ -37,20 +52,54 @@ tpv.config(function ($routeProvider) {
             controller: "EmbroideryListController",
             controllerAs: "vm"
         })
-             .when("/feature03/TextilePrinting/TextilePrintingList", {
+        .when("/feature03/TextilePrinting/TextilePrintingList", {
             templateUrl: "app/components/feature03/TextilePrinting/TextilePrintingList.html",
             controller: "TextilePrintingListController",
             controllerAs: "vm"
         })
+
+        .when("/feature03/Articles/CreateArticle", {
+            templateUrl: "app/components/feature03/Articles/CreateArticle.html",
+            controller: "CreateArticleController",
+            controllerAs: "vm"
+        })
+        .when("/feature03/Embroidery/CreateEmbroidery", {
+            templateUrl: "app/components/feature03/Embroidery/CreateEmbroidery.html",
+            controller: "CreateEmbroideryController",
+            controllerAs: "vm"
+        })
+        .when("/feature03/TextilePrinting/CreateTextilePrinting", {
+            templateUrl: "app/components/feature03/TextilePrinting/CreateTextilePrinting.html",
+            controller: "CreateTextilePrintingController",
+            controllerAs: "vm"
+        })
+        
+                 .when("/feature03/Articles/UpdateArticle", {
+	        templateUrl: "app/components/feature03/Articles/UpdateArticle.html",
+	        controller: "UpdateArticleController",
+	        controllerAs: "vm"
+        })
+        .when("/feature03/Embroidery/UpdateEmbroidery", {
+            templateUrl: "app/components/feature03/Embroidery/UpdateEmbroidery.html",
+            controller: "UpdateEmbroideryController",
+            controllerAs: "vm"
+        })
+             .when("/feature03/TextilePrinting/UpdateTextilePrinting", {
+            templateUrl: "app/components/feature03/TextilePrinting/UpdateTextilePrinting.html",
+            controller: "UpdateTextilePrintingController",
+            controllerAs: "vm"
+        })
+        
+        
         
         .when("/feature10/list", {
             templateUrl: "app/components/feature10/listAlarms.html",
             controller: "ListAlarmsController",
             controllerAs: "vm"
         })
-    	.when("/feature10/list/articles", {
-    		templateUrl: "app/components/feature10/listArticlesWarning.html",
-        	controller: "ListArticlesWarningController",
+        .when("/feature10/list/articles", {
+            templateUrl: "app/components/feature10/listArticlesWarning.html",
+            controller: "ListArticlesWarningController",
         	controllerAs: "vm"
     	})
         .when("/feature8.9/invoices/create", {
@@ -115,20 +164,44 @@ tpv.config(function ($routeProvider) {
             controllerAs: "vm"
         })
         .when("/feature06/createTicket", {
-	        templateUrl: "app/components/feature06/createTicket.html",
-	        controller: "CreateTicketController",
-	        controllerAs: "vm"
+            templateUrl: "app/components/feature06/createTicket.html",
+            controller: "CreateTicketController",
+            controllerAs: "vm"
         })
         .when("/feature06/searchTicket", {
-	        templateUrl: "app/components/feature06/searchTicket.html",
-	        controller: "SearchTicketController",
-	        controllerAs: "vm"
+            templateUrl: "app/components/feature06/searchTicket.html",
+            controller: "SearchTicketController",
+            controllerAs: "vm"
         })
         .when("/feature06/editTicket", {
-	        templateUrl: "app/components/feature06/editTicket.html",
-	        controller: "EditTicketController",
-	        controllerAs: "vm"
+            templateUrl: "app/components/feature06/editTicket.html",
+            controller: "EditTicketController",
+            controllerAs: "vm"
         })
+        //Feature 14
+        .when("/feature14/totalSales", {
+            templateUrl: "app/components/feature14/totalSales.html",
+            controller: "totalSalesController",
+            controllerAs: "vm"
+        })
+        .when("/feature14/bestSellers", {
+            templateUrl: "app/components/feature14/bestSellers.html",
+            controller: "bestSellersController",
+            controllerAs: "vm"
+        })
+        
+        .when("/feature14/productSales", {
+            templateUrl: "app/components/feature14/productSales.html",
+            controller: "productSalesController",
+            controllerAs: "vm"
+        })
+         //Feature 05
+        .when("/feature05/productsFamily", {
+            templateUrl: "app/components/feature05/productsFamily.html",
+            controller: "productsFamilyController",
+            controllerAs: "vm"
+        })
+
         .otherwise({
             redirectTo: '/'
         });
