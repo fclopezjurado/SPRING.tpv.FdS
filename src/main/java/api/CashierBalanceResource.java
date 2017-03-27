@@ -3,9 +3,12 @@ package api;
 import api.exceptions.AlreadyExistCashierBalanceDayException;
 import api.exceptions.NotFoundCashierBalanceIdException;
 import controllers.CashierBalanceController;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import wrappers.CashierBalanceWrapper;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,7 @@ public class CashierBalanceResource {
 
     private CashierBalanceController cashierBalanceController;
 
+    @Autowired
     public void setCashierBalanceController(CashierBalanceController cashierBalanceController) {
         this.cashierBalanceController = cashierBalanceController;
     }
@@ -30,7 +34,7 @@ public class CashierBalanceResource {
 
     @RequestMapping(method = RequestMethod.POST)
     public CashierBalanceWrapper createCashierBalance(@RequestBody CashierBalanceWrapper cashierBalanceWrapper)
-            throws AlreadyExistCashierBalanceDayException {
+            throws AlreadyExistCashierBalanceDayException, ParseException {
         if (cashierBalanceController.existCashierBalanceByDate(cashierBalanceWrapper.getDate())) {
             throw new AlreadyExistCashierBalanceDayException();
         }
