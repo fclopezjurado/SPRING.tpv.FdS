@@ -1,6 +1,7 @@
 package wrappers;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -140,6 +141,13 @@ public class CashierBalanceWrapper {
 
     public void setCash(double cash) {
         this.cash = cash;
+    }
+
+    public Calendar getDay() throws ParseException {
+        SimpleDateFormat dateFormater = new SimpleDateFormat(dateFormat);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateFormater.parse(this.getDate()));
+        return cal;
     }
 
 }

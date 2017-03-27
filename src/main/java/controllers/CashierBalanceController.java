@@ -29,9 +29,11 @@ public class CashierBalanceController {
         return cashierBalancesWrapper;
     }
 
-    public CashierBalanceWrapper createCashierBalance(CashierBalanceWrapper cashierBalanceWrapper) {
+    public CashierBalanceWrapper createCashierBalance(CashierBalanceWrapper cashierBalanceWrapper) throws ParseException {
         CashierBalance balance = new CashierBalance(cashierBalanceWrapper.getChange(), cashierBalanceWrapper.getTotal(),
                 cashierBalanceWrapper.getCash(), cashierBalanceWrapper.getChecks(), cashierBalanceWrapper.getDataphone());
+        balance.setId(cashierBalanceWrapper.getId());
+        balance.setDay(cashierBalanceWrapper.getDay());
         cashierBalanceDao.save(balance);
         cashierBalanceDao.flush();
         cashierBalanceWrapper.setId(cashierBalanceDao.findOneByDay(balance.getDay()).getId());

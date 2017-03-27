@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import wrappers.CashierBalanceWrapper;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -33,7 +34,7 @@ public class CashierBalanceResource {
 
     @RequestMapping(method = RequestMethod.POST)
     public CashierBalanceWrapper createCashierBalance(@RequestBody CashierBalanceWrapper cashierBalanceWrapper)
-            throws AlreadyExistCashierBalanceDayException {
+            throws AlreadyExistCashierBalanceDayException, ParseException {
         if (cashierBalanceController.existCashierBalanceByDate(cashierBalanceWrapper.getDate())) {
             throw new AlreadyExistCashierBalanceDayException();
         }
