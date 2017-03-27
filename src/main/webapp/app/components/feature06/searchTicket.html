@@ -3,6 +3,62 @@
         <fieldset>
             <legend>Feature06. Consultar Ticket</legend>
             <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="ticketReference">Referencia
+                        del ticket:</label>
+                    <div class='col-sm-10'>
+                        <input type='text' class="form-control" name='ticketReference'
+                            ng-model='vm.ticketReference' required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-2">
+                        <button class="btn btn-primary btn-sm" ng-click="vm.Search()">Consultar</button>
+                        <label class="bg-success col-sm-6" ng-show="vm.completed">Petición
+                            correcta</label> <label class="bg-danger col-sm-6" ng-show="vm.error">Error!!!</label>
+                    </div>
+                </div>
+                <h2>RESPUESTA:</h2>
+                <div class="form-group">
+                    <table class="table  table-hover data-table sort display">
+                        <thead>
+                            <tr>
+                                <th class="idTicket">Ticket ID</th>
+                                <th class="ticketState">Estado del ticket</th>
+                                <th class="username">Username</th>
+                                <th class="created">Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>{{vm.id}}</td>
+                            <td>{{vm.ticketState}}</td>
+                            <td>{{vm.username}}</td>
+                            <td>{{vm.created}}</td>
+                        </tbody>
+                    </table>
+                    <br>
+                    <h3>Shopping List:</h3>
+                    <table class="table  table-hover data-table sort display">
+                        <thead>
+                            <tr>
+                                <th class="idProducto">Id producto</th>
+                                <th class="cantidad">Cantidad</th>
+                                <th class="descuento">Descuento</th>
+                                <th class="descripcion">Descripción</th>
+                                <th class="precioAlPorMenor">Precio al por menor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="shopping in vm.shoppings">
+                                <td>{{shopping.id}}</td>
+                                <td>{{shopping.amount}}</td>
+                                <td>{{shopping.discount}}</td>
+                                <td>{{shopping.description}}</td>
+                                <td>{{shopping.retailPrice}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </form>
         </fieldset>
     </div>
