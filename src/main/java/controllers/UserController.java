@@ -72,7 +72,9 @@ public class UserController {
     public void deleteUser(long mobile) throws Exception{
         User user = this.userDao.findByMobile(mobile);
         for(Authorization auth : this.authorizationDao.findAll()) {
-            this.authorizationDao.delete(auth);
+            if (auth.getId() == user.getId()) {
+                this.authorizationDao.delete(auth);
+            }
         }
         this.userDao.delete(user);
     }
