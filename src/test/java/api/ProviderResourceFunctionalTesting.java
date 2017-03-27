@@ -6,7 +6,6 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.web.client.HttpClientErrorException;
 
-import api.exceptions.ProviderWithArticlesException;
 import entities.core.Provider;
 import wrappers.ProviderWrapper;
 
