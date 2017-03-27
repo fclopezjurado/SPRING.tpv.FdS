@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import api.exceptions.AlreadyExistProviderFieldException;
 import api.exceptions.MalformedHeaderException;
+import api.exceptions.NotFoundProviderIdException;
 import api.exceptions.ProviderWithArticlesException;
 import controllers.ProviderController;
 import wrappers.ProviderWrapper;
@@ -37,12 +38,12 @@ public class ProviderResource {
     }
 
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.GET)
-    public List<ProviderWrapper> getAll() throws Exception {
+    public List<ProviderWrapper> getAll() {
         return providerController.getAll();
     }
 
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.PUT)
-    public ProviderWrapper providerUpdate(@RequestBody ProviderWrapper providerWrapper) throws Exception {
+    public ProviderWrapper providerUpdate(@RequestBody ProviderWrapper providerWrapper) throws NotFoundProviderIdException {
         ProviderWrapper wrapper = providerController.editProvider(providerWrapper);
         return wrapper;
     }
