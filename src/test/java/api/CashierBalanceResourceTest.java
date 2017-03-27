@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import wrappers.CashierBalanceWrapper;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,9 +39,9 @@ public class CashierBalanceResourceTest {
     public void testCreateCashierBalance() {
         try {
             cashierBalanceResource.createCashierBalance(new CashierBalanceWrapper(50, 50, 50, 50, "03-03-1970"));
-        } catch (AlreadyExistCashierBalanceDayException e) {
+        } catch (AlreadyExistCashierBalanceDayException | ParseException e) {
             fail();
-        }
+        } 
     }
 
     @Test
@@ -49,7 +50,7 @@ public class CashierBalanceResourceTest {
             cashierBalanceResource.createCashierBalance(
                     new CashierBalanceWrapper(50, 50, 50, 50, new SimpleDateFormat(CashierBalanceWrapper.dateFormat).format(new Date())));
             fail();
-        } catch (AlreadyExistCashierBalanceDayException e) {
+        } catch (AlreadyExistCashierBalanceDayException | ParseException e) {
             assertEquals(1, 1);
         }
     }
