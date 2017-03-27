@@ -9,7 +9,6 @@ tpv.controller('SearchTicketController', [ 'f06Service', '$timeout',
 			vm.Search = Search;
 			vm.id = "";
 			vm.ticketState = "";
-			vm.username = "";
 			vm.created = "";
 			vm.shoppings = "";
 
@@ -21,7 +20,6 @@ tpv.controller('SearchTicketController', [ 'f06Service', '$timeout',
 					vm.completed = true;
 					vm.id = result.id;
 					vm.ticketState = result.ticketState;
-					vm.username = result.user.username;
 					vm.created = result.created;
 					vm.shoppings = result.shoppingList;
 					$timeout(function() {
