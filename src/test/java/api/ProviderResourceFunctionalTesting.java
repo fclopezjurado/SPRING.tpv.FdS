@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.web.client.HttpClientErrorException;
 
+import api.exceptions.ProviderWithArticlesException;
 import entities.core.Provider;
 import wrappers.ProviderWrapper;
 
@@ -45,7 +47,7 @@ public class ProviderResourceFunctionalTesting {
         new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).path("/"+ id).delete().build();
     }
     
-    @Test
+    @Test(expected = HttpClientErrorException.class)
     public void testDeleteProvidersException() {
         new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).path("/"+ 1).delete().build();
     }
