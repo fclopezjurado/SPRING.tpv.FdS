@@ -1,6 +1,7 @@
 package api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -58,21 +59,37 @@ public class ArticleResourceFunctionalTesting {
     }
 
     @Test
+    public void testGetArticleByFilter() {
+        ArticleFilterWrapper articleFilterWrapper = new ArticleFilterWrapper();
+        articleFilterWrapper.setDescription("");
+        articleFilterWrapper.setReference("");
+        articleFilterWrapper.setMinRetailPrice(new BigDecimal("0"));
+        articleFilterWrapper.setMaxRetailPrice(new BigDecimal("0"));
+        articleFilterWrapper.setStock(0);
+        articleFilterWrapper.setMinWholesalePrice(new BigDecimal("0"));
+        articleFilterWrapper.setMaxWholesalePrice(new BigDecimal("0"));
+        List<ProductsOutFilterWrapper> productosSalida = Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
+                (RestService.URL).path(Uris.ARTICLES + Uris.FILTER).clazz(ProductsOutFilterWrapper[].class).body(articleFilterWrapper)
+                .post().build());
+        assertTrue(productosSalida.size()>0);
+    }
+
+    @Test
     public void testGetArticleByFilterMock() {
         ArticleFilterWrapper articleFilterWrapper = new ArticleFilterWrapper();
-        articleFilterWrapper.setDescription("descripcion");
-        articleFilterWrapper.setReference("reference");
+        articleFilterWrapper.setDescription("");
+        articleFilterWrapper.setReference("");
         articleFilterWrapper.setMinRetailPrice(new BigDecimal("0"));
         articleFilterWrapper.setMaxRetailPrice(new BigDecimal("0"));
         articleFilterWrapper.setStock(1);
         articleFilterWrapper.setMinWholesalePrice(new BigDecimal("0"));
         articleFilterWrapper.setMaxWholesalePrice(new BigDecimal("0"));
         List<ProductsOutFilterWrapper> productosSalidaMock = Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
-                (RestService.URL).path(Uris.ARTICLES + Uris.FILTER).clazz(ProductsOutFilterWrapper[].class).body(articleFilterWrapper)
+                (RestService.URL).path(Uris.ARTICLES + Uris.FILTER+Uris.MOCK).clazz(ProductsOutFilterWrapper[].class).body(articleFilterWrapper)
                 .post().build());
         assertEquals(1, productosSalidaMock.size());
     }
-
+    
     @After
     public void after() {
         new RestService().deleteAll();

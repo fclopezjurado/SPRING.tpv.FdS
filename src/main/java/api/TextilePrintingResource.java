@@ -32,7 +32,7 @@ public class TextilePrintingResource {
     }
     
 
-    @RequestMapping(value = Uris.FILTER,method = RequestMethod.POST)
+    @RequestMapping(value = Uris.FILTER+Uris.MOCK,method = RequestMethod.POST)
     public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody TextilePritingFilterWrapper textile){
         List<ProductsOutFilterWrapper> productosSalidaMock= new ArrayList<ProductsOutFilterWrapper> ();
         ProductsOutFilterWrapper productoMock= new ProductsOutFilterWrapper();
@@ -43,7 +43,7 @@ public class TextilePrintingResource {
         return productosSalidaMock;
     }
 
-    @RequestMapping(value = Uris.FILTER+"SinMock",method = RequestMethod.POST)
+    @RequestMapping(value = Uris.FILTER,method = RequestMethod.POST)
     public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody TextilePritingFilterWrapper textile){
         List<ProductsOutFilterWrapper> productosSalida = this.textilePrintingController.getTextilePrintingByFilter(textile);
         return productosSalida;

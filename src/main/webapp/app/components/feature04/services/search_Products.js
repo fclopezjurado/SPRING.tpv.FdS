@@ -56,7 +56,7 @@ tpv.service('busquedaDeProductos', function ($http, $q) {
     	this.getProducts= function (products) {
     		let config = {
     				method: 'POST',
-    				url: urlBase + "/products",
+    				url: urlBase + "/products/byFilter",
     				data:products
     		};
     		return this.request(config); 
