@@ -2,6 +2,7 @@ package controllers;
 
 import config.PersistenceConfig;
 import config.TestsControllerConfig;
+import config.TestsMailConfig;
 import config.TestsPersistenceConfig;
 import daos.core.ArticleDao;
 import daos.core.TicketDao;
@@ -26,7 +27,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class, TestsMailConfig.class})
 public class TicketControllerIT {
 
     @Autowired

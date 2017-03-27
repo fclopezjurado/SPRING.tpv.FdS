@@ -5,10 +5,9 @@ import entities.core.Shopping;
 import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
-import api.MailService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import services.MailService;
 import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
 
@@ -45,7 +44,6 @@ public class TicketController {
 
         TicketWrapper ticketWrapper = new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
                 ticket.getShoppingList(), ticket.getUser());
-        // TODO Feature 11: If ticket state is Committed no Wrapper will be returned
         return (ticketWrapper);
     }
 
@@ -72,10 +70,11 @@ public class TicketController {
 
         ticketDao.save(ticket);
 
+        sendTicketEmail(ticket);
+
         ticketWrapper = new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
                 ticket.getShoppingList(), ticket.getUser());
 
-        // TODO Feature 11: Send an email after creation
         return ticketWrapper;
     }
 
@@ -84,9 +83,12 @@ public class TicketController {
         if (ticket != null) {
             ticket.setShoppingList(ticketWrapper.getShoppingList());
             ticket.setTicketState(ticketWrapper.getTicketState());
-            return new TicketWrapper(ticketDao.save(ticket));
+            ticketDao.save(ticket);
+            if (ticket.getTicketState() == TicketState.CLOSED) {
+                sendTicketEmail(ticket);
+            }
+            return new TicketWrapper(ticket);
         }
-        // TODO Feature 11: Check status after each update
         else {
             return null;
         }
@@ -147,9 +149,13 @@ public class TicketController {
         return new TicketWrapper(ticket.getId(), ticket.getCreated(), ticket.getReference(), ticket.getTicketState(),
                 ticket.getShoppingList(), ticket.getUser());
     }
-    
-    private void sendTicketEmail(TicketState state,String emailRecipient){
-        mailService.sendMail("miw.upm.fds@gmail.com", emailRecipient, "Cambio en el estado de su ticket ", "Mail Service test");
+
+    private void sendTicketEmail(Ticket ticket) {
+        User user = ticket.getUser();
+        if (user != null) {
+            mailService.sendHtmlMail("miw.upm.fds@gmail.com", "miw.upm.fds@gmail.com", "Cambio en el estado de su ticket ",
+                    "<html><body><center>Test</center></body></html>");
+        }
     }
 
 }
