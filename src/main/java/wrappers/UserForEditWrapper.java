@@ -1,5 +1,7 @@
 package wrappers;
 
+import java.util.Calendar;
+
 public class UserForEditWrapper {
 
     private long mobile;
@@ -14,13 +16,13 @@ public class UserForEditWrapper {
     
     private String email;
     
-    private String registrationDate;
+    private Calendar registrationDate;
 
     public UserForEditWrapper() {
     }
 
     public UserForEditWrapper(long mobile, String username, boolean active,
-            String address, String dni, String email, String registrationDate) {
+            String address, String dni, String email, Calendar registrationDate) {
         this.mobile = mobile;
         this.username = username;
         this.active = active;
@@ -62,11 +64,11 @@ public class UserForEditWrapper {
         this.email = email;
     }
 
-    public String getRegistrationDate() {
+    public Calendar getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(String registrationDate) {
+    public void setRegistrationDate(Calendar registrationDate) {
         this.registrationDate = registrationDate;
     }
 

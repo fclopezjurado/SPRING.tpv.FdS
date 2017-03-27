@@ -60,8 +60,13 @@ public class EmbroideryResource {
         this.embroideryController.addEmbroidery(embroideryWrapper);
     }
     
-    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
-    public void updateEmproidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateEmbroidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
         this.embroideryController.updateEmbroidery(embroideryWrapper);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
+    public EmbroideryWrapper getEmbroidery(@PathVariable(value = "id") long id) {
+        return this.embroideryController.getEmbroidery(id);
     }
 }

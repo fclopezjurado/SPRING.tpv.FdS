@@ -3,8 +3,11 @@ package api;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.Calendar;
+
 import org.apache.logging.log4j.LogManager;
-import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
@@ -15,12 +18,17 @@ import wrappers.UserForEditWrapper;
 import wrappers.UserWrapper;
 
 public class UserResourceFunctionalTesting {
-
+    @BeforeClass
+    public static void seedDataBase() {
+        new RestService().deleteAll();
+        new RestService().seedDatabase();
+    }
+    
     @Test
     public void testCreateManager() {
         String token = new RestService().loginAdmin();
         for (int i = 0; i < 4; i++) {
-            new RestBuilder<Object>(RestService.URL).path(Uris.USERS).body(new UserWrapper(777000000 + i, "user" + i, "pass"))
+            new RestBuilder<Object>(RestService.URL).path(Uris.USERS).body(new UserWrapper(777000005 + i, "user" + i, "pass"))
                     .basicAuth(token, "").post().build();
         }
     }
@@ -69,7 +77,7 @@ public class UserResourceFunctionalTesting {
     @Test
     public void testCreateCustomer() {
         String token = new RestService().registerAndLoginManager();
-        new RestBuilder<Object>(RestService.URL).path(Uris.CUSTOMERS).body(new UserWrapper(777000000, "customer", "pass"))
+        new RestBuilder<Object>(RestService.URL).path(Uris.CUSTOMERS).body(new UserWrapper(777000001, "customer", "pass"))
                 .basicAuth(token, "").post().build();
     }
 
@@ -77,7 +85,7 @@ public class UserResourceFunctionalTesting {
     public void testCreateCustomerForbidden() {
         try {
             String token = new RestService().loginAdmin();
-            new RestBuilder<Object>(RestService.URL).path(Uris.CUSTOMERS).body(new UserWrapper(777000000, "customer", "pass"))
+            new RestBuilder<Object>(RestService.URL).path(Uris.CUSTOMERS).body(new UserWrapper(777000001, "customer", "pass"))
                     .basicAuth(token, "").post().build();
             fail();
         } catch (HttpClientErrorException httpError) {
@@ -92,7 +100,7 @@ public class UserResourceFunctionalTesting {
         try {
             UserForEditListWrapper users = new RestBuilder<UserForEditListWrapper>(RestService.URL).path(Uris.USERS)
                     .clazz(UserForEditListWrapper.class).get().build();
-            assertEquals(1, users.getUserList().size());
+            assertEquals(6, users.getUserList().size());
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
             LogManager.getLogger(this.getClass())
@@ -103,9 +111,9 @@ public class UserResourceFunctionalTesting {
     @Test
     public void testUpdateUser() {
         try {
-            String msg = new RestBuilder<String>(RestService.URL).path(Uris.USERS).body(new UserForEditWrapper(660000,"test",true,"calle prueba","12345678Z","prueba@mail.com","20/12/2012")).clazz(String.class)
-                    .put().build();
-            assertEquals("update llamado", msg);
+            String token = new RestService().loginAdmin();
+            new RestBuilder<String>(RestService.URL).path(Uris.USERS).body(new UserForEditWrapper(666000000,"customer0",true,"calle prueba","12345678Z","prueba@mail.com",Calendar.getInstance())).clazz(String.class)
+                    .basicAuth(token, "").put().build();
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
             LogManager.getLogger(this.getClass())
@@ -116,9 +124,13 @@ public class UserResourceFunctionalTesting {
     @Test
     public void testDeleteUser() {
         try {
-            String msg = new RestBuilder<String>(RestService.URL).path(Uris.USERS).body(6600000).clazz(String.class)
-                    .delete().build();
-            assertEquals("delete llamado", msg);
+            String token = new RestService().loginAdmin();
+            new RestBuilder<String>(RestService.URL).path(Uris.USERS + "/" + 666000001).clazz(String.class)
+                .basicAuth(token, "").delete().build();
+            
+            UserForEditListWrapper users = new RestBuilder<UserForEditListWrapper>(RestService.URL).path(Uris.USERS)
+                    .clazz(UserForEditListWrapper.class).get().build();
+            assertEquals(11, users.getUserList().size());
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
             LogManager.getLogger(this.getClass())
@@ -126,21 +138,9 @@ public class UserResourceFunctionalTesting {
         }
     }
     
-    @Test
-    public void testBadRequestDeleteUser() {
-        try {
-            new RestBuilder<String>(RestService.URL).path(Uris.USERS).clazz(String.class)
-                    .delete().build();
-            fail();
-        } catch (HttpClientErrorException httpError) {
-            assertEquals(HttpStatus.BAD_REQUEST, httpError.getStatusCode());
-            LogManager.getLogger(this.getClass())
-                    .info("testBadRequestDeleteUser (" + httpError.getMessage() + "):\n " + httpError.getResponseBodyAsString());
-        }
-    }
 
-    @After
-    public void deleteAll() {
+    @AfterClass
+    public static void deleteAll() {
         new RestService().deleteAll();
     }
 }

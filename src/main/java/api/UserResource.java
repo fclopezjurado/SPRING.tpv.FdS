@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.exceptions.AlreadyExistUserFieldException;
+import api.exceptions.CannotDeleteUserException;
 import api.exceptions.InvalidUserFieldException;
 import api.exceptions.NotFoundTicketReferenceException;
 import api.exceptions.NotFoundUserIdException;
@@ -65,10 +66,14 @@ public class UserResource {
         this.userController.updateUser(userWrapper);
     }
 
-    @RequestMapping(value = Uris.USERS, method = RequestMethod.DELETE)
-    public void deleteUser(@RequestBody long mobile)
-            throws InvalidUserFieldException, NotFoundUserIdException {
-        this.userController.deleteUser(mobile);
+    @RequestMapping(value = Uris.USERS + Uris.USER_MOBILE, method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable long mobile)
+            throws CannotDeleteUserException {
+        try {
+            this.userController.deleteUser(mobile);
+        } catch (Exception e){
+            throw new CannotDeleteUserException();
+        }
     }
 
     private void validateField(String field, String msg) throws InvalidUserFieldException {
