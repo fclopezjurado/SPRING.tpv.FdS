@@ -43,12 +43,6 @@ public class TextilePrintingResource {
         return productosSalidaMock;
     }
 
-    @RequestMapping(value = Uris.FILTER+"SinMock",method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody TextilePritingFilterWrapper textile){
-        List<ProductsOutFilterWrapper> productosSalida = this.textilePrintingController.getTextilePrintingByFilter(textile);
-        return productosSalida;
-    }
-    
     @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
     public void removeTextilePrinting(@PathVariable(value = "id")  long id) {
       System.out.println(id);
@@ -64,6 +58,11 @@ public class TextilePrintingResource {
     @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
     public void updateTextilePrinting(@RequestBody TextilePrintingWrapper textilePrintingWrapper) {
         this.textilePrintingController.updateTextilePrinting(textilePrintingWrapper);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
+    public TextilePrintingWrapper getTextilePrinting(@PathVariable(value = "id") long id) {
+        return this.textilePrintingController.getTextilePrinting(id);
     }
 
 }

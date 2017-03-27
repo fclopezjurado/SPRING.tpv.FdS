@@ -6,15 +6,26 @@
     <div class="table-responsive">
         <fieldset>
             <legend align="right">Update Textile Printing</legend>
+<<<<<<< HEAD
+             <form class="form-horizontal" ng-submit="vm.updateTextilePrinting()" >
+                <div class="form-group" ng-init="vm.getTextilePrinting()">
+=======
              <form class="form-horizontal" ng-submit="vm.updateTextilePrinting()" ng-init="vm.getAll()">
                 <div class="form-group">
+>>>>>>> refs/heads/develop
                     <label class="control-label label-id col-md-1">Id</label>
                     <div class="col-md-4">
+<<<<<<< HEAD
+                        <select class="form-control" name='id'  ng-change="vm.findTextilePrinting(vm.textileprinting.id)" ng-model="vm.textileprinting.id" ng-options="p.id as p.description for p in vm.textiles" required>
+                            <option value="">Choose Option</option>
+                        </select>
+=======
                     <div> 
                        <select class="form-control" name='id' ng-model='vm.textileprinting.id' ng-options="t.id as t.description for t in vm.textiles" required>
                         <option value="">Seleccionar</option>
                     </select>
                     </div>
+>>>>>>> refs/heads/develop
                     </div>
                 </div>
 
