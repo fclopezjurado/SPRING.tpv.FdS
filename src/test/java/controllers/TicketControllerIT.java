@@ -42,6 +42,9 @@ public class TicketControllerIT {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private MailServiceMock mailService;
+
     private Ticket ticket;
 
     private Ticket committedTicket;
@@ -116,6 +119,9 @@ public class TicketControllerIT {
         ticketWrapper = ticketController.createTicket(shoppingList, user);
 
         assertEquals(ticketWrapper.getTicketState(), TicketState.OPENED);
+        assertEquals(user.getEmail(), mailService.getTo());
+        assertTrue(mailService.getMsg().contains(ticketWrapper.getTicketState().toString()));
+        assertTrue(mailService.getMsg().contains(ticketWrapper.getReference()));
     }
 
     @Test
@@ -137,5 +143,21 @@ public class TicketControllerIT {
 
         assertEquals(ticketWrapper.getTicketState(), TicketState.STARTED);
         assertEquals(2, ticketWrapper.getShoppingList().size());
+    }
+
+    @Test
+    public void testCloseTicket() {
+        List<Shopping> shoppingList = new ArrayList<>();
+        TicketWrapper ticketWrapper;
+        ticketWrapper = ticketController.createTicket(shoppingList, user);
+
+        ticketWrapper.setTicketState(TicketState.CLOSED);
+
+        ticketWrapper = ticketController.updateTicket(ticketWrapper);
+
+        assertEquals(ticketWrapper.getTicketState(), TicketState.CLOSED);
+        assertEquals(user.getEmail(), mailService.getTo());
+        assertTrue(mailService.getMsg().contains(ticketWrapper.getTicketState().toString()));
+        assertTrue(mailService.getMsg().contains(ticketWrapper.getReference()));
     }
 }

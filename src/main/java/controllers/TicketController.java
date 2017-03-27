@@ -163,7 +163,7 @@ public class TicketController {
         User user = ticket.getUser();
         String emailText = getEmailTemplateString();
         if (user != null) {
-            mailService.sendHtmlMail("miw.upm.fds@gmail.com", "miw.upm.fds@gmail.com", "Cambio en el estado de su ticket ",
+            mailService.sendHtmlMail("miw.upm.fds@gmail.com", user.getEmail(), "Cambio en el estado de su ticket ",
                     String.format(emailText, ticket.getTicketState(), ticket.getReference()));
         }
     }
