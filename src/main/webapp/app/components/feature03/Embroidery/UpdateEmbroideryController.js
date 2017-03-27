@@ -16,6 +16,10 @@ tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 			vm.Mstitches;
 			vm.Mcolor;
 			vm.Msquaremilimeters;
+			vm.embroidery=updateEmbroidery;
+		    vm.getAll = getAll;
+		    vm.embroiderys = [];
+
 
 			function updateEmbroidery() {
 				const
@@ -36,6 +40,7 @@ tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 					}, delay)
 				});
 			}
+
 			
 			   function getEmbroidery() {
 		        	f03Service.getAllEmbroidery().then(function success(response){
@@ -74,4 +79,21 @@ tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 						}, delay)
 					});
 				}
+
+		
+			
+	        function getAll() {
+	            //const delay = 10000
+	        	f03Service.getAllEmbroidery().then(function success(response){
+		        	      vm.data = response;
+		        	      console.log(vm.data);
+		        	    	    $.each(vm.data, function (i, item) {
+		        	    	        vm.embroiderys.push({"id": item['id'], "description": item['description']});
+		        	    	    });
+		        	    },
+		        	    function error(errors){
+		        	      console.log(errors);
+	            });
+
+	        }
 		} ]);

@@ -14,7 +14,10 @@ tpv.controller('UpdateTextilePrintingController', [ '$timeout', 'f03Service',
 			vm.Mreference;
 			vm.Mprice;
 			vm.Mtype;
-			
+		    vm.getAll = getAll;
+		    vm.textiles = [];
+
+
 			function updateTextilePrinting() {
 				const
 				delay = 10000;
@@ -34,6 +37,7 @@ tpv.controller('UpdateTextilePrintingController', [ '$timeout', 'f03Service',
 					}, delay)
 				});
 			}
+
 			function getTextilePrinting() {
 	        	f03Service.getAllTextile().then(function success(response){
 	        	      vm.data = response;
@@ -70,4 +74,18 @@ tpv.controller('UpdateTextilePrintingController', [ '$timeout', 'f03Service',
 					});
 				}
 		
+	        function getAll() {
+	            //const delay = 10000
+	        	f03Service.getAllTextile().then(function success(response){
+		        	      vm.data = response;
+		        	      console.log(vm.data);
+		        	    	    $.each(vm.data, function (i, item) {
+		        	    	        vm.textiles.push({"id": item['id'], "description": item['description']});
+		        	    	    });
+		        	    },
+		        	    function error(errors){
+		        	      console.log(errors);
+	            });
+
+	        }
 		} ]);
