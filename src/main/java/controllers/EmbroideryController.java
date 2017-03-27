@@ -69,6 +69,8 @@ public class EmbroideryController {
             this.embroideryDao.save(embroidery);
         }
     }
+   
+
 
     public List<ProductsOutFilterWrapper> getEmroiderysByFilter(EmbroideryFilterWrapper embroideryFilter) {
         List<Embroidery> embroideryDeBusqueda = this.embroideryDao.findEmbroideryByFilter(embroideryFilter);
@@ -80,4 +82,10 @@ public class EmbroideryController {
         return embroiderysSalida;
     }
 
+   public EmbroideryWrapper getEmbroidery(long id) {
+        Embroidery embroidery = embroideryDao.findById(id);
+        EmbroideryWrapper wrapper = new EmbroideryWrapper(embroidery);
+        return wrapper;
+        
+    }
 }

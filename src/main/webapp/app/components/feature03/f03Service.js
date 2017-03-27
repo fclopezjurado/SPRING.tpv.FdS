@@ -151,15 +151,33 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
     this.updateEmbroidery = function (embroideryId) {
         let config = {
             method: 'PUT',
-            url: urlBase + "/embroidery/" + embroideryId
+            url: urlBase + "/embroidery" + embroideryId,
+            data:{
+       	      'id': embroidery.id,
+    	      'reference': embroidery.reference,
+    	      'description': embroidery.description,
+    	      'retailPrice': embroidery.retailPrice,
+    	      'stitches': embroidery.stitches,
+    	      'colors': embroidery.colors,
+    	      'squareMillimeters': embroidery.squaremillimeters
+            }
         };
         return this.request(config);
+       
+        
     }
 
     this.updateTextilePrinting = function (textilePrintingId) {
         let config = {
             method: 'PUT',
-            url: urlBase + "/textilePrinting/" + textilePrintingId
+            url: urlBase + "/textilePrinting" + textilePrintingId,
+            data:{
+         	  'id': textileprinting.id,
+      	      'reference': textileprinting.reference,
+      	      'description': textileprinting.description,
+      	      'retailPrice': textileprinting.retailPrice,
+      	      'type': textileprinting.type
+            }
         };
         return this.request(config);
     }
@@ -167,12 +185,28 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
     this.findArticle = function (articleId) {
         let config = {
             method: 'GET',
-            url: urlBase + "/articles/" + articleId,
+            url: urlBase + "/articles/" + articleId
         };
 
         return this.request(config);
     }
     
+    this.findTextilePrinting = function (textilePrintingId) {
+        let config = {
+            method: 'GET',
+            url: urlBase + "/textilePrinting/" + textilePrintingId
+        };
+
+        return this.request(config);
+    }
     
+    this.findEmbroidery = function (embroideryId) {
+        let config = {
+            method: 'GET',
+            url: urlBase + "/embroidery/" + embroideryId
+        };
+
+        return this.request(config);
+    }
    
 }]);
