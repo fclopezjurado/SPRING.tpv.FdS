@@ -46,12 +46,13 @@ public class CashierBalanceController {
 
     public boolean existCashierBalanceByDate(String date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(CashierBalanceWrapper.dateFormat);
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();        
         try {
             cal.setTime(dateFormat.parse(date));
         } catch (ParseException e) {
             return false;
         }
+        
         return cashierBalanceDao.findOneByDay(cal) != null;
     }
 

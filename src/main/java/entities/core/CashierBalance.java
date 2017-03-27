@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class CashierBalance {
@@ -17,6 +19,7 @@ public class CashierBalance {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
+    @Temporal(TemporalType.DATE)
     private Calendar day;
 
     private BigDecimal balance = new BigDecimal(0);
