@@ -44,4 +44,14 @@ public class UserControllerIT {
                 environment.getProperty("admin.password"));
         assertFalse(userController.registration(user, Role.CUSTOMER));
     }
+
+    @Test
+    public void testUserExistsByMobile() {
+        assertTrue(userController.userExistsByMobile(Long.valueOf(environment.getProperty("admin.mobile"))));
+    }
+
+    @Test
+    public void testUserExistsByMobileWrong() {
+        assertFalse(userController.userExistsByMobile(USER_MOBILE));
+    }
 }
