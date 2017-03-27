@@ -29,7 +29,7 @@ public class UserForEditListWrapper {
     public void wrapUsers(List<User> users) {
         for (User user : users)
             this.userList.add(new UserForEditWrapper(user.getMobile(), user.getUsername(), user.isActive(), user.getAddress(),
-                    user.getDni(), user.getEmail(), user.getRegistrationDate().toString()));
+                    user.getDni(), user.getEmail(), user.getRegistrationDate()));
     }
 
     @Override
