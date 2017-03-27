@@ -44,5 +44,13 @@ tpv.service('f07Service', ['$http', '$q', function ($http, $q) {
 		  };
 	      return this.request(config);
 	   }
+
+   this.consultar = function (reference) {
+	      let config = {
+	 	     method: 'GET',
+	 	     url: urlBase + "/vouchers/"+reference,
+		  };
+	      return this.request(config);
+	   }   
    
 }]);

@@ -1,0 +1,33 @@
+<section class="container">
+    <div class="jumbotron text-center">
+        <fieldset>
+            <legend>Feature06. Editar Ticket</legend>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-10 " for="name">Introduzca referencia del ticket:</label>
+                    <div class='col-sm-10'>
+                        <input type='text' class="form-control" name='vm.reference' required/>
+                        <button class="btn btn-primary btn-sm" ng-click="vm.searchTicket()">Buscar</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2 " for="type">Estado del ticket:</label>
+                    <div class='col-sm-10'>
+                        <select name="type" ng-model="vm.ticketState" required>
+                            <option value="warning">Abierto</option>
+                            <option value="critical">Empezado</option>
+                            <option value="critical">Cerrado</option>
+                            <option value="critical">Entregado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-2">
+                        <button class="btn btn-primary btn-sm" ng-click="vm.editTicket()">Guardar cambios</button>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+</section>

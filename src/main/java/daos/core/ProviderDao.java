@@ -1,9 +1,12 @@
 package daos.core;
 
+import entities.core.Provider;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import entities.core.Provider;
-
 public interface ProviderDao extends JpaRepository<Provider, Integer> {
+
+    Provider findByMobile(long mobile);
+
+    Provider findById(int id);
 
 }

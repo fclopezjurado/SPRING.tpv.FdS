@@ -1,18 +1,15 @@
 package entities.core;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Product {
-
-    @Id
-    private long id;
+public abstract class Product extends ComponentProduct {
 
     private String reference;
 
@@ -24,14 +21,14 @@ public abstract class Product {
     }
 
     public Product(long id, String reference, BigDecimal retailPrice, String description) {
-        this.id = id;
+        super(id);
         this.reference = reference;
         this.retailPrice = retailPrice;
         this.description = description;
     }
 
     public long getId() {
-        return id;
+        return super.getId();
     }
 
     public String getReference() {
@@ -59,8 +56,32 @@ public abstract class Product {
     }
 
     @Override
+    public void add(ComponentProduct componentFamily) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void remove(ComponentProduct componentFamily) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public boolean isFamily() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public List<Product> getAllProducts() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
     public int hashCode() {
-        return (int) id;
+        return (int) this.getId();
     }
 
     @Override
@@ -74,12 +95,12 @@ public abstract class Product {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        return id == ((Product) obj).id;
+        return this.getId() == ((Product) obj).getId();
     }
 
     @Override
     public String toString() {
-        return id + ": reference=" + reference + ", retailPrice=" + retailPrice + ", description=" + description;
+        return getId() + ": reference=" + reference + ", retailPrice=" + retailPrice + ", description=" + description;
     }
 
 }

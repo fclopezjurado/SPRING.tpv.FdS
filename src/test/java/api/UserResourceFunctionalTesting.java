@@ -11,6 +11,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import api.Uris;
 import wrappers.UserForEditListWrapper;
+import wrappers.UserForEditWrapper;
 import wrappers.UserWrapper;
 
 public class UserResourceFunctionalTesting {
@@ -85,17 +86,56 @@ public class UserResourceFunctionalTesting {
                     .info("testCreateCustomerForbidden (" + httpError.getMessage() + "):\n " + httpError.getResponseBodyAsString());
         }
     }
-    
+
     @Test
     public void testGetAllUsers() {
         try {
-            UserForEditListWrapper users = new RestBuilder<UserForEditListWrapper>(RestService.URL).path(Uris.USERS).clazz(UserForEditListWrapper.class)
-                    .get().build();
+            UserForEditListWrapper users = new RestBuilder<UserForEditListWrapper>(RestService.URL).path(Uris.USERS)
+                    .clazz(UserForEditListWrapper.class).get().build();
             assertEquals(1, users.getUserList().size());
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
             LogManager.getLogger(this.getClass())
                     .info("testGetAllUsersForbidden (" + httpError.getMessage() + "):\n " + httpError.getResponseBodyAsString());
+        }
+    }
+    
+    @Test
+    public void testUpdateUser() {
+        try {
+            String msg = new RestBuilder<String>(RestService.URL).path(Uris.USERS).body(new UserForEditWrapper(660000,"test",true,"calle prueba","12345678Z","prueba@mail.com","20/12/2012")).clazz(String.class)
+                    .put().build();
+            assertEquals("update llamado", msg);
+        } catch (HttpClientErrorException httpError) {
+            assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
+            LogManager.getLogger(this.getClass())
+                    .info("testUpdateUserForbidden (" + httpError.getMessage() + "):\n " + httpError.getResponseBodyAsString());
+        }
+    }
+    
+    @Test
+    public void testDeleteUser() {
+        try {
+            String msg = new RestBuilder<String>(RestService.URL).path(Uris.USERS).body(6600000).clazz(String.class)
+                    .delete().build();
+            assertEquals("delete llamado", msg);
+        } catch (HttpClientErrorException httpError) {
+            assertEquals(HttpStatus.FORBIDDEN, httpError.getStatusCode());
+            LogManager.getLogger(this.getClass())
+                    .info("testDeleteUserForbidden (" + httpError.getMessage() + "):\n " + httpError.getResponseBodyAsString());
+        }
+    }
+    
+    @Test
+    public void testBadRequestDeleteUser() {
+        try {
+            new RestBuilder<String>(RestService.URL).path(Uris.USERS).clazz(String.class)
+                    .delete().build();
+            fail();
+        } catch (HttpClientErrorException httpError) {
+            assertEquals(HttpStatus.BAD_REQUEST, httpError.getStatusCode());
+            LogManager.getLogger(this.getClass())
+                    .info("testBadRequestDeleteUser (" + httpError.getMessage() + "):\n " + httpError.getResponseBodyAsString());
         }
     }
 

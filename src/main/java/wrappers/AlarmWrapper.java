@@ -11,27 +11,27 @@ public class AlarmWrapper {
     private String name;
 
     private AlarmType type;
-
-    private List<String> products;
+    
+    private List<ArticleWrapper> productsList;
     
     private int numProducts;
 
     public AlarmWrapper() {}
 
-    public AlarmWrapper(String name, AlarmType type, List<String> products, int numProducts) {
+    public AlarmWrapper(String name, AlarmType type, List<ArticleWrapper> products, int numProducts) {
         super();
         this.name = name;
         this.type = type;
-        this.products = products;
+        this.productsList = products;
         this.numProducts = numProducts;
     }
-
-    public AlarmWrapper(int id, String name, AlarmType type, List<String> products, int numProducts) {
+    
+    public AlarmWrapper(int id, String name, List<ArticleWrapper> productsList, AlarmType type, int numProducts) {
         super();
         this.id = id;
         this.name = name;
+        this.productsList = productsList;
         this.type = type;
-        this.products = products;
         this.numProducts = numProducts;
     }
 
@@ -58,13 +58,13 @@ public class AlarmWrapper {
     public void setType(AlarmType type) {
         this.type = type;
     }
-
-    public List<String> getProducts() {
-        return products;
+    
+    public List<ArticleWrapper> getProductsList() {
+        return productsList;
     }
 
-    public void setProducts(List<String> products) {
-        this.products = products;
+    public void setProductsList(List<ArticleWrapper> productsList) {
+        this.productsList = productsList;
     }
 
     public int getNumProducts() {
@@ -77,7 +77,7 @@ public class AlarmWrapper {
 
     @Override
     public String toString() {
-        return "AlarmWrapper [name=" + name + ", type=" + type + ", products=" + products + ", numProducts=" + numProducts + "]";
+        return "AlarmWrapper [name=" + name + ", type=" + type + ", productsList=" + productsList + ", numProducts=" + numProducts + "]";
     }
     
 }
