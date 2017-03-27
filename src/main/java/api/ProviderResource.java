@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import api.exceptions.AlreadyExistProviderFieldException;
 import api.exceptions.MalformedHeaderException;
+import api.exceptions.ProviderWithArticlesException;
 import controllers.ProviderController;
 import wrappers.ProviderWrapper;
 
@@ -25,12 +26,14 @@ public class ProviderResource {
     }
 
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.POST)
-    public void providerRegistration(@RequestBody ProviderWrapper providerWrapper)
+    public ProviderWrapper providerRegistration(@RequestBody ProviderWrapper providerWrapper)
             throws MalformedHeaderException, AlreadyExistProviderFieldException {
         validateFields(providerWrapper);
-        if (!this.providerController.registration(providerWrapper)) {
+        ProviderWrapper wrapper = this.providerController.registration(providerWrapper);
+        if (wrapper==null) {
             throw new AlreadyExistProviderFieldException();
         }
+        return wrapper;
     }
 
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.GET)
@@ -45,7 +48,7 @@ public class ProviderResource {
     }
 
     @RequestMapping(value = Uris.PROVIDERS+Uris.ID, method = RequestMethod.DELETE)
-    public void providerDelete(@PathVariable(value = "id") String id) throws Exception {
+    public void providerDelete(@PathVariable(value = "id") String id) throws ProviderWithArticlesException {
         providerController.delete(id);
     }
 
