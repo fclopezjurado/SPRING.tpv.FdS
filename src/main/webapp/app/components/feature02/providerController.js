@@ -7,6 +7,7 @@ tpv.controller('ProviderController', [
 
 			vm.completed = false;
 			vm.error = false;
+			vm.providers;
 			vm.company;
 			vm.address; 
 			vm.mobile;
@@ -27,6 +28,11 @@ tpv.controller('ProviderController', [
 					// promise was fullfilled
 					vm.completed = true;
 					vm.response = "";
+					vm.company = "";
+					vm.address = ""; 
+					vm.mobile = "";
+					vm.payment = "";
+					vm.notes = "";
 					$timeout(function() {
 						vm.completed = false;
 					}, delay)
@@ -46,7 +52,7 @@ tpv.controller('ProviderController', [
 				f02Service.getAll().then(function(result) {
 					vm.completed = true;
 					vm.response = result;
-					
+					vm.provider = result;
 					$timeout(function() {
 						vm.completed = false;
 					}, delay)
@@ -66,7 +72,7 @@ tpv.controller('ProviderController', [
 		            f02Service.removeProvider(id).then(function (result) {
 		                vm.completed = true;
 		                vm.response = result;
-
+		                vm.provider = getAll();
 		                $timeout(function () {
 		                    vm.completed = false;
 		                }, delay)

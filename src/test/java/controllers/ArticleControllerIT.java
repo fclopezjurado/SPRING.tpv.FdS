@@ -39,7 +39,7 @@ public class ArticleControllerIT {
         ProviderWrapper provider = providerController.getAll().get(0);
         List<ArticleWrapper> list = articleController.search(provider.getId(), AlarmType.WARNING);
         assertEquals(false, list.isEmpty());
-        assertEquals(true, list.get(0).getProviderWrapper().getId() == provider.getId());
+        assertEquals(true, list.get(0).getProviderID() == provider.getId());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ArticleControllerIT {
         ProviderWrapper provider = providerController.getAll().get(0);
         List<ArticleWrapper> list = articleController.search(provider.getId(), null);
         assertEquals(false, list.isEmpty());
-        assertEquals(true, list.get(0).getProviderWrapper().getId() == provider.getId());
+        assertEquals(true, list.get(0).getProviderID() == provider.getId());
     }
 
     @Test

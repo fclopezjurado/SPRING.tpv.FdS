@@ -6,5 +6,5 @@ import entities.core.TextilePrinting;
 import wrappers.TextilePritingFilterWrapper;
 
 public interface TextilePritingFExtended {
-    public List<TextilePrinting> findArticlesByFilter(TextilePritingFilterWrapper textilePriting);
+    public List<TextilePrinting> findTextilePrintingsByFilter(TextilePritingFilterWrapper textilePriting);
 }

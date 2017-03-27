@@ -5,13 +5,16 @@
     <br />
     <div class="table-responsive">
         <fieldset>
-            <legend align="right">Create Embroidery</legend>
-            <form class="form-horizontal" ng-submit="vm.addEmbroidery()" >
+            <legend align="right">Update Embroidery</legend>
+            <form class="form-horizontal" ng-submit="vm.updateEmbroidery()" ng-init="vm.getAll()" >
                 <div class="form-group">
-                    <label class="control-label label-id col-md-1">Id</label>
+                    <label class="control-label label-stitches col-md-1">Id</label>
                     <div class="col-md-4">
-                        <input type="number" class="form-control" 
-                            ng-model='vm.embroidery.id' required>
+                       <div> 
+                       <select class="form-control" name='id' ng-model='vm.embroidery.id' ng-options="e.id as e.description for e in vm.embroiderys" required>
+                        <option value="">Seleccionar</option>
+                    </select>
+                    </div>
                     </div>
                 </div>
 

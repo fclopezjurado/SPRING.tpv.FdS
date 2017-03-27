@@ -7,6 +7,8 @@ tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 			vm.error = false;
 			vm.response;
 			vm.embroidery=updateEmbroidery;
+		    vm.getAll = getAll;
+		    vm.embroiderys = [];
 
 			function updateEmbroidery() {
 				const
@@ -28,4 +30,19 @@ tpv.controller('UpdateEmbroideryController', [ '$timeout', 'f03Service',
 				});
 			}
 		
+			
+	        function getAll() {
+	            //const delay = 10000
+	        	f03Service.getAllEmbroidery().then(function success(response){
+		        	      vm.data = response;
+		        	      console.log(vm.data);
+		        	    	    $.each(vm.data, function (i, item) {
+		        	    	        vm.embroiderys.push({"id": item['id'], "description": item['description']});
+		        	    	    });
+		        	    },
+		        	    function error(errors){
+		        	      console.log(errors);
+	            });
+
+	        }
 		} ]);
