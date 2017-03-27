@@ -99,4 +99,10 @@ public class UserControllerIT {
             assertTrue(true);
         }
     }
+
+    @Test
+    public void testFindAll() {
+        assertFalse(this.userController.findAll().isEmpty());
+    }
+
 }
