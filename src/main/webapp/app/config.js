@@ -36,11 +36,6 @@ tpv.config(function ($routeProvider) {
 	        controller: "ProviderController",
 	        controllerAs: "vm"
         })
-        .when("/feature02/update", {
-	        templateUrl: "app/components/feature02/update.html",
-	        controller: "ProviderController",
-	        controllerAs: "vm"
-        })
         //Feature 03 -01 
         .when("/feature03/Articles/ArticleList", {
             templateUrl: "app/components/feature03/Articles/ArticleList.html",
@@ -147,11 +142,6 @@ tpv.config(function ($routeProvider) {
             controller: "UserController",
             controllerAs: "vm"
         })
-        .when("/feature18/budgets", {
-            templateUrl: "app/components/feature18/budgets.html",
-            controller: "BudgetController",
-            controllerAs: "vm"
-        })
         //Feature 09
         .when("/feature09/cierrecaja/nuevo", {
             templateUrl: "app/components/feature09/new_cashier_balancing.html",
@@ -166,6 +156,11 @@ tpv.config(function ($routeProvider) {
         .when("/feature11/ticket", {
             templateUrl: "app/components/feature11/ticket.html",
             controller: "ProductsServiceController",
+            controllerAs: "vm"
+        })
+        .when("/feature12/populateDB", {
+            templateUrl: "app/components/feature12/populateDB.html",
+            controller: "PopulateDBController",
             controllerAs: "vm"
         })
         .when("/feature06/createTicket", {

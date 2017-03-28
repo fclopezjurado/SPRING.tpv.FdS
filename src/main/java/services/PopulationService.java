@@ -168,6 +168,7 @@ public class PopulationService {
         ticketDao.save(tickets);
         invoiceDao.save(invoices);
         alarmDao.save(alarms);		
+
 	}
 	
 	private String readFile(File file) throws IOException

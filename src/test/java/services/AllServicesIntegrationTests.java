@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({PopulateDbFromFilesTest.class})
+@SuiteClasses({PopulationServicesTest.class})
 public class AllServicesIntegrationTests {
 
 }
