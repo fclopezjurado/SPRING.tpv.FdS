@@ -1,9 +1,9 @@
 package api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,19 +33,9 @@ public class EmbroideryResource {
         return embroideryController.getAll();
     }
 
-    @RequestMapping(value = Uris.FILTER+Uris.MOCK, method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody EmbroideryFilterWrapper embroidery) {
-        List<ProductsOutFilterWrapper> productosSalidaMock = new ArrayList<ProductsOutFilterWrapper>();
-        ProductsOutFilterWrapper productoMock = new ProductsOutFilterWrapper();
-        productoMock.setId(0);
-        productoMock.setReference("referenceMock");
-        productoMock.setDescription("descriptionMock");
-        productosSalidaMock.add(productoMock);
-        return productosSalidaMock;
-    }
-
     @RequestMapping(value = Uris.FILTER, method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody EmbroideryFilterWrapper embroidery) throws MalformedFieldxception {
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
+    public List<ProductsOutFilterWrapper> getEmbroideryByFilter(@RequestBody EmbroideryFilterWrapper embroidery) throws MalformedFieldxception {
         this.validarCamposApi(embroidery);
         List<ProductsOutFilterWrapper> productosSalida = this.embroideryController.getEmroiderysByFilter(embroidery);
         return productosSalida;
