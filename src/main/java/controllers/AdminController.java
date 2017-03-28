@@ -96,7 +96,7 @@ public class AdminController {
         CashierBalance balance;
         Calendar day = Calendar.getInstance();
         for(int i = 0; i < 4; i++){
-            balance = new CashierBalance(50,50,50,50,50);
+            balance = new CashierBalance(new BigDecimal(50),new BigDecimal(50),new BigDecimal(50),new BigDecimal(50),new BigDecimal(50));
             day.add(Calendar.DATE, -1);           
             balance.setDay(day);                       
             cashierBalanceDao.save(balance);

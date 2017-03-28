@@ -86,7 +86,7 @@ public class DaosServiceIntegrationTests {
         CashierBalance balance;
         Calendar day = Calendar.getInstance();
         for(int i = 0; i < 4; i++){
-            balance = new CashierBalance(50.0, 50.0, 50.0, 50.0, 50.0);
+            balance = new CashierBalance(new BigDecimal(50.0), new BigDecimal(50.0), new BigDecimal(50.0), new BigDecimal(50.0), new BigDecimal(50.0));
             day.add(Calendar.DATE, -1);
             balance.setDay(day);
             cashierBalanceDao.save(balance);

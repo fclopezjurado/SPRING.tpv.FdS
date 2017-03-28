@@ -2,53 +2,59 @@
 	ng-controller="CashierBalancingController as vm">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h3>Nuevo cierre de caja</h3>
+			<h3>Nuevo cierre de caja. Autor: Enrique Arranz</h3>
 		</div>
 		<form class="" ng-submit="vm.createCashierBalancing()">
 			<div class="panel-body">
+			    <div ng-show="vm.showAlert" class="alert alert-danger">
+	                <strong>¡ERROR!</strong> {{vm.alertMessage}}
+	            </div>
 				<div class="form-container">
 					<div class="well">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Fecha</label> <input type="date"
-										class="form-control" ng-model="vm.cashierbalancing.date"
-										>
+									<label class="control-label">Fecha</label> 
+									<input type="date" class="form-control" ng-model="vm.cashierbalancing.date" readonly ng-change="vm.getTotal()" required>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="control-label">Importe total</label> <input
-										type="number" class="form-control"
-										ng-model="vm.cashierbalancing.total" >
+									<label class="control-label">Importe total</label> 
+									<input type="number" class="form-control" ng-model="vm.cashierbalancing.total" readonly required>
 								</div>
 							</div>
 						</div>
 
 					</div>
 					<div class="form-group">
-						<label class="control-label">Importe inicial</label> <input
-							type="number" class="form-control"
-							ng-model="vm.cashierbalancing.change">
+						<label class="control-label">Importe inicial</label> 
+						<input type="number" class="form-control" ng-model="vm.cashierbalancing.change" ng-change="vm.calculateBalance()" required>
 					</div>
 
 					<div class="form-group">
-						<label class="control-label">Importe datáfono</label> <input
-							type="number" class="form-control"
-							ng-model="vm.cashierbalancing.dataphone">
+						<label class="control-label">Importe datáfono</label> 
+						<input type="number" class="form-control" ng-model="vm.cashierbalancing.dataphone" ng-change="vm.calculateBalance()" required>
 					</div>
 					<div class="form-group">
-						<label class="control-label">Importe metálico</label> <input
-							type="number" class="form-control"
-							ng-model="vm.cashierbalancing.cash">
+						<label class="control-label">Importe metálico</label> 
+						<input type="number" class="form-control" ng-model="vm.cashierbalancing.cash" ng-change="vm.calculateBalance()" required>
 					</div>
+					
+					<div class="form-group" ng-show="vm.showBalance">
+                        <label class="control-label">Balance</label> 
+                        <input type="number" class="form-control" ng-model="vm.cashierbalancing.balance" ng-style="vm.backgroundBalance" required>
+                    </div>
 				</div>
 			</div>
 			<div class="panel-footer text-center">
-				<button class="btn btn-default" type="reset">
+				<button class="btn btn-default" type="button" ng-click="vm.resetCashierBalancing()">
 					<i class="glyphicon glyphicon-trash"></i> Limpiar campos
 				</button>
-				<button class="btn btn-primary" type="submit">
+				<button class="btn btn-primary" type="button" ng-click="vm.calculateBalance()" ng-hide="vm.showBalance">
+                    <i class="glyphicon glyphicon-check"></i> Calcular
+                </button>
+				<button class="btn btn-primary" type="submit" ng-show="vm.showBalance">
 					<i class="glyphicon glyphicon-check"></i> Crear
 				</button>
 			</div>
