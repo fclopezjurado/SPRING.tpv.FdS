@@ -6,6 +6,7 @@ import controllers.InvoiceController;
 import controllers.TicketController;
 import controllers.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import wrappers.InvoiceWrapper;
 import wrappers.InvoicesWrapper;
@@ -36,6 +37,7 @@ public class InvoiceResource {
     }
 
     @RequestMapping(value = Uris.INVOICES, method = RequestMethod.POST)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public InvoiceWrapper createInvoice(@RequestBody String ticketReference) throws NotFoundTicketReferenceException {
         if (!this.ticketController.ticketExistsByReference(ticketReference))
             throw new NotFoundTicketReferenceException();
@@ -44,6 +46,7 @@ public class InvoiceResource {
     }
 
     @RequestMapping(value = Uris.INVOICES + Uris.USER_MOBILE, method = RequestMethod.GET)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public InvoicesWrapper getInvoicesByUserMobile(@PathVariable(value = "mobile") long userMobile) throws NotFoundUserMobileException {
         if (!this.userController.userExistsByMobile(userMobile))
             throw new NotFoundUserMobileException();
