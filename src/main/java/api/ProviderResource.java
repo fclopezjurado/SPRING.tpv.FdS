@@ -33,9 +33,6 @@ public class ProviderResource {
             throws MalformedHeaderException, AlreadyExistProviderFieldException {
         validateFields(providerWrapper);
         ProviderWrapper wrapper = this.providerController.registration(providerWrapper);
-        if (wrapper==null) {
-            throw new AlreadyExistProviderFieldException();
-        }
         return wrapper;
     }
 
