@@ -22,7 +22,7 @@ public class CashierBalance {
     @Temporal(TemporalType.DATE)
     private Calendar day;
 
-    private BigDecimal balance;
+    private BigDecimal balance = new BigDecimal(0);
 
     @Column(name= "dayChange")
     private BigDecimal change;
@@ -39,27 +39,23 @@ public class CashierBalance {
         day = Calendar.getInstance();
     }
 
-    public CashierBalance(BigDecimal change, BigDecimal total, BigDecimal cash, BigDecimal checks, BigDecimal dataphone) {
+    public CashierBalance(BigDecimal change, BigDecimal cash, BigDecimal checks, BigDecimal dataphone) {
         super();
         this.change = change;
-        this.totalTiketsMoney = total;
         this.cash = cash;
         this.checks = checks;
         this.dataphone = dataphone;
-        this.balance = this.calculateBalance();
         this.day = Calendar.getInstance();
     }
-    
-    private BigDecimal calculateBalance(){
-        BigDecimal balance = this.totalTiketsMoney.subtract(this.change);
-        if(this.cash != null)
-            balance.subtract(this.cash);        
-        if(this.checks != null)
-            balance.subtract(this.checks);
-        if(this.dataphone != null)
-            balance.subtract(this.dataphone);
-        
-        return balance;
+
+    public CashierBalance(double change, double total, double cash, double checks, double dataphone) {
+        this.change = new BigDecimal(change, MathContext.DECIMAL64);
+        this.totalTiketsMoney = new BigDecimal(total, MathContext.DECIMAL64);
+        this.cash = new BigDecimal(cash, MathContext.DECIMAL64);
+        this.checks = new BigDecimal(checks, MathContext.DECIMAL64);
+        this.dataphone = new BigDecimal(dataphone, MathContext.DECIMAL64);
+        this.balance = this.totalTiketsMoney.subtract(this.change.add(this.cash.add(this.checks.add(this.dataphone))));
+        this.day = Calendar.getInstance();
     }
 
     public int getId() {
@@ -153,13 +149,5 @@ public class CashierBalance {
             return false;
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "CashierBalance [id=" + id + ", day=" + day + ", balance=" + balance + ", change=" + change + ", cash=" + cash + ", checks="
-                + checks + ", dataphone=" + dataphone + ", totalTiketsMoney=" + totalTiketsMoney + "]";
-    }
-    
-    
 
 }

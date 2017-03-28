@@ -12,7 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import wrappers.CashierBalanceWrapper;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -24,7 +23,7 @@ import static org.junit.Assert.*;
 public class CashierBalanceControllerIT {
     
     private static final int VALID_CASHIER_BALANACE_ID = 1;
-    private static final BigDecimal CHANGE_UPDATE = new BigDecimal(0);
+    private static final int CHANGE_UPDATE = 0;
     private static final String CASHIER_BALANCE_DATE = "01-01-1970";
     private static final int CASHIER_BALANCE_CREATE_ID = 5;
     
@@ -74,7 +73,7 @@ public class CashierBalanceControllerIT {
         assertNotEquals(CHANGE_UPDATE, balanceWrapper.getChange());
         balanceWrapper.setChange(CHANGE_UPDATE);
         cashierBalanceController.updateCashierBalance(balanceWrapper);
-        assertEquals(CHANGE_UPDATE.stripTrailingZeros(), cashierBalanceController.getCashierBalanceById(VALID_CASHIER_BALANACE_ID).getChange().stripTrailingZeros());        
+        assertEquals(CHANGE_UPDATE, cashierBalanceController.getCashierBalanceById(VALID_CASHIER_BALANACE_ID).getChange(), 0);        
     }
 
 }
