@@ -1,6 +1,5 @@
 users:
   - &user001 !entities.users.User
-    id: 001
     mobile: 654654652
     username: Marcos
     dni: 45125689K
@@ -10,7 +9,6 @@ users:
     registrationDate: 01-11-2016
     active: 0
   - &user002 !entities.users.User
-    id: 002
     mobile: 654645654
     username: Laura
     dni: 11125689A
@@ -20,7 +18,6 @@ users:
     registrationDate: 13-01-2017
     active: 1
   - &user003 !entities.users.User
-    id: 003
     mobile: 654333555
     username: Alba
     dni: 54875412P
@@ -30,7 +27,6 @@ users:
     registrationDate: 25-12-2016
     active: 1
   - &user004 !entities.users.User
-    id: 004
     mobile: 654654689
     username: Luis
     dni: 53124589T

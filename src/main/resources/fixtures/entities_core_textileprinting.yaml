@@ -1,37 +1,31 @@
-textilsprinting:
-  - !entities.core.TextilPrinting
-    id: 001
+textilesprinting:
+  - &text001 !entities.core.TextilePrinting
+    id: 9
     reference: cafe
     retailPrice: 20.22
     description: Café
-    ticket: 001
-  - !entities.core.TextilPrinting
-    id: 002
+  - &text002 !entities.core.TextilePrinting
+    id: 10
     reference: cola
     retailPrice: 21.23
     description: Cocacola
-    ticket: 002
-  - !entities.core.TextilPrinting
-    id: 003
+  - !entities.core.TextilePrinting
+    id: 11
     reference: pan
     retailPrice: 0.45
     description: Pan
-    ticket: 003
-  - !entities.core.Product
-    id: 004
+  - !entities.core.TextilePrinting
+    id: 12
     reference: pizza
     retailPrice: 21.23
     description: Piza
-    ticket: 004
-  - !entities.core.Product
-    id: 005
+  - !entities.core.TextilePrinting
+    id: 13
     reference: leche
     retailPrice: 1.3
     description: Leche
-    ticket: 005
-  - !entities.core.Product
-    id: 006
+  - !entities.core.TextilePrinting
+    id: 14
     reference: pollo
     retailPrice: 4
     description: Pollo
-    ticket: 006

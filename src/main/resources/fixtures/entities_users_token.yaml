@@ -1,0 +1,5 @@
+tokens:
+  - !entities.users.Token
+    user: *user001
+    creationDate: 01-01-2017
+    value: thistokenissecret

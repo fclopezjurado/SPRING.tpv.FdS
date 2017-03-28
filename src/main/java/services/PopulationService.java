@@ -14,8 +14,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.Vector;
 
 import javax.transaction.Transactional;
 
@@ -40,11 +42,19 @@ import daos.users.TokenDao;
 import daos.users.UserDao;
 import entities.core.Alarm;
 import entities.core.Article;
+import entities.core.Embroidery;
+import entities.core.Invoice;
 import entities.core.Provider;
+import entities.core.TextilePrinting;
+import entities.core.Ticket;
+import entities.core.Voucher;
+import entities.users.Authorization;
+import entities.users.Token;
+import entities.users.User;
 
 @Service
 @Transactional
-public class PopulateDbFromFiles {
+public class PopulationService {
 
 	public static String PATH = new String("fixtures");
 	
@@ -79,25 +89,40 @@ public class PopulateDbFromFiles {
 	private InvoiceDao invoiceDao;
 	
 	@Autowired
-	private AlarmDao alertDao;
+	private AlarmDao alarmDao;
 	
-	public TreeMap<Integer, String> getFilesOrdered()
+	List<User> users;
+	List<Authorization> authorizations;
+	List<Token> tokens;
+	List<Voucher> vouchers;
+	List<Provider> providers;
+	List<Article> articles;
+	List<Embroidery> embroideries;
+	List<TextilePrinting> textiles;
+	List<Ticket> tickets;
+	List<Invoice> invoices;
+	List<Alarm> alarms;
+	
+    
+	public Vector<String> getFilesOrdered()
 	{
-		TreeMap<Integer, String> files = new TreeMap<Integer, String>();
-		files.put(1, "entities_core_alarm.yaml");
-		files.put(1, "entities_core_article.yaml");
-		files.put(1, "entities_core_cashierbalance.yaml");
-		files.put(1, "entities_core_embroidery.yaml");
-		files.put(1, "entities_core_invoice.yaml");
-		files.put(1, "entities_core_product.yaml");
-		files.put(0, "entities_core_provider.yaml");
-		files.put(1, "entities_core_shopping.yaml");
-		files.put(1, "entities_core_textileprinting.yaml");
-		files.put(1, "entities_core_ticket.yaml");
-		files.put(1, "entities_core_voucher.yaml");
-		files.put(1, "entities_users_authorization.yaml");
-		files.put(1, "entities_users_encrypting.yaml");
-		files.put(0, "entities_users_user.yaml");
+		Vector<String> files = new Vector<>();
+		files.add("entities_users_user.yaml");
+		files.add("entities_users_token.yaml");
+		files.add("entities_core_provider.yaml");
+		files.add("entities_core_shopping.yaml");
+		files.add("entities_core_ticket.yaml");
+		files.add("entities_core_article.yaml");
+		files.add("entities_core_textileprinting.yaml");
+		files.add("entities_core_cashierbalance.yaml");
+		files.add("entities_core_embroidery.yaml");
+		files.add("entities_core_invoice.yaml");
+		files.add("entities_core_voucher.yaml");
+		files.add("entities_users_authorization.yaml");
+		files.add("entities_users_encrypting.yaml");
+		files.add("entities_core_alarm.yaml");
+
+		
 		
 		return files;
 		
@@ -106,7 +131,7 @@ public class PopulateDbFromFiles {
 	{
 		String allFixturesTogether = new String();
 
-		for(String file : getFilesOrdered().values())
+		for(String file : getFilesOrdered())
 		{
 			ClassPathResource resource = new ClassPathResource(PATH + "/" +file);
 			allFixturesTogether += readFile(resource.getFile());
@@ -119,17 +144,30 @@ public class PopulateDbFromFiles {
 		
 		Map map = (Map)reader.read();
 		
-        userDao.save((List)map.get("users"));
-        authorizationDao.save((List)map.get("authorizations"));
-        tokenDao.save((List)map.get("tokens"));
-        voucherDao.save((List)map.get("vouchers"));
-        providerDao.save((List)map.get("providers"));
-        articleDao.save((List)map.get("articles"));
-        embroideryDao.save((List)map.get("embroiderys"));
-        textilePrintingDao.save((List)map.get("textilePrinting"));
-        ticketDao.save((List)map.get("textilesPrinting"));
-        invoiceDao.save((List)map.get("invoices"));
-        alertDao.save((List)map.get("alerts"));		
+		users = (List)map.get("users");
+		authorizations = (List)map.get("authorizations");
+		tokens = (List)map.get("tokens");
+		vouchers = (List)map.get("vouchers");
+		providers = (List)map.get("providers");
+		articles = (List)map.get("articles");
+		embroideries = (List)map.get("embroiderys");
+		textiles = (List)map.get("textilesprinting");
+		tickets = (List)map.get("tickets");
+		invoices = (List)map.get("invoices");
+		alarms = (List)map.get("alarms");
+
+		
+		users = userDao.save(users);
+        authorizationDao.save(authorizations);
+        tokenDao.save(tokens);
+        voucherDao.save(vouchers);
+        providerDao.save(providers);
+        articleDao.save(articles);
+        embroideryDao.save(embroideries);
+        textilePrintingDao.save(textiles);
+        ticketDao.save(tickets);
+        invoiceDao.save(invoices);
+        alarmDao.save(alarms);		
 	}
 	
 	private String readFile(File file) throws IOException

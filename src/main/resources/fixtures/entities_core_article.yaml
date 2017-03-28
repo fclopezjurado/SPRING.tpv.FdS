@@ -1,6 +1,6 @@
 articles:
-  - !entities.core.Article
-    id: 001
+  - &art001 !entities.core.Article
+    id: 1
     stock: 300
     wholesalePrice: 270
     provider: *prov001
@@ -8,7 +8,7 @@ articles:
     retailPrice: 21.23
     description: Cocacola
   - !entities.core.Article
-    id: 002
+    id: 2
     stock: 80
     wholesalePrice: 130
     provider: *prov002
@@ -16,7 +16,7 @@ articles:
     retailPrice: 0.45
     description: Pan
   - !entities.core.Article
-    id: 003
+    id: 3
     stock: 130
     wholesalePrice: 89
     provider: *prov001
@@ -24,7 +24,7 @@ articles:
     retailPrice: 21.23
     description: Piza
   - !entities.core.Article
-    id: 004
+    id: 4
     stock: 130
     wholesalePrice: 89
     provider: *prov003

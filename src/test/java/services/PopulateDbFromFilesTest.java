@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import config.MailConfig;
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { PersistenceConfig.class, TestsPersistenceConfig.class })
-
+@ContextConfiguration(classes = { MailConfig.class, PersistenceConfig.class, TestsPersistenceConfig.class })
 public class PopulateDbFromFilesTest {
 
 	@Autowired
@@ -31,7 +31,6 @@ public class PopulateDbFromFilesTest {
 	public void setUp() {
 		dataService.deleteAllExceptAdmin();
 	}
-
 	@Test
 	public void testReadFromPath() throws IOException {
 		populateDbFromFiles.readFromPath();

@@ -1,10 +1,10 @@
 invoices:
   - !entities.core.Invoice
     id: 001
-    ticket: 002
+    ticket: *tick002
   - !entities.core.Invoice
     id: 002
-    ticket: 001
+    ticket: *tick001
   - !entities.core.Invoice
     id: 003
-    ticket: 003
+    ticket: *tick003

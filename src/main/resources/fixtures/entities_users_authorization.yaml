@@ -6,7 +6,7 @@ authorizations:
   - !entities.users.Authorization
     id: 002
     user: *user002
-    role: admin
+    role: ADMIN
   - !entities.users.Authorization
     id: 003
     user: *user003
