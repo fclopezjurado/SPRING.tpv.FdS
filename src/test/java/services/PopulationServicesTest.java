@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import config.MailConfig;
 import config.PersistenceConfig;
 import config.TestsPersistenceConfig;
 
