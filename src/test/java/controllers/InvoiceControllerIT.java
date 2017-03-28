@@ -1,26 +1,26 @@
 package controllers;
 
-import static org.junit.Assert.*;
-
+import api.exceptions.NotFoundInvoiceIdException;
+import api.exceptions.NotFoundTicketReferenceException;
+import api.exceptions.NotFoundUserMobileException;
+import config.PersistenceConfig;
+import config.TestsControllerConfig;
+import config.TestsMailConfig;
+import config.TestsPersistenceConfig;
 import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import api.exceptions.NotFoundInvoiceIdException;
-import api.exceptions.NotFoundTicketReferenceException;
-import api.exceptions.NotFoundUserMobileException;
-import config.PersistenceConfig;
-import config.TestsControllerConfig;
-import config.TestsPersistenceConfig;
 import wrappers.InvoiceWrapper;
 import wrappers.InvoicesWrapper;
 import wrappers.TicketsWrapper;
 
+import static org.junit.Assert.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class, TestsMailConfig.class})
 public class InvoiceControllerIT {
 
     private static final String INVALID_TICKET_REFERENCE = "wg_yXs1LJmSvNsld-aXBg27P1jA";
