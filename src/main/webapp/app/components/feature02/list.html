@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody ng-init="vm.getAll()" >
-          <label class="bg-danger col-sm-6" ng-show="vm.error">Error: No se puede borrar un proveedor con articulos activos</label>
+          <label class="bg-danger col-sm-6" ng-show="vm.error">Error{{vm.response}}</label>
             <tr ng-repeat="provider in vm.providers"  >
               <td>{{provider.company}}</td>
               <td>{{provider.address}}</td>

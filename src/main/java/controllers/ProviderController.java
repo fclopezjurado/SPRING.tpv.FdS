@@ -69,7 +69,7 @@ public class ProviderController {
 		int provId = Integer.parseInt(id);
 		List<Article> articlesWithProvider = articleDao.findByProvider(providerDao.findById(provId));
 		if (articlesWithProvider.size() > 0) {
-			throw new ProviderWithArticlesException(articlesWithProvider.toString());
+			throw new ProviderWithArticlesException();
 		}
 		providerDao.delete(providerId);
 	}
