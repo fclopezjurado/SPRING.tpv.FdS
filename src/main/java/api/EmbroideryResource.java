@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.exceptions.MalformedFieldxception;
 import controllers.EmbroideryController;
 import wrappers.EmbroideryFilterWrapper;
 import wrappers.EmbroideryWrapper;
@@ -32,7 +33,7 @@ public class EmbroideryResource {
         return embroideryController.getAll();
     }
 
-    @RequestMapping(value = Uris.FILTER, method = RequestMethod.POST)
+    @RequestMapping(value = Uris.FILTER+Uris.MOCK, method = RequestMethod.POST)
     public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody EmbroideryFilterWrapper embroidery) {
         List<ProductsOutFilterWrapper> productosSalidaMock = new ArrayList<ProductsOutFilterWrapper>();
         ProductsOutFilterWrapper productoMock = new ProductsOutFilterWrapper();
@@ -43,8 +44,9 @@ public class EmbroideryResource {
         return productosSalidaMock;
     }
 
-    @RequestMapping(value = Uris.FILTER+"SinMock", method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody EmbroideryFilterWrapper embroidery) {
+    @RequestMapping(value = Uris.FILTER, method = RequestMethod.POST)
+    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody EmbroideryFilterWrapper embroidery) throws MalformedFieldxception {
+        this.validarCamposApi(embroidery);
         List<ProductsOutFilterWrapper> productosSalida = this.embroideryController.getEmroiderysByFilter(embroidery);
         return productosSalida;
     }
@@ -60,8 +62,28 @@ public class EmbroideryResource {
         this.embroideryController.addEmbroidery(embroideryWrapper);
     }
     
-    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
-    public void updateEmproidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateEmbroidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
         this.embroideryController.updateEmbroidery(embroideryWrapper);
+    }
+    
+
+    private void validarCamposApi(EmbroideryFilterWrapper embroidery) throws MalformedFieldxception {
+        if (embroidery == null)
+            throw new MalformedFieldxception();
+        if (embroidery.getDescription() == null)
+            throw new MalformedFieldxception();
+        if (embroidery.getMaxRetailPrice() == null)
+            throw new MalformedFieldxception();
+        if (embroidery.getMinRetailPrice() == null)
+            throw new MalformedFieldxception();
+        if (embroidery.getReference() == null)
+            throw new MalformedFieldxception();
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
+    public EmbroideryWrapper getEmbroidery(@PathVariable(value = "id") long id) {
+        return this.embroideryController.getEmbroidery(id);
+
     }
 }

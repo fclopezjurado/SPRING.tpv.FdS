@@ -14,7 +14,6 @@ import wrappers.TextilePritingFilterWrapper;
 
 @Controller
 public class TextilePrintingController {
-    
 
     @Autowired
     private TextilePrintingDao textilePrintingsDao;
@@ -63,17 +62,21 @@ public class TextilePrintingController {
             this.textilePrintingsDao.save(textilePrinting);
         }
     }
-    
-    public List<ProductsOutFilterWrapper> getTextilePrintingByFilter(TextilePritingFilterWrapper TextilePrintingFilter) {
-        List<TextilePrinting> textilePrintingDeBusqueda = this.textilePrintingsDao.findTextilePrintingsByFilter(TextilePrintingFilter);
-        List<ProductsOutFilterWrapper> textilePrintingSalida = new ArrayList<ProductsOutFilterWrapper>();
-        for (TextilePrinting producto : textilePrintingDeBusqueda) {
-            ProductsOutFilterWrapper productoOutWrapper = new ProductsOutFilterWrapper(producto);
-            textilePrintingSalida.add(productoOutWrapper);
-        }
-        return textilePrintingSalida;
+      public TextilePrintingWrapper getTextilePrinting(long id) {
+          TextilePrinting textileprinting = textilePrintingsDao.findById(id);
+          TextilePrintingWrapper wrapper = new TextilePrintingWrapper(textileprinting);
+            return wrapper;
+                   
     }
-    
-   
+      
+      public List<ProductsOutFilterWrapper> getTextilePrintingByFilter(TextilePritingFilterWrapper TextilePrintingFilter) {
+          List<TextilePrinting> textilePrintingDeBusqueda = this.textilePrintingsDao.findTextilePrintingsByFilter(TextilePrintingFilter);
+          List<ProductsOutFilterWrapper> textilePrintingSalida = new ArrayList<ProductsOutFilterWrapper>();
+          for (TextilePrinting producto : textilePrintingDeBusqueda) {
+              ProductsOutFilterWrapper productoOutWrapper = new ProductsOutFilterWrapper(producto);
+              textilePrintingSalida.add(productoOutWrapper);
+          }
+          return textilePrintingSalida;
+      }
 
 }

@@ -1,43 +1,48 @@
 <section class="container">
 	<div class="jumbotron text-center">
 		<fieldset>
-			<legend>Feature02. <b>Update Registration.</b></legend>
-			<form class="form-horizontal" ng-submit="vm.registration()">
+			<legend>Feature02. <b>Update Provider.</b></legend>
+			<form class="form-horizontal" ng-submit="vm.update()">
+                
+                <div class="form-group">
+                	<label class="control-label col-sm-2 " for="providerSelected">Provider</label>
+					<div class='col-sm-10' ng-init="vm.init()">
+	                    <div> 
+		                    <select class="form-control" name='providerSelected' ng-model="vm.providerSelected"  ng-options="providerSelected as providerSelected.company for providerSelected in vm.providers" required>
+		                    <option value="">Seleccionar</option>
+							</select>
+	                    </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2 " for="company">Company:</label>
                     <div class='col-sm-10'>
-                        <input type='text' class="form-control" ng-model='vm.company' required />
+                        <input type='text' class="form-control" ng-model='vm.providerSelected.company' required />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2 " for="address">Address:</label>
                     <div class='col-sm-10'>
-                        <input type='text' class="form-control" ng-model='vm.address' />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2 " for="address">Address:</label>
-                    <div class='col-sm-10'>
-                        <input type='text' class="form-control" ng-model='vm.address' />
+                        <input type='text' class="form-control" ng-model='vm.providerSelected.address' />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2 " for="mobile">Mobile:</label>
                     <div class='col-sm-10'>
-                        <input type="number" class="form-control" ng-model='vm.mobile'
+                        <input type="number" class="form-control" ng-model='vm.providerSelected.mobile'
                             required />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2 " for="payment">Payment conditions:</label>
+                    <label class="control-label col-sm-2 " for="paymentConditions">Payment conditions:</label>
                     <div class='col-sm-10'>
-                        <input type='text' class="form-control" ng-model='vm.payment'/>
+                        <input type='text' class="form-control" ng-model='vm.providerSelected.paymentConditions'/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2 " for="notes">Notes:</label>
+                    <label class="control-label col-sm-2 " for="note">Notes:</label>
                     <div class='col-sm-10'>
-                        <input type='text' class="form-control" ng-model='vm.notes'/>
+                        <input type='text' class="form-control" ng-model='vm.providerSelected.note'/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -45,11 +50,7 @@
                         <input type="submit" class="btn btn-primary " value="Enviar">
                     </div>
                     <label class="bg-success col-sm-6" ng-show="vm.completed">Petición
-                        correcta</label> <label class="bg-danger col-sm-6" ng-show="vm.error">Error</label>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Respuesta:</label>
-                    <label class="col-sm-10" ng-bind='vm.response'></label>
+                        correcta</label> <label class="bg-danger col-sm-6" ng-show="vm.error">Error{{vm.response}}</label>
                 </div>
             </form>
 	        <div align="center">

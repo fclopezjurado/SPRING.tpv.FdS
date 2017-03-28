@@ -1,6 +1,7 @@
 package wrappers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import entities.core.Budget;
@@ -10,7 +11,7 @@ public class BudgetDetailWrapper {
 
     private String reference;
     
-    private String created;
+    private Calendar created;
     
     private float total;
     
@@ -22,7 +23,7 @@ public class BudgetDetailWrapper {
 
     public BudgetDetailWrapper(Budget budget) {
         reference = budget.getReference();
-        created = budget.getCreated().toString();
+        created = budget.getCreated();
         total = 0;
         shoppingList = new ArrayList<Shopping>();
         for (Shopping shopping : budget.getShoppingList()){
@@ -39,11 +40,11 @@ public class BudgetDetailWrapper {
         this.reference = reference;
     }
 
-    public String getCreated() {
+    public Calendar getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(Calendar created) {
         this.created = created;
     }
 

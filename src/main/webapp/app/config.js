@@ -36,6 +36,11 @@ tpv.config(function ($routeProvider) {
 	        controller: "ProviderController",
 	        controllerAs: "vm"
         })
+        .when("/feature02/update", {
+	        templateUrl: "app/components/feature02/update.html",
+	        controller: "ProviderController",
+	        controllerAs: "vm"
+        })
         //Feature 03 -01 
         .when("/feature03/Articles/ArticleList", {
             templateUrl: "app/components/feature03/Articles/ArticleList.html",
@@ -140,6 +145,11 @@ tpv.config(function ($routeProvider) {
         .when("/feature20/users", {
             templateUrl: "app/components/feature20/users.html",
             controller: "UserController",
+            controllerAs: "vm"
+        })
+        .when("/feature18/budgets", {
+            templateUrl: "app/components/feature18/budgets.html",
+            controller: "BudgetController",
             controllerAs: "vm"
         })
         //Feature 09

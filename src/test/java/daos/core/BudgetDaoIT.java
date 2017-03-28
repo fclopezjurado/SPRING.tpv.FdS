@@ -1,6 +1,7 @@
 package daos.core;
 
 import config.PersistenceConfig;
+import config.TestsMailConfig;
 import config.TestsPersistenceConfig;
 import daos.users.UserDao;
 import entities.core.Budget;
@@ -14,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsMailConfig.class})
 public class BudgetDaoIT {
 
     @Autowired

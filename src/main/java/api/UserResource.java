@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.exceptions.AlreadyExistUserFieldException;
+import api.exceptions.CannotDeleteUserException;
 import api.exceptions.InvalidUserFieldException;
 import api.exceptions.NotFoundTicketReferenceException;
 import api.exceptions.NotFoundUserIdException;
@@ -59,14 +60,20 @@ public class UserResource {
     }
 
     @RequestMapping(value = Uris.USERS, method = RequestMethod.PUT)
-    public void updateUser(@RequestBody UserForEditWrapper userWrapper) throws InvalidUserFieldException, NotFoundUserIdException {
+    public void updateUser(@RequestBody UserForEditWrapper userWrapper)
+            throws InvalidUserFieldException, NotFoundUserIdException {
         validateField(userWrapper.getUsername(), "username");
-        // TODO use: this.userController.updateUser(userWrapper);
+        this.userController.updateUser(userWrapper);
     }
 
-    @RequestMapping(value = Uris.USERS, method = RequestMethod.DELETE)
-    public void deleteUser(@RequestBody long mobile) throws InvalidUserFieldException, NotFoundUserIdException {
-        // TODO use: this.userController.deleteUser(mobile);
+    @RequestMapping(value = Uris.USERS + Uris.USER_MOBILE, method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable long mobile)
+            throws CannotDeleteUserException {
+        try {
+            this.userController.deleteUser(mobile);
+        } catch (Exception e){
+            throw new CannotDeleteUserException();
+        }
     }
 
     private void validateField(String field, String msg) throws InvalidUserFieldException {

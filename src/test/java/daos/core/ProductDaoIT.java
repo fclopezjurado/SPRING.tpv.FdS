@@ -1,28 +1,28 @@
 package daos.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.math.BigDecimal;
-
+import config.PersistenceConfig;
+import config.TestsMailConfig;
+import config.TestsPersistenceConfig;
+import entities.core.AlarmType;
+import entities.core.Product;
+import entities.core.TextilePrinting;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import config.PersistenceConfig;
-import config.TestsPersistenceConfig;
-import entities.core.AlarmType;
-import entities.core.Product;
-import entities.core.TextilePrinting;
 import wrappers.ArticleFilterWrapper;
 import wrappers.EmbroideryFilterWrapper;
 import wrappers.ProductFilterWrapper;
 import wrappers.TextilePritingFilterWrapper;
 
+import java.math.BigDecimal;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsMailConfig.class})
 public class ProductDaoIT {
 
     @Autowired

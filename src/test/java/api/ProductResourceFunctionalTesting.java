@@ -20,7 +20,7 @@ public class ProductResourceFunctionalTesting {
         productsFilterWrapper.setMinRetailPrice(new BigDecimal("0"));
         productsFilterWrapper.setMaxRetailPrice(new BigDecimal("0"));
         List<ProductsOutFilterWrapper> productosSalidaMock = Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
-                (RestService.URL).path(Uris.PRODUCTS).clazz(ProductsOutFilterWrapper[].class).body(productsFilterWrapper).post().build());
+                (RestService.URL).path(Uris.PRODUCTS+Uris.FILTER+Uris.MOCK).clazz(ProductsOutFilterWrapper[].class).body(productsFilterWrapper).post().build());
         assertEquals(3, productosSalidaMock.size());
     }
 }

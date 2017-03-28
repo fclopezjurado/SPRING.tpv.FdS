@@ -63,8 +63,7 @@
     <script src="app/components/feature8.10/services/get_users.service.js"></script>
     <script src="app/components/feature8.10/controllers/get_invoice.controller.js"></script>
     <!-- Author: Enrique Arranz -->
-    <script src="app/components/feature09/new_cashier_balancing.service.js"></script>
-    <script src="app/components/feature09/get_cashier_balancing.service.js"></script>
+    <script src="app/components/feature09/cashier_balancing.service.js"></script>
     <script src="app/components/feature09/cashier_balancing.controller.js"></script>
     <!-- Autor: Cecilia Aguilar DAvid Blasco-->
     <script src="app/components/feature03/f03Service.js"></script>
@@ -82,12 +81,16 @@
     <script src="app/components/feature06/searchTicketController.js"></script>
     <script src="app/components/feature06/editTicketController.js"></script>
     <script src="app/components/feature06/createTicketController.js"></script>
+    <script src="app/components/feature06/feature06Service.js"></script>
     <!-- Autor: Jose Maria Moreno-->
     <script src="app/components/feature14/totalSalesController.js"></script>
     <script src="app/components/feature14/bestSellersController.js"></script>
-    <script src="app/components/feature14/f14Service.js"></script>
     <script src="app/components/feature14/productSalesController.js"></script>
     <script src="app/components/feature14/f14Service.js"></script>
+    
+    <!-- Autor: Jorge Cárdenas -->
+    <script src="app/components/feature18/f18Service.js"></script>  
+    <script src="app/components/feature18/budgetController.js"></script> 
 
 
     <!--  Autor: Alan Mark Sousa Juan Robisco-->
@@ -100,8 +103,6 @@
     <script src="app/components/feature05/productsFamilyController.js"></script>
     <script src="app/components/feature05/f05Service.js"></script>
     
-    
-
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -119,7 +120,6 @@
     <div id="collapse1" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
             <li><a href="#/">Home</a></li>
-
             <!-- Menus -->
 
             <!-- Autor: Jesús Bernal -->
@@ -135,10 +135,12 @@
              <ul class="dropdown-menu">
                <li><a href="#/feature02/registration">Provider Registration</a></li>
                <li><a href="#/feature02/list">Provider List</a></li>
+               <li><a href="#/feature02/update">Provider Update</a></li>
              </ul>
            </li>
            
            <li><a href="#/feature20/users">F20</a></li>
+           <li><a href="#/feature18/budgets">F18</a></li>
            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F07<b class="caret"></b></a>
              <ul class="dropdown-menu">
                <li><a href="#/feature07/create">Crear</a></li>

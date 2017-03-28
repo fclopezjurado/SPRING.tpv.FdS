@@ -8,6 +8,7 @@ import daos.core.ArticleDao;
 import daos.core.EmbroideryDao;
 import daos.core.FamilyDao;
 import daos.core.BudgetDao;
+import daos.core.CashierBalanceDao;
 import daos.core.InvoiceDao;
 import daos.core.ProviderDao;
 import daos.core.TextilePrintingDao;
@@ -61,8 +62,12 @@ public class DataService {
     
     @Autowired
     private FamilyDao familyDao;
+    
+    @Autowired
+    private CashierBalanceDao cashierBalanceDao;
 
     public void deleteAllExceptAdmin() {
+        cashierBalanceDao.deleteAll();
         invoiceDao.deleteAll();
         ticketDao.deleteAll();
         budgetDao.deleteAll();

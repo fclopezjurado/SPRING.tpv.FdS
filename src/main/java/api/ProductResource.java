@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.exceptions.MalformedFieldxception;
 import controllers.ProductController;
 import wrappers.ProductFilterWrapper;
 import wrappers.ProductsOutFilterWrapper;
@@ -24,7 +25,7 @@ public class ProductResource {
         this.productController = productController;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = Uris.FILTER + Uris.MOCK, method = RequestMethod.POST)
     public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody ProductFilterWrapper product) {
         List<ProductsOutFilterWrapper> productosSalidaMock = new ArrayList<ProductsOutFilterWrapper>();
         ProductsOutFilterWrapper productoMock = new ProductsOutFilterWrapper();
@@ -38,8 +39,23 @@ public class ProductResource {
     }
 
     @RequestMapping(value = Uris.FILTER, method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody ProductFilterWrapper product) {
+    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody ProductFilterWrapper product) throws MalformedFieldxception {
+        this.validarCamposApi(product);
         List<ProductsOutFilterWrapper> productosSalida = this.productController.getProductsByFilter(product);
         return productosSalida;
+    }
+
+    private void validarCamposApi(ProductFilterWrapper product) throws MalformedFieldxception {
+        if (product == null)
+            throw new MalformedFieldxception();
+        if (product.getDescription() == null)
+            throw new MalformedFieldxception();
+        if (product.getMaxRetailPrice() == null)
+            throw new MalformedFieldxception();
+        if (product.getMinRetailPrice() == null)
+            throw new MalformedFieldxception();
+        if (product.getReference() == null)
+            throw new MalformedFieldxception();
+
     }
 }

@@ -1,37 +1,58 @@
 package wrappers;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class CashierBalanceWrapper {
 
     public static final String dateFormat = "dd-MM-yyyy";
 
     private int id;
 
-    private double change;
+    private BigDecimal change;
 
-    private double total;
+    private BigDecimal total;
 
-    private double checks;
+    private BigDecimal checks;
 
-    private double dataphone;
+    private BigDecimal dataphone;
+
+    private BigDecimal cash;
 
     private String date;
 
+    public CashierBalanceWrapper() {
+        super();
+    }
+
     public CashierBalanceWrapper(int id, double change, double total, double checks, double dataphone, String date) {
         super();
+        this.id = id;
+        this.change = new BigDecimal(change);
+        this.total = new BigDecimal(total);
+        this.checks = new BigDecimal(checks);
+        this.dataphone = new BigDecimal(dataphone);
+        this.date = date;
+    }
+
+    public CashierBalanceWrapper(int id, BigDecimal change, BigDecimal total, BigDecimal checks, BigDecimal dataphone, Calendar date) {
+        SimpleDateFormat dateFormater = new SimpleDateFormat(dateFormat);
         this.id = id;
         this.change = change;
         this.total = total;
         this.checks = checks;
         this.dataphone = dataphone;
-        this.date = date;
+        this.date = dateFormater.format(date.getTime());
     }
 
     public CashierBalanceWrapper(double change, double total, double checks, double dataphone, String date) {
         super();
-        this.change = change;
-        this.total = total;
-        this.checks = checks;
-        this.dataphone = dataphone;
+        this.change = new BigDecimal(change);
+        this.total = new BigDecimal(total);
+        this.checks = new BigDecimal(checks);
+        this.dataphone = new BigDecimal(dataphone);
         this.date = date;
     }
 
@@ -43,35 +64,35 @@ public class CashierBalanceWrapper {
         this.id = id;
     }
 
-    public double getChange() {
+    public BigDecimal getChange() {
         return change;
     }
 
-    public void setChange(double change) {
+    public void setChange(BigDecimal change) {
         this.change = change;
     }
 
-    public double getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 
-    public double getChecks() {
+    public BigDecimal getChecks() {
         return checks;
     }
 
-    public void setChecks(double checks) {
+    public void setChecks(BigDecimal checks) {
         this.checks = checks;
     }
 
-    public double getDataphone() {
+    public BigDecimal getDataphone() {
         return dataphone;
     }
 
-    public void setDataphone(double dataphone) {
+    public void setDataphone(BigDecimal dataphone) {
         this.dataphone = dataphone;
     }
 
@@ -115,6 +136,26 @@ public class CashierBalanceWrapper {
         if (id != other.id)
             return false;
         return true;
+    }
+
+    public BigDecimal getCash() {
+        return cash;
+    }
+
+    public void setCash(BigDecimal cash) {
+        this.cash = cash;
+    }
+
+    public Calendar getDay() throws ParseException {
+        SimpleDateFormat dateFormater = new SimpleDateFormat(dateFormat);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateFormater.parse(this.getDate()));
+        return cal;
+    }
+
+    public void setDay(Calendar day) {
+        SimpleDateFormat dateFormater = new SimpleDateFormat(dateFormat);
+        this.date = dateFormater.format(day.getTime());
     }
 
 }

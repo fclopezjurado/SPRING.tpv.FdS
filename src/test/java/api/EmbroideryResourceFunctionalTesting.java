@@ -27,7 +27,7 @@ public class EmbroideryResourceFunctionalTesting {
         embroideryFilterWrapper.setMaxSquareMillimeters(0);
 
         List<ProductsOutFilterWrapper> productosSalidaMock = Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>(RestService.URL)
-                .path(Uris.EMBROIDERY + Uris.FILTER).clazz(ProductsOutFilterWrapper[].class).body(embroideryFilterWrapper).post().build());
+                .path(Uris.EMBROIDERY + Uris.FILTER+Uris.MOCK).clazz(ProductsOutFilterWrapper[].class).body(embroideryFilterWrapper).post().build());
         assertEquals(1, productosSalidaMock.size());
     }
 }

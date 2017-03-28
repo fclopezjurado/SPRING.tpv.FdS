@@ -2,6 +2,7 @@ package controllers;
 
 import config.PersistenceConfig;
 import config.TestsControllerConfig;
+import config.TestsMailConfig;
 import config.TestsPersistenceConfig;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class, TestsMailConfig.class})
 
 public class StatisticsControllerIT {
 

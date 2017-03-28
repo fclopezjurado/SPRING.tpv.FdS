@@ -1,6 +1,7 @@
 package daos.core;
 
 import config.PersistenceConfig;
+import config.TestsMailConfig;
 import config.TestsPersistenceConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsMailConfig.class})
 public class AlarmDaoIT {
 
     @Autowired

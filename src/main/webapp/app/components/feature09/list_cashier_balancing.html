@@ -27,10 +27,10 @@
                             hay cierres de caja</td>
                     </tr>
                     <tr ng-show="vm.successList && vm.balances.length" ng-repeat="balance in vm.balances">
-                        <td>{{balance.day}}</td>
+                        <td>{{balance.date}}</td>
                         <td>{{balance.change}}</td>
-                        <td>{{balance.totalMoney}}</td>
-                        <td>{{balance.balance}}</td>
+                        <td>{{balance.total}}</td>
+                        <td>{{balance.total - (balance.cash + balance.dataphone + balance.checks) + balance.change}}</td>
                         <td>
                             <button type="button" class="btn btn-info btn-sm">Editar</button>
                             <button type="button" class="btn btn-danger btn-sm">Eliminar</button>

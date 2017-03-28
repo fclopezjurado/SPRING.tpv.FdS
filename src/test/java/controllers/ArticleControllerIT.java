@@ -2,6 +2,7 @@ package controllers;
 
 import config.PersistenceConfig;
 import config.TestsControllerConfig;
+import config.TestsMailConfig;
 import config.TestsPersistenceConfig;
 import entities.core.AlarmType;
 import org.junit.Test;
@@ -9,15 +10,18 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import wrappers.ArticleFilterWrapper;
 import wrappers.ArticleWrapper;
+import wrappers.ProductsOutFilterWrapper;
 import wrappers.ProviderWrapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class, TestsMailConfig.class})
 public class ArticleControllerIT {
 
     @Autowired
@@ -55,5 +59,36 @@ public class ArticleControllerIT {
         List<ArticleWrapper> list = articleController.search(0, AlarmType.WARNING);
         assertEquals(false, list.isEmpty());
     }
-
+ 
+    @Test
+    public void testGetArticlesByFilter() {
+        ArticleFilterWrapper articleFront= new ArticleFilterWrapper ();
+        articleFront.setDescription("");
+        articleFront.setReference("");
+        articleFront.setMaxRetailPrice(new BigDecimal("0"));
+        articleFront.setMinRetailPrice(new BigDecimal("0"));
+        articleFront.setMaxWholesalePrice(new BigDecimal("0"));
+        articleFront.setMinWholesalePrice(new BigDecimal("1"));
+        articleFront.setStock(0);
+        List<ProductsOutFilterWrapper> productosOut=articleController.getArticlesByFilter(articleFront);
+        assertNotNull(productosOut);
+        assertTrue(productosOut.size()>1);
+    }
+    
+    @Test
+    public void testGetArticlesByFilterExtrem() {
+        ArticleFilterWrapper articleFront= new ArticleFilterWrapper ();
+        articleFront.setDescription("");
+        articleFront.setReference("");
+        articleFront.setMaxRetailPrice(new BigDecimal("0"));
+        articleFront.setMinRetailPrice(new BigDecimal("0"));
+        articleFront.setMaxWholesalePrice(new BigDecimal("0"));
+        articleFront.setMinWholesalePrice(new BigDecimal("10000000000000"));
+        articleFront.setStock(0);
+        assertEquals(0,articleController.getArticlesByFilter(articleFront).size());
+        articleFront.setMaxWholesalePrice(new BigDecimal("1"));
+        articleFront.setMinWholesalePrice(new BigDecimal("10"));
+        assertEquals(0,articleController.getArticlesByFilter(articleFront).size());
+    
+    }
 }

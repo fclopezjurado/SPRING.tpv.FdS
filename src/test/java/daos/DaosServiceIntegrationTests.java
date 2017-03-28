@@ -64,6 +64,8 @@ public class DaosServiceIntegrationTests {
     @Autowired
     private FamilyDao familyDao;
     
+    @Autowired
+    private CashierBalanceDao cashierBalanceDao;    
 
     @PostConstruct
     public void populate() {
@@ -77,6 +79,19 @@ public class DaosServiceIntegrationTests {
         this.createInvoices();
         this.createAlarms();
         this.createFamilies();
+        this.createCashierBalances();
+    }
+
+    private void createCashierBalances() {
+        CashierBalance balance;
+        Calendar day = Calendar.getInstance();
+        for(int i = 0; i < 4; i++){
+            balance = new CashierBalance(new BigDecimal(50.0), new BigDecimal(50.0), new BigDecimal(50.0), new BigDecimal(50.0), new BigDecimal(50.0));
+            day.add(Calendar.DATE, -1);
+            balance.setDay(day);
+            cashierBalanceDao.save(balance);
+        }
+        
     }
 
     public void createUsers(int initial, int size, Role role) {

@@ -3,12 +3,14 @@ package controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import api.exceptions.NotFoundTicketReferenceException;
 import daos.users.AuthorizationDao;
 import daos.users.UserDao;
 import entities.users.Authorization;
 import entities.users.Role;
 import entities.users.User;
 import wrappers.UserForEditListWrapper;
+import wrappers.UserForEditWrapper;
 import wrappers.UserWrapper;
 
 @Controller
@@ -57,8 +59,12 @@ public class UserController {
         return false;
     }
 
-    public UserWrapper getByTicketReference(String ticketReference) {
+    public UserWrapper getByTicketReference(String ticketReference) throws NotFoundTicketReferenceException {
         User user = this.userDao.findByTicketReference(ticketReference);
+
+        if (user == null)
+            throw new NotFoundTicketReferenceException();
+
         return new UserWrapper(user.getMobile(), user.getUsername(), user.getPassword());
     }
 
@@ -66,6 +72,28 @@ public class UserController {
         UserForEditListWrapper usersWrapper = new UserForEditListWrapper();
         usersWrapper.wrapUsers(this.userDao.findAll());
         return usersWrapper;
+    }
+
+    public void deleteUser(long mobile) throws Exception {
+        User user = this.userDao.findByMobile(mobile);
+        for (Authorization auth : this.authorizationDao.findAll()) {
+            if (auth.getId() == user.getId()) {
+                this.authorizationDao.delete(auth);
+            }
+        }
+        this.userDao.delete(user);
+    }
+
+    public void updateUser(UserForEditWrapper userWrapper) {
+        User user = this.userDao.findByMobile(userWrapper.getMobile());
+
+        user.setActive(userWrapper.isActive());
+        user.setAddress(userWrapper.getAddress());
+        user.setDni(userWrapper.getDni());
+        user.setEmail(userWrapper.getEmail());
+        user.setUsername(userWrapper.getUsername());
+
+        userDao.save(user);
     }
 
 }

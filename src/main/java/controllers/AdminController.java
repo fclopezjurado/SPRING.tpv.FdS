@@ -65,6 +65,9 @@ public class AdminController {
 
     @Autowired
     private Environment environment;
+    
+    @Autowired
+    private CashierBalanceDao cashierBalanceDao;
 
     @Autowired
     public void setDataService(DataService dataService) {
@@ -86,8 +89,21 @@ public class AdminController {
         this.createInvoices();
         this.createAlarms();
         this.createFamilies();
+        this.createCashierBalances();
     }
     
+    private void createCashierBalances() {
+        CashierBalance balance;
+        Calendar day = Calendar.getInstance();
+        for(int i = 0; i < 4; i++){
+            balance = new CashierBalance(new BigDecimal(50),new BigDecimal(50),new BigDecimal(50),new BigDecimal(50),new BigDecimal(50));
+            day.add(Calendar.DATE, -1);           
+            balance.setDay(day);                       
+            cashierBalanceDao.save(balance);
+        }
+        
+    }
+
     public void createUsers(int initial, int size, Role role) {
         User user;
         for (int i = 0; i < size; i++) {

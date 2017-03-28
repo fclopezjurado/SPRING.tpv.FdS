@@ -56,7 +56,7 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         return this.request(config);
     }
 
-    //Falta corregir
+    // Falta corregir
     this.removeArticle = function (articleId) {
         let config = {
             method: 'DELETE',
@@ -81,7 +81,7 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         return this.request(config);
     }
 
-    //* Create
+    // * Create
     this.addArticle = function (article) {
         let config = {
             method: 'POST',
@@ -130,11 +130,20 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
         return this.request(config);
     }
     
-    //* Update
-    this.updateArticle = function (articleId) {
+    // * Update
+    this.updateArticle = function (article) {
         let config = {
             metod: 'PUT',
-            url: urlBase + "/articles/" + articleId
+            url: urlBase + "/articles",
+            data:{
+     	      'id': article.id,
+  	    	  'reference': article.reference,
+  	    	  'description': article.description,
+  	    	  'retailPrice': article.retailPrice,
+  	    	  'wholesalePrice': article.wholesalePrice,
+  	    	  'stock': article.stock,
+  	    	  'providerId': article.providerId
+            }
         };
         return this.request(config);
     }
@@ -142,19 +151,62 @@ tpv.service('f03Service', ['$http', '$q', function ($http, $q) {
     this.updateEmbroidery = function (embroideryId) {
         let config = {
             method: 'PUT',
-            url: urlBase + "/embroidery/" + embroideryId
+            url: urlBase + "/embroidery" + embroideryId,
+            data:{
+       	      'id': embroidery.id,
+    	      'reference': embroidery.reference,
+    	      'description': embroidery.description,
+    	      'retailPrice': embroidery.retailPrice,
+    	      'stitches': embroidery.stitches,
+    	      'colors': embroidery.colors,
+    	      'squareMillimeters': embroidery.squaremillimeters
+            }
         };
         return this.request(config);
+       
+        
     }
 
     this.updateTextilePrinting = function (textilePrintingId) {
         let config = {
             method: 'PUT',
-            url: urlBase + "/textilePrinting/" + textilePrintingId
+            url: urlBase + "/textilePrinting" + textilePrintingId,
+            data:{
+         	  'id': textileprinting.id,
+      	      'reference': textileprinting.reference,
+      	      'description': textileprinting.description,
+      	      'retailPrice': textileprinting.retailPrice,
+      	      'type': textileprinting.type
+            }
         };
         return this.request(config);
     }
     
+    this.findArticle = function (articleId) {
+        let config = {
+            method: 'GET',
+            url: urlBase + "/articles/" + articleId
+        };
 
+        return this.request(config);
+    }
+    
+    this.findTextilePrinting = function (textilePrintingId) {
+        let config = {
+            method: 'GET',
+            url: urlBase + "/textilePrinting/" + textilePrintingId
+        };
+
+        return this.request(config);
+    }
+    
+    this.findEmbroidery = function (embroideryId) {
+        let config = {
+            method: 'GET',
+            url: urlBase + "/embroidery/" + embroideryId
+        };
+
+        return this.request(config);
+    }
    
 }]);

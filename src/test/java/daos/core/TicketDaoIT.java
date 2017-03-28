@@ -1,24 +1,26 @@
 package daos.core;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.Calendar;
-
+import config.PersistenceConfig;
+import config.TestsMailConfig;
+import config.TestsPersistenceConfig;
+import daos.users.UserDao;
+import entities.core.Invoice;
+import entities.core.Ticket;
+import entities.users.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import config.PersistenceConfig;
-import config.TestsPersistenceConfig;
-import daos.users.UserDao;
-import entities.core.Invoice;
-import entities.core.Ticket;
-import entities.users.User;
+import java.math.BigDecimal;
+import java.util.Calendar;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsMailConfig.class})
 public class TicketDaoIT {
 
     @Autowired
@@ -71,6 +73,19 @@ public class TicketDaoIT {
     public void testFindByInvoiceID() {
         Invoice invoice = invoiceDao.findOne(1);
         assertEquals(invoice.getTicket().getReference(), ticketDao.findByInvoiceID(invoice.getId()).getReference());
+    }
+    
+    @Test
+    public void testGetTotalPriceOfTicketsBetweenDates(){
+        Calendar dateInicio = Calendar.getInstance();
+        int diaBase = dateInicio.get(Calendar.DAY_OF_MONTH);
+        dateInicio.set(Calendar.DAY_OF_MONTH, diaBase - 1);
+        Calendar dateFin = Calendar.getInstance();
+        dateFin.set(Calendar.DAY_OF_MONTH, diaBase + 5);
+        
+        assertNotNull(ticketDao.getTotalPriceOfTicketsBetweenDates(dateInicio, dateFin));
+        
+        
     }
 
 }

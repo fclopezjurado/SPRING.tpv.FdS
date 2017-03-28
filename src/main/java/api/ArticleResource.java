@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.exceptions.MalformedFieldxception;
 import controllers.ArticleController;
 import entities.core.AlarmType;
 import wrappers.ArticleFilterWrapper;
@@ -22,6 +23,7 @@ import wrappers.ProductsOutFilterWrapper;
 
 public class ArticleResource {
 
+    
     private ArticleController articleController;
 
     @Autowired
@@ -39,7 +41,7 @@ public class ArticleResource {
         return articleController.search(provider, type);
     }
 
-    @RequestMapping(value = Uris.FILTER, method = RequestMethod.POST)
+    @RequestMapping(value = Uris.FILTER+Uris.MOCK, method = RequestMethod.POST)
     public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody ArticleFilterWrapper article) {
         List<ProductsOutFilterWrapper> productosSalidaMock = new ArrayList<ProductsOutFilterWrapper>();
         ProductsOutFilterWrapper productoMock = new ProductsOutFilterWrapper();
@@ -50,8 +52,9 @@ public class ArticleResource {
         return productosSalidaMock;
     }
 
-    @RequestMapping(value = Uris.FILTER+"SinMock", method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody ArticleFilterWrapper article) {
+    @RequestMapping(value = Uris.FILTER, method = RequestMethod.POST)
+    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody ArticleFilterWrapper article) throws MalformedFieldxception {
+        this.validarCamposApi(article);
         List<ProductsOutFilterWrapper> productosSalida = this.articleController.getArticlesByFilter(article);
         return productosSalida;
     }
@@ -62,14 +65,38 @@ public class ArticleResource {
         this.articleController.removeArticle(id);
     }
 
-    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
-    public void updateArticle(@RequestBody ArticleWrapper articleWrapper) {
-        this.articleController.updateArticle(articleWrapper);
+    @RequestMapping(method = RequestMethod.PUT)
+    public ArticleWrapper updateArticle(@RequestBody ArticleWrapper articleWrapper) {
+       this.articleController.updateArticle(articleWrapper);
+       return articleWrapper;
     }
     
     @RequestMapping(method = RequestMethod.POST)
     public void addArticle(@RequestBody ArticleWrapper article) {
         this.articleController.add(article);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
+    public ArticleWrapper getArticle(@PathVariable(value = "id") long id) {
+        return this.articleController.getArticle(id);
+    }
+    
+    private void validarCamposApi(ArticleFilterWrapper article) throws MalformedFieldxception {
+        if (article == null)
+            throw new MalformedFieldxception();
+        if (article.getDescription() == null)
+            throw new MalformedFieldxception();
+        if (article.getMaxRetailPrice() == null)
+            throw new MalformedFieldxception();
+        if (article.getMinRetailPrice() == null)
+            throw new MalformedFieldxception();
+        if (article.getReference() == null)
+            throw new MalformedFieldxception();
+        if (article.getMaxWholesalePrice()==null)
+            throw new MalformedFieldxception();
+        if (article.getMinWholesalePrice()==null)
+            throw new MalformedFieldxception();
+        
     }
 
 }
