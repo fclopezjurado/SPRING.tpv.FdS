@@ -58,21 +58,7 @@ public class ArticleResourceFunctionalTesting {
         assertEquals(true, articles.get(0).getProviderID() == providerWrapper.getId());
     }
 
-    @Test
-    public void testGetArticleByFilter() {
-        ArticleFilterWrapper articleFilterWrapper = new ArticleFilterWrapper();
-        articleFilterWrapper.setDescription("");
-        articleFilterWrapper.setReference("");
-        articleFilterWrapper.setMinRetailPrice(new BigDecimal("0"));
-        articleFilterWrapper.setMaxRetailPrice(new BigDecimal("0"));
-        articleFilterWrapper.setStock(0);
-        articleFilterWrapper.setMinWholesalePrice(new BigDecimal("0"));
-        articleFilterWrapper.setMaxWholesalePrice(new BigDecimal("0"));
-        List<ProductsOutFilterWrapper> productosSalida = Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
-                (RestService.URL).path(Uris.ARTICLES + Uris.FILTER).clazz(ProductsOutFilterWrapper[].class).body(articleFilterWrapper)
-                .post().build());
-        assertTrue(productosSalida.size()>0);
-    }
+   
 
     @Test
     public void testGetArticleByFilterMock() {
