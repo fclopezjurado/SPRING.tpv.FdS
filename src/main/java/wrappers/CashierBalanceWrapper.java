@@ -11,15 +11,15 @@ public class CashierBalanceWrapper {
 
     private int id;
 
-    private BigDecimal change;
+    private double change;
 
-    private BigDecimal total;
+    private double total;
 
-    private BigDecimal checks;
+    private double checks;
 
-    private BigDecimal dataphone;
+    private double dataphone;
 
-    private BigDecimal cash;
+    private double cash;
 
     private String date;
 
@@ -30,29 +30,29 @@ public class CashierBalanceWrapper {
     public CashierBalanceWrapper(int id, double change, double total, double checks, double dataphone, String date) {
         super();
         this.id = id;
-        this.change = new BigDecimal(change);
-        this.total = new BigDecimal(total);
-        this.checks = new BigDecimal(checks);
-        this.dataphone = new BigDecimal(dataphone);
+        this.change = change;
+        this.total = total;
+        this.checks = checks;
+        this.dataphone = dataphone;
         this.date = date;
     }
 
     public CashierBalanceWrapper(int id, BigDecimal change, BigDecimal total, BigDecimal checks, BigDecimal dataphone, Calendar date) {
         SimpleDateFormat dateFormater = new SimpleDateFormat(dateFormat);
         this.id = id;
-        this.change = change;
-        this.total = total;
-        this.checks = checks;
-        this.dataphone = dataphone;
+        this.change = change.doubleValue();
+        this.total = total.doubleValue();
+        this.checks = checks.doubleValue();
+        this.dataphone = dataphone.doubleValue();
         this.date = dateFormater.format(date.getTime());
     }
 
     public CashierBalanceWrapper(double change, double total, double checks, double dataphone, String date) {
         super();
-        this.change = new BigDecimal(change);
-        this.total = new BigDecimal(total);
-        this.checks = new BigDecimal(checks);
-        this.dataphone = new BigDecimal(dataphone);
+        this.change = change;
+        this.total = total;
+        this.checks = checks;
+        this.dataphone = dataphone;
         this.date = date;
     }
 
@@ -64,35 +64,35 @@ public class CashierBalanceWrapper {
         this.id = id;
     }
 
-    public BigDecimal getChange() {
+    public double getChange() {
         return change;
     }
 
-    public void setChange(BigDecimal change) {
+    public void setChange(double change) {
         this.change = change;
     }
 
-    public BigDecimal getTotal() {
+    public double getTotal() {
         return total;
     }
 
-    public void setTotal(BigDecimal total) {
+    public void setTotal(double total) {
         this.total = total;
     }
 
-    public BigDecimal getChecks() {
+    public double getChecks() {
         return checks;
     }
 
-    public void setChecks(BigDecimal checks) {
+    public void setChecks(double checks) {
         this.checks = checks;
     }
 
-    public BigDecimal getDataphone() {
+    public double getDataphone() {
         return dataphone;
     }
 
-    public void setDataphone(BigDecimal dataphone) {
+    public void setDataphone(double dataphone) {
         this.dataphone = dataphone;
     }
 
@@ -138,11 +138,11 @@ public class CashierBalanceWrapper {
         return true;
     }
 
-    public BigDecimal getCash() {
+    public double getCash() {
         return cash;
     }
 
-    public void setCash(BigDecimal cash) {
+    public void setCash(double cash) {
         this.cash = cash;
     }
 
@@ -151,11 +151,6 @@ public class CashierBalanceWrapper {
         Calendar cal = Calendar.getInstance();
         cal.setTime(dateFormater.parse(this.getDate()));
         return cal;
-    }
-
-    public void setDay(Calendar day) {
-        SimpleDateFormat dateFormater = new SimpleDateFormat(dateFormat);
-        this.date = dateFormater.format(day.getTime());
     }
 
 }
