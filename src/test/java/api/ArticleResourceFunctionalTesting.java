@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.web.client.HttpClientErrorException;
+
 
 import entities.core.AlarmType;
 import wrappers.ArticleFilterWrapper;
@@ -18,11 +20,13 @@ import wrappers.ProductsOutFilterWrapper;
 import wrappers.ProviderWrapper;
 
 public class ArticleResourceFunctionalTesting {
-
+    
+    private String token;
     @Before
     public void seedDataBase() {
         new RestService().deleteAll();
         new RestService().seedDatabase();
+        token = new RestService().loginAdmin();
     }
 
     @Test
@@ -60,20 +64,54 @@ public class ArticleResourceFunctionalTesting {
 
    
 
+    
     @Test
-    public void testGetArticleByFilterMock() {
+    public void testGetArticleByFilter() {
         ArticleFilterWrapper articleFilterWrapper = new ArticleFilterWrapper();
         articleFilterWrapper.setDescription("");
         articleFilterWrapper.setReference("");
         articleFilterWrapper.setMinRetailPrice(new BigDecimal("0"));
         articleFilterWrapper.setMaxRetailPrice(new BigDecimal("0"));
-        articleFilterWrapper.setStock(1);
+        articleFilterWrapper.setStock(0);
         articleFilterWrapper.setMinWholesalePrice(new BigDecimal("0"));
         articleFilterWrapper.setMaxWholesalePrice(new BigDecimal("0"));
-        List<ProductsOutFilterWrapper> productosSalidaMock = Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
-                (RestService.URL).path(Uris.ARTICLES + Uris.FILTER+Uris.MOCK).clazz(ProductsOutFilterWrapper[].class).body(articleFilterWrapper)
+        List<ProductsOutFilterWrapper> productosSalida = Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
+                (RestService.URL).path(Uris.ARTICLES + Uris.FILTER).clazz(ProductsOutFilterWrapper[].class).body(articleFilterWrapper).basicAuth(token, "")
                 .post().build());
-        assertEquals(1, productosSalidaMock.size());
+        assertTrue(productosSalida.size()>0);
+    }
+    
+    
+    @Test
+    public void testGetArticleByFilterExtrem() {
+        ArticleFilterWrapper articleFilterWrapper = new ArticleFilterWrapper();
+        articleFilterWrapper.setDescription("");
+        articleFilterWrapper.setReference("");
+        articleFilterWrapper.setMinRetailPrice(new BigDecimal("0"));
+        articleFilterWrapper.setMaxRetailPrice(new BigDecimal("0"));
+        articleFilterWrapper.setStock(0);
+        articleFilterWrapper.setMinWholesalePrice(new BigDecimal("10000000000000"));
+        articleFilterWrapper.setMaxWholesalePrice(new BigDecimal("0"));
+        List<ProductsOutFilterWrapper> productosSalida = Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
+                (RestService.URL).path(Uris.ARTICLES + Uris.FILTER).clazz(ProductsOutFilterWrapper[].class).body(articleFilterWrapper).basicAuth(token, "")
+                .post().build());
+        assertEquals(0,productosSalida.size());
+        
+        articleFilterWrapper.setMinWholesalePrice(new BigDecimal("10"));
+        articleFilterWrapper.setMaxWholesalePrice(new BigDecimal("1"));
+        List<ProductsOutFilterWrapper> productosSalida2 = Arrays.asList(new RestBuilder<ProductsOutFilterWrapper[]>
+                (RestService.URL).path(Uris.ARTICLES + Uris.FILTER).clazz(ProductsOutFilterWrapper[].class).body(articleFilterWrapper).basicAuth(token, "")
+                .post().build());
+        assertEquals(0,productosSalida2.size());
+    }
+    
+    @Test(expected=HttpClientErrorException.class)
+    public void testGetArticleByFilterException() {
+        ArticleFilterWrapper articleFilterWrapper = new ArticleFilterWrapper();
+        articleFilterWrapper.setDescription(null);
+        new RestBuilder<ProductsOutFilterWrapper[]> (RestService.URL).path(Uris.ARTICLES + Uris.FILTER).body(articleFilterWrapper).basicAuth(token, "") 
+        .post().build();
+
     }
     
     @After

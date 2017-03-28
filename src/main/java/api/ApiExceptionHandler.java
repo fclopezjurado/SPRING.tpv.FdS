@@ -29,7 +29,7 @@ public class ApiExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MalformedHeaderException.class, InvalidUserFieldException.class, InvalidNewVoucherException.class,
-            InvalidVoucherReferenceException.class})
+            InvalidVoucherReferenceException.class, MalformedFieldxception.class})
     @ResponseBody
     public ErrorMessage badRequest(ApiException exception) {
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);
