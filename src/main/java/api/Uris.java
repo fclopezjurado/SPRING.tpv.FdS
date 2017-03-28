@@ -72,4 +72,6 @@ public class Uris {
     
     public static final String MOCK = "/mock";
     
+    public static final String POPULATE = "/populate";
+    
 }

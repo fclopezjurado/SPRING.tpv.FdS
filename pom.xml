@@ -132,6 +132,12 @@
 			<version>${spring.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<!--Yaml parser -->
+		<dependency>
+		    <groupId>com.esotericsoftware.yamlbeans</groupId>
+		    <artifactId>yamlbeans</artifactId>
+		    <version>1.11</version>
+		</dependency>
 		<!-- Web. Api Rest -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

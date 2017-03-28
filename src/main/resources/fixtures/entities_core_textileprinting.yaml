@@ -1,0 +1,31 @@
+textilesprinting:
+  - &text001 !entities.core.TextilePrinting
+    id: 9
+    reference: cafe
+    retailPrice: 20.22
+    description: Café
+  - &text002 !entities.core.TextilePrinting
+    id: 10
+    reference: cola
+    retailPrice: 21.23
+    description: Cocacola
+  - !entities.core.TextilePrinting
+    id: 11
+    reference: pan
+    retailPrice: 0.45
+    description: Pan
+  - !entities.core.TextilePrinting
+    id: 12
+    reference: pizza
+    retailPrice: 21.23
+    description: Piza
+  - !entities.core.TextilePrinting
+    id: 13
+    reference: leche
+    retailPrice: 1.3
+    description: Leche
+  - !entities.core.TextilePrinting
+    id: 14
+    reference: pollo
+    retailPrice: 4
+    description: Pollo

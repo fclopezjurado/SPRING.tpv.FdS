@@ -1,0 +1,52 @@
+tickets:
+  - &tick001 !entities.core.Ticket
+    id: 1
+    created: 16-05-2016
+    reference: 1001
+    ticketState: STARTED
+    shoppingList:  
+      - *shop001
+      - *shop002
+    user: *user001
+  - &tick002 !entities.core.Ticket
+    id: 2
+    created: 10-01-2017
+    reference: 1002
+    ticketState: STARTED
+    shoppingList:  
+      - *shop001
+      - *shop002
+      - *shop004
+    user: *user002
+  - &tick003 !entities.core.Ticket
+    id: 3
+    created: 14-02-2017
+    reference: 1003
+    ticketState: STARTED
+    shoppingList:  
+      - *shop003
+    user: *user002
+  - &tick004 !entities.core.Ticket
+    id: 4
+    created: 14-02-2017
+    reference: 1004
+    ticketState: STARTED
+    shoppingList:  
+      - *shop003
+    user: *user002
+  - &tick005 !entities.core.Ticket
+    id: 5
+    created: 14-02-2017
+    reference: 1005
+    ticketState: STARTED
+    shoppingList:  
+      - *shop003
+    user: *user002
+  - &tick006 !entities.core.Ticket
+    id: 6
+    created: 14-02-2017
+    reference: 1006
+    ticketState: STARTED
+    shoppingList:  
+      - *shop003
+    user: *user002

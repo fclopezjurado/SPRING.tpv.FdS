@@ -1,0 +1,17 @@
+authorizations:
+  - !entities.users.Authorization
+    id: 001
+    user: *user001
+    role: CUSTOMER
+  - !entities.users.Authorization
+    id: 002
+    user: *user002
+    role: ADMIN
+  - !entities.users.Authorization
+    id: 003
+    user: *user003
+    role: ANONYMOUS
+  - !entities.users.Authorization
+    id: 004
+    user: *user004
+    role: AUTHENTICATED

@@ -1,0 +1,33 @@
+embroiderys:
+  - !entities.core.Embroidery
+    id: 5
+    stitches: 300
+    colors: 270
+    squareMillimeters: 4
+    reference: cola
+    retailPrice: 21.23
+    description: Cocacola
+  - !entities.core.Embroidery
+    id: 6
+    stitches: 300
+    colors: 270
+    squareMillimeters: 45
+    reference: pan
+    retailPrice: 0.45
+    description: Pan
+  - !entities.core.Embroidery
+    id: 7
+    stitches: 300
+    colors: 270
+    squareMillimeters: 23
+    reference: pizza
+    retailPrice: 21.23
+    description: Piza
+  - !entities.core.Embroidery
+    id: 8
+    stitches: 300
+    colors: 270
+    squareMillimeters: 1
+    reference: f_naranja
+    retailPrice: 0.9
+    description: Fanta de naranja
