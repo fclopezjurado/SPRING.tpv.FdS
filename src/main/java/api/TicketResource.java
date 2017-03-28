@@ -1,5 +1,10 @@
 package api;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +20,7 @@ import api.exceptions.NotFoundUserMobileException;
 import controllers.InvoiceController;
 import controllers.TicketController;
 import controllers.UserController;
+import wrappers.CashierBalanceWrapper;
 import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
 
@@ -99,5 +105,16 @@ public class TicketResource {
         }
 
         return this.ticketController.getByInvoiceID(invoiceID);
+    }
+    
+    @RequestMapping(value = Uris.TICKETS + Uris.CASHIER_BALANCE, method = RequestMethod.GET)
+    public BigDecimal getTotalSoldByDay(@RequestParam(value = "day") String date) throws ParseException{
+        SimpleDateFormat formatter = new SimpleDateFormat(CashierBalanceWrapper.dateFormat);
+        Calendar day = Calendar.getInstance();
+        day.setTime(formatter.parse(date));
+        
+        System.out.println(day.getTime());
+        
+        return ticketController.getTotalSoldByDay(day);
     }
 }

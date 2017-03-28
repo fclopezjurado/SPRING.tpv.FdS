@@ -13,9 +13,9 @@ public class ApiExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({NotFoundUserIdException.class, NotFoundReferenceVoucherException.class, NotFoundTicketReferenceException.class,
-            NotFoundUserMobileException.class, NotFoundUserEmailException.class, NotFoundInvoiceIdException.class})
+            NotFoundUserMobileException.class, NotFoundUserEmailException.class, NotFoundInvoiceIdException.class, NotFoundProviderIdException.class })
     @ResponseBody
-    public ErrorMessage notFoundRequest(ApiException exception) {
+    public ErrorMessage notFoundRequest(ApiException exception) { 
         ErrorMessage apiErrorMessage = new ErrorMessage(exception);
         return apiErrorMessage;
     }
