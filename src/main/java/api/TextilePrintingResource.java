@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.exceptions.MalformedFieldxception;
 import controllers.TextilePrintingController;
 import wrappers.ProductsOutFilterWrapper;
 import wrappers.TextilePrintingWrapper;
@@ -30,9 +31,9 @@ public class TextilePrintingResource {
     public List<TextilePrintingWrapper> getAll() {
         return textilePrintingController.getAll();
     }
-    
+     
 
-    @RequestMapping(value = Uris.FILTER,method = RequestMethod.POST)
+    @RequestMapping(value = Uris.FILTER+Uris.MOCK,method = RequestMethod.POST)
     public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody TextilePritingFilterWrapper textile){
         List<ProductsOutFilterWrapper> productosSalidaMock= new ArrayList<ProductsOutFilterWrapper> ();
         ProductsOutFilterWrapper productoMock= new ProductsOutFilterWrapper();
@@ -42,6 +43,17 @@ public class TextilePrintingResource {
         productosSalidaMock.add(productoMock);
         return productosSalidaMock;
     }
+
+
+    @RequestMapping(value = Uris.FILTER,method = RequestMethod.POST)
+    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody TextilePritingFilterWrapper textile) throws MalformedFieldxception{
+        this.validarCamposApi(textile);
+        List<ProductsOutFilterWrapper> productosSalida = this.textilePrintingController.getTextilePrintingByFilter(textile);
+        return productosSalida;
+    }
+    
+
+
 
     @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
     public void removeTextilePrinting(@PathVariable(value = "id")  long id) {
@@ -60,9 +72,27 @@ public class TextilePrintingResource {
         this.textilePrintingController.updateTextilePrinting(textilePrintingWrapper);
     }
     
+
+    private void validarCamposApi(TextilePritingFilterWrapper textile) throws MalformedFieldxception {
+        if (textile == null)
+            throw new MalformedFieldxception();
+        if (textile.getDescription() == null)
+            throw new MalformedFieldxception();
+        if (textile.getMaxRetailPrice() == null)
+            throw new MalformedFieldxception();
+        if (textile.getMinRetailPrice() == null)
+            throw new MalformedFieldxception();
+        if (textile.getReference() == null)
+            throw new MalformedFieldxception();
+        if (textile.getType() == null)
+            throw new MalformedFieldxception();
+
+    }
+    
     @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
     public TextilePrintingWrapper getTextilePrinting(@PathVariable(value = "id") long id) {
         return this.textilePrintingController.getTextilePrinting(id);
+
     }
 
 }

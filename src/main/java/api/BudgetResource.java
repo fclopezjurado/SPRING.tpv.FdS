@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import controllers.BudgetController;
 import wrappers.BudgetDetailWrapper;
 import wrappers.BudgetListWrapper;
+import wrappers.BudgetProductWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION + Uris.BUDGETS)
@@ -43,9 +44,9 @@ public class BudgetResource {
         budgetController.deleteBudget(reference);
     }
     
-    @RequestMapping(method = RequestMethod.PUT)
-    public void updateBudget(BudgetDetailWrapper budgetWrapper) {
-        budgetController.updateBudget(budgetWrapper);
+    @RequestMapping(value = Uris.PRODUCTS, method = RequestMethod.POST)
+    public void addProductToBudget(@RequestBody BudgetProductWrapper wrapper) {
+        budgetController.addProductToBudget(wrapper.getReference(), wrapper.getProductId(), wrapper.getAmount());
     }
 
 }
