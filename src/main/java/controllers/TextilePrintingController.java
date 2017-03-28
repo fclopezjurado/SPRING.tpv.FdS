@@ -4,6 +4,7 @@ import daos.core.TextilePrintingDao;
 import entities.core.TextilePrinting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import wrappers.TextilePrintingWrapper;
 
 import java.util.ArrayList;
@@ -58,6 +59,12 @@ public class TextilePrintingController {
 
             this.textilePrintingsDao.save(textilePrinting);
         }
+    }
+      public TextilePrintingWrapper getTextilePrinting(long id) {
+          TextilePrinting textileprinting = textilePrintingsDao.findById(id);
+          TextilePrintingWrapper wrapper = new TextilePrintingWrapper(textileprinting);
+            return wrapper;
+                   
     }
 
 }

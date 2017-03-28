@@ -1,6 +1,6 @@
 package wrappers;
 
-import java.math.BigDecimal;
+import entities.core.Product;
 
 public class ProductsFilterByFamilyWrapper extends ProductWrapper {
 
@@ -8,7 +8,7 @@ public class ProductsFilterByFamilyWrapper extends ProductWrapper {
         // TODO Auto-generated constructor stub
     }
 
-    public ProductsFilterByFamilyWrapper(long id, String reference, String description, BigDecimal retailPrice) {
-        super(id, reference, description, retailPrice);
+    public ProductsFilterByFamilyWrapper(Product product) {
+        super(product.getId(), product.getReference(), product.getDescription(), product.getRetailPrice());
     }
 }

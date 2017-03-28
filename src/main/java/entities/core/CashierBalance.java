@@ -1,18 +1,25 @@
 package entities.core;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class CashierBalance {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
+    @Temporal(TemporalType.DATE)
     private Calendar day;
 
     private BigDecimal balance = new BigDecimal(0);
@@ -38,6 +45,17 @@ public class CashierBalance {
         this.cash = cash;
         this.checks = checks;
         this.dataphone = dataphone;
+        this.day = Calendar.getInstance();
+    }
+
+    public CashierBalance(double change, double total, double cash, double checks, double dataphone) {
+        this.change = new BigDecimal(change, MathContext.DECIMAL64);
+        this.totalTiketsMoney = new BigDecimal(total, MathContext.DECIMAL64);
+        this.cash = new BigDecimal(cash, MathContext.DECIMAL64);
+        this.checks = new BigDecimal(checks, MathContext.DECIMAL64);
+        this.dataphone = new BigDecimal(dataphone, MathContext.DECIMAL64);
+        this.balance = this.totalTiketsMoney.subtract(this.change.add(this.cash.add(this.checks.add(this.dataphone))));
+        this.day = Calendar.getInstance();
     }
 
     public int getId() {

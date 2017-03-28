@@ -1,15 +1,18 @@
 package api;
+import java.util.List;
 
-import api.exceptions.AlreadyExistProviderFieldException;
-import api.exceptions.MalformedHeaderException;
-import controllers.ProviderController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import api.exceptions.AlreadyExistProviderFieldException;
+import api.exceptions.MalformedHeaderException;
+import api.exceptions.ProviderWithArticlesException;
+import controllers.ProviderController;
 import wrappers.ProviderWrapper;
-import wrappers.ProvidersWrapper;
 
 @RestController
 @RequestMapping(Uris.VERSION)
@@ -23,16 +26,18 @@ public class ProviderResource {
     }
 
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.POST)
-    public void providerRegistration(@RequestBody ProviderWrapper providerWrapper)
+    public ProviderWrapper providerRegistration(@RequestBody ProviderWrapper providerWrapper)
             throws MalformedHeaderException, AlreadyExistProviderFieldException {
         validateFields(providerWrapper);
-        if (!this.providerController.registration(providerWrapper)) {
+        ProviderWrapper wrapper = this.providerController.registration(providerWrapper);
+        if (wrapper==null) {
             throw new AlreadyExistProviderFieldException();
         }
+        return wrapper;
     }
 
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.GET)
-    public ProvidersWrapper getAll() throws Exception {
+    public List<ProviderWrapper> getAll() throws Exception {
         return providerController.getAll();
     }
 
@@ -42,8 +47,8 @@ public class ProviderResource {
         return wrapper;
     }
 
-    @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.DELETE)
-    public void providerDelete(String id) throws Exception {
+    @RequestMapping(value = Uris.PROVIDERS+Uris.ID, method = RequestMethod.DELETE)
+    public void providerDelete(@PathVariable(value = "id") String id) throws ProviderWithArticlesException {
         providerController.delete(id);
     }
 

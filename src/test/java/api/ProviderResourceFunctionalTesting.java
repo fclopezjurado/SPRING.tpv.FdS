@@ -1,39 +1,33 @@
 package api;
 
-import org.junit.Before;
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Test;
+import org.springframework.web.client.HttpClientErrorException;
+
+import api.exceptions.ProviderWithArticlesException;
+import entities.core.Provider;
 import wrappers.ProviderWrapper;
-import wrappers.ProvidersWrapper;
 
 public class ProviderResourceFunctionalTesting {
     
-    public static String id = "1";
+    public static int id = 1;
     
-    @Before
-    public void setUp() {
-        ProvidersWrapper providers = new RestBuilder<ProvidersWrapper>(RestService.URL).path(Uris.PROVIDERS).get()
-                .clazz(ProvidersWrapper.class).build();
-        
-        if(providers!=null  && providers.getProvidersWrapper()!=null
-                && providers.getProvidersWrapper().size() >0 && providers.getProvidersWrapper().get(0)!=null){
-            id = String.valueOf(providers.getProvidersWrapper().get(0).getId());
-        }
-
-    }
     
     @Test
     public void testCreateProvider() {
         ProviderWrapper providerWrapper = new ProviderWrapper();
         providerWrapper.setCompany("Compañia");
-        providerWrapper.setMobile(666666679L);
+        providerWrapper.setMobile(666666672L);
         new RestBuilder<Object>(RestService.URL).path(Uris.PROVIDERS).body(providerWrapper).post().build();
     }
 
     @Test
     public void testGetAll() {
-        ProvidersWrapper providers = new RestBuilder<ProvidersWrapper>(RestService.URL).path(Uris.PROVIDERS).get()
-                .clazz(ProvidersWrapper.class).build();
-        for (ProviderWrapper providerWrapper : providers.getProvidersWrapper()) {
+        List<ProviderWrapper> providers = Arrays.asList(new RestBuilder<ProviderWrapper[]>(RestService.URL).path(Uris.PROVIDERS).get()
+                .clazz(ProviderWrapper[].class).build());
+        for (ProviderWrapper providerWrapper : providers) {
             System.out.println(providerWrapper.toString());
         }
     }
@@ -45,7 +39,17 @@ public class ProviderResourceFunctionalTesting {
 
     @Test
     public void testDeleteProviders() {
-        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).param("id", id).delete().build();
+    	Provider provider = new Provider("company", "address", 173656738675748927L, 666, "paymentConditions", "note");
+    	ProviderWrapper providerWrapper = new ProviderWrapper(provider);
+    	Provider p = new RestBuilder<Provider>(RestService.URL).path(Uris.PROVIDERS).body(providerWrapper).clazz(Provider.class).post().build();
+    	id = p.getId();
+    	
+        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).path("/"+ id).delete().build();
+    }
+    
+    @Test(expected = HttpClientErrorException.class)
+    public void testDeleteProvidersException() {
+        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).path("/"+ 1).delete().build();
     }
 
 }

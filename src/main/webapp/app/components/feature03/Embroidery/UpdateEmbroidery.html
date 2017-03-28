@@ -5,13 +5,14 @@
     <br />
     <div class="table-responsive">
         <fieldset>
-            <legend align="right">Create Embroidery</legend>
-            <form class="form-horizontal" ng-submit="vm.addEmbroidery()" >
-                <div class="form-group">
+            <legend align="right">Update Embroidery</legend>
+            <form class="form-horizontal" ng-submit="vm.updateEmbroidery()" >
+                <div class="form-group" ng-init="vm.getEmbroidery()">
                     <label class="control-label label-id col-md-1">Id</label>
                     <div class="col-md-4">
-                        <input type="number" class="form-control" 
-                            ng-model='vm.embroidery.id' required>
+                        <select class="form-control" name='id'  ng-change="vm.findEmbroidery(vm.embroidery.id)" ng-model="vm.embroidery.id" ng-options="p.id as p.description for p in vm.embroideries" required>
+                            <option value="">Seleccionar</option>
+                        </select>
                     </div>
                 </div>
 

@@ -82,6 +82,7 @@
     <script src="app/components/feature06/searchTicketController.js"></script>
     <script src="app/components/feature06/editTicketController.js"></script>
     <script src="app/components/feature06/createTicketController.js"></script>
+    <script src="app/components/feature06/feature06Service.js"></script>
     <!-- Autor: Jose Maria Moreno-->
     <script src="app/components/feature14/totalSalesController.js"></script>
     <script src="app/components/feature14/bestSellersController.js"></script>
@@ -98,6 +99,10 @@
     <script src="app/components/feature11/productsServiceController.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+     <!-- Autor: Dan Huang, TieLin Jiang-->  
+    <script src="app/components/feature05/productsFamilyController.js"></script>
+    <script src="app/components/feature05/f05Service.js"></script>
     
 </head>
 <body>
@@ -116,33 +121,35 @@
     <div id="collapse1" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
             <li><a href="#/">Home</a></li>
-            
-           <!-- Menus -->
-                        
-           <!-- Autor: Jesús Bernal -->                       
-           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F00<b class="caret"></b></a>
+            <!-- Menus -->
+
+            <!-- Autor: Jesús Bernal -->
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F00<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature00/version">Version</a></li>
+                    <li><a href="#/feature00/login">Login</a></li>
+                    <li><a href="#/feature00/registration">Registration</a></li>
+                    <li><a href="#/feature00/delete-all">Delete All</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F02<b class="caret"></b></a>
              <ul class="dropdown-menu">
-               <li><a href="#/feature00/version">Version</a></li>
-               <li><a href="#/feature00/login">Login</a></li>
-               <li><a href="#/feature00/registration">Registration</a></li>
-               <li><a href="#/feature00/delete-all">Delete All</a></li>
+               <li><a href="#/feature02/registration">Provider Registration</a></li>
+               <li><a href="#/feature02/list">Provider List</a></li>
+               <li><a href="#/feature02/update">Provider Update</a></li>
              </ul>
            </li>
-           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F02<b class="caret"></b></a>
-               <ul class="dropdown-menu">
-                   <li><a href="#/feature02/registration">Provider Registration</a></li>
-               </ul>
-           </li>
+           
            <li><a href="#/feature20/users">F20</a></li>
            <li><a href="#/feature18/budgets">F18</a></li>
            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F07<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#/feature07/create">Crear</a></li>
-                    <li><a href="#/feature07/search">Consultar</a></li>
-                    <li><a href="#/feature07/consume">Consumir</a></li>
-                    <li><a href="#/feature07/validTotal">Importe en vales</a></li>
-                </ul>
-            </li>         
+             <ul class="dropdown-menu">
+               <li><a href="#/feature07/create">Crear</a></li>
+               <li><a href="#/feature07/search">Consultar</a></li>
+               <li><a href="#/feature07/consume">Consumir</a></li>
+               <li><a href="#/feature07/validTotal">Importe en vales</a></li>
+             </ul>
+           </li>           
            <!-- Feature 10  --> 
            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F10<b class="caret"></b></a>
              <ul class="dropdown-menu">
@@ -207,6 +214,14 @@
                     <li><a href="#/feature11/ticket">Ver estado pedido</a></li>
                 </ul>
             </li>
+            
+            <!-- Feature 05  --> 
+           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F05<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature05/productsFamily">Products Family</a></li>
+                </ul>
+           </li>
+            
         </ul>
     </div>
 </nav>

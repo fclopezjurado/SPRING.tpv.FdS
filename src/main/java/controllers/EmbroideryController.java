@@ -1,13 +1,16 @@
 package controllers;
 
-import daos.core.EmbroideryDao;
-import entities.core.Embroidery;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import wrappers.EmbroideryWrapper;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import daos.core.EmbroideryDao;
+import entities.core.Embroidery;
+import wrappers.EmbroideryFilterWrapper;
+import wrappers.EmbroideryWrapper;
+import wrappers.ProductsOutFilterWrapper;
 
 @Controller
 public class EmbroideryController {
@@ -55,14 +58,34 @@ public class EmbroideryController {
             embroidery.setDescription(embroideryWrapper.getDescription());
             embroidery.setReference(embroideryWrapper.getReference());
             embroidery.setRetailPrice(embroideryWrapper.getRetailPrice());
-            
-            /*TODO */
-            /*embroidery.setStitches(embroideryWrapper.getStitches());
-            embroidery.setSquareMillimeters(embroideryWrapper.getSquareMillimeters());
-            embroidery.setColors(embroideryWrapper.getColors());*/
+
+            /* TODO */
+            /*
+             * embroidery.setStitches(embroideryWrapper.getStitches());
+             * embroidery.setSquareMillimeters(embroideryWrapper.getSquareMillimeters());
+             * embroidery.setColors(embroideryWrapper.getColors());
+             */
 
             this.embroideryDao.save(embroidery);
         }
     }
+   
 
+
+    public List<ProductsOutFilterWrapper> getEmroiderysByFilter(EmbroideryFilterWrapper embroideryFilter) {
+        List<Embroidery> embroideryDeBusqueda = this.embroideryDao.findEmbroideryByFilter(embroideryFilter);
+        List<ProductsOutFilterWrapper> embroiderysSalida = new ArrayList<ProductsOutFilterWrapper>();
+        for (Embroidery embroidery : embroideryDeBusqueda) {
+            ProductsOutFilterWrapper productoOutWrapper = new ProductsOutFilterWrapper(embroidery);
+            embroiderysSalida.add(productoOutWrapper);
+        }
+        return embroiderysSalida;
+    }
+
+   public EmbroideryWrapper getEmbroidery(long id) {
+        Embroidery embroidery = embroideryDao.findById(id);
+        EmbroideryWrapper wrapper = new EmbroideryWrapper(embroidery);
+        return wrapper;
+        
+    }
 }
