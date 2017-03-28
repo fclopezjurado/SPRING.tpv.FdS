@@ -58,7 +58,7 @@ tpv
 									method : 'POST',
 									url : urlBase + "/tickets",
 									data : {
-										'shoppings' : shoppings
+										'shoppingList' : shoppings
 									}
 								};
 								return this.request(config);
