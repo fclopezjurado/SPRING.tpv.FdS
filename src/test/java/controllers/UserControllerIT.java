@@ -1,6 +1,7 @@
 package controllers;
 
 import api.exceptions.NotFoundTicketReferenceException;
+import api.exceptions.NotFoundUserMobileException;
 import config.PersistenceConfig;
 import config.TestsControllerConfig;
 import config.TestsMailConfig;
@@ -31,6 +32,8 @@ public class UserControllerIT {
     private static final String USER_EMAIL = "test@test.com";
 
     private static final String INVALID_TICKET_REFERENCE = "wg_yXs1LJmSvNsld-aXBg27P1jA";
+
+    private static final long INVALID_USER_MOBILE = 666666667;
 
     @Autowired
     private UserController userController;
@@ -100,6 +103,26 @@ public class UserControllerIT {
     @Test
     public void testFindAll() {
         assertFalse(this.userController.findAll().isEmpty());
+    }
+
+    @Test
+    public void testDeleteUserException() {
+        try {
+            this.userController.deleteUser(INVALID_USER_MOBILE);
+            fail();
+        } catch (NotFoundUserMobileException exception) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
+    public void testDeleteUser() {
+        try {
+            this.userController.deleteUser(USER_MOBILE);
+            assertFalse(this.userController.userExistsByMobile(USER_MOBILE));
+        } catch (NotFoundUserMobileException exception) {
+            fail();
+        }
     }
 
 }

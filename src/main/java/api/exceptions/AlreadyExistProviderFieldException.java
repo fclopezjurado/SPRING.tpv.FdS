@@ -4,7 +4,7 @@ public class AlreadyExistProviderFieldException extends ApiException {
 
     private static final long serialVersionUID = -3642480446627523359L;
     
-    public static final String DESCRIPTION = "Provider already exists in DB";
+    public static final String DESCRIPTION = "Ya existe el proveedor en la base de datos";
 
     public static final int CODE = 1;
 

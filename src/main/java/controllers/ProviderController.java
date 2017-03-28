@@ -32,7 +32,7 @@ public class ProviderController {
 	}
 
 	public ProviderWrapper registration(ProviderWrapper providerWrapper) throws AlreadyExistProviderFieldException {
-		if (null == providerDao.findByMobile(providerWrapper.getMobile())) {
+		if (null == providerDao.findByMobile(providerWrapper.getMobile()) && null == providerDao.findByCompany(providerWrapper.getCompany())) {
 			Provider provider = new Provider(providerWrapper.getCompany(), providerWrapper.getAddress(),
 					providerWrapper.getMobile(), providerWrapper.getMobile(), providerWrapper.getPaymentConditions(),
 					providerWrapper.getNote());
@@ -50,16 +50,22 @@ public class ProviderController {
 		return providerWrapperList;
 	}
 
-	public ProviderWrapper editProvider(ProviderWrapper providerWrapper) throws NotFoundProviderIdException {
+	public ProviderWrapper editProvider(ProviderWrapper providerWrapper)
+			throws NotFoundProviderIdException, AlreadyExistProviderFieldException {
 		Provider provider = providerDao.findById(providerWrapper.getId());
-		if (provider != null) {
-			provider.setAddress(providerWrapper.getAddress());
-			provider.setCompany(providerWrapper.getCompany());
-			provider.setMobile(providerWrapper.getMobile());
-			provider.setNote(providerWrapper.getNote());
-			provider.setPaymentConditions(providerWrapper.getPaymentConditions());
-			provider.setPhone(providerWrapper.getMobile());
-			return new ProviderWrapper(providerDao.save(provider));
+		if (provider != null){
+			if ((provider.getMobile()==providerWrapper.getMobile() || null == providerDao.findByMobile(providerWrapper.getMobile())) 
+					&& (provider.getCompany().equals(providerWrapper.getCompany()) || null == providerDao.findByCompany(providerWrapper.getCompany()))) {
+				provider.setAddress(providerWrapper.getAddress());
+				provider.setCompany(providerWrapper.getCompany());
+				provider.setMobile(providerWrapper.getMobile());
+				provider.setNote(providerWrapper.getNote());
+				provider.setPaymentConditions(providerWrapper.getPaymentConditions());
+				provider.setPhone(providerWrapper.getMobile());
+				return new ProviderWrapper(providerDao.save(provider));
+			}else {
+				throw new AlreadyExistProviderFieldException();
+			}
 		} else
 			throw new NotFoundProviderIdException();
 	}
@@ -69,7 +75,7 @@ public class ProviderController {
 		int provId = Integer.parseInt(id);
 		List<Article> articlesWithProvider = articleDao.findByProvider(providerDao.findById(provId));
 		if (articlesWithProvider.size() > 0) {
-			throw new ProviderWithArticlesException(articlesWithProvider.toString());
+			throw new ProviderWithArticlesException();
 		}
 		providerDao.delete(providerId);
 	}
