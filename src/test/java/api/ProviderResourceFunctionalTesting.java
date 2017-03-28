@@ -10,15 +10,19 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.client.HttpClientErrorException;
 
+import com.mysql.fabric.xmlrpc.Client;
+
 import wrappers.ArticleWrapper;
 import wrappers.ProviderWrapper;
 
 public class ProviderResourceFunctionalTesting {
-    
+	
+	private String token;
     @Before
     public void seedDataBase() {
         new RestService().deleteAll();
         new RestService().seedDatabase();
+        token = new RestService().loginAdmin();
     }
     
     @After
@@ -27,11 +31,22 @@ public class ProviderResourceFunctionalTesting {
     }
     
     @Test
+    public void testCreateProviderExceptionNotAuthorized() {
+    	try{
+    		new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).body(new ProviderWrapper()).clazz(ProviderWrapper.class).post().build();
+    		fail();
+    	}catch(HttpClientErrorException e){
+    		assertEquals(e.getStatusCode().toString(), "401");
+    		assertEquals(e.getStatusText().toString(), "No Autorizado");
+    	}
+    }
+    
+    @Test
     public void testCreateProvider() {
         ProviderWrapper providerWrapper = new ProviderWrapper();
         providerWrapper.setCompany("Compañia");
         providerWrapper.setMobile(666666672L);
-        assertNotNull(new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).body(providerWrapper).clazz(ProviderWrapper.class).post().build());
+        assertNotNull(new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).body(providerWrapper).basicAuth(token, "").clazz(ProviderWrapper.class).post().build());
     }
 
     @Test
@@ -50,7 +65,7 @@ public class ProviderResourceFunctionalTesting {
     	
     	ProviderWrapper providerToUpdate = new ProviderWrapper(providerCreated.getId(), "", "", 6666L, 0L, "", "");
     	providerToUpdate.setMobile(9999);
-    	ProviderWrapper providerUpdated = new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).body(providerToUpdate).clazz(ProviderWrapper.class).put().build();
+    	ProviderWrapper providerUpdated = new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).basicAuth(token, "").body(providerToUpdate).clazz(ProviderWrapper.class).put().build();
     	
     	assertEquals(providerUpdated.getId(), providerToUpdate.getId());
     	assertEquals(providerUpdated.getId(), providerCreated.getId());
@@ -62,7 +77,7 @@ public class ProviderResourceFunctionalTesting {
 
     @Test
     public void testDeleteProviders() {
-        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).path("/"+ createProviderWithoutArticles().getId()).delete().build();
+        new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).basicAuth(token, "").path("/"+ createProviderWithoutArticles().getId()).delete().build();
     }
     
     @Test(expected = HttpClientErrorException.class)
@@ -85,7 +100,7 @@ public class ProviderResourceFunctionalTesting {
         providerWrapper.setCompany("Compañia");
         providerWrapper.setMobile(899);
         providerWrapper.setMobile(System.currentTimeMillis());
-        ProviderWrapper inserted = new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).clazz(ProviderWrapper.class).body(providerWrapper).post().build();
+        ProviderWrapper inserted = new RestBuilder<ProviderWrapper>(RestService.URL).path(Uris.PROVIDERS).basicAuth(token, "").clazz(ProviderWrapper.class).body(providerWrapper).post().build();
         
         return inserted;
     }
