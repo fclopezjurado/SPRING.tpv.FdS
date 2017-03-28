@@ -5,7 +5,7 @@ angular.module("tpv").service("balancesService", ['$http', '$q', function($http,
 	
 	this.request = function (config) {
         let deferred = $q.defer();
-       // $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(sessionStorage.token + ':');
+        $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(sessionStorage.token + ':');
         $http(config).then(function (response) {
             deferred.resolve(response.data);
         }, function (response) {
