@@ -20,7 +20,7 @@ public class TextilePrintingResourceFunctionalTesting {
         textilePrintingFilterWrapper.setMaxRetailPrice(new BigDecimal("0"));
         textilePrintingFilterWrapper.setType("type");
         List<ProductsOutFilterWrapper> productosSalidaMock = Arrays
-                .asList(new RestBuilder<ProductsOutFilterWrapper[]>(RestService.URL).path(Uris.TEXTILE_PRINTING + Uris.FILTER)
+                .asList(new RestBuilder<ProductsOutFilterWrapper[]>(RestService.URL).path(Uris.TEXTILE_PRINTING + Uris.FILTER+Uris.MOCK)
                         .clazz(ProductsOutFilterWrapper[].class).body(textilePrintingFilterWrapper).post().build());
         assertEquals(1, productosSalidaMock.size());
     }
