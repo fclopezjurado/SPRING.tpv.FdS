@@ -43,6 +43,12 @@ public class EmbroideryResource {
         return productosSalidaMock;
     }
 
+    @RequestMapping(value = Uris.FILTER+"SinMock", method = RequestMethod.POST)
+    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody EmbroideryFilterWrapper embroidery) {
+        List<ProductsOutFilterWrapper> productosSalida = this.embroideryController.getEmroiderysByFilter(embroidery);
+        return productosSalida;
+    }
+    
     @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
     public void removeEmbroidery(@PathVariable(value = "id") long id) {
         this.embroideryController.removeEmbroidery(id);
@@ -54,8 +60,13 @@ public class EmbroideryResource {
         this.embroideryController.addEmbroidery(embroideryWrapper);
     }
     
-    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
-    public void updateEmproidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateEmbroidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
         this.embroideryController.updateEmbroidery(embroideryWrapper);
+    }
+    
+    @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
+    public EmbroideryWrapper getEmbroidery(@PathVariable(value = "id") long id) {
+        return this.embroideryController.getEmbroidery(id);
     }
 }

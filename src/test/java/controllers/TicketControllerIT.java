@@ -2,6 +2,7 @@ package controllers;
 
 import config.PersistenceConfig;
 import config.TestsControllerConfig;
+import config.TestsMailConfig;
 import config.TestsPersistenceConfig;
 import daos.core.ArticleDao;
 import daos.core.TicketDao;
@@ -20,13 +21,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import wrappers.TicketWrapper;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class, TestsMailConfig.class})
 public class TicketControllerIT {
 
     @Autowired
@@ -40,6 +43,9 @@ public class TicketControllerIT {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private MailServiceMock mailService;
 
     private Ticket ticket;
 
@@ -115,6 +121,9 @@ public class TicketControllerIT {
         ticketWrapper = ticketController.createTicket(shoppingList, user);
 
         assertEquals(ticketWrapper.getTicketState(), TicketState.OPENED);
+        assertEquals(user.getEmail(), mailService.getTo());
+        assertTrue(mailService.getMsg().contains(ticketWrapper.getTicketState().toString()));
+        assertTrue(mailService.getMsg().contains(ticketWrapper.getReference()));
     }
 
     @Test
@@ -136,5 +145,27 @@ public class TicketControllerIT {
 
         assertEquals(ticketWrapper.getTicketState(), TicketState.STARTED);
         assertEquals(2, ticketWrapper.getShoppingList().size());
+    }
+
+    @Test
+    public void testCloseTicket() {
+        List<Shopping> shoppingList = new ArrayList<>();
+        TicketWrapper ticketWrapper;
+        ticketWrapper = ticketController.createTicket(shoppingList, user);
+
+        ticketWrapper.setTicketState(TicketState.CLOSED);
+
+        ticketWrapper = ticketController.updateTicket(ticketWrapper);
+
+        assertEquals(ticketWrapper.getTicketState(), TicketState.CLOSED);
+        assertEquals(user.getEmail(), mailService.getTo());
+        assertTrue(mailService.getMsg().contains(ticketWrapper.getTicketState().toString()));
+        assertTrue(mailService.getMsg().contains(ticketWrapper.getReference()));
+    }
+    
+    @Test
+    public void testGetTotalSoldByDay(){
+        assertNotNull(ticketController.getTotalSoldByDay(Calendar.getInstance()));
+        
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import services.DataService;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -49,15 +50,24 @@ public class AdminController {
 
     @Autowired
     private TicketDao ticketDao;
+    
+    @Autowired
+    private BudgetDao budgetDao;
 
     @Autowired
     private InvoiceDao invoiceDao;
     
     @Autowired
     private AlarmDao alarmDao;
+    
+    @Autowired
+    private FamilyDao familyDao;
 
     @Autowired
     private Environment environment;
+    
+    @Autowired
+    private CashierBalanceDao cashierBalanceDao;
 
     @Autowired
     public void setDataService(DataService dataService) {
@@ -75,10 +85,25 @@ public class AdminController {
         this.createProviders();
         this.createProducts();
         this.createTickets();
+        this.createBudgets();
         this.createInvoices();
         this.createAlarms();
+        this.createFamilies();
+        this.createCashierBalances();
     }
     
+    private void createCashierBalances() {
+        CashierBalance balance;
+        Calendar day = Calendar.getInstance();
+        for(int i = 0; i < 4; i++){
+            balance = new CashierBalance(50,50,50,50,50);
+            day.add(Calendar.DATE, -1);           
+            balance.setDay(day);                       
+            cashierBalanceDao.save(balance);
+        }
+        
+    }
+
     public void createUsers(int initial, int size, Role role) {
         User user;
         for (int i = 0; i < size; i++) {
@@ -196,6 +221,32 @@ public class AdminController {
         }
         ticketDao.save(ticket);
     }
+    
+    public void createBudgets() {
+        Budget budget;
+
+        budget = new Budget(1L);
+        for (int i = 0; i < 4; i++) {
+            Product product = articleDao.findOne(84000001111L + i);
+            budget.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budget.setUser(userDao.findByMobile(666000000));
+        budgetDao.save(budget);
+
+        budget = new Budget(2L);
+        for (int i = 0; i < 4; i++) {
+            Product product = embroideryDao.findOne(84000002222L + i);
+            budget.addShopping(new Shopping(1 + i, 0, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budgetDao.save(budget);
+
+        budget = new Budget(3L);
+        for (int i = 0; i < 4; i++) {
+            Product product = textilePrintingDao.findOne(84000003333L + i);
+            budget.addShopping(new Shopping(1 + i, 10, product.getId(), product.getDescription(), product.getRetailPrice()));
+        }
+        budgetDao.save(budget);
+    }
 
     public void createInvoices() {
         invoiceDao.save(new Invoice(1, ticketDao.findOne(1L)));
@@ -206,5 +257,26 @@ public class AdminController {
         List<Article> articles = articleDao.findAll();
         alarmDao.save(new Alarm("Alarma Warning", articles, AlarmType.WARNING, 5));
         alarmDao.save(new Alarm("Alarma Critical", null, AlarmType.CRITICAL, 2));
+    }
+    
+    public void createFamilies() {
+        List<ComponentProduct> componentProducts = new ArrayList<>();
+        for (int i = 0; i < 4; i++){
+            componentProducts.add(articleDao.findAll().get(i));
+        }
+        Family family1 = new Family(1L, "familyName1", "description1", componentProducts);
+        List<ComponentProduct> productsAndFamilies = new ArrayList<>();
+        for (int i = 4; i < 8; i++) {
+            productsAndFamilies.add(articleDao.findAll().get(i));
+        }
+        productsAndFamilies.add(family1);
+        Family family2 = new Family(2L, "familyName2", "description2", productsAndFamilies);
+        List<ComponentProduct> families = new ArrayList<>();
+        families.add(family1);
+        families.add(family2);
+        Family family3 = new Family(3L, "familyName3", "description3", families);
+        familyDao.save(family1);
+        familyDao.save(family2);
+        familyDao.save(family3);
     }
 }

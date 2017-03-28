@@ -1,11 +1,15 @@
 package controllers;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import daos.core.BudgetDao;
+import daos.core.ProductDao;
 import entities.core.Budget;
+import entities.core.Product;
 import entities.core.Shopping;
 import wrappers.BudgetDetailWrapper;
 import wrappers.BudgetListWrapper;
@@ -15,6 +19,9 @@ public class BudgetController {
 
     @Autowired
     BudgetDao budgetDao;
+    
+    @Autowired
+    ProductDao productDao;
     
     @Autowired
     public void setBudgetDao(BudgetDao budgetDao) {
@@ -38,10 +45,23 @@ public class BudgetController {
         Budget budget = budgetDao.findByReference(reference);
         budgetDao.delete(budget);
     }
-    
-    public void updateBudget(BudgetDetailWrapper budgetWrapper) {
-        Budget budget = budgetDao.findByReference(budgetWrapper.getReference());
-        budget.setShoppingList(budgetWrapper.getShoppingList());
+
+    public void addProductToBudget(String reference, long id, int amount) {
+        Budget budget = budgetDao.findByReference(reference);
+        List<Product> products = productDao.findAll();
+        
+        Product found = null;
+        
+        for (Product product : products) {
+            if (product.getId() == id) {
+                found = product;
+                break;
+            }
+        }
+        if (found != null){
+            budget.addShopping(new Shopping(amount, 0, found.getId(), found.getDescription(), found.getRetailPrice()));
+        }
+        
         budgetDao.save(budget);
     }
 }

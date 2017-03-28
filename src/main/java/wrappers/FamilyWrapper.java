@@ -1,5 +1,7 @@
 package wrappers;
 
+import entities.core.Family;
+
 public class FamilyWrapper {
 
     private long id;
@@ -11,10 +13,10 @@ public class FamilyWrapper {
     public FamilyWrapper() {
     }
 
-    public FamilyWrapper(Long id, String name, String familyDescription) {
-        this.id = id;
-        this.name = name;
-        this.familyDescription = familyDescription;
+    public FamilyWrapper(Family family) {
+        this.id = family.getId();
+        this.name = family.getName();
+        this.familyDescription = family.getFamilyDescription();
     }
 
     public long getId() {

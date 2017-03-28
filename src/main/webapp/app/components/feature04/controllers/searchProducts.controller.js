@@ -116,10 +116,17 @@ angular.module("tpv").controller("SearchProducts",
         
         vm.requestToGetProducts = function (getProductService, queryParameter) {
             var serverResponseBody;
+            
+            angular.fromJson(getProductService.getProducts(queryParameter).then(function(result){
+            	vm.articles					= result;
+            	vm.showTableProducts		= true;
+            }));
 
-            serverResponseBody 			= angular.fromJson(getProductService.getProducts(queryParameter));
-            vm.articles					= serverResponseBody.data;
-            vm.showTableProducts		= true;
+            
+
+//            serverResponseBody 			= angular.fromJson(getProductService.getProducts(queryParameter).then(function(result){})    );
+//            vm.articles					= serverResponseBody.data;
+//            vm.showTableProducts		= true;
             
         }
 

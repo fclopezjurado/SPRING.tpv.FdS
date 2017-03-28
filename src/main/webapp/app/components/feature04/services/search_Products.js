@@ -52,15 +52,17 @@ tpv.service('busquedaDeProductos', function ($http, $q) {
      * TODO:
 	 */
 
-    this.getProducts = function (products) {
-        let config = {
-            method: 'POST',
-            url: urlBase + "/products",
-            data: products
-        };
-        this.request(config);
+
+    	this.getProducts= function (products) {
+    		let config = {
+    				method: 'POST',
+    				url: urlBase + "/products",
+    				data:products
+    		};
+    		return this.request(config); 
+
             
-            return productosAjax;
+           // return productosAjax;
         }
 
 

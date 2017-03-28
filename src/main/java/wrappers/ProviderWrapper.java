@@ -105,7 +105,7 @@ public class ProviderWrapper {
 
     @Override
     public String toString() {
-        return "[ id: " + this.getId() + " Company: " + this.getCompany() + " Mobile: " + this.getMobile() + "]";
+        return "[ id: " + this.getId() + " Company: " + this.getCompany() +  " Mobile: " + this.getMobile() + " PaymentConditions: " + this.getPaymentConditions() + " Note: " + this.getNote() + "]";
     }
 
     @Override

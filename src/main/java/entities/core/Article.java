@@ -50,10 +50,10 @@ public class Article extends Product {
         this.provider = provider;
     }
 
-    @Override
-    public String toString() {
-        return "Article [" + super.toString() + "stock=" + stock + ", wholesalePrice=" + wholesalePrice + ", providerId=" + provider.getId()
-                + "]";
-    }
+//    @Override
+//    public String toString() {
+//        return "Article [" + super.toString() + "stock=" + stock + ", wholesalePrice=" + wholesalePrice + ", providerId=" + provider.getId()
+//                + "]";
+//    }
 
 }

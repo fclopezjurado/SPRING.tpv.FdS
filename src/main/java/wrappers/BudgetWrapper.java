@@ -1,5 +1,8 @@
 package wrappers;
 
+
+import java.util.Calendar;
+
 import entities.core.Budget;
 import entities.core.Shopping;
 
@@ -7,13 +10,17 @@ public class BudgetWrapper {
 
     private String reference;
     
-    private String created;
+    private Calendar created;
     
     private float total;
     
+    public BudgetWrapper() {
+        
+    }
+    
     public BudgetWrapper(Budget budget) {
         reference = budget.getReference();
-        created = budget.getCreated().toString();
+        created = budget.getCreated();
         total = 0;
         for (Shopping shopping : budget.getShoppingList()){
             total += shopping.getRetailPrice().floatValue() * shopping.getAmount();
@@ -28,11 +35,11 @@ public class BudgetWrapper {
         this.reference = reference;
     }
 
-    public String getCreated() {
+    public Calendar getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(Calendar created) {
         this.created = created;
     }
 
