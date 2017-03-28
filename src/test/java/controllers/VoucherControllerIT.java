@@ -2,6 +2,7 @@ package controllers;
 
 import config.PersistenceConfig;
 import config.TestsControllerConfig;
+import config.TestsMailConfig;
 import config.TestsPersistenceConfig;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,7 @@ import java.math.BigDecimal;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class, TestsMailConfig.class})
 public class VoucherControllerIT {
 
     @Autowired
