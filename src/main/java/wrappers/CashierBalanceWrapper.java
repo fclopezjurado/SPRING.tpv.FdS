@@ -18,10 +18,14 @@ public class CashierBalanceWrapper {
     private double checks;
 
     private double dataphone;
-    
+
     private double cash;
 
     private String date;
+
+    public CashierBalanceWrapper() {
+        super();
+    }
 
     public CashierBalanceWrapper(int id, double change, double total, double checks, double dataphone, String date) {
         super();
@@ -32,7 +36,7 @@ public class CashierBalanceWrapper {
         this.dataphone = dataphone;
         this.date = date;
     }
-    
+
     public CashierBalanceWrapper(int id, BigDecimal change, BigDecimal total, BigDecimal checks, BigDecimal dataphone, Calendar date) {
         SimpleDateFormat dateFormater = new SimpleDateFormat(dateFormat);
         this.id = id;
@@ -51,7 +55,6 @@ public class CashierBalanceWrapper {
         this.dataphone = dataphone;
         this.date = date;
     }
-
 
     public int getId() {
         return id;

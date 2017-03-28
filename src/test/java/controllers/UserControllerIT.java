@@ -1,10 +1,11 @@
 package controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
+import api.exceptions.NotFoundTicketReferenceException;
+import config.PersistenceConfig;
+import config.TestsControllerConfig;
+import config.TestsMailConfig;
+import config.TestsPersistenceConfig;
+import entities.users.Role;
 import org.apache.logging.log4j.LogManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,17 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import api.exceptions.NotFoundTicketReferenceException;
-import config.PersistenceConfig;
-import config.TestsControllerConfig;
-import config.TestsPersistenceConfig;
-import entities.users.Role;
 import wrappers.TicketsWrapper;
 import wrappers.UserWrapper;
 
+import static org.junit.Assert.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class, TestsMailConfig.class})
 public class UserControllerIT {
 
     private static final long USER_MOBILE = 666666666;

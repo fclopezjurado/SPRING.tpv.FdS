@@ -1,10 +1,13 @@
 package controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.util.List;
-
+import api.exceptions.AlreadyExistProviderFieldException;
+import api.exceptions.NotFoundProviderIdException;
+import api.exceptions.ProviderWithArticlesException;
+import config.PersistenceConfig;
+import config.TestsControllerConfig;
+import config.TestsMailConfig;
+import config.TestsPersistenceConfig;
+import entities.core.Provider;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -13,18 +16,15 @@ import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import api.exceptions.AlreadyExistProviderFieldException;
-import api.exceptions.NotFoundProviderIdException;
-import api.exceptions.ProviderWithArticlesException;
-import config.PersistenceConfig;
-import config.TestsControllerConfig;
-import config.TestsPersistenceConfig;
-import entities.core.Provider;
 import wrappers.ProviderWrapper;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class, TestsMailConfig.class})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class providerControllerIT {
 
