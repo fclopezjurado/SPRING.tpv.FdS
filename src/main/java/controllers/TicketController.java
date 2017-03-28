@@ -17,6 +17,7 @@ import wrappers.TicketsWrapper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -182,6 +183,22 @@ public class TicketController {
             LogManager.getLogger(this.getClass()).error("TicketController: " + e.getMessage());
         }
         return emailText;
+    }
+    
+    public BigDecimal getTotalSoldByDay(Calendar day){
+        Calendar inicio = Calendar.getInstance();
+        inicio.setTime(day.getTime());
+        inicio.set(Calendar.HOUR_OF_DAY, 0);
+        inicio.set(Calendar.MINUTE, 0);
+        inicio.set(Calendar.SECOND, 0);
+        inicio.set(Calendar.MILLISECOND, 0);
+        
+        Calendar fin = day;
+        fin.set(Calendar.HOUR_OF_DAY, 23);
+        fin.set(Calendar.MINUTE, 59);
+        fin.set(Calendar.SECOND, 59);       
+        
+        return ticketDao.getTotalPriceOfTicketsBetweenDates(inicio, fin);
     }
 
 }

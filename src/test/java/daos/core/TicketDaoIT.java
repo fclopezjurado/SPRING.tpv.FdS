@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
@@ -71,6 +72,19 @@ public class TicketDaoIT {
     public void testFindByInvoiceID() {
         Invoice invoice = invoiceDao.findOne(1);
         assertEquals(invoice.getTicket().getReference(), ticketDao.findByInvoiceID(invoice.getId()).getReference());
+    }
+    
+    @Test
+    public void testGetTotalPriceOfTicketsBetweenDates(){
+        Calendar dateInicio = Calendar.getInstance();
+        int diaBase = dateInicio.get(Calendar.DAY_OF_MONTH);
+        dateInicio.set(Calendar.DAY_OF_MONTH, diaBase - 1);
+        Calendar dateFin = Calendar.getInstance();
+        dateFin.set(Calendar.DAY_OF_MONTH, diaBase + 5);
+        
+        assertEquals(new BigDecimal(620.00).stripTrailingZeros(), ticketDao.getTotalPriceOfTicketsBetweenDates(dateInicio, dateFin).stripTrailingZeros() );
+        
+        
     }
 
 }
