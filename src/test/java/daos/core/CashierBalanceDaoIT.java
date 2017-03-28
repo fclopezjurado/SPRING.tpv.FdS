@@ -3,6 +3,8 @@ package daos.core;
 import config.PersistenceConfig;
 import config.TestsMailConfig;
 import config.TestsPersistenceConfig;
+import entities.core.CashierBalance;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import wrappers.CashierBalanceWrapper;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,7 +35,14 @@ public class CashierBalanceDaoIT {
     
     @Test
     public void testFindById() {
-        assertNotNull(cashierBalanceDao.findOne(1));
+        CashierBalance balance = cashierBalanceDao.findOne(1);
+        assertEquals(1, balance.getId());
+        assertEquals(new BigDecimal(50).stripTrailingZeros(), balance.getChange().stripTrailingZeros());
+        assertEquals(new BigDecimal(50).stripTrailingZeros(), balance.getTotalTiketsMoney().stripTrailingZeros());
+        assertEquals(new BigDecimal(50).stripTrailingZeros(), balance.getCash().stripTrailingZeros());
+        assertEquals(new BigDecimal(50).stripTrailingZeros(), balance.getChecks().stripTrailingZeros());
+        assertEquals(new BigDecimal(50).stripTrailingZeros(), balance.getDataphone().stripTrailingZeros());  
+        assertEquals(new BigDecimal(0).stripTrailingZeros(), balance.getBalance().stripTrailingZeros());  
     }
     
     @Test
@@ -44,7 +55,7 @@ public class CashierBalanceDaoIT {
             fail();
         }        
         cal.add(Calendar.DATE, -1);        
-        assertNotNull(cashierBalanceDao.findOneByDay(cal));
+        assertEquals(cal, cashierBalanceDao.findOneByDay(cal).getDay());
     }
 
 }

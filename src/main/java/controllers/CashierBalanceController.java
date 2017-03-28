@@ -34,6 +34,7 @@ public class CashierBalanceController {
                 cashierBalanceWrapper.getCash(), cashierBalanceWrapper.getChecks(), cashierBalanceWrapper.getDataphone());
         balance.setId(cashierBalanceWrapper.getId());
         balance.setDay(cashierBalanceWrapper.getDay());
+        balance.setBalance(cashierBalanceWrapper.getBalance());
         cashierBalanceDao.save(balance);
         cashierBalanceDao.flush();
         cashierBalanceWrapper.setId(cashierBalanceDao.findOneByDay(balance.getDay()).getId());
@@ -66,6 +67,7 @@ public class CashierBalanceController {
         CashierBalance balance = new CashierBalance(cashierBalanceWrapper.getChange(), cashierBalanceWrapper.getTotal(),
                 cashierBalanceWrapper.getCash(), cashierBalanceWrapper.getChecks(), cashierBalanceWrapper.getDataphone());
         balance.setId(cashierBalanceWrapper.getId());
+        balance.setBalance(cashierBalanceWrapper.getBalance());
         cashierBalanceDao.save(balance);
         cashierBalanceDao.flush();
         return cashierBalanceWrapper;

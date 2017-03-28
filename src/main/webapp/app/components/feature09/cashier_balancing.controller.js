@@ -17,7 +17,7 @@ angular.module("tpv").controller("CashierBalancingController",
 
 		vm.cashierbalancing = {
 			date : new Date()
-		};
+		};		
 		
 		vm.calculateBalance = function(){
 			if(vm.cashierbalancing.total === '' || vm.cashierbalancing.change === ''  || vm.cashierbalancing.cash === '' || vm.cashierbalancing.dataphone === ''
@@ -84,6 +84,29 @@ angular.module("tpv").controller("CashierBalancingController",
 			};
 			
 			vm.getTotal();
+		}
+		
+		vm.editCashierBalancing = function(balance){
+			vm.cashierbalancing = balance;		
+			if(vm.cashierbalancing.balance > 0){
+				vm.backgroundBalance = {'background-color':'rgba(0, 255, 0, 0.5)'};
+			}else{
+				vm.backgroundBalance = {'background-color':'rgba(255, 0, 0, 0.5)'};
+			}
+			vm.showBalance = true;			
+		}
+		
+		vm.saveBalance = function(){
+			vm.cashierbalancing.date = $filter('date')(vm.cashierbalancing.date, "dd-MM-yyyy");		
+			balancesService.update(vm.cashierbalancing)
+				.then(function(balance){
+					$location.path("/feature09/cierrecaja");
+				})
+				.catch(function(err) {
+					vm.showAlert = true;
+					vm.alertMessage = err;
+				});
+			
 		}
 		
 		vm.getBalances();

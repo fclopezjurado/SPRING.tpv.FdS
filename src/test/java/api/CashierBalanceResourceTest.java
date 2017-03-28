@@ -61,7 +61,7 @@ public class CashierBalanceResourceTest {
         CashierBalanceWrapper balance = cashierBalanceResource.getCashierBalance(1);
         balance.setChange(new BigDecimal(80));
         try {
-            cashierBalanceResource.updateCashierBalance(balance);
+            cashierBalanceResource.updateCashierBalance(balance.getId(), balance);
             assertEquals(balance.getChange(), cashierBalanceResource.getCashierBalance(1).getChange());
         } catch (NotFoundCashierBalanceIdException e) {
             fail();
