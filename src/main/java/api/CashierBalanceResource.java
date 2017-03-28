@@ -27,7 +27,7 @@ public class CashierBalanceResource {
         return cashierBalanceController.getAll();
     }
 
-    @RequestMapping(value = Uris.REFERENCE, method = RequestMethod.GET)
+    @RequestMapping(value = Uris.ID, method = RequestMethod.GET)
     public CashierBalanceWrapper getCashierBalance(@PathVariable int id) {
         return cashierBalanceController.getCashierBalanceById(id);
     }
@@ -43,9 +43,12 @@ public class CashierBalanceResource {
     }
 
     @RequestMapping(value = Uris.ID, method = RequestMethod.PUT)
-    public CashierBalanceWrapper updateCashierBalance(@RequestBody CashierBalanceWrapper cashierBalanceWrapper)
+    public CashierBalanceWrapper updateCashierBalance(@PathVariable int id, @RequestBody CashierBalanceWrapper cashierBalanceWrapper)
             throws NotFoundCashierBalanceIdException {
-        if (!cashierBalanceController.existCashierBalanceId(cashierBalanceWrapper.getId())) {
+        System.out.println("--------------------");
+        System.out.println(cashierBalanceWrapper);
+        System.out.println("--------------------");
+        if (!cashierBalanceController.existCashierBalanceId(id)) {
             throw new NotFoundCashierBalanceIdException();
         }
 

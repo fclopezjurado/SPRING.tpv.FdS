@@ -10,7 +10,8 @@ angular.module("tpv").service("balancesService", ['$http', '$q', function($http,
             deferred.resolve(response.data);
         }, function (response) {
             let errorMsg;
-            if (response.data.error === undefined) {
+            
+            if (response.data == null || response.data.error === undefined) {
                 errorMsg = "";
             } else {
                 errorMsg = " --- " + response.data.error + ":" + response.data.description;
@@ -32,6 +33,10 @@ angular.module("tpv").service("balancesService", ['$http', '$q', function($http,
 	
 	this.create = function(cashierbalancing) {						
 		return this.request({ method: 'POST', url: baseURL + balancesURL, data: cashierbalancing });
+	}
+	
+	this.update = function(cashierbalancing) {						
+		return this.request({ method: 'PUT', url: baseURL + balancesURL + '/' + cashierbalancing.id, data: cashierbalancing });
 	}
 	
 	this.getTotal = function(date) {

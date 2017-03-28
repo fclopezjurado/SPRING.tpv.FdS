@@ -163,6 +163,11 @@ tpv.config(function ($routeProvider) {
             controller: "CashierBalancingController",
             controllerAs: "vm"
         })
+        .when("/feature09/cierrecaja/edit", {
+            templateUrl: "app/components/feature09/new_cashier_balancing.html",
+            controller: "CashierBalancingController",
+            controllerAs: "vm"
+        })
         .when("/feature11/ticket", {
             templateUrl: "app/components/feature11/ticket.html",
             controller: "ProductsServiceController",
