@@ -1,7 +1,7 @@
 <section class="container">
 	<div class="jumbotron text-center">
 		<fieldset>
-			<legend>Feature02. <b>Update Registration.</b></legend>
+			<legend>Feature02. <b>Update Provider.</b></legend>
 			<form class="form-horizontal" ng-submit="vm.update()">
                 
                 <div class="form-group">
@@ -50,7 +50,7 @@
                         <input type="submit" class="btn btn-primary " value="Enviar">
                     </div>
                     <label class="bg-success col-sm-6" ng-show="vm.completed">Petición
-                        correcta</label> <label class="bg-danger col-sm-6" ng-show="vm.error">Error</label>
+                        correcta</label> <label class="bg-danger col-sm-6" ng-show="vm.error">Error{{vm.response}}</label>
                 </div>
             </form>
 	        <div align="center">

@@ -43,8 +43,10 @@ public class ProviderResource {
 
     @RequestMapping(value = Uris.PROVIDERS, method = RequestMethod.PUT)
     @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
-    public ProviderWrapper providerUpdate(@RequestBody ProviderWrapper providerWrapper) throws NotFoundProviderIdException {
-        ProviderWrapper wrapper = providerController.editProvider(providerWrapper);
+	public ProviderWrapper providerUpdate(@RequestBody ProviderWrapper providerWrapper)
+			throws NotFoundProviderIdException, MalformedHeaderException, AlreadyExistProviderFieldException {
+        validateFields(providerWrapper);
+    	ProviderWrapper wrapper = providerController.editProvider(providerWrapper);
         return wrapper;
     }
 
