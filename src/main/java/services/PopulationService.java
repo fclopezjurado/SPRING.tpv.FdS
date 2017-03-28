@@ -44,7 +44,7 @@ import entities.core.Provider;
 
 @Service
 @Transactional
-public class PopulateDbFromFiles {
+public class PopulationService {
 
 	public static String PATH = new String("fixtures");
 	

@@ -158,6 +158,11 @@ tpv.config(function ($routeProvider) {
             controller: "ProductsServiceController",
             controllerAs: "vm"
         })
+        .when("/feature12/populateDB", {
+            templateUrl: "app/components/feature12/populateDB.html",
+            controller: "PopulateDBController",
+            controllerAs: "vm"
+        })
         .when("/feature06/createTicket", {
             templateUrl: "app/components/feature06/createTicket.html",
             controller: "CreateTicketController",

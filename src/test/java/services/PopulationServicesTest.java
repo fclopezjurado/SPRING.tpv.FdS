@@ -19,10 +19,10 @@ import config.TestsPersistenceConfig;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { PersistenceConfig.class, TestsPersistenceConfig.class })
 
-public class PopulateDbFromFilesTest {
+public class PopulationServicesTest {
 
 	@Autowired
-	private PopulateDbFromFiles populateDbFromFiles;
+	private PopulationService populateDbFromFiles;
 
 	@Autowired
 	private DataService dataService;
