@@ -52,13 +52,13 @@ public class providerControllerIT {
 	}
 
 	@Test
-	public void test02ShouldEditProvider() throws NotFoundProviderIdException{
+	public void test02ShouldEditProvider() throws NotFoundProviderIdException, AlreadyExistProviderFieldException{
 		ProviderWrapper providerWrapper = new ProviderWrapper(provider);
 		providerWrapper.setId(5);
-		providerWrapper.setCompany("nueva");
+		providerWrapper.setCompany("nueva1");
 		ProviderWrapper providerEdited = providerController.editProvider(providerWrapper);
 		
-		assertEquals("nueva", providerEdited.getCompany());
+		assertEquals("nueva1", providerEdited.getCompany());
 	}
 	
 	@Test(expected = AlreadyExistProviderFieldException.class)

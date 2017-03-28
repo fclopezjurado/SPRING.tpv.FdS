@@ -1,6 +1,7 @@
 package api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,20 +26,9 @@ public class ProductResource {
         this.productController = productController;
     }
 
-    @RequestMapping(value = Uris.FILTER + Uris.MOCK, method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody ProductFilterWrapper product) {
-        List<ProductsOutFilterWrapper> productosSalidaMock = new ArrayList<ProductsOutFilterWrapper>();
-        ProductsOutFilterWrapper productoMock = new ProductsOutFilterWrapper();
-        productoMock.setId(0);
-        productoMock.setReference("referenceMock");
-        productoMock.setDescription("descriptionMock");
-        productosSalidaMock.add(productoMock);
-        productosSalidaMock.add(productoMock);
-        productosSalidaMock.add(productoMock);
-        return productosSalidaMock;
-    }
 
     @RequestMapping(value = Uris.FILTER, method = RequestMethod.POST)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody ProductFilterWrapper product) throws MalformedFieldxception {
         this.validarCamposApi(product);
         List<ProductsOutFilterWrapper> productosSalida = this.productController.getProductsByFilter(product);

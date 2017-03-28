@@ -1,9 +1,9 @@
 package api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,20 +33,10 @@ public class TextilePrintingResource {
     }
      
 
-    @RequestMapping(value = Uris.FILTER+Uris.MOCK,method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilterMock(@RequestBody TextilePritingFilterWrapper textile){
-        List<ProductsOutFilterWrapper> productosSalidaMock= new ArrayList<ProductsOutFilterWrapper> ();
-        ProductsOutFilterWrapper productoMock= new ProductsOutFilterWrapper();
-        productoMock.setId(0);
-        productoMock.setReference("referenceMock");
-        productoMock.setDescription("descriptionMock");
-        productosSalidaMock.add(productoMock);
-        return productosSalidaMock;
-    }
-
 
     @RequestMapping(value = Uris.FILTER,method = RequestMethod.POST)
-    public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody TextilePritingFilterWrapper textile) throws MalformedFieldxception{
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
+    public List<ProductsOutFilterWrapper> getTextilePritingFilterByFilter(@RequestBody TextilePritingFilterWrapper textile) throws MalformedFieldxception{
         this.validarCamposApi(textile);
         List<ProductsOutFilterWrapper> productosSalida = this.textilePrintingController.getTextilePrintingByFilter(textile);
         return productosSalida;
