@@ -32,6 +32,10 @@ public class UserForEditListWrapper {
                     user.getDni(), user.getEmail(), user.getRegistrationDate()));
     }
 
+    public boolean isEmpty() {
+        return this.userList.isEmpty();
+    }
+
     @Override
     public String toString() {
         return "UserForEditListWrapper [userList=" + userList + "]";
