@@ -1,25 +1,25 @@
 package controllers;
 
-import static org.junit.Assert.*;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
+import config.PersistenceConfig;
+import config.TestsControllerConfig;
+import config.TestsMailConfig;
+import config.TestsPersistenceConfig;
+import daos.core.CashierBalanceDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import config.PersistenceConfig;
-import config.TestsControllerConfig;
-import config.TestsPersistenceConfig;
-import daos.core.CashierBalanceDao;
 import wrappers.CashierBalanceWrapper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import static org.junit.Assert.*;
+
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsControllerConfig.class, TestsMailConfig.class})
 public class CashierBalanceControllerIT {
     
     private static final int VALID_CASHIER_BALANACE_ID = 1;
