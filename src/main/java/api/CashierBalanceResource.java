@@ -5,6 +5,7 @@ import api.exceptions.NotFoundCashierBalanceIdException;
 import controllers.CashierBalanceController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import wrappers.CashierBalanceWrapper;
 
@@ -23,16 +24,19 @@ public class CashierBalanceResource {
     }
 
     @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public List<CashierBalanceWrapper> getAllCashierBalances() {
         return cashierBalanceController.getAll();
     }
 
     @RequestMapping(value = Uris.ID, method = RequestMethod.GET)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public CashierBalanceWrapper getCashierBalance(@PathVariable int id) {
         return cashierBalanceController.getCashierBalanceById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public CashierBalanceWrapper createCashierBalance(@RequestBody CashierBalanceWrapper cashierBalanceWrapper)
             throws AlreadyExistCashierBalanceDayException, ParseException {
         if (cashierBalanceController.existCashierBalanceByDate(cashierBalanceWrapper.getDate())) {
@@ -43,6 +47,7 @@ public class CashierBalanceResource {
     }
 
     @RequestMapping(value = Uris.ID, method = RequestMethod.PUT)
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public CashierBalanceWrapper updateCashierBalance(@PathVariable int id, @RequestBody CashierBalanceWrapper cashierBalanceWrapper)
             throws NotFoundCashierBalanceIdException {
         System.out.println("--------------------");
