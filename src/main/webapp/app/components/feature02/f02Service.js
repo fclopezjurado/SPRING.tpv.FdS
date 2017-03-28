@@ -21,15 +21,26 @@ tpv.service('f02Service', ['$http', '$q', function ($http, $q) {
    }
 
    
-   this.registration = function (company, address, mobile, payment, notes){
+   this.registration = function (company, address, mobile, paymentConditions, note){
 	      let resource="providers";
 		  let config = {
 	 	      method: 'POST',
 	 	      url: urlBase + "/"+ resource,
-	 	      data: {'company':company, 'address': address, 'mobile': mobile, 'payment': payment, 'notes': notes}
+	 	      data: {'company':company, 'address': address, 'mobile': mobile, 'paymentConditions': paymentConditions, 'note': note}
 		  };
 	      return this.request(config);
 	   }
+   
+   this.update = function (id, company, address, mobile, paymentConditions, note){
+	      let resource="providers";
+		  let config = {
+	 	      method: 'PUT',
+	 	      url: urlBase + "/"+ resource,
+	 	      data: {'id':id, 'company':company, 'address': address, 'mobile': mobile, 'paymentConditions': paymentConditions, 'note': note}
+		  };
+	      return this.request(config);
+	   }
+   
    this.getAll = function() {
 	   let config = {
  	     method: 'GET',

@@ -1,23 +1,21 @@
 package daos.users;
 
-import static org.junit.Assert.assertEquals;
-
-import java.util.List;
-
+import config.PersistenceConfig;
+import config.TestsMailConfig;
+import config.TestsPersistenceConfig;
+import entities.users.Role;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import config.PersistenceConfig;
-import config.TestsPersistenceConfig;
-import daos.users.AuthorizationDao;
-import daos.users.UserDao;
-import entities.users.Role;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class})
+@ContextConfiguration(classes = {PersistenceConfig.class, TestsPersistenceConfig.class, TestsMailConfig.class})
 public class AuthorizationDaoIT {
 
     @Autowired

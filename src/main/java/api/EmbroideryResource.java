@@ -62,11 +62,12 @@ public class EmbroideryResource {
         this.embroideryController.addEmbroidery(embroideryWrapper);
     }
     
-    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
-    public void updateEmproidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
+    @RequestMapping(method = RequestMethod.PUT)
+    public void updateEmbroidery(@RequestBody EmbroideryWrapper embroideryWrapper) {
         this.embroideryController.updateEmbroidery(embroideryWrapper);
     }
     
+
     private void validarCamposApi(EmbroideryFilterWrapper embroidery) throws MalformedFieldxception {
         if (embroidery == null)
             throw new MalformedFieldxception();
@@ -78,5 +79,11 @@ public class EmbroideryResource {
             throw new MalformedFieldxception();
         if (embroidery.getReference() == null)
             throw new MalformedFieldxception();
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
+    public EmbroideryWrapper getEmbroidery(@PathVariable(value = "id") long id) {
+        return this.embroideryController.getEmbroidery(id);
+
     }
 }

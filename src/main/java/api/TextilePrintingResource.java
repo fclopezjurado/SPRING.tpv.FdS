@@ -44,6 +44,7 @@ public class TextilePrintingResource {
         return productosSalidaMock;
     }
 
+
     @RequestMapping(value = Uris.FILTER,method = RequestMethod.POST)
     public List<ProductsOutFilterWrapper> getProductsByFilter(@RequestBody TextilePritingFilterWrapper textile) throws MalformedFieldxception{
         this.validarCamposApi(textile);
@@ -51,6 +52,9 @@ public class TextilePrintingResource {
         return productosSalida;
     }
     
+
+
+
     @RequestMapping(method = RequestMethod.DELETE, value = Uris.ID)
     public void removeTextilePrinting(@PathVariable(value = "id")  long id) {
       System.out.println(id);
@@ -63,11 +67,12 @@ public class TextilePrintingResource {
         this.textilePrintingController.addTextilePrinting(textilePrintingWrapper);
     }
     
-    @RequestMapping(value = Uris.ARTICLES + Uris.ID, method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public void updateTextilePrinting(@RequestBody TextilePrintingWrapper textilePrintingWrapper) {
         this.textilePrintingController.updateTextilePrinting(textilePrintingWrapper);
     }
     
+
     private void validarCamposApi(TextilePritingFilterWrapper textile) throws MalformedFieldxception {
         if (textile == null)
             throw new MalformedFieldxception();
@@ -81,6 +86,12 @@ public class TextilePrintingResource {
             throw new MalformedFieldxception();
         if (textile.getType() == null)
             throw new MalformedFieldxception();
+
+    }
+    
+    @RequestMapping(method = RequestMethod.GET,value = Uris.ID)
+    public TextilePrintingWrapper getTextilePrinting(@PathVariable(value = "id") long id) {
+        return this.textilePrintingController.getTextilePrinting(id);
 
     }
 

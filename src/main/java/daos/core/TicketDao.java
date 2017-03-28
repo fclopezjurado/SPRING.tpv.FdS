@@ -4,6 +4,7 @@ import entities.core.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -26,4 +27,7 @@ public interface TicketDao extends JpaRepository<Ticket, Long> {
     Ticket findByInvoiceID(int id);
 
     public Ticket findById(long id);
+    
+    @Query("select sum((s.retailPrice * s.amount) - s.discount) from Ticket t, Shopping s where s MEMBER OF t.shoppingList AND t.created BETWEEN ?1 AND ?2")
+    BigDecimal getTotalPriceOfTicketsBetweenDates(Calendar inicio, Calendar fin);
 }

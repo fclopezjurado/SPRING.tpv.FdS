@@ -147,6 +147,11 @@ tpv.config(function ($routeProvider) {
             controller: "UserController",
             controllerAs: "vm"
         })
+        .when("/feature18/budgets", {
+            templateUrl: "app/components/feature18/budgets.html",
+            controller: "BudgetController",
+            controllerAs: "vm"
+        })
         //Feature 09
         .when("/feature09/cierrecaja/nuevo", {
             templateUrl: "app/components/feature09/new_cashier_balancing.html",
