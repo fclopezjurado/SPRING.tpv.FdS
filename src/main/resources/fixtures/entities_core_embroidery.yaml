@@ -1,5 +1,5 @@
 embroiderys:
-  - !entities.core.Embroidery:
+  - !entities.core.Embroidery
     id: 001
     stitches: 300
     colors: 270
@@ -7,7 +7,7 @@ embroiderys:
     reference: cola
     retailPrice: 21.23
     description: Cocacola
-  - !entities.core.Embroidery:
+  - !entities.core.Embroidery
     id: 002
     stitches: 300
     colors: 270
@@ -15,7 +15,7 @@ embroiderys:
     reference: pan
     retailPrice: 0.45
     description: Pan
-  - !entities.core.Embroidery:
+  - !entities.core.Embroidery
     id: 003
     stitches: 300
     colors: 270
@@ -23,7 +23,7 @@ embroiderys:
     reference: pizza
     retailPrice: 21.23
     description: Piza
-  - !entities.core.Embroidery:
+  - !entities.core.Embroidery
     id: 004
     stitches: 300
     colors: 270

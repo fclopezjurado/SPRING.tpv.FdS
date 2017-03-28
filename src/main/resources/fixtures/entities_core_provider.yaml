@@ -1,5 +1,5 @@
 providers:
-  - !entities.core.Provider
+  - &prov001 !entities.core.Provider
     id: 001
     company: Carnicas
     address: Calle Milagros, 22, Madrid
@@ -7,7 +7,7 @@ providers:
     phone: 927845464
     paymentConditions: Pago por meses.
     note: Reparte todos los martes.
-  - !entities.core.Provider
+  - &prov002 !entities.core.Provider
     id: 002
     company: Cocacola
     address: Calle Reina Victoria, 113, Madrid
@@ -15,7 +15,7 @@ providers:
     phone: 927841164
     paymentConditions: Pago por pedidos.
     note: Reparte dos veces al mes.
-  - !entities.core.Provider
+  - &prov003 !entities.core.Provider
     id: 003
     company: Frutos secos
     address: Avd. de Chile, 34, Barcelona

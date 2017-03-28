@@ -1,10 +1,10 @@
 Cashierbalances:
-  - !entities.core.CashierBalance:
+  - !entities.core.CashierBalance
     id: 001
     day: 01-01-2016
     balance: 102.32
     change: 23.10
     cash: 65.15
     checks: 54.32
-    dataphone: 654654654
+    dataphone: 654654621
     totalTiketsMoney: 150
