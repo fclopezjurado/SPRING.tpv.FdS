@@ -14,7 +14,6 @@ import api.exceptions.MalformedFieldxception;
 import controllers.EmbroideryController;
 import wrappers.EmbroideryFilterWrapper;
 import wrappers.EmbroideryWrapper;
-import wrappers.ProductFilterWrapper;
 import wrappers.ProductsOutFilterWrapper;
 
 

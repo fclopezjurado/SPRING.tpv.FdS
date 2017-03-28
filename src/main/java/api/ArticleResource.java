@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import api.exceptions.MalformedFieldxception;
 import controllers.ArticleController;
-import daos.DaosServiceIntegrationTests;
 import entities.core.AlarmType;
 import wrappers.ArticleFilterWrapper;
 import wrappers.ArticleWrapper;
-import wrappers.ProductFilterWrapper;
 import wrappers.ProductsOutFilterWrapper;
 
 @RestController
