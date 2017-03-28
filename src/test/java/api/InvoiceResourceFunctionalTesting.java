@@ -20,10 +20,13 @@ public class InvoiceResourceFunctionalTesting {
 
     private static final long wrongMobile = 666666666;
 
+    private String sessionToken;
+
     @Before
     public void seedDataBase() {
         new RestService().deleteAll();
         new RestService().seedDatabase();
+        sessionToken = new RestService().loginAdmin();
     }
 
     @Test
@@ -31,7 +34,7 @@ public class InvoiceResourceFunctionalTesting {
         TicketsWrapper tickets = new RestBuilder<TicketsWrapper>(RestService.URL).path(Uris.TICKETS).clazz(TicketsWrapper.class).get()
                 .build();
         InvoiceWrapper invoice = new RestBuilder<InvoiceWrapper>(RestService.URL).path(Uris.INVOICES)
-                .body(tickets.getFirstTicket().getReference()).clazz(InvoiceWrapper.class).post().build();
+                .body(tickets.getFirstTicket().getReference()).clazz(InvoiceWrapper.class).basicAuth(sessionToken, "").post().build();
 
         assertEquals(invoice.getTicketReference(), tickets.getFirstTicket().getReference());
     }
@@ -39,8 +42,8 @@ public class InvoiceResourceFunctionalTesting {
     @Test
     public void testCreateInvoiceException() {
         try {
-            new RestBuilder<InvoiceWrapper>(RestService.URL).path(Uris.INVOICES).body(ticketReferenceWrong)
-                    .clazz(InvoiceWrapper.class).post().build();
+            new RestBuilder<InvoiceWrapper>(RestService.URL).path(Uris.INVOICES).body(ticketReferenceWrong).clazz(InvoiceWrapper.class)
+                    .basicAuth(sessionToken, "").post().build();
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.NOT_FOUND, httpError.getStatusCode());
         }
@@ -53,7 +56,7 @@ public class InvoiceResourceFunctionalTesting {
          * = Long.valueOf(environment.getProperty("admin.mobile"));
          */
         InvoicesWrapper invoices = new RestBuilder<InvoicesWrapper>(RestService.URL).path(Uris.INVOICES).path("/" + adminMobile)
-                .clazz(InvoicesWrapper.class).get().build();
+                .clazz(InvoicesWrapper.class).basicAuth(sessionToken, "").get().build();
 
         assertEquals(false, invoices.isEmpty());
 
@@ -67,8 +70,8 @@ public class InvoiceResourceFunctionalTesting {
     @Test
     public void testGetInvoicesByUserMobileException() {
         try {
-            new RestBuilder<InvoicesWrapper>(RestService.URL).path(Uris.INVOICES).path("/" + wrongMobile).clazz(InvoicesWrapper.class).get()
-                    .build();
+            new RestBuilder<InvoicesWrapper>(RestService.URL).path(Uris.INVOICES).path("/" + wrongMobile).clazz(InvoicesWrapper.class)
+                    .basicAuth(sessionToken, "").get().build();
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.NOT_FOUND, httpError.getStatusCode());
         }
