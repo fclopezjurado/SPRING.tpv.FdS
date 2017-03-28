@@ -72,6 +72,21 @@
 			        </div>
                 </div>
             </div>
+            <div class="row">
+                <form class="form-inline">
+					<div class="form-group col">
+						<label for="formGroupExampleInput">Product Id:</label>
+						<select ng-model="vm.productId" type="text" class="form-control" id="formGroupExampleInput" placeholder="Product">
+                            <option ng-repeat="product in vm.products" value="{{product.id}}">{{product.description}}</option>
+					    </select>
+					</div>
+					<div class="form-group col">
+						<label for="formGroupExampleInput2">Amount:</label>
+						<input ng-model="vm.productAmount" type="number" value="1" pattern="[0-9]+" class="form-control" id="formGroupExampleInput2" placeholder="Amount">
+					</div>
+					<button type="submit" class="btn btn-primary" ng-click="vm.addProduct(vm.detail)">Add Product</button>
+				</form>
+            </div>
         </div>
       </div>
       <div class="modal-footer">

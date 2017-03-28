@@ -59,4 +59,18 @@ tpv.service('f18Service', ['$http', '$q', function ($http, $q) {
 	  };
       return this.request(config);
    }
+   
+   this.addProduct = function (reference, id, amount){
+		  $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(sessionStorage.token + ':');
+		  let config = {
+		 	 method: 'POST',
+		 	 data: {
+		 		 productId: parseInt(id),
+		 		 amount: amount,
+		 		 reference: reference
+		 	 },
+		 	 url: urlBase + "/budgets/products",
+		  };
+	      return this.request(config);
+	   }
 }]);
