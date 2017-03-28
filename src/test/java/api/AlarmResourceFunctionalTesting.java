@@ -1,22 +1,21 @@
 package api;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import entities.core.Alarm;
+import entities.core.AlarmType;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import wrappers.AlarmWrapper;
+import wrappers.AlarmsWrapper;
+import wrappers.ArticleWrapper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
-import entities.core.Alarm;
-import entities.core.AlarmType;
-import wrappers.AlarmWrapper;
-import wrappers.AlarmsWrapper;
-import wrappers.ArticleWrapper;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class AlarmResourceFunctionalTesting {
 
@@ -111,7 +110,7 @@ public class AlarmResourceFunctionalTesting {
             fail();
         }
     }
-    
+
     @After
     public void after() {
         new RestService().deleteAll();

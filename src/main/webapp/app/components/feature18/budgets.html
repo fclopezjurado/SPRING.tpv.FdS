@@ -1,0 +1,98 @@
+<section class="container">
+	<div class="jumbotron">
+		<div class="table-responsive" ng-init="vm.getBudgets()">
+			<table class="table table-hover">
+				<tbody>
+					<tr>
+						<th>Reference</th>
+						<th>Created</th>
+						<th>Total</th>
+						<th class="col-md-2"></th>
+					</tr>
+					<tr ng-repeat="budget in vm.budgets">
+						<td>{{budget.reference}}</td>
+		                <td>{{budget.created | date:'dd-MM-yy HH:mm:ss'}}</td>
+		                <td>{{budget.total | currency:'€'}}</td>
+		                <td>
+		                    <button class="btn btn-primary" ng-click="vm.getDetails(budget)" data-toggle="modal" data-target="#budgetDetailsModal">Details</button>
+		                    <button class="btn btn-danger" ng-click="vm.deleteBudget(budget)">Delete</button>
+		                </td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="btn btn-primary" ng-click="vm.createBudget()">New budget</button>
+		</div>
+	</div>
+</section>
+
+<div id="budgetDetailsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{vm.detail.reference}}</h4>
+      </div>
+      <div class="modal-body">
+	      <div class="container-fluid">
+	        <div class="row">
+	            <div class="col-md-6">
+                    <h4>Created</h4>
+	                <span>{{vm.detail.created | date:'dd-MM-yy HH:mm:ss'}}</span>
+	            </div>
+	            <div class="col-md-6">
+	                <h4>Total</h4>
+	                <span>{{vm.detail.total | currency:'€'}}</span>
+	            </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>Items</h4>
+                    <div class="table-responsive">
+			            <table class="table table-hover">
+			                <tbody>
+			                    <tr>
+			                        <th>Product Id</th>
+			                        <th>Description</th>
+			                        <th>Amount</th>
+			                        <th>Discount</th>
+			                        <th>Retail Price</th>
+			                        <th class="col-md-2"></th>
+			                    </tr>
+			                    <tr ng-repeat="shopping in vm.detail.shoppingList">
+			                        <td>{{shopping.productId}}</td>
+			                        <td>{{shopping.description}}</td>
+			                        <td>{{shopping.amount}}</td>
+			                        <td>{{shopping.discount | currency:'€'}}</td>
+			                        <td>{{shopping.retailPrice | currency:'€'}}</td>
+			                    </tr>
+			                </tbody>
+			            </table>
+			        </div>
+                </div>
+            </div>
+            <div class="row">
+                <form class="form-inline">
+					<div class="form-group col">
+						<label for="formGroupExampleInput">Product Id:</label>
+						<select ng-model="vm.productId" type="text" class="form-control" id="formGroupExampleInput" placeholder="Product">
+                            <option ng-repeat="product in vm.products" value="{{product.id}}">{{product.description}}</option>
+					    </select>
+					</div>
+					<div class="form-group col">
+						<label for="formGroupExampleInput2">Amount:</label>
+						<input ng-model="vm.productAmount" type="number" value="1" pattern="[0-9]+" class="form-control" id="formGroupExampleInput2" placeholder="Amount">
+					</div>
+					<button type="submit" class="btn btn-primary" ng-click="vm.addProduct(vm.detail)">Add Product</button>
+				</form>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

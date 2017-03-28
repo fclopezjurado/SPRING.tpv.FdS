@@ -5,15 +5,19 @@
     <title>tpv U.P.M.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="assets/css/main.css">
     <script src="assets/js/angular.min.js"></script>
     <script src="assets/js/route.min.js"></script>
-    <script src="assets/js/angular-css.min.js"></script> 
+    <script src="assets/js/angular-css.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
     <!-- Configuración -->
@@ -21,16 +25,19 @@
 
     <!-- Controladores -->
     <!-- Autor: Jesús Bernal -->
-    <script src="app/components/feature00/f00Service.js"></script>  
-    <script src="app/components/feature00/versionController.js"></script>  
-    <script src="app/components/feature00/loginController.js"></script>  
-    <script src="app/components/feature00/registrationController.js"></script>  
+    <script src="app/components/feature00/f00Service.js"></script>
+    <script src="app/components/feature00/versionController.js"></script>
+    <script src="app/components/feature00/loginController.js"></script>
+    <script src="app/components/feature00/registrationController.js"></script>
     <script src="app/components/feature00/deleteAllController.js"></script>
+    <!-- Autor: Javier Molina -->
+    <script src="app/components/feature02/f02Service.js"></script>
+    <script src="app/components/feature02/providerController.js"></script>
     <!-- Autor: Jorge Cárdenas -->
-    <script src="app/components/feature20/f20Service.js"></script>  
-    <script src="app/components/feature20/userController.js"></script>  
+    <script src="app/components/feature20/f20Service.js"></script>
+    <script src="app/components/feature20/userController.js"></script>
     <!-- Autor: Jorge Higuera y Daniel González -->
-    <script src="app/components/feature10/f10Service.js"></script>  
+    <script src="app/components/feature10/f10Service.js"></script>
     <script src="app/components/feature10/listAlarmsController.js"></script>
     <script src="app/components/feature10/listArticlesWarningController.js"></script>
     <!-- Author: Francisco López -->
@@ -38,13 +45,13 @@
     <script src="app/components/feature8.9/services/get_tickets_by_user_mobile.service.js"></script>
     <script src="app/components/feature8.9/services/create_invoice.service.js"></script>
     <script src="app/components/feature8.9/controllers/create_invoice.controller.js"></script>
-    <!-- Autor: Alfonso Ayuso -->    
-    <script src="app/components/feature07/f07Service.js"></script>    
+    <!-- Autor: Alfonso Ayuso -->
+    <script src="app/components/feature07/f07Service.js"></script>
     <script src="app/components/feature07/validController.js"></script>
     <script src="app/components/feature07/createController.js"></script>
     <script src="app/components/feature07/searchController.js"></script>
     <script src="app/components/feature07/consumeController.js"></script>
-    <!-- Autor: Eduardo Franco Gutierrez-->  
+    <!-- Autor: Eduardo Franco Gutierrez-->
     <script src="app/components/feature04/controllers/searchProducts.controller.js"></script>
     <script src="app/components/feature04/services/search_Products.js"></script>
     <script src="app/components/feature04/services/search_Articles.js"></script>
@@ -56,52 +63,84 @@
     <script src="app/components/feature8.10/services/get_users.service.js"></script>
     <script src="app/components/feature8.10/controllers/get_invoice.controller.js"></script>
     <!-- Author: Enrique Arranz -->
-    <script src="app/components/feature09/new_cashier_balancing.service.js"></script>
-    <script src="app/components/feature09/get_cashier_balancing.service.js"></script>
+    <script src="app/components/feature09/cashier_balancing.service.js"></script>
     <script src="app/components/feature09/cashier_balancing.controller.js"></script>
-        <!-- Autor: Cecilia Aguilar DAvid Blasco-->  
-    <script src="app/components/feature03/f03Service.js"></script>  
+    <!-- Autor: Cecilia Aguilar DAvid Blasco-->
+    <script src="app/components/feature03/f03Service.js"></script>
     <script src="app/components/feature03/Articles/ArticleListController.js"></script>
     <script src="app/components/feature03/Embroidery/EmbroideryListController.js"></script>
     <script src="app/components/feature03/TextilePrinting/TextilePrintingListController.js"></script>
-     <!-- Autor: Emilio Castellano , Alberto Bricio-->  
+
+    <script src="app/components/feature03/Articles/CreateArticleController.js"></script>
+    <script src="app/components/feature03/Embroidery/CreateEmbroideryController.js"></script>
+    <script src="app/components/feature03/TextilePrinting/CreateTextilePrintingController.js"></script>
+    <script src="app/components/feature03/Articles/UpdateArticleController.js"></script>
+    <script src="app/components/feature03/Embroidery/UpdateEmbroideryController.js"></script>
+    <script src="app/components/feature03/TextilePrinting/UpdateTextilePrintingController.js"></script>
+    <!-- Autor: Emilio Castellano , Alberto Bricio-->
     <script src="app/components/feature06/searchTicketController.js"></script>
     <script src="app/components/feature06/editTicketController.js"></script>
     <script src="app/components/feature06/createTicketController.js"></script>
-    <!-- Autor: Jose Maria Moreno-->  
+    <script src="app/components/feature06/feature06Service.js"></script>
+    <!-- Autor: Jose Maria Moreno-->
     <script src="app/components/feature14/totalSalesController.js"></script>
     <script src="app/components/feature14/bestSellersController.js"></script>
+    <script src="app/components/feature14/productSalesController.js"></script>
     <script src="app/components/feature14/f14Service.js"></script>
+    
+    <!-- Autor: Jorge Cárdenas -->
+    <script src="app/components/feature18/f18Service.js"></script>  
+    <script src="app/components/feature18/budgetController.js"></script> 
+
+
+    <!--  Autor: Alan Mark Sousa Juan Robisco-->
+    <script src="app/components/feature11/productServiceDataService.js"></script>
+    <script src="app/components/feature11/productsServiceController.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+     <!-- Autor: Dan Huang, TieLin Jiang-->  
+    <script src="app/components/feature05/productsFamilyController.js"></script>
+    <script src="app/components/feature05/f05Service.js"></script>
+    
 </head>
 <body>
-    <nav class="navbar navbar-default">
+<nav class="navbar navbar-default">
 
-      <div class="navbar-header">
+    <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse1">
-          <span class="sr-only">Desplegar navegación</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+            <span class="sr-only">Desplegar navegación</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">TPV MIW UPM</a>
-      </div>
+    </div>
 
-      <div id="collapse1" class="collapse navbar-collapse">
-         <ul class="nav navbar-nav">
-           <li><a href="#/">Home</a></li>
+    <div id="collapse1" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li><a href="#/">Home</a></li>
+            <!-- Menus -->
 
-           <!-- Menus -->
-                        
-           <!-- Autor: Jesús Bernal -->                       
-           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F00<b class="caret"></b></a>
+            <!-- Autor: Jesús Bernal -->
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F00<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature00/version">Version</a></li>
+                    <li><a href="#/feature00/login">Login</a></li>
+                    <li><a href="#/feature00/registration">Registration</a></li>
+                    <li><a href="#/feature00/delete-all">Delete All</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F02<b class="caret"></b></a>
              <ul class="dropdown-menu">
-               <li><a href="#/feature00/version">Version</a></li>
-               <li><a href="#/feature00/login">Login</a></li>
-               <li><a href="#/feature00/registration">Registration</a></li>
-               <li><a href="#/feature00/delete-all">Delete All</a></li>
+               <li><a href="#/feature02/registration">Provider Registration</a></li>
+               <li><a href="#/feature02/list">Provider List</a></li>
+               <li><a href="#/feature02/update">Provider Update</a></li>
              </ul>
            </li>
+           
            <li><a href="#/feature20/users">F20</a></li>
+           <li><a href="#/feature18/budgets">F18</a></li>
            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F07<b class="caret"></b></a>
              <ul class="dropdown-menu">
                <li><a href="#/feature07/create">Crear</a></li>
@@ -123,51 +162,71 @@
                 <ul class="dropdown-menu">
                     <li><a href="#/feature4/searchProducts">Buscar Productos</a></li>
                 </ul>
-           </li>
-                
-                <!-- Feature 03-01  -->     
+            </li>
+
+            <!-- Feature 03-01  -->
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F03<b class="caret"></b></a>
-             <ul class="dropdown-menu">
-              <li><a href="#/feature03/Articles/ArticleList">ArticleList</a></li>
-               <li><a href="#/feature03/TextilePrinting/TextilePrintingList">TextilePrintingList</a></li>
-               <li><a href="#/feature03/Embroidery/EmbroideryList">EmbroideryList</a></li>
-             </ul>
-           </li>
-           
-           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F8<b class="caret"></b></a>
-             <ul class="dropdown-menu">
-               <li><a href="#/feature8.9/invoices/create">Crear factura</a></li>
-               <li><a href="#/feature8.10/invoices/details">Detalles de factura</a></li>
-             </ul>
-           </li>
-           <!-- FEature 09 -->
-           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F09<b class="caret"></b></a>
-             <ul class="dropdown-menu">
-               <li><a href="#/feature09/cierrecaja/nuevo">Crear cierre de caja</a></li>
-               <li><a href="#/feature09/cierrecaja">Listar cierre de caja</a></li>
-             </ul>
-           </li>
-           <!-- Feature 6  --> 
-           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F6<b class="caret"></b></a>
-             <ul class="dropdown-menu">
-               <li><a href="#/feature06/createTicket">Crear ticket</a></li>
-               <li><a href="#/feature06/searchTicket">Consultar ticket</a></li>
-               <li><a href="#/feature06/editTicket">Modificar ticket</a></li>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature03/Articles/ArticleList">ArticleList</a></li>
+                    <li><a href="#/feature03/TextilePrinting/TextilePrintingList">TextilePrintingList</a></li>
+                    <li><a href="#/feature03/Embroidery/EmbroideryList">EmbroideryList</a></li>
+                    <li><a href="#/feature03/Articles/CreateArticle">Create Article</a></li>
+                    <li><a href="#/feature03/TextilePrinting/CreateTextilePrinting">Create Textile Printing</a></li>
+                    <li><a href="#/feature03/Embroidery/CreateEmbroidery">Create Embroidery</a></li>
+                    <li><a href="#/feature03/Articles/UpdateArticle">Update Article</a></li>
+                    <li><a href="#/feature03/TextilePrinting/UpdateTextilePrinting">Update Textile Printing</a></li>
+                    <li><a href="#/feature03/Embroidery/UpdateEmbroidery">Update Embroidery</a></li>
                 </ul>
-                </li>
-           <!-- Feature 14 -->
-           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F14<b class="caret"></b></a>
-             <ul class="dropdown-menu">
-               <li><a href="#/feature14/totalSales">Total Sales</a></li>
-               <li><a href="#/feature14/bestSellers">Best Sellers</a></li>
-             </ul>
+            </li>
+
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F8<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature8.9/invoices/create">Crear factura</a></li>
+                    <li><a href="#/feature8.10/invoices/details">Detalles de factura</a></li>
+                </ul>
+            </li>
+            <!-- FEature 09 -->
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F09<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature09/cierrecaja/nuevo">Crear cierre de caja</a></li>
+                    <li><a href="#/feature09/cierrecaja">Listar cierre de caja</a></li>
+                </ul>
+            </li>
+            <!-- Feature 6  -->
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F6<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature06/createTicket">Crear ticket</a></li>
+                    <li><a href="#/feature06/searchTicket">Consultar ticket</a></li>
+                    <li><a href="#/feature06/editTicket">Modificar ticket</a></li>
+                </ul>
+            </li>
+            <!-- Feature 14 -->
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F14<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature14/totalSales">Total Sales</a></li>
+                    <li><a href="#/feature14/bestSellers">Best Sellers</a></li>
+                    <li><a href="#/feature14/productSales">Product sales development</a></li>
+                </ul>
+            </li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F11<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature11/ticket">Ver estado pedido</a></li>
+                </ul>
+            </li>
+            
+            <!-- Feature 05  --> 
+           <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">F05<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#/feature05/productsFamily">Products Family</a></li>
+                </ul>
            </li>
-         </ul>
-       </div>
-     </nav>
-  <main id='cuerpo'>
+            
+        </ul>
+    </div>
+</nav>
+<main id='cuerpo'>
     <div class="container" ng-view></div>
-  </main>  
+</main>
 </body>
 
 </html>

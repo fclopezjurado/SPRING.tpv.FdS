@@ -32,14 +32,6 @@ public class ProviderWrapper {
         this.note = note;
     }
 
-    public long getPhone() {
-        return phone;
-    }
-
-    public void setPhone(long phone) {
-        this.phone = phone;
-    }
-
     public ProviderWrapper(Provider provider) {
         this.id = provider.getId();
         this.company = provider.getCompany();
@@ -48,6 +40,14 @@ public class ProviderWrapper {
         this.phone = provider.getPhone();
         this.paymentConditions = provider.getPaymentConditions();
         this.note = provider.getNote();
+    }
+
+    public long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(long phone) {
+        this.phone = phone;
     }
 
     public int getId() {
@@ -105,7 +105,7 @@ public class ProviderWrapper {
 
     @Override
     public String toString() {
-        return "[ id: " + this.getId() + " Company: " + this.getCompany() + " Mobile: " + this.getMobile() + "]";
+        return "[ id: " + this.getId() + " Company: " + this.getCompany() +  " Mobile: " + this.getMobile() + " PaymentConditions: " + this.getPaymentConditions() + " Note: " + this.getNote() + "]";
     }
 
     @Override

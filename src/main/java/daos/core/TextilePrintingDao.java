@@ -1,10 +1,12 @@
 package daos.core;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import entities.core.TextilePrinting;
 
-public interface TextilePrintingDao extends JpaRepository<TextilePrinting, Long> {
-    TextilePrinting findById(long id);
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TextilePrintingDao extends JpaRepository<TextilePrinting, Long> , TextilePritingFExtended{
+    public List<TextilePrinting> findAll();
+    public TextilePrinting findById(long id);
 }

@@ -1,21 +1,28 @@
 package entities.core;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class CashierBalance {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
+    @Temporal(TemporalType.DATE)
     private Calendar day;
 
-    private BigDecimal balance = new BigDecimal(0);
+    private BigDecimal balance;
 
     @Column(name= "dayChange")
     private BigDecimal change;
@@ -32,12 +39,27 @@ public class CashierBalance {
         day = Calendar.getInstance();
     }
 
-    public CashierBalance(BigDecimal change, BigDecimal cash, BigDecimal checks, BigDecimal dataphone) {
+    public CashierBalance(BigDecimal change, BigDecimal total, BigDecimal cash, BigDecimal checks, BigDecimal dataphone) {
         super();
         this.change = change;
+        this.totalTiketsMoney = total;
         this.cash = cash;
         this.checks = checks;
         this.dataphone = dataphone;
+        this.balance = this.calculateBalance();
+        this.day = Calendar.getInstance();
+    }
+    
+    private BigDecimal calculateBalance(){
+        BigDecimal balance = this.totalTiketsMoney.subtract(this.change);
+        if(this.cash != null)
+            balance.subtract(this.cash);        
+        if(this.checks != null)
+            balance.subtract(this.checks);
+        if(this.dataphone != null)
+            balance.subtract(this.dataphone);
+        
+        return balance;
     }
 
     public int getId() {
@@ -131,5 +153,13 @@ public class CashierBalance {
             return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "CashierBalance [id=" + id + ", day=" + day + ", balance=" + balance + ", change=" + change + ", cash=" + cash + ", checks="
+                + checks + ", dataphone=" + dataphone + ", totalTiketsMoney=" + totalTiketsMoney + "]";
+    }
+    
+    
 
 }

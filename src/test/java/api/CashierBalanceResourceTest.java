@@ -1,17 +1,18 @@
 package api;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import api.exceptions.AlreadyExistCashierBalanceDayException;
 import api.exceptions.NotFoundCashierBalanceIdException;
+import org.junit.Before;
+import org.junit.Test;
 import wrappers.CashierBalanceWrapper;
+
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CashierBalanceResourceTest {
 
@@ -39,9 +40,9 @@ public class CashierBalanceResourceTest {
     public void testCreateCashierBalance() {
         try {
             cashierBalanceResource.createCashierBalance(new CashierBalanceWrapper(50, 50, 50, 50, "03-03-1970"));
-        } catch (AlreadyExistCashierBalanceDayException e) {
+        } catch (AlreadyExistCashierBalanceDayException | ParseException e) {
             fail();
-        }
+        } 
     }
 
     @Test
@@ -50,7 +51,7 @@ public class CashierBalanceResourceTest {
             cashierBalanceResource.createCashierBalance(
                     new CashierBalanceWrapper(50, 50, 50, 50, new SimpleDateFormat(CashierBalanceWrapper.dateFormat).format(new Date())));
             fail();
-        } catch (AlreadyExistCashierBalanceDayException e) {
+        } catch (AlreadyExistCashierBalanceDayException | ParseException e) {
             assertEquals(1, 1);
         }
     }
@@ -58,10 +59,10 @@ public class CashierBalanceResourceTest {
     @Test
     public void testUpdateCashierBalance() {
         CashierBalanceWrapper balance = cashierBalanceResource.getCashierBalance(1);
-        balance.setChange(80);
+        balance.setChange(new BigDecimal(80));
         try {
-            cashierBalanceResource.updateCashierBalance(balance);
-            assertEquals(balance.getChange(), cashierBalanceResource.getCashierBalance(1).getChange(), 0);
+            cashierBalanceResource.updateCashierBalance(balance.getId(), balance);
+            assertEquals(balance.getChange(), cashierBalanceResource.getCashierBalance(1).getChange());
         } catch (NotFoundCashierBalanceIdException e) {
             fail();
         }

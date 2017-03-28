@@ -1,18 +1,15 @@
 package api;
 
-import java.util.List;
+import api.exceptions.AlreadyExistCashierBalanceDayException;
+import api.exceptions.NotFoundCashierBalanceIdException;
+import controllers.CashierBalanceController;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
-import api.exceptions.NotFoundCashierBalanceIdException;
-import api.exceptions.AlreadyExistCashierBalanceDayException;
-import controllers.CashierBalanceController;
+import org.springframework.web.bind.annotation.*;
 import wrappers.CashierBalanceWrapper;
+
+import java.text.ParseException;
+import java.util.List;
 
 @RestController
 @RequestMapping(Uris.VERSION + Uris.CASHIER_BALANCE)
@@ -30,14 +27,14 @@ public class CashierBalanceResource {
         return cashierBalanceController.getAll();
     }
 
-    @RequestMapping(value = Uris.REFERENCE, method = RequestMethod.GET)
+    @RequestMapping(value = Uris.ID, method = RequestMethod.GET)
     public CashierBalanceWrapper getCashierBalance(@PathVariable int id) {
         return cashierBalanceController.getCashierBalanceById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public CashierBalanceWrapper createCashierBalance(@RequestBody CashierBalanceWrapper cashierBalanceWrapper)
-            throws AlreadyExistCashierBalanceDayException {
+            throws AlreadyExistCashierBalanceDayException, ParseException {
         if (cashierBalanceController.existCashierBalanceByDate(cashierBalanceWrapper.getDate())) {
             throw new AlreadyExistCashierBalanceDayException();
         }
@@ -46,9 +43,12 @@ public class CashierBalanceResource {
     }
 
     @RequestMapping(value = Uris.ID, method = RequestMethod.PUT)
-    public CashierBalanceWrapper updateCashierBalance(@RequestBody CashierBalanceWrapper cashierBalanceWrapper)
+    public CashierBalanceWrapper updateCashierBalance(@PathVariable int id, @RequestBody CashierBalanceWrapper cashierBalanceWrapper)
             throws NotFoundCashierBalanceIdException {
-        if (!cashierBalanceController.existCashierBalanceId(cashierBalanceWrapper.getId())) {
+        System.out.println("--------------------");
+        System.out.println(cashierBalanceWrapper);
+        System.out.println("--------------------");
+        if (!cashierBalanceController.existCashierBalanceId(id)) {
             throw new NotFoundCashierBalanceIdException();
         }
 

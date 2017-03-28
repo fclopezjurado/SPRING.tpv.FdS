@@ -1,39 +1,39 @@
-<section>
+<section ng-init="vm.getAll()">
     <div class="page-header">
     </div>
     <br/>
     <div class="table-responsive">
-    <fieldset>
-    <legend  align="right">Embroidery List</legend>
-       <table class="table table-striped">
-         <thead>
-            <tr>
-              <th>Reference</th>
-              <th>Description</th>
-              <th>Retail price</th>
-              <th>Stitches</th>
-              <th>Colors</th>
-              <th>Square Millimeters</th>
-            </tr>
-          </thead>
-          <tbody ng-init="vm.getAll()">
-            <tr ng-repeat="embroidery in vm.response">
-              <td>{{embroidery.reference}}</td>
-              <td>{{embroidery.description}}</td>
-              <td>{{embroidery.retailPrice}}</td>
-              <td>{{embroidery.stitches}}</td>
-              <td>{{embroidery.colors}}</td>
-              <td>{{embroidery.squareMillimeters}}</td>
-               <td style="vertical-align: middle;">
-              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeEmbroidery(embroidery.id) ; vm.getAll()">
-              </td>
-            </tr>
-          </tbody>
-        </table>
-            
-        <div class="no-data" ng-if="vm.data.length === 0">
-           <div class="panel-body"> No Articles found </div>
-        </div>
+        <fieldset>
+            <legend align="right">Embroidery List</legend>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Reference</th>
+                    <th>Description</th>
+                    <th>Retail price</th>
+                    <th>Stitches</th>
+                    <th>Colors</th>
+                    <th>Square Millimeters</th>
+                </tr>
+                </thead>
+                <tbody ng-init="vm.getAll()">
+                <tr ng-repeat="embroidery in vm.response">
+                    <td>{{embroidery.reference}}</td>
+                    <td>{{embroidery.description}}</td>
+                    <td>{{embroidery.retailPrice}}</td>
+                    <td>{{embroidery.stitches}}</td>
+                    <td>{{embroidery.colors}}</td>
+                    <td>{{embroidery.squareMillimeters}}</td>
+                    <td style="vertical-align: middle;">
+                        <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeEmbroidery(embroidery.id)">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="no-data" ng-if="vm.data.length === 0">
+                <div class="panel-body"> No Articles found</div>
+            </div>
         </fieldset>
     </div>
 </section>

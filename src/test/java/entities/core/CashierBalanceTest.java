@@ -22,9 +22,10 @@ public class CashierBalanceTest {
         BigDecimal doscientos = new BigDecimal(200);
         BigDecimal quinientos = new BigDecimal(500);
         BigDecimal diez = new BigDecimal(10);
-        CashierBalance cBalance = new CashierBalance(doscientos, quinientos, diez, diez);
+        CashierBalance cBalance = new CashierBalance(doscientos, quinientos, quinientos, diez, diez);
         assertEquals(doscientos, cBalance.getChange());
         assertEquals(quinientos, cBalance.getCash());
+        assertEquals(quinientos, cBalance.getTotalTiketsMoney());
         assertEquals(diez, cBalance.getChecks());
         assertEquals(diez, cBalance.getDataphone());
     }

@@ -5,54 +5,54 @@
             <form class="form-horizontal">
                 <div class="form-group">
                     <div class="container">
-                            <div class='col-xs-4 col-xs-push-1'>
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepickerInicio'>
-                                        <input type='text' class="form-control" ng-model="vm.inicio" required/>
-                                        <span class="input-group-addon">
+                        <div class='col-xs-4 col-xs-push-1'>
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepickerInicio'>
+                                    <input type='text' class="form-control" ng-model="vm.inicio" required/>
+                                    <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
-                                    </div>
-                                    
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class='col-xs-4 col-xs-push-2'>
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepickerFin'>
+                                    <input type='text' class="form-control" ng-model="vm.fin" required/>
+                                    <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
                                 </div>
                             </div>
-                           
-                            <div class='col-xs-4 col-xs-push-2'>
-                                <div class="form-group">
-                                    <div class='input-group date' id='datetimepickerFin'>
-                                        <input type='text' class="form-control" ng-model="vm.fin" required/>
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-                                 </div>
-                            </div>
                         </div>
-                        <label class="bg-success col-xs-12" ng-show="vm.completed">Petición correcta</label>
-                        <div class="col-xs-2 col-xs-push-10">
-                            <button class="btn btn-primary btn-sm" ng-click="vm.bestSellers()">Enviar</button>
-                        </div>   
-                        <div class="col-xs-12">
-                         <table class="table table-hover">
-			                <tbody>
-			                    <tr>
-			                        <th>ProductId</th>
-			                        <th>Description</th>
-			                        <th>Total Sales</th>
-			                    </tr>
-			                    <tr ng-repeat="product in vm.productList">
-			                         <td>{{ product.idProduct }}</td>
-			                         <td>{{ product.description }}</td>
-			                         <td>{{ product.totalAmount }}</td>
-			                    </tr>
-			                </tbody>
-			            </table>
-                        </div>
-                        <div class=col-xs-12>
-	                        <label class="bg-danger col-xs-12" ng-show="vm.error">Error!!!</label> 
-                        </div>  
-                        
-                        <div id="container"></div>
+                    </div>
+                    <label class="bg-success col-xs-12" ng-show="vm.completed">Petición correcta</label>
+                    <div class="col-xs-2 col-xs-push-10">
+                        <button class="btn btn-primary btn-sm" ng-click="vm.bestSellers()">Enviar</button>
+                    </div>
+                    <div class="col-xs-12">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>ProductId</th>
+                                <th>Description</th>
+                                <th>Total Sales</th>
+                            </tr>
+                            <tr ng-repeat="product in vm.productList">
+                                <td>{{ product.idProduct }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>{{ product.totalAmount }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class=col-xs-12>
+                        <label class="bg-danger col-xs-12" ng-show="vm.error">Error!!!</label>
+                    </div>
+
+                    <div id="container"></div>
                 </div>
             </form>
         </fieldset>
@@ -64,10 +64,10 @@
         $('#datetimepickerInicio').datetimepicker({format: 'DD/MM/YYYY'});
         $('#datetimepickerFin').datetimepicker({
             format: 'DD/MM/YYYY',
-            useCurrent: false 
+            useCurrent: false
         });
         $("#datetimepickerInicio").on("dp.change", function (e) {
-        	
+
             $('#datetimepickerFin').data("DateTimePicker").minDate(e.date);
         });
         $("#datetimepickerFin").on("dp.change", function (e) {

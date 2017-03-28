@@ -1,11 +1,12 @@
 package wrappers;
 
-import java.util.Calendar;
-import java.util.List;
-
 import entities.core.Shopping;
+import entities.core.Ticket;
 import entities.core.TicketState;
 import entities.users.User;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class TicketWrapper {
 
@@ -31,6 +32,15 @@ public class TicketWrapper {
         this.ticketState = ticketState;
         this.shoppingList = shoppingList;
         this.user = user;
+    }
+
+    public TicketWrapper(Ticket ticket) {
+        this.id = ticket.getId();
+        this.created = ticket.getCreated();
+        this.reference = ticket.getReference();
+        this.ticketState = ticket.getTicketState();
+        this.shoppingList = ticket.getShoppingList();
+        this.user = ticket.getUser();
     }
 
     public long getId() {

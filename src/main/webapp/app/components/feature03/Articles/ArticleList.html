@@ -4,35 +4,35 @@
     </div>
     <br/>
     <div class="table-responsive">
-     <fieldset>
-      <legend  align="right">Article List</legend>
-       <table class="table table-striped">
-         <thead>
-            <tr>
-              <th>Reference</th>
-              <th>Description</th>
-              <th>Retail price</th>
-              <th>Wholesale Price</th>
-            </tr>
-          </thead>
-          <tbody ng-init="vm.getAll()">
-            <tr ng-repeat="article in vm.response">
-              <td>{{article.reference}}</td>
-              <td>{{article.description}}</td>
-              <td>{{article.retailPrice}}</td>
-              <td>{{article.wholesalePrice}}</td>
-              <td style="vertical-align: middle;">
-              <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeArticle(article.id) ; vm.getAll()">
-              </td>
-            </tr>
-          </tbody>
-          
-        </table>
-            
-        <div class="no-data" ng-if="vm.data.length === 0">
-           <div class="panel-body"> No Articles found </div>
-        </div>
-   
-    </fieldset>
-     </div>
+        <fieldset>
+            <legend align="right">Article List</legend>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Reference</th>
+                    <th>Description</th>
+                    <th>Retail price</th>
+                    <th>Wholesale Price</th>
+                </tr>
+                </thead>
+                <tbody ng-init="vm.getAll()">
+                <tr ng-repeat="article in vm.response">
+                    <td>{{article.reference}}</td>
+                    <td>{{article.description}}</td>
+                    <td>{{article.retailPrice}}</td>
+                    <td>{{article.wholesalePrice}}</td>
+                    <td style="vertical-align: middle;">
+                        <input class="btn btn-danger" type="button" value="Delete" ng-click="vm.removeArticle(article.id)">
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+
+            <div class="no-data" ng-if="vm.data.length === 0">
+                <div class="panel-body"> No Articles found</div>
+            </div>
+
+        </fieldset>
+    </div>
 </section>
