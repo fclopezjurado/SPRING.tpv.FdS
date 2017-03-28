@@ -45,6 +45,10 @@ public class TextilePrintingResourceFunctionalTesting {
     
     @Test(expected=HttpClientErrorException.class)
     public void testGetTextilePrintingByFilterException() {
+        TextilePritingFilterWrapper textilePrintingFilterWrapper = new TextilePritingFilterWrapper();
+        textilePrintingFilterWrapper.setDescription(null);
+        new RestBuilder<ProductsOutFilterWrapper[]>(RestService.URL).path(Uris.TEXTILE_PRINTING + Uris.FILTER)
+        .clazz(ProductsOutFilterWrapper[].class).body(textilePrintingFilterWrapper).basicAuth(token, "").post().build();
         
     }
 }
