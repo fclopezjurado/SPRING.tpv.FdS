@@ -70,4 +70,6 @@ public class Uris {
 
     public static final String BUDGETS = "/budgets";
     
+    public static final String MOCK = "/mock";
+    
 }

@@ -8,7 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({TokenControllerIT.class, ArticleControllerIT.class, AlarmControllerIT.class, StatisticsControllerIT.class,
         VoucherControllerIT.class, TicketControllerIT.class, InvoiceControllerIT.class, FamilyControllerIT.class,
         CashierBalanceControllerIT.class, EmbroideryControllerIT.class, ProductControllerIT.class, TextilePrintingControllerIT.class,
-        UserControllerIT.class, providerControllerIT.class})
+        UserControllerIT.class, providerControllerIT.class, BudgetControllerIT.class})
 
 public class AllControllersIntegrationTests {
 
