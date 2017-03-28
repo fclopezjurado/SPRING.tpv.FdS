@@ -12,7 +12,6 @@ public class CashierBalancesListWrapper extends ArrayList<CashierBalanceWrapper>
     public void wrapCashierBalances(List<CashierBalance> cashierBalances) {  
         CashierBalanceWrapper balanceWrapper;
        for(CashierBalance balance : cashierBalances){
-           System.out.println(balance);
            balanceWrapper = new CashierBalanceWrapper();
            balanceWrapper.setId(balance.getId());
            balanceWrapper.setChange(balance.getChange());
@@ -20,8 +19,8 @@ public class CashierBalancesListWrapper extends ArrayList<CashierBalanceWrapper>
            balanceWrapper.setDataphone(balance.getDataphone());
            balanceWrapper.setTotal(balance.getTotalTiketsMoney());
            balanceWrapper.setDay(balance.getDay());
-           System.out.println(balanceWrapper); 
-           System.out.println(balanceWrapper); 
+           balanceWrapper.setBalance(balance.getBalance());
+           balanceWrapper.setCash(balance.getCash());
            this.add(balanceWrapper);
        }
     }

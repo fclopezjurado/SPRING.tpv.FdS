@@ -20,6 +20,8 @@ public class CashierBalanceWrapper {
     private BigDecimal dataphone;
 
     private BigDecimal cash;
+    
+    private BigDecimal balance;
 
     private String date;
 
@@ -54,6 +56,14 @@ public class CashierBalanceWrapper {
         this.checks = new BigDecimal(checks);
         this.dataphone = new BigDecimal(dataphone);
         this.date = date;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public int getId() {

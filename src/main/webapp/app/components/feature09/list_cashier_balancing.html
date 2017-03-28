@@ -1,4 +1,5 @@
-<section class="container-fluid" ng-controller="CashierBalancingController as vm">
+<div ng-controller="CashierBalancingController as vm">
+<section class="container-fluid" >
     <div class="jumbotron text-center">
         <fieldset>
             <legend>Feature09. Listado de cierres de cajas</legend>
@@ -30,10 +31,9 @@
                         <td>{{balance.date}}</td>
                         <td>{{balance.change}}</td>
                         <td>{{balance.total}}</td>
-                        <td>{{balance.total - (balance.cash + balance.dataphone + balance.checks) + balance.change}}</td>
+                        <td>{{balance.balance}}</td>
                         <td>
-                            <button type="button" class="btn btn-info btn-sm">Editar</button>
-                            <button type="button" class="btn btn-danger btn-sm">Eliminar</button>
+                            <button type="button" class="btn btn-info btn-sm" ng-click="vm.editCashierBalancing(balance)" data-toggle="modal" data-target="#cashierBalanceModal">Editar</button>
                         </td>
                     </tr>
                 </tbody>
@@ -41,3 +41,67 @@
         </fieldset>
     </div>
 </section>
+
+
+<div id="cashierBalanceModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Editar cierre de caja</h4>
+      </div>
+      <div class="modal-body">
+          <div class="container-fluid">
+             <div ng-show="vm.showAlert" class="alert alert-danger">
+                 <strong>¡ERROR!</strong> {{vm.alertMessage}}
+             </div>
+            <div class="form-container">
+                 <div class="well">
+                     <div class="row">
+                         <div class="col-md-6">
+                             <div class="form-group">
+                                 <label class="control-label">Fecha</label> 
+                                 <input type="date" class="form-control" ng-model="vm.cashierbalancing.date" readonly ng-change="vm.getTotal()" required>
+                             </div>
+                         </div>
+                         <div class="col-md-6">
+                             <div class="form-group">
+                                 <label class="control-label">Importe total</label> 
+                                 <input type="number" class="form-control" ng-model="vm.cashierbalancing.total" readonly required>
+                             </div>
+                         </div>
+                     </div>
+
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label">Importe inicial</label> 
+                     <input type="number" class="form-control" ng-model="vm.cashierbalancing.change" ng-change="vm.calculateBalance()" required>
+                 </div>
+
+                 <div class="form-group">
+                     <label class="control-label">Importe datáfono</label> 
+                     <input type="number" class="form-control" ng-model="vm.cashierbalancing.dataphone" ng-change="vm.calculateBalance()" required>
+                 </div>
+                 <div class="form-group">
+                     <label class="control-label">Importe metálico</label> 
+                     <input type="number" class="form-control" ng-model="vm.cashierbalancing.cash" ng-change="vm.calculateBalance()" required>
+                 </div>
+                 
+                 <div class="form-group">
+                     <label class="control-label">Balance</label> 
+                     <input type="number" class="form-control" ng-model="vm.cashierbalancing.balance" ng-style="vm.backgroundBalance" required>
+                 </div>
+             </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.saveBalance()" data-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
