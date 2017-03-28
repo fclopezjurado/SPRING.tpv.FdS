@@ -32,6 +32,15 @@ public class UserForEditListWrapper {
                     user.getDni(), user.getEmail(), user.getRegistrationDate()));
     }
 
+    public UserForEditWrapper findByMobile(long mobile) {
+        if (!this.isEmpty())
+            for (UserForEditWrapper user : this.userList)
+                if (user.getMobile() == mobile)
+                    return user;
+
+        return new UserForEditWrapper();
+    }
+
     public boolean isEmpty() {
         return this.userList.isEmpty();
     }
