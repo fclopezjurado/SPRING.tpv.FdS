@@ -5,6 +5,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.apache.logging.log4j.LogManager;
 import org.junit.After;
 import org.junit.Before;
@@ -15,6 +19,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import entities.core.Ticket;
 import entities.core.TicketState;
+import wrappers.CashierBalanceWrapper;
 import wrappers.InvoicesWrapper;
 import wrappers.TicketWrapper;
 import wrappers.TicketsWrapper;
@@ -212,6 +217,16 @@ public class TicketResourceFunctionalTesting {
         } catch (HttpClientErrorException httpError) {
             assertEquals(HttpStatus.NOT_FOUND, httpError.getStatusCode());
         }
+    }
+
+    @Test
+    public void testGetTotalSoldByDay(){
+        SimpleDateFormat formatter = new SimpleDateFormat(CashierBalanceWrapper.dateFormat);
+        Calendar day = Calendar.getInstance();
+        BigDecimal total = new RestBuilder<BigDecimal>(RestService.URL).path(Uris.TICKETS).path(Uris.CASHIER_BALANCE).param("day",formatter.format(day.getTime())).get()
+            .clazz(BigDecimal.class).build();
+        
+        assertEquals(new BigDecimal(620).stripTrailingZeros(), total.stripTrailingZeros());
     }
 
     @After

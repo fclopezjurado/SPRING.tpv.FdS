@@ -21,7 +21,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import wrappers.TicketWrapper;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -159,5 +161,11 @@ public class TicketControllerIT {
         assertEquals(user.getEmail(), mailService.getTo());
         assertTrue(mailService.getMsg().contains(ticketWrapper.getTicketState().toString()));
         assertTrue(mailService.getMsg().contains(ticketWrapper.getReference()));
+    }
+    
+    @Test
+    public void testGetTotalSoldByDay(){
+        assertEquals(new BigDecimal(620).stripTrailingZeros(), ticketController.getTotalSoldByDay(Calendar.getInstance()).stripTrailingZeros());
+        
     }
 }
