@@ -37,6 +37,8 @@ public class TicketResourceFunctionalTesting {
     private static final String wrongEmail = "test@test.es";
 
     private static final int wrongInvoiceID = 999;
+    
+    private String sessionToken;
 
     @Autowired
     private Ticket ticket;
@@ -49,6 +51,7 @@ public class TicketResourceFunctionalTesting {
         new RestService().seedDatabase();
         ticket = new Ticket(69L, TicketState.COMMITTED);
         ticketWrapper = new TicketWrapper(ticket);
+        sessionToken = new RestService().loginAdmin();
     }
 
     @Test
@@ -194,7 +197,7 @@ public class TicketResourceFunctionalTesting {
          * = Long.valueOf(environment.getProperty("admin.mobile"));
          */
         InvoicesWrapper invoices = new RestBuilder<InvoicesWrapper>(RestService.URL).path(Uris.INVOICES).path("/" + adminMobile)
-                .clazz(InvoicesWrapper.class).get().build();
+                .clazz(InvoicesWrapper.class).basicAuth(sessionToken, "").get().build();
         assertEquals(false, invoices.isEmpty());
 
         TicketWrapper ticket = new RestBuilder<TicketWrapper>(RestService.URL).path(Uris.TICKETS).path(Uris.INVOICE)
