@@ -64,15 +64,15 @@ tpv
 								return this.request(config);
 							};
 
-							this.updateTicket = function(products, type, number) {
+							this.updateTicket = function(id, shoppings, ticketState) {
 								let
 								config = {
 									method : 'PUT',
 									url : urlBase + "/tickets",
 									data : {
-										'products' : products,
-										'type' : type,
-										'number' : number
+										'id' : id,
+										'shoppingList' : shoppings,
+										'ticketState' : ticketState
 									}
 								};
 								return this.request(config);
